@@ -1,0 +1,1 @@
+crtg_content = ''; (function(){document.cookie = 'crtg_amoad_rta=' + escape(crtg_content) + '; path=/; expires=Fri, 29 Jan 2016 12:27:52 GMT; domain=lancork.net';})();

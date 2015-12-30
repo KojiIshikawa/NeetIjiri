@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="ja"><head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<title>iPhoneアプリの初歩的なデータ書き換え・チート方法と、それを防ぐ方法 | Lancork</title>
+<meta name="description" content="通常iOSではファイルシステムが閲覧できないため、iPhone・iPadのアプリは内部構造がわかりにくく安全性が高いです。
+
+しかし特殊なツールを使うと、アプリの作りによってはデータの改ざんや、ゲームにおけるチートができてしまうケースがあります。最近でもそれができてしまうアプリがたまにあるため、大切...">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@lancork">
+<link rel="stylesheet" media="all" href="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/style.css">
+<link rel="icon" href="http://www.lancork.net/wordpress/wp-content/themes/lv13/images/favicon.ico">
+<link rel="apple-touch-icon" href="http://www.lancork.net/wordpress/wp-content/themes/lv13/images/apple-touch-icon.png">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="http://www.lancork.net/feed/">
+		<script async="" src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/cbgapi.loaded_1"></script><script async="" src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/cbgapi.loaded_0"></script><script src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/sdk.js" id="facebook-jssdk"></script><script gapi_processed="true" src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/platform.js" async=""></script><script src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/bookmark_button.js" async=""></script><script id="twitter-wjs" src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/widgets.js" async=""></script><script src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/btn.js" async=""></script><script src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/ca-pub-8787409380235381.js"></script><script src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/analytics.js" async=""></script><script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"http:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/www.lancork.net\/wordpress\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.4"}};
+			!function(a,b,c){function d(a){var c=b.createElement("canvas"),d=c.getContext&&c.getContext("2d");return d&&d.fillText?(d.textBaseline="top",d.font="600 32px Arial","flag"===a?(d.fillText(String.fromCharCode(55356,56806,55356,56826),0,0),c.toDataURL().length>3e3):("simple"===a?d.fillText(String.fromCharCode(55357,56835),0,0):d.fillText(String.fromCharCode(55356,57135),0,0),0!==d.getImageData(16,16,1,1).data[0])):!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g;c.supports={simple:d("simple"),flag:d("flag"),unicode8:d("unicode8")},c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.simple&&c.supports.flag&&c.supports.unicode8||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script type="text/javascript" src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/wp-emoji-release.js"></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="fontawesome-css" href="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/font-awesome.css" type="text/css" media="all">
+<link rel="https://api.w.org/" href="http://www.lancork.net/wp-json/">
+<link rel="canonical" href="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/a_003.htm">
+<link rel="alternate" type="application/json+oembed" href="http://www.lancork.net/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwww.lancork.net%2F2013%2F10%2Fcheat-tamper-iphone-app-and-prevent%2F">
+<link rel="alternate" type="text/xml+oembed" href="http://www.lancork.net/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwww.lancork.net%2F2013%2F10%2Fcheat-tamper-iphone-app-and-prevent%2F&amp;format=xml">
+<meta http-equiv="Last-Modified" content="Tue, 29 Dec 2015 20:08:02 GMT">
+<meta property="og:title" content="iPhoneアプリの初歩的なデータ書き換え・チート方法と、それを防ぐ方法">
+<meta property="og:site_name" content="Lancork">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://www.lancork.net/2013/10/cheat-tamper-iphone-app-and-prevent/">
+<meta property="og:image" content="http://www.lancork.net/wordpress/wp-content/uploads/2013/10/ios-filesystem-sandbox-150x113.png">
+<meta property="fb:app_id" content="544055992347771">
+<link href="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/shCore.css" type="text/css" rel="stylesheet"><link href="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/shThemeMidnight.css" type="text/css" rel="stylesheet"><style type="text/css" id="syntaxhighlighteranchor"></style>
+<!--[if lte IE 8]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-2626123-1', 'lancork.net');
+  ga('send', 'pageview');
+</script>
+<script async="" src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/rta.js" id="amoad_criteo_rta" type="text/javascript"></script><script async="" src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/a.txt" charset="utf-8" type="text/javascript"></script><script src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/button.js" async="" charset="utf-8" type="text/javascript"></script><script src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/timeline.js" async="" charset="utf-8" type="text/javascript"></script><script async="" src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/aa2nd.js" id="amoad_loader" type="text/javascript"></script><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow-x:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, "hiragino kaku gothic pro",meiryo,"ms pgothic",sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_close_icon:active{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_loader{background-color:#f6f7f8;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100%}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100%;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3a5795;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{width:auto;height:auto;min-height:initial;min-width:initial;background:none}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{color:#fff;display:block;padding-top:20px;clear:both;font-size:18px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100%;min-height:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #2f477a;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f6f7f8;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yD/r/t-wz8gw1xG1.png);background-repeat:no-repeat;background-position:50% 50%;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}</style></head>
+<body>
+
+<div id="wrap">
+    <div id="inner">
+ 
+        <header id="header">
+    
+        <div id="header-top">
+
+            <div class="container-inner">
+                
+                <h1>
+                    <a href="http://www.lancork.net/">
+                        <img src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/lancork-logo.jpg" alt="トップページへ戻る" width="150">
+                    </a>
+                </h1>
+
+                <div id="header-mainnav">
+                    <nav>
+                        <ul class="sitenavi">
+                            <li><a href="http://www.lancork.net/" class="tran">Home</a></li>
+                            <li><a href="http://www.lancork.net/about/" class="tran">About</a></li>
+                            <li><a href="http://www.lancork.net/blog/" class="tran">Blog</a></li>
+                            <li><a href="http://www.lancork.net/gallery/" class="tran">Gallery</a></li>
+                            <li><a href="http://www.lancork.net/contact/" class="tran">Contact</a></li>
+                        </ul>
+                    </nav>
+                    
+                    <div id="header-search">
+                        <form method="get" action="http://www.lancork.net/search/">
+                            <input name="q" id="header-search-text" placeholder="検索 ..." type="text">
+                            <button type="submit" id="header-search-submit"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+
+
+                
+                <div class="clear"></div>
+            </div>
+        </div>    
+        
+        <div id="header-image">
+            <div class="container-inner"><img src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/lv13-lowpoly2x.jpg" alt="Lancork Header Image"></div>
+        </div>
+        
+        <div id="header-breadcrumbs">
+            
+            <div class="container-inner">
+
+                <div class="breadcrumbs">
+                    <!-- Breadcrumb NavXT 5.3.0 -->
+<span typeof="v:Breadcrumb"><a rel="v:url" property="v:title" title="Go to Lancork." href="http://www.lancork.net/" class="home">Lancork</a></span><span class="separator">/</span><span typeof="v:Breadcrumb"><a rel="v:url" property="v:title" title="Go to Blog." href="http://www.lancork.net/blog/" class="post-root post post-post">Blog</a></span><span class="separator">/</span><span typeof="v:Breadcrumb"><a rel="v:url" property="v:title" title="Go to the プログラミング category archives." href="http://www.lancork.net/category/programming/" class="taxonomy category">プログラミング</a></span><span class="separator">/</span><span typeof="v:Breadcrumb"><a rel="v:url" property="v:title" title="Go to iPhoneアプリの初歩的なデータ書き換え・チート方法と、それを防ぐ方法." href="http://www.lancork.net/2013/10/cheat-tamper-iphone-app-and-prevent/" class="post post-post current-item">iPhoneアプリの初歩的なデータ書き換え・チート方法と、それを防ぐ方法</a></span>                </div>
+                
+                <nav>
+                    <ul class="socialnavi">
+                        <li><a href="https://twitter.com/lancork" class="tran nav-icon-twitter"><i class="fa fa-twitter fa-lg"></i></a></li>
+                        <li><a href="https://www.facebook.com/lancork" class="tran nav-icon-facebook"><i class="fa fa-facebook fa-lg"></i></a></li>
+                        <li><a href="https://www.google.com/+LancorkNet" class="tran nav-icon-gplus"><i class="fa fa-google-plus fa-lg"></i></a></li>
+                        <li><a href="http://www.lancork.net/feed/" class="tran nav-icon-rss"><i class="fa fa-rss fa-lg"></i></a></li>
+                    </ul>
+                </nav>
+
+                <div class="clear"></div>
+            </div>
+        </div>
+                
+    </header>
+
+<div id="main" class="container-inner">
+
+    <div id="leftcontents">
+
+                    
+                
+                <article>
+                    <div class="singlepost">
+                        <header>
+                            <h1 class="title">iPhoneアプリの初歩的なデータ書き換え・チート方法と、それを防ぐ方法</h1>
+                            <div class="blog_info">
+                                <ul>
+                                    <li class="cal"><i class="fa fa-calendar fa-fw"></i> 2013年10月26日</li>
+                                    <li class="cat"><i class="fa fa-folder-open fa-fw"></i> <a href="http://www.lancork.net/category/programming/" rel="category tag">プログラミング</a>, <a href="http://www.lancork.net/category/security/" rel="category tag">セキュリティ</a>, <a href="http://www.lancork.net/category/iphone/" rel="category tag">iPhone</a></li>
+                                    <li class="tag"><i class="fa fa-tags fa-fw"></i> <a href="http://www.lancork.net/tag/ios/" rel="tag">iOS</a> <a href="http://www.lancork.net/tag/%e3%83%81%e3%83%bc%e3%83%88/" rel="tag">チート</a></li>
+                                </ul>
+                                <br class="clear">
+                            </div>
+                        </header>
+                        <img style="display: block;" src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/ios-filesystem-sandbox-180x180.png" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="iOSのファイルシステムとサンドボックス" height="180" width="180"><noscript><img width="180" height="180" src="http://www.lancork.net/wordpress/wp-content/uploads/2013/10/ios-filesystem-sandbox-180x180.png" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="iOSのファイルシステムとサンドボックス" /></noscript>
+        <p>通常iOSではファイルシステムが閲覧できないため、iPhone・iPadのアプリは内部構造がわかりにくく安全性が高いです。</p>
+<p>しかし特殊なツールを使うと、アプリの作りによってはデータの改ざんや、ゲームにおけるチートができてしまうケースがあります。最近でもそれができ
+てしまうアプリがたまにあるため、大切なアプリ・サービスを守るためにデータ書き換えの初歩的な手法と防衛の考え方についてメモします。<br>
+                        </p>
+                        <div class="clear"></div>
+                        
+                                                <!-- .ads -->
+                        <div class="adcontainer">
+                            <div class="ad-top">
+                                
+                            <style>
+                            .my_adslot { width: 728px; height: 90px; }
+                            @media(max-width: 1095px) { .my_adslot { width: 468px; height: 60px; } }
+                            @media(max-width: 1020px) { .my_adslot { width: 728px; height: 90px; } }
+                            @media(max-width: 800px) { .my_adslot { width: 336px; height: 280px; } }
+                            @media(max-width: 400px){ .my_adslot { width: 300px; height: 250px; } }
+                            </style>
+                            <script async="" src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/adsbygoogle.js"></script>
+                            <!-- res -->
+                            <ins data-adsbygoogle-status="done" class="adsbygoogle my_adslot" style="display: inline-block; width: 728px; height: 90px;" data-ad-client="ca-pub-8787409380235381" data-ad-slot="4968505756"><ins id="aswift_0_expand" style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px;background-color:transparent"><ins id="aswift_0_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px;background-color:transparent"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;" frameborder="0" height="90" width="728"></iframe></ins></ins></ins>
+                            <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                            
+                            </div>
+                        </div>
+                        <!-- /.ads -->                        
+                        
+<h2>概要</h2>
+<p>本エントリではアプリ内のデータ参照・書き換えについて以下の流れで記載しています。あくまで初歩的な手法についてであり、脱獄が必要な手法には触れていません。</p>
+<ul>
+<li>iOSのファイルシステムと主なデータ保存の方法</li>
+<li>ユーザがアプリ内データを書き換えできると何がまずいか</li>
+<li>未脱獄でのアプリ内部のデータ参照</li>
+<li>初歩的なアプリ内部のデータ書き換え方法</li>
+<li>アプリのデータ改ざんを防ぐために</li>
+</ul>
+<h2>iOSのファイルシステムと主なデータ保存の方法</h2>
+<p>iOSではアプリを終了すると保存していないデータは消えてしまいます。ゲームのセーブデータや設定などが消えてしまっては困るため、データを永続的に保存しておく必要があります。その中でもデータを保存できる領域は決まっています。</p>
+<h3>iOSのファイルシステム</h3>
+<p>iOSではアプリごとにサンドボックスと呼ばれる専用の領域が与えられます。以下がそのイメージ図です。<br>
+<a href="http://www.lancork.net/wordpress/wp-content/uploads/2013/10/ios-filesystem-sandbox.png"><img style="display: inline;" src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/ios-filesystem-sandbox.png" alt="iOSのファイルシステムとサンドボックス" class="alignnone size-full wp-image-1165" height="480" width="438"><noscript><img src="http://www.lancork.net/wordpress/wp-content/uploads/2013/10/ios-filesystem-sandbox.png" alt="iOSのファイルシステムとサンドボックス" width="438" height="480" class="alignnone size-full wp-image-1165" /></noscript></a><br>
+一般的に各アプリがデータを書き込めるディレクトリはサンドボックス内の<code>Documents</code>,<code>Library</code>,<code>tmp</code>です。ディレクトリごとに書き込むデータの種類は異なりますが、一時的に使用するもの以外は<code>Documents</code>,<code>Library</code>のどちらかが使用されます。</p>
+<p>各ディレクトリの利用方法はApple公式ドキュメントの<a href="https://developer.apple.com/jp/devcenter/ios/library/japanese.html" title="Apple日本語ドキュメント" target="_blank">ファイルシステム プログラミングガイド</a>から参照できます。</p>
+<h3>主なデータの保存方法</h3>
+<p>アプリ内部にデータを永続的に保持しておくためには主に以下のような方法があります。</p>
+<h3>NSUserDefaultsクラスを使ったデータ保存</h3>
+<p>最も手軽に使用できるデータ保存方法です。「キー：値」の形式で簡単にデータの保存・取り出しができます。</p>
+<p>以下は<code>NSUserDefaults</code>クラスの使用例です。たとえば金額：100を表す値を保存したい場合は任意のキー<code>Gold</code>に<code>100</code>を指定します。</p>
+<div><div id="highlighter_366909" class="syntaxhighlighter  objc"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="objc keyword">NSUserDefaults</code> <code class="objc plain">*userDefaults = [</code><code class="objc keyword">NSUserDefaults</code> <code class="objc plain">standardUserDefaults];</code></div><div class="line number2 index1 alt1"><code class="objc plain">[userDefaults setInteger:100 forKey:</code><code class="objc string">@"Gold"</code><code class="objc plain">];</code></div></div></td></tr></tbody></table></div></div>
+<p>値の保存が完了すると下記のパスにプロパティリスト(<code>*.plist</code>)形式のファイルが保存されます。このファイルに実際の値が保存されています。</p>
+<p><code>&lt;Application_Home&gt;/Library/Preferences/</code><br>
+</p><div id="attachment_1171" style="width: 510px" class="wp-caption alignnone"><a href="http://www.lancork.net/wordpress/wp-content/uploads/2013/10/nsuserdefaults-example.png"><img style="display: inline;" src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/nsuserdefaults-example-500x151.png" alt="NSUserDefaults-Example" class="size-medium wp-image-1171" srcset="http://www.lancork.net/wordpress/wp-content/uploads/2013/10/nsuserdefaults-example-500x151.png 500w, http://www.lancork.net/wordpress/wp-content/uploads/2013/10/nsuserdefaults-example.png 800w" sizes="(max-width: 500px) 100vw, 500px" height="151" width="500"><noscript><img src="http://www.lancork.net/wordpress/wp-content/uploads/2013/10/nsuserdefaults-example-500x151.png" alt="NSUserDefaults-Example" width="500" height="151" class="size-medium wp-image-1171" srcset="http://www.lancork.net/wordpress/wp-content/uploads/2013/10/nsuserdefaults-example-500x151.png 500w, http://www.lancork.net/wordpress/wp-content/uploads/2013/10/nsuserdefaults-example.png 800w" sizes="(max-width: 500px) 100vw, 500px" /></noscript></a><p class="wp-caption-text">NSUserDefaultsによる保存例(iOSシミュレータ)</p></div><br>
+保存されたデータはアプリを終了しても消えないため、次回のアプリ起動時にも値を読み出すことができます。<p></p>
+<h3>CoreDataフレームワークを使ったデータ保存</h3>
+<p>CoreDataと呼ばれるモデルオブジェクトを保存するためのフレームワークを使う方法です。データ保存形式はいくつかありますが、SQLiteのデータベース形式で保存するのが一般的です。<br>
+</p><div id="attachment_1172" style="width: 510px" class="wp-caption alignnone"><a href="http://www.lancork.net/wordpress/wp-content/uploads/2013/10/coredata-example.png"><img style="display: inline;" src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/coredata-example.png" alt="CoreDataの保存例" class="size-full wp-image-1172" height="240" width="500"><noscript><img src="http://www.lancork.net/wordpress/wp-content/uploads/2013/10/coredata-example.png" alt="CoreDataの保存例" width="500" height="240" class="size-full wp-image-1172" /></noscript></a><p class="wp-caption-text">CoreDataによる保存例(iOSシミュレータ)</p></div><p></p>
+<p>CoreDataの使い方はA Day In The Life様の下記の記事が参考になります。<br>
+<a href="http://d.hatena.ne.jp/glass-_-onion/20111015/1318667971" title="サルでもわかる Core Data 入門【概念編】" target="_blank">サルでもわかる Core Data 入門【概念編】</a></p>
+<h2>ユーザがアプリ内データを書き換えできると何がまずいか</h2>
+<p>例えばゲーム等でユーザに変更されては良くない値は以下のようなものです。</p>
+<p><strong>ゲーム内通貨の金額</strong><br>
+もし変更できてしまうと早くクリアできてしまい、ユーザに長く遊んでもらえなくなるかもしれません。またゲーム内通貨の購入にアプリ内課金が必要な場合、課金しなくてもお金が増やせてしまいます。</p>
+<p><strong>時間で回復する行動力（スタミナ）</strong><br>
+ソーシャルゲームによくある行動力です。これも変更できてしまうのは開発者の意図に反しています。また、行動力回復にアプリ内課金が必要な場合、課金しなくてもスタミナが回復できてしまいます。</p>
+<p><strong>「アプリ内サービスを買った」という情報</strong><br>
+機能制限があり課金で制限解除するアプリの場合、「機能制限解除がされている」という情報をアプリ内部に持ってしまっていると、この情報が変更された場合アプリ内課金をしていないにもかかわらず機能制限解除と同じ状態になってしまうかもしれません。</p>
+<p>他にもユーザ同士が競うようなゲームの場合は一部のユーザだけが有利になり、他のユーザが離れていく原因にもなり得ます。</p>
+<h2>未脱獄でのiPhone内部のデータ参照</h2>
+<p><a href="http://www.i-funbox.com/" title="iFunBox" target="_blank">iFunBox</a>というツールを使用すると、未脱獄でも本来見ることのできないiPhone内部のファイルを参照したり書き換えることができます。Windows・MACで使えます。</p>
+<p>PC・MACにiPhoneやiPadをUSB接続した状態でiFunBoxを起動すると、左ペインのUser Applicationsにインストールされたアプリが一覧表示されます。<br>
+<a href="http://www.lancork.net/wordpress/wp-content/uploads/2013/10/iFunbox-Example.png"><img style="display: inline;" src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/iFunbox-Example-500x279.png" alt="iFunboxサンプル１" class="alignnone size-medium wp-image-1157" srcset="http://www.lancork.net/wordpress/wp-content/uploads/2013/10/iFunbox-Example-500x279.png 500w, http://www.lancork.net/wordpress/wp-content/uploads/2013/10/iFunbox-Example-800x447.png 800w, http://www.lancork.net/wordpress/wp-content/uploads/2013/10/iFunbox-Example.png 893w" sizes="(max-width: 500px) 100vw, 500px" height="279" width="500"><noscript><img src="http://www.lancork.net/wordpress/wp-content/uploads/2013/10/iFunbox-Example-500x279.png" alt="iFunboxサンプル１" width="500" height="279" class="alignnone size-medium wp-image-1157" srcset="http://www.lancork.net/wordpress/wp-content/uploads/2013/10/iFunbox-Example-500x279.png 500w, http://www.lancork.net/wordpress/wp-content/uploads/2013/10/iFunbox-Example-800x447.png 800w, http://www.lancork.net/wordpress/wp-content/uploads/2013/10/iFunbox-Example.png 893w" sizes="(max-width: 500px) 100vw, 500px" /></noscript></a><br>
+さらにアプリを選択して階層を掘り下げると、その中のファイル一つ一つも閲覧できます。また、ファイルをPC・MACにコピーすることも可能です。<br>
+<a href="http://www.lancork.net/wordpress/wp-content/uploads/2013/10/iFunbox-Example01.png"><img style="display: inline;" src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/iFunbox-Example01-500x279.png" alt="iFunbox階層掘り下げ" class="alignnone size-medium wp-image-1158" srcset="http://www.lancork.net/wordpress/wp-content/uploads/2013/10/iFunbox-Example01-500x279.png 500w, http://www.lancork.net/wordpress/wp-content/uploads/2013/10/iFunbox-Example01-800x447.png 800w, http://www.lancork.net/wordpress/wp-content/uploads/2013/10/iFunbox-Example01.png 893w" sizes="(max-width: 500px) 100vw, 500px" height="279" width="500"><noscript><img src="http://www.lancork.net/wordpress/wp-content/uploads/2013/10/iFunbox-Example01-500x279.png" alt="iFunbox階層掘り下げ" width="500" height="279" class="alignnone size-medium wp-image-1158" srcset="http://www.lancork.net/wordpress/wp-content/uploads/2013/10/iFunbox-Example01-500x279.png 500w, http://www.lancork.net/wordpress/wp-content/uploads/2013/10/iFunbox-Example01-800x447.png 800w, http://www.lancork.net/wordpress/wp-content/uploads/2013/10/iFunbox-Example01.png 893w" sizes="(max-width: 500px) 100vw, 500px" /></noscript></a></p>
+<h2>初歩的なPhone内部のデータ書き換え方法</h2>
+<p>アプリの永続的なデータ保存に<code>NSUserDefaults</code>や<code>CoreData</code>が使用されている場合、これらのデータが保存されている場所をiFunBoxで開き、データをPC・MACにコピーし編集した後、元の場所に上書きすることでデータの書き換えが可能です。それぞれの一例を示します。</p>
+<p><strong>以下の作業をするとアプリが起動しなくなったりiPhoneが壊れたりするかもしれません。お約束ですがやる場合は自己責任で。</strong></p>
+<h3>NSUserDefaults（*.plist）の保存データ書き換え</h3>
+<p><code>NSUserDefaults</code>を使用してデータ保存しているアプリの場合、下記のフォルダにプロパティリスト形式(*.plist)のファイルが存在します。</p>
+<p><code>&lt;Application_Home&gt;/Library/Preferences/</code></p>
+<p>プロパティリストの実体はXMLファイルのため、テキストエディタで開くことができます。変更したい箇所の値を書き換えて保存した後、iFunBoxでファイルを元の場所に戻せばデータの書き換えが可能です。<br>
+</p><div id="attachment_1179" style="width: 510px" class="wp-caption alignnone"><a href="http://www.lancork.net/wordpress/wp-content/uploads/2013/10/nsuserdefaults-edit-example.png"><img style="display: inline;" src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/nsuserdefaults-edit-example-500x78.png" alt="NSUserDefaultsで作成されたplistファイルの編集" class="size-medium wp-image-1179" srcset="http://www.lancork.net/wordpress/wp-content/uploads/2013/10/nsuserdefaults-edit-example-500x78.png 500w, http://www.lancork.net/wordpress/wp-content/uploads/2013/10/nsuserdefaults-edit-example.png 764w" sizes="(max-width: 500px) 100vw, 500px" height="78" width="500"><noscript><img src="http://www.lancork.net/wordpress/wp-content/uploads/2013/10/nsuserdefaults-edit-example-500x78.png" alt="NSUserDefaultsで作成されたplistファイルの編集" width="500" height="78" class="size-medium wp-image-1179" srcset="http://www.lancork.net/wordpress/wp-content/uploads/2013/10/nsuserdefaults-edit-example-500x78.png 500w, http://www.lancork.net/wordpress/wp-content/uploads/2013/10/nsuserdefaults-edit-example.png 764w" sizes="(max-width: 500px) 100vw, 500px" /></noscript></a><p class="wp-caption-text">NSUserDefaultsで作成されたplistファイルの書き換え例</p></div><p></p>
+<h3>CoreData（SQLite）の保存データ書き換え</h3>
+<p><code>CoreData</code>を使用してデータ保存しているアプリの場合、大体<code>Documents</code>フォルダのどこかにSQLiteデータベース形式のファイルが存在します。</p>
+<p>テキストファイルではないのでテキストエディタでは編集できませんが、<code>sqlite3</code>コマンドでファイルを開けばSQLの<code>SELECT</code>でデータの参照、<code>UPDATE</code>でデータの更新が可能です。<br>
+</p><div id="attachment_1180" style="width: 346px" class="wp-caption alignnone"><a href="http://www.lancork.net/wordpress/wp-content/uploads/2013/10/coredata-edit-example.png"><img style="display: inline;" src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/coredata-edit-example.png" alt="CoreDataのSQLiteデータベースの参照例" class="size-full wp-image-1180" height="58" width="336"><noscript><img src="http://www.lancork.net/wordpress/wp-content/uploads/2013/10/coredata-edit-example.png" alt="CoreDataのSQLiteデータベースの参照例" width="336" height="58" class="size-full wp-image-1180" /></noscript></a><p class="wp-caption-text">SQLiteデータベースの参照例</p></div><p></p>
+<p><strong>2014/07/24追記</strong><br>
+GUIでSQLiteファイルが簡単に編集できるツール「SQLite Database Browser」であればさらに簡単にデータの書き換えが可能です。「SQLite Database Browser」については<a href="http://www.lancork.net/2014/07/sqlitebrowser-improve/" title="iOS開発に便利！SQLiteデータベースを手軽に編集できるツール「SQLite Database Browser」が大幅にバージョンアップしていた">こちらのエントリ</a>にダウンロード・インストール方法をまとめています。</p>
+<h2>アプリのデータ改ざんを防ぐために</h2>
+<p>上記のとおり、何も対策していないと比較的簡単にアプリ内部に保存したデータは変更できてしまいます。もし大事なデータが書き換えられてしまうと開発者にとって良いことはありません。</p>
+<p>書き換えられてはいけない大事なデータは以下の方法で保存するのが良いと思われます。</p>
+<h3>データを暗号化する</h3>
+<p>AES等のアルゴリズムを使用してデータを暗号化して書き込み、アプリ内で値が必要な時には復号して使う方法です。データを保存しているファイルの中身を見られても第三者には内容をわからなくすることができます。</p>
+<p>Objective-CでのAESを使用した暗号化については下記サイトが参考になります。<br>
+<a href="http://blog.fusic.co.jp/archives/859" title="iPhoneで暗号化" target="_blank">iPhone で暗号化</a></p>
+<p>またiOSにはデータを安全に保存するKeychain Servicesという仕組みがあります。暗号化されユーザが参照できない領域にデータを保存できるため、特に安全に保存したいデータを格納するのに適しています。</p>
+<p>キーチェーンサービスについてはCocoaの日々様で詳しく解説されています。<br>
+<a href="http://cocoadays.blogspot.jp/2011/02/ios-keychain-services.html" title="Keychain Serviceとは" target="_blank">[iOS] Keychain Services とは</a></p>
+<h3>データをオンラインのサーバー等に保存する</h3>
+<p>いくらデータを暗号化しておいても、アプリ内部にあれば復号したり全く別の方法で書き換えができてしまうかもしれません。アプリ内部には書き換えら
+れてはいけないデータを保存せず、オンラインのサーバーやクラウドサービスへ保存すればデータを変更されるリスクは大幅に減らすことができます。</p>
+<p>自前でサーバーを用意しなくても、クラウドサービスのデータストア機能（<a href="http://www.lancork.net/2013/10/ios-push-with-nifty-mobile-backend/" title="これはラク！ニフティクラウドmobile backend(mBaaS)でiOSのプッシュ通知を実装してみた" target="_blank">ニフティクラウドのモバイルバックエンドサービス等</a>）を使用すればそれほど時間をかけずに実装できます。パズドラ等のソーシャルゲームや、オンラインゲーム等のデータの取り扱いが重要なアプリはほとんどこの方法がとられています。</p>
+<h2>まとめ</h2>
+<p>最近では本エントリのような方法でデータの変更ができるアプリは少なくなったと思われます。しかし未だに通用してしまうアプリも少なからず存在します。</p>
+<p>サーバーへのデータ保存については費用がかかる場合もあるのでケースバイケースかもしれませんが、時間をかけて構想・作成したアプリを守るために、データの取り扱いには気を付けたいですね。</p>
+
+                                               <!-- .ads -->
+                        <div class="adcontainer">
+                            <style>
+                            .textad,.footad { width: 336px; height: 280px; }
+                            @media(max-width: 1095px) { .textad,.footad { width: 300px; height: 250px; } }
+                            @media(max-width: 1020px) { .textad,.footad { width: 336px; height: 280px; } }
+                            @media(max-width: 768px) { .textad,.footad { width: 336px; height: 280px; } }
+                            @media(max-width: 740px) { .textad,.footad { width: 300px; height: 250px; } }
+                            @media(max-width: 660px) { 
+                                .ad-left,.ad-right{
+                                    width:100%;
+                                }
+                                .ad-left{
+                                    margin-bottom:1em;
+                                }
+                                .textad,.footad { width: 336px; height: 280px; }
+                            }
+                            @media(max-width: 400px){ .textad,.footad { width: 300px; height: 250px; } }
+                            </style>
+                            
+                                    
+                            <div class="ad-left">
+                                <!-- adsense left -->
+                                <script async="" src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/adsbygoogle.js"></script>
+                                <!-- textad -->
+                                <ins data-adsbygoogle-status="done" class="adsbygoogle textad" style="display: inline-block; width: 336px; height: 280px;" data-ad-client="ca-pub-8787409380235381" data-ad-slot="2686760955"><ins id="aswift_1_expand" style="display:inline-table;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:336px;background-color:transparent"><ins id="aswift_1_anchor" style="display:block;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:336px;background-color:transparent"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;" frameborder="0" height="280" width="336"></iframe></ins></ins></ins>
+                                <script>
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
+                                <!-- /adsense left -->
+                            </div>
+        
+                            <div class="ad-right">
+                                <!-- adsense right -->
+                                <script async="" src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/adsbygoogle.js"></script>
+                                <!-- footad -->
+                                <ins data-adsbygoogle-status="done" class="adsbygoogle footad" style="display: inline-block; width: 336px; height: 280px;" data-ad-client="ca-pub-8787409380235381" data-ad-slot="1213813750"><ins id="aswift_2_expand" style="display:inline-table;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:336px;background-color:transparent"><ins id="aswift_2_anchor" style="display:block;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:336px;background-color:transparent"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_2" name="aswift_2" style="left:0;position:absolute;top:0;" frameborder="0" height="280" width="336"></iframe></ins></ins></ins>
+                                <script>
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
+                                <!-- /adsense right -->
+                            </div>
+                            
+                            <div class="clear"></div>
+                        </div>
+                        <!-- /.ads -->
+                    </div><!-- /.singlepost -->
+
+    
+                <aside class="articlefooter">
+                    <h2 class="title">シェアして頂けると嬉しいです！</h2>
+                    <div>
+                        <div class="socialbox hatena-box">
+                            <iframe style="width: 80px; height: 60px;" src="javascript:false" scrolling="no" title="このエントリーをはてなブックマークに追加" class="hatena-bookmark-button-frame" frameborder="0" height="60" width="80"></iframe>
+                        </div>
+                        <div class="socialbox facebook-box">
+                            <div fb-iframe-plugin-query="app_id=&amp;container_width=70&amp;href=http%3A%2F%2Fwww.lancork.net%2F2013%2F10%2Fcheat-tamper-iphone-app-and-prevent%2F&amp;layout=box_count&amp;locale=ja_JP&amp;sdk=joey&amp;send=false&amp;show_faces=false&amp;width=450" fb-xfbml-state="rendered" class="fb-like fb_iframe_widget" data-href="http://www.lancork.net/2013/10/cheat-tamper-iphone-app-and-prevent/" data-send="false" data-layout="box_count" data-width="450" data-show-faces="false"><span style="vertical-align: bottom; width: 71px; height: 61px;"><iframe class="" src="http://www.facebook.com/v2.3/plugins/like.php?app_id=&amp;channel=http%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter.php%3Fversion%3D42%23cb%3Dfd045b42205ca4%26domain%3Dwww.lancork.net%26origin%3Dhttp%253A%252F%252Fwww.lancork.net%252Ff6ed34c6d0aed6%26relation%3Dparent.parent&amp;container_width=70&amp;href=http%3A%2F%2Fwww.lancork.net%2F2013%2F10%2Fcheat-tamper-iphone-app-and-prevent%2F&amp;layout=box_count&amp;locale=ja_JP&amp;sdk=joey&amp;send=false&amp;show_faces=false&amp;width=450" style="border: medium none; visibility: visible; width: 71px; height: 61px;" title="fb:like Facebook Social Plugin" scrolling="no" allowfullscreen="true" allowtransparency="true" name="f2a213ae8069e0c" frameborder="0" height="1000px" width="450px"></iframe></span></div>
+                        </div>
+                        <div class="socialbox twitter-box">
+                            <iframe src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/tweet_button.htm" title="Twitter Tweet Button" style="position: static; visibility: visible; width: 68px; height: 20px;" class="twitter-share-button twitter-share-button-rendered twitter-tweet-button" allowtransparency="true" scrolling="no" id="twitter-widget-1" frameborder="0"></iframe>
+                        </div>
+                        <div class="socialbox gplus-box">
+                            <div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; background: transparent none repeat scroll 0% 0%; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 50px; height: 60px;"><iframe title="+1" data-gapiattached="true" src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/fastbutton.htm" name="I0_1451478472662" id="I0_1451478472662" vspace="0" tabindex="0" style="position: static; top: 0px; width: 50px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 60px;" scrolling="no" marginwidth="0" marginheight="0" hspace="0" frameborder="0" width="100%"></iframe></div>
+                        </div>
+                        <div class="socialbox pocket-box">
+                            <div class="pocket-btn"><iframe id="pocket-button-0" allowtransparency="true" scrolling="NO" src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/button.htm" frameborder="0" height="63" width="60"></iframe></div>
+                        </div>
+
+                                
+                                                <div class="socialbox feedly-box">
+                            <div id="feedly-followers">
+                                <a href="http://cloud.feedly.com/#subscription%2Ffeed%2Fhttp%3A%2F%2Fwww.lancork.net%2Ffeed%2F" target="blank">
+                                    <span id="feedly-count" class="fdly-count">59</span>
+                                    <img id="feedlyFollow" src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/feedly-follow-rectangle-volume-small_2x.png" alt="follow us in feedly" height="20" width="66"></a>
+                            </div>
+                        </div>
+                        
+                    </div>
+                        
+                    <div class="clear"></div>
+
+                    <p class="social">サイト更新情報は以下より配信中！</p>
+
+                    <div><iframe data-screen-name="lancork" src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/follow_button.htm" title="Twitter Follow Button" style="position: static; visibility: visible; width: 249px; height: 20px;" class="twitter-follow-button twitter-follow-button-rendered" allowtransparency="true" scrolling="no" id="twitter-widget-0" frameborder="0"></iframe></div>
+                    <div>
+                        <div fb-iframe-plugin-query="app_id=&amp;color_scheme=light&amp;container_width=770&amp;header=false&amp;href=http%3A%2F%2Fwww.facebook.com%2Flancork&amp;locale=ja_JP&amp;sdk=joey&amp;show_border=false&amp;show_faces=false&amp;stream=false" fb-xfbml-state="rendered" class="fb-like-box fb_iframe_widget" data-href="http://www.facebook.com/lancork" data-colorscheme="light" data-show-faces="false" data-header="false" data-stream="false" data-show-border="false"><span style="vertical-align: bottom; width: 300px; height: 70px;"><iframe class="" src="http://www.facebook.com/v2.3/plugins/like_box.php?app_id=&amp;channel=http%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter.php%3Fversion%3D42%23cb%3Df1964c9c291846a%26domain%3Dwww.lancork.net%26origin%3Dhttp%253A%252F%252Fwww.lancork.net%252Ff6ed34c6d0aed6%26relation%3Dparent.parent&amp;color_scheme=light&amp;container_width=770&amp;header=false&amp;href=http%3A%2F%2Fwww.facebook.com%2Flancork&amp;locale=ja_JP&amp;sdk=joey&amp;show_border=false&amp;show_faces=false&amp;stream=false" style="border: medium none; visibility: visible; width: 300px; height: 70px;" title="fb:like_box Facebook Social Plugin" scrolling="no" allowfullscreen="true" allowtransparency="true" name="f27d2ea8b52c1bc" frameborder="0" height="1000px" width="1000px"></iframe></span></div>
+                    </div>
+
+                    <div class="clear"></div>
+                </aside><!-- /articlefooter share -->
+
+                <aside class="articlefooter">
+                    <h2 class="title">関連する記事</h2>
+                                                <div class="relatedthumbnail">
+                                <a rel="external" href="http://www.lancork.net/2015/09/poketoru-mega-gangar-s-rank/"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="http://www.lancork.net/wordpress/wp-content/uploads/2015/09/mega-gangar-150x113.jpg" class="attachment-80x60 size-80x60 wp-post-image" alt="ポケとる メガゲンガー Sランク" height="60" width="80"><noscript><img width="80" height="60" src="http://www.lancork.net/wordpress/wp-content/uploads/2015/09/mega-gangar-150x113.jpg" class="attachment-80x60 size-80x60 wp-post-image" alt="ポケとる メガゲンガー Sランク" /></noscript>                                    <p>【スマホ版】ポケとるのステージ135「メガゲンガー」でSランクを取るための攻略方法</p>
+                                </a>
+                            </div>
+                                                    <div class="relatedthumbnail">
+                                <a rel="external" href="http://www.lancork.net/2015/03/spare5-fitst-task/"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="http://www.lancork.net/wordpress/wp-content/uploads/2015/03/spare5-first-task-04-150x113.jpg" class="attachment-80x60 size-80x60 wp-post-image" alt="Spare5 初仕事 写真をタグ付け" height="60" width="80"><noscript><img width="80" height="60" src="http://www.lancork.net/wordpress/wp-content/uploads/2015/03/spare5-first-task-04-150x113.jpg" class="attachment-80x60 size-80x60 wp-post-image" alt="Spare5 初仕事 写真をタグ付け" /></noscript>                                    <p>お小遣い稼ぎアプリ「Spare5」でようやく初仕事が来たのでやってみた結果</p>
+                                </a>
+                            </div>
+                                                    <div class="relatedthumbnail">
+                                <a rel="external" href="http://www.lancork.net/2015/03/moji-popn/"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="http://www.lancork.net/wordpress/wp-content/uploads/2015/03/moji-popn-eyecatch-150x113.jpg" class="attachment-80x60 size-80x60 wp-post-image" alt="モジポップン" height="60" width="80"><noscript><img width="80" height="60" src="http://www.lancork.net/wordpress/wp-content/uploads/2015/03/moji-popn-eyecatch-150x113.jpg" class="attachment-80x60 size-80x60 wp-post-image" alt="モジポップン" /></noscript>                                    <p>ガンホーと情熱大陸のコラボ！完全無料のiOS/Androidゲーム「モジポップン」が面白い</p>
+                                </a>
+                            </div>
+                                                    <div class="relatedthumbnail">
+                                <a rel="external" href="http://www.lancork.net/2015/01/gururin-quest/"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="http://www.lancork.net/wordpress/wp-content/uploads/2015/01/gururinquest-eyecatch-150x113.jpg" class="attachment-80x60 size-80x60 wp-post-image" alt="ぐるりんクエスト" height="60" width="80"><noscript><img width="80" height="60" src="http://www.lancork.net/wordpress/wp-content/uploads/2015/01/gururinquest-eyecatch-150x113.jpg" class="attachment-80x60 size-80x60 wp-post-image" alt="ぐるりんクエスト" /></noscript>                                    <p>【悲報】iOS/Androidの2.5DアクションRPG「ぐるりんクエスト」が期待はずれだった・・・</p>
+                                </a>
+                            </div>
+                                                    <div class="relatedthumbnail">
+                                <a rel="external" href="http://www.lancork.net/2015/01/candy-crush-soda-saga-sodalicious/"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="http://www.lancork.net/wordpress/wp-content/uploads/2015/01/candy-crush-soda-150x113.jpg" class="attachment-80x60 size-80x60 wp-post-image" alt="candy-crush-soda" height="60" width="80"><noscript><img width="80" height="60" src="http://www.lancork.net/wordpress/wp-content/uploads/2015/01/candy-crush-soda-150x113.jpg" class="attachment-80x60 size-80x60 wp-post-image" alt="candy-crush-soda" /></noscript>                                    <p>Sodalicious！iOS/Android新作パズルゲーム「キャンディークラッシュソーダ」をプレイしてみた</p>
+                                </a>
+                            </div>
+                                                    <div class="relatedthumbnail">
+                                <a rel="external" href="http://www.lancork.net/2015/01/snowboard-party-is-interesting/"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="http://www.lancork.net/wordpress/wp-content/uploads/2015/01/snowboard-party-eyecatch-150x113.jpg" class="attachment-80x60 size-80x60 wp-post-image" alt="Snowboard Party" height="60" width="80"><noscript><img width="80" height="60" src="http://www.lancork.net/wordpress/wp-content/uploads/2015/01/snowboard-party-eyecatch-150x113.jpg" class="attachment-80x60 size-80x60 wp-post-image" alt="Snowboard Party" /></noscript>                                    <p>iOS/Android用スノーボードゲーム「Snowboard Party」が爽快で面白い！</p>
+                                </a>
+                            </div>
+                                            <div class="clear"></div>
+                </aside><!-- /articlefooter related -->
+
+                <div class="articlefooter">
+                    <span class="nav-previous"><a href="http://www.lancork.net/2013/10/ios-tunnelbear-vpn-free/" rel="prev">« 古い記事へ</a></span>
+                    <span class="nav-next"><a href="http://www.lancork.net/2013/10/facebook-limited-wallpaper/" rel="next">新しい記事へ »</a></span>
+                </div>
+
+            </article>
+
+        
+    </div><!-- /#leftcontents -->
+
+<!-- Sidebar -->
+				<aside id="side">
+					<div class="widget-area">
+
+<!-- Amazon Widget -->
+
+<section id="amazon-widget" style="margin-bottom: 1.5em;">
+
+</section>
+
+<!-- /Amazon Widget -->
+
+            					<section id="newpostcatch-2" class="widget-container widget_newpostcatch"><h3 class="widget-title">最近の投稿</h3><ul id="npcatch">
+<li>
+<a href="http://www.lancork.net/2015/10/poketoru-stage176-dokkora-s-rank-clear/" title="【ポケとる】ステージ176「ドッコラー」でSランクを取るための攻略方法">
+<img src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/poketoru-stage176-150x113.jpg" alt="【ポケとる】ステージ176「ドッコラー」でSランクを取るための攻略方法" title="【ポケとる】ステージ176「ドッコラー」でSランクを取るための攻略方法" height="66" width="86">
+</a>
+<span class="title"><a href="http://www.lancork.net/2015/10/poketoru-stage176-dokkora-s-rank-clear/" title="【ポケとる】ステージ176「ドッコラー」でSランクを取るための攻略方法">【ポケとる】ステージ176「ドッコラー」でSランクを取るための攻略方法</a></span>
+</li>
+<li>
+<a href="http://www.lancork.net/2015/10/cheap-casio-mq-24-review/" title="【チプカシ】カシオのアナログ腕時計「CASIO MQ-24-7B2LLJF」を購入した理由とレビュー">
+<img src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/cheap-casio-mq-24-150x113.jpg" alt="【チプカシ】カシオのアナログ腕時計「CASIO MQ-24-7B2LLJF」を購入した理由とレビュー" title="【チプカシ】カシオのアナログ腕時計「CASIO MQ-24-7B2LLJF」を購入した理由とレビュー" height="66" width="86">
+</a>
+<span class="title"><a href="http://www.lancork.net/2015/10/cheap-casio-mq-24-review/" title="【チプカシ】カシオのアナログ腕時計「CASIO MQ-24-7B2LLJF」を購入した理由とレビュー">【チプカシ】カシオのアナログ腕時計「CASIO MQ-24-7B2LLJF」を購入した理由とレビュー</a></span>
+</li>
+<li>
+<a href="http://www.lancork.net/2015/10/poketoru-pokemon-safari-ghost-poison/" title="【ポケとる】ゴースト・どくタイプが登場する「ポケモンサファリ」の攻略方法">
+<img src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/poketoru-pokemon-safari-ghost-poison-150x113.jpg" alt="【ポケとる】ゴースト・どくタイプが登場する「ポケモンサファリ」の攻略方法" title="【ポケとる】ゴースト・どくタイプが登場する「ポケモンサファリ」の攻略方法" height="66" width="86">
+</a>
+<span class="title"><a href="http://www.lancork.net/2015/10/poketoru-pokemon-safari-ghost-poison/" title="【ポケとる】ゴースト・どくタイプが登場する「ポケモンサファリ」の攻略方法">【ポケとる】ゴースト・どくタイプが登場する「ポケモンサファリ」の攻略方法</a></span>
+</li>
+<li>
+<a href="http://www.lancork.net/2015/10/poketoru-dusknoir-no-item-clear/" title="【ポケとる】イベントステージ「ヨノワール登場」をノーアイテムで攻略する方法">
+<img src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/poketoru-dusknoir-event-noitem-150x113.jpg" alt="【ポケとる】イベントステージ「ヨノワール登場」をノーアイテムで攻略する方法" title="【ポケとる】イベントステージ「ヨノワール登場」をノーアイテムで攻略する方法" height="66" width="86">
+</a>
+<span class="title"><a href="http://www.lancork.net/2015/10/poketoru-dusknoir-no-item-clear/" title="【ポケとる】イベントステージ「ヨノワール登場」をノーアイテムで攻略する方法">【ポケとる】イベントステージ「ヨノワール登場」をノーアイテムで攻略する方法</a></span>
+</li>
+<li>
+<a href="http://www.lancork.net/2015/10/cheap-casio-mq-24-shop/" title="流行のチープカシオ「MQ-24」はどこで買える？約1,000円で買えるリアル店舗を探してみた">
+<img src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/cheap-casio-mq-24-150x113.jpg" alt="流行のチープカシオ「MQ-24」はどこで買える？約1,000円で買えるリアル店舗を探してみた" title="流行のチープカシオ「MQ-24」はどこで買える？約1,000円で買えるリアル店舗を探してみた" height="66" width="86">
+</a>
+<span class="title"><a href="http://www.lancork.net/2015/10/cheap-casio-mq-24-shop/" title="流行のチープカシオ「MQ-24」はどこで買える？約1,000円で買えるリアル店舗を探してみた">流行のチープカシオ「MQ-24」はどこで買える？約1,000円で買えるリアル店舗を探してみた</a></span>
+</li>
+</ul>
+
+</section><section id="text-5" class="widget-container widget_text">			<div class="textwidget"><!-- AMoAd Zone: [Lancork/300×250] -->
+<div class="amoad_frame sid_62056d310111552c719a231bcf5b904ff2cef6ac414235a9326cbd843ef6be85 container_div color_#0000CC-#444444-#FFFFFF-#0000FF-#009900 sp"></div>
+<script src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/aa.js" type="text/javascript" charset="utf-8"></script></div>
+		</section><section id="categories-2" class="widget-container widget_categories"><h3 class="widget-title">カテゴリ</h3>		<ul>
+	<li class="cat-item cat-item-73"><a href="http://www.lancork.net/category/android/">Android<span class="countmarks">66</span></a>
+</li>
+	<li class="cat-item cat-item-35"><a href="http://www.lancork.net/category/aws/">AWS<span class="countmarks">25</span></a>
+</li>
+	<li class="cat-item cat-item-40"><a href="http://www.lancork.net/category/iphone/">iPhone<span class="countmarks">163</span></a>
+</li>
+	<li class="cat-item cat-item-128"><a href="http://www.lancork.net/category/pc/">PC全般<span class="countmarks">12</span></a>
+</li>
+	<li class="cat-item cat-item-54"><a href="http://www.lancork.net/category/seo/">SEO<span class="countmarks">6</span></a>
+</li>
+	<li class="cat-item cat-item-3"><a href="http://www.lancork.net/category/wordpress/">WordPress<span class="countmarks">10</span></a>
+</li>
+	<li class="cat-item cat-item-177"><a href="http://www.lancork.net/category/event/">イベント<span class="countmarks">3</span></a>
+</li>
+	<li class="cat-item cat-item-165"><a href="http://www.lancork.net/category/internet/">インターネット<span class="countmarks">10</span></a>
+</li>
+	<li class="cat-item cat-item-33"><a href="http://www.lancork.net/category/notify/">お知らせ<span class="countmarks">6</span></a>
+</li>
+	<li class="cat-item cat-item-79"><a href="http://www.lancork.net/category/games/">ゲーム<span class="countmarks">91</span></a>
+</li>
+	<li class="cat-item cat-item-14"><a href="http://www.lancork.net/category/security/">セキュリティ<span class="countmarks">31</span></a>
+</li>
+	<li class="cat-item cat-item-29"><a href="http://www.lancork.net/category/software/">ソフトウェア<span class="countmarks">20</span></a>
+</li>
+	<li class="cat-item cat-item-12"><a href="http://www.lancork.net/category/design/">デザイン<span class="countmarks">23</span></a>
+</li>
+	<li class="cat-item cat-item-85"><a href="http://www.lancork.net/category/fashion/">ファッション<span class="countmarks">13</span></a>
+</li>
+	<li class="cat-item cat-item-5"><a href="http://www.lancork.net/category/programming/">プログラミング<span class="countmarks">37</span></a>
+</li>
+	<li class="cat-item cat-item-247"><a href="http://www.lancork.net/category/lifestyle/">ライフスタイル<span class="countmarks">1</span></a>
+</li>
+	<li class="cat-item cat-item-20"><a href="http://www.lancork.net/category/services/">便利サービス<span class="countmarks">44</span></a>
+</li>
+	<li class="cat-item cat-item-55"><a href="http://www.lancork.net/category/wallpaper-free-material/">壁紙・フリー素材<span class="countmarks">12</span></a>
+</li>
+	<li class="cat-item cat-item-90"><a href="http://www.lancork.net/category/books/">書籍<span class="countmarks">7</span></a>
+</li>
+	<li class="cat-item cat-item-4"><a href="http://www.lancork.net/category/license/">資格試験<span class="countmarks">13</span></a>
+</li>
+		</ul>
+</section><section id="text-7" class="widget-container widget_text">			<div class="textwidget"><script type="text/amoad-template" class="amoad_template" data-sid="62056d310111552c24431720876132be71e719ef3054780a8c0e97f17c0843b8">
+<ul id="amoadnative">
+<li>
+<a href="${NATIVE_LINK}" target="_blank">
+<img style="width:86px; height:auto;" src="${NATIVE_ICON_URL}">
+</a>
+<span class="title"><a href="${NATIVE_LINK}" target="_blank">${NATIVE_TITLE_SHORT}</a> ${NATIVE_SERVICE_NAME} PR</span>
+</li>
+</ul>
+</script>
+
+<div data-amoad-status="sent" class="amoad_native" data-sid="62056d310111552c24431720876132be71e719ef3054780a8c0e97f17c0843b8"></div>
+<script src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/n.js" type="text/javascript" charset="utf-8"></script></div>
+		</section><section id="archives-2" class="widget-container widget_archive"><h3 class="widget-title">アーカイブ</h3>		<ul>
+			<li><a href="http://www.lancork.net/2015/10/">2015年10月<span class="countmarks">7</span></a></li>
+	<li><a href="http://www.lancork.net/2015/09/">2015年9月<span class="countmarks">3</span></a></li>
+	<li><a href="http://www.lancork.net/2015/08/">2015年8月<span class="countmarks">1</span></a></li>
+	<li><a href="http://www.lancork.net/2015/05/">2015年5月<span class="countmarks">2</span></a></li>
+	<li><a href="http://www.lancork.net/2015/04/">2015年4月<span class="countmarks">16</span></a></li>
+	<li><a href="http://www.lancork.net/2015/03/">2015年3月<span class="countmarks">22</span></a></li>
+	<li><a href="http://www.lancork.net/2015/02/">2015年2月<span class="countmarks">11</span></a></li>
+	<li><a href="http://www.lancork.net/2015/01/">2015年1月<span class="countmarks">32</span></a></li>
+	<li><a href="http://www.lancork.net/2014/12/">2014年12月<span class="countmarks">17</span></a></li>
+	<li><a href="http://www.lancork.net/2014/11/">2014年11月<span class="countmarks">6</span></a></li>
+	<li><a href="http://www.lancork.net/2014/10/">2014年10月<span class="countmarks">12</span></a></li>
+	<li><a href="http://www.lancork.net/2014/09/">2014年9月<span class="countmarks">33</span></a></li>
+	<li><a href="http://www.lancork.net/2014/08/">2014年8月<span class="countmarks">26</span></a></li>
+	<li><a href="http://www.lancork.net/2014/07/">2014年7月<span class="countmarks">18</span></a></li>
+	<li><a href="http://www.lancork.net/2014/06/">2014年6月<span class="countmarks">14</span></a></li>
+	<li><a href="http://www.lancork.net/2014/05/">2014年5月<span class="countmarks">18</span></a></li>
+	<li><a href="http://www.lancork.net/2014/04/">2014年4月<span class="countmarks">19</span></a></li>
+	<li><a href="http://www.lancork.net/2014/03/">2014年3月<span class="countmarks">4</span></a></li>
+	<li><a href="http://www.lancork.net/2014/02/">2014年2月<span class="countmarks">3</span></a></li>
+	<li><a href="http://www.lancork.net/2014/01/">2014年1月<span class="countmarks">2</span></a></li>
+	<li><a href="http://www.lancork.net/2013/12/">2013年12月<span class="countmarks">11</span></a></li>
+	<li><a href="http://www.lancork.net/2013/11/">2013年11月<span class="countmarks">12</span></a></li>
+	<li><a href="http://www.lancork.net/2013/10/">2013年10月<span class="countmarks">16</span></a></li>
+	<li><a href="http://www.lancork.net/2013/09/">2013年9月<span class="countmarks">13</span></a></li>
+	<li><a href="http://www.lancork.net/2013/08/">2013年8月<span class="countmarks">10</span></a></li>
+	<li><a href="http://www.lancork.net/2013/07/">2013年7月<span class="countmarks">3</span></a></li>
+		</ul>
+		</section><section id="text-6" class="widget-container widget_text"><h3 class="widget-title">Facebookページ</h3>			<div class="textwidget"><iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Flancork&amp;width&amp;height=62&amp;colorscheme=light&amp;show_faces=false&amp;header=false&amp;stream=false&amp;show_border=false" scrolling="no" style="border:none; overflow:hidden; height:62px;" allowtransparency="true" frameborder="0"></iframe></div>
+		</section><section id="text-3" class="widget-container widget_text"><h3 class="widget-title">Twitter</h3>			<div class="textwidget"><iframe title="Twitterタイムライン" data-user-id="181978422" data-widget-id="363480779206057984" style="position: static; visibility: visible; display: inline-block; width: 100%; height: 450px; padding: 0px; border: medium none; max-width: 520px; min-width: 180px; margin-top: 0px; margin-bottom: 0px; min-height: 200px;" class="twitter-timeline twitter-timeline-rendered" allowfullscreen="true" allowtransparency="true" scrolling="no" id="twitter-widget-2" frameborder="0"></iframe></div>
+		</section>
+					</div><!-- /.widget-area -->
+					
+				</aside><!-- /#side -->
+				<div class="clear"></div></div><!-- /#main -->
+
+
+    </div>
+    <div class="clear"></div>
+    <footer>
+        <div id="footer">
+            <div id="footerinner">
+                <div id="copyright"><p>Copyright © 2004-2015 Lancork.net All Rights Reserved.</p></div>
+                <div id="linkbanner">
+
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </footer>
+
+</div>
+
+<!-- Social Button Scripts -->
+<div class=" fb_reset" id="fb-root"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/xd_arbiter.htm" style="border: medium none;" tabindex="-1" title="Facebook Cross Domain Communication Frame" aria-hidden="true" id="fb_xdm_frame_http" scrolling="no" allowfullscreen="true" allowtransparency="true" name="fb_xdm_frame_http" frameborder="0"></iframe><iframe src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/xd_arbiter_002.htm" style="border: medium none;" tabindex="-1" title="Facebook Cross Domain Communication Frame" aria-hidden="true" id="fb_xdm_frame_https" scrolling="no" allowfullscreen="true" allowtransparency="true" name="fb_xdm_frame_https" frameborder="0"></iframe></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div></div>
+<script>
+    (function(w,d){
+        w.___gcfg={lang:"ja"};
+        var s,e = d.getElementsByTagName("script")[0],
+        a=function(u,f){if(!d.getElementById(f)){s=d.createElement("script");
+        s.async=!0;s.src=u;if(f){s.id=f;}e.parentNode.insertBefore(s,e);}};
+        a("https://apis.google.com/js/platform.js");
+        a("http://b.st-hatena.com/js/bookmark_button.js");
+        a("//platform.twitter.com/widgets.js","twitter-wjs");
+        a("https://widgets.getpocket.com/v1/j/btn.js?v=1");
+    })(this, document);
+</script>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.3";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<!-- /Social Button Scripts -->
+
+<script type="text/javascript" src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/shCore.js"></script>
+<script type="text/javascript" src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/shBrushObjC.js"></script>
+<script type="text/javascript">
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "http://www.lancork.net/wordpress/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "http://www.lancork.net/wordpress/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeMidnight.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = 'ソースを表示';
+	SyntaxHighlighter.config.strings.help = 'SyntaxHighlighterについて';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = '指定のブラシが見つかりませんでした: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'HTMLスクリプトのオプションのためにブラシが構成されませんでした: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.defaults['wrap-lines'] = false;
+	SyntaxHighlighter.all();
+</script>
+<script type="text/javascript" src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/jquery_003.js"></script>
+<script type="text/javascript" src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/jquery.js"></script>
+<script type="text/javascript" src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/jquery_002.js"></script>
+<script type="text/javascript" src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/wp-embed.js"></script>
+
+<script type="text/javascript">
+(function($){
+    $("#author").val($.cookie("comment_author_8d91fb668b1f28fdad4f2b1afcca7151"));
+    $("#email").val($.cookie("comment_author_email_8d91fb668b1f28fdad4f2b1afcca7151"));
+    $("#url").val($.cookie("comment_author_url_8d91fb668b1f28fdad4f2b1afcca7151"));
+})(jQuery);
+</script>
+<script>
+jQuery( document ).ready( function($) {
+	$('.bawpvc-ajax-counter').each( function( i ) {
+		var $id = $(this).data('id');
+		var t = this;
+		var n = 1;
+		$.get('http://www.lancork.net/wordpress/wp-admin/admin-ajax.php?action=bawpvc-ajax-counter&p='+$id+'&n='+n, function( html ) {
+			$(t).html( html );
+		})
+	});
+});
+</script>
+
+
+
+<iframe tabindex="-1" style="width: 1px; height: 1px; position: absolute; top: -100px;" src="iPhone%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%88%9D%E6%AD%A9%E7%9A%84%E3%81%AA%E3%83%87%E3%83%BC%E3%82%BF%E6%9B%B8%E3%81%8D%E6%8F%9B%E3%81%88%E3%83%BB%E3%83%81%E3%83%BC%E3%83%88%E6%96%B9%E6%B3%95%E3%81%A8%E3%80%81%E3%81%9D%E3%82%8C%E3%82%92%E9%98%B2%E3%81%90%E6%96%B9%E6%B3%95%20_%20Lancork_files/postmessageRelay.htm" id="oauth2relay455467545" name="oauth2relay455467545"></iframe></body></html>
