@@ -8,26 +8,20 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class ViewController_0002: UIViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        /* 以下の行を追加する */
-/*
-        var view1 = UIView(frame: CGRectMake(200, 30, 100, 100))
-        view1.backgroundColor = .redColor()
         
-        // self.viewに view1を addする
-        self.view.addSubview(view1)
-*/
+        self.view.backgroundColor = UIColor.whiteColor()
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    
 }
-

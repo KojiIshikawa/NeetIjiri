@@ -15,6 +15,7 @@
 		F483301B1C2F040D00234B18 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F48330191C2F040D00234B18 /* LaunchScreen.storyboard */; };
 		F48330261C2F040D00234B18 /* NeeNeeAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48330251C2F040D00234B18 /* NeeNeeAppTests.swift */; };
 		F48330311C2F040D00234B18 /* NeeNeeAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48330301C2F040D00234B18 /* NeeNeeAppUITests.swift */; };
+		F4A5CA121C3523B70015DC0A /* ViewController_0002.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A5CA111C3523B70015DC0A /* ViewController_0002.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		F483302C1C2F040D00234B18 /* NeeNeeAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NeeNeeAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F48330301C2F040D00234B18 /* NeeNeeAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeeNeeAppUITests.swift; sourceTree = "<group>"; };
 		F48330321C2F040D00234B18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F4A5CA111C3523B70015DC0A /* ViewController_0002.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController_0002.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 			children = (
 				F483300D1C2F040D00234B18 /* AppDelegate.swift */,
 				F483300F1C2F040D00234B18 /* ViewController.swift */,
+				F4A5CA111C3523B70015DC0A /* ViewController_0002.swift */,
 				F48330111C2F040D00234B18 /* Main.storyboard */,
 				F48330171C2F040D00234B18 /* Assets.xcassets */,
 				F48330191C2F040D00234B18 /* LaunchScreen.storyboard */,
@@ -262,6 +265,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4A5CA121C3523B70015DC0A /* ViewController_0002.swift in Sources */,
 				F48330161C2F040D00234B18 /* NeeNeeApp.xcdatamodeld in Sources */,
 				F48330101C2F040D00234B18 /* ViewController.swift in Sources */,
 				F483300E1C2F040D00234B18 /* AppDelegate.swift in Sources */,
