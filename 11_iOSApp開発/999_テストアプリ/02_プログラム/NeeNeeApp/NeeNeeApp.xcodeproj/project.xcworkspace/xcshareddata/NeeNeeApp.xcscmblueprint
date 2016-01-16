@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "A47AA73DA30978861A6E9A24AEC83189FE6EAB84",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "C6B641F5EC3AF2F2F748CFE5AF48099A9ADBA5ED" : 0,
+    "A47AA73DA30978861A6E9A24AEC83189FE6EAB84" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "437D0E7D-FDAA-4B83-9619-97D7CCF8CB7D",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "C6B641F5EC3AF2F2F748CFE5AF48099A9ADBA5ED" : ".Trash\/NeeNeeApp%202.13.34\/",
+    "A47AA73DA30978861A6E9A24AEC83189FE6EAB84" : "neetrepository\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "NeeNeeApp",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "11_iOSApp開発\/999_テストアプリ\/02_プログラム\/NeeNeeApp\/NeeNeeApp.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/neetral\/neetrepository.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A47AA73DA30978861A6E9A24AEC83189FE6EAB84"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "ssh:\/\/git-codecommit.us-east-1.amazonaws.com\/v1\/repos\/neeNeeRepository",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C6B641F5EC3AF2F2F748CFE5AF48099A9ADBA5ED"
+    }
+  ]
+}
