@@ -1,0 +1,589 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AE53D0331C4370010042DD35 /* MGoroku+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE53D0311C4370010042DD35 /* MGoroku+CoreDataProperties.swift */; };
+		AE53D0341C4370010042DD35 /* MGoroku.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE53D0321C4370010042DD35 /* MGoroku.swift */; };
+		AE5CF11D1C3AA507005A3088 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5CF11C1C3AA507005A3088 /* AppDelegate.swift */; };
+		AE5CF11F1C3AA507005A3088 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5CF11E1C3AA507005A3088 /* ViewController.swift */; };
+		AE5CF1221C3AA507005A3088 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE5CF1201C3AA507005A3088 /* Main.storyboard */; };
+		AE5CF1271C3AA507005A3088 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE5CF1261C3AA507005A3088 /* Assets.xcassets */; };
+		AE5CF12A1C3AA507005A3088 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE5CF1281C3AA507005A3088 /* LaunchScreen.storyboard */; };
+		AE5CF1351C3AA507005A3088 /* NeetIjiriTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5CF1341C3AA507005A3088 /* NeetIjiriTests.swift */; };
+		AE5CF1401C3AA507005A3088 /* NeetIjiriUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5CF13F1C3AA507005A3088 /* NeetIjiriUITests.swift */; };
+		AE6AE7441C43937800172A15 /* NeetMaster.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = AE6AE7431C43937800172A15 /* NeetMaster.sqlite */; };
+		AEAD1BD61C3D5950006A6AC2 /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = AEAD1BD51C3D5950006A6AC2 /* twitter.png */; };
+		AEAD1BD81C3D59FF006A6AC2 /* facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = AEAD1BD71C3D59FF006A6AC2 /* facebook.png */; };
+		AEAD1C2A1C3D681C006A6AC2 /* LINEActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAD1C241C3D681C006A6AC2 /* LINEActivity.m */; };
+		AEAD1C2B1C3D681C006A6AC2 /* LINEActivityIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = AEAD1C251C3D681C006A6AC2 /* LINEActivityIcon.png */; };
+		AEAD1C2C1C3D681C006A6AC2 /* LINEActivityIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AEAD1C261C3D681C006A6AC2 /* LINEActivityIcon@2x.png */; };
+		AEAD1C2D1C3D681C006A6AC2 /* LINEActivityIcon@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = AEAD1C271C3D681C006A6AC2 /* LINEActivityIcon@2x~ipad.png */; };
+		AEAD1C2E1C3D681C006A6AC2 /* LINEActivityIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AEAD1C281C3D681C006A6AC2 /* LINEActivityIcon@3x.png */; };
+		AEAD1C2F1C3D681C006A6AC2 /* LINEActivityIcon~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = AEAD1C291C3D681C006A6AC2 /* LINEActivityIcon~ipad.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AE5CF1311C3AA507005A3088 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE5CF1111C3AA507005A3088 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AE5CF1181C3AA507005A3088;
+			remoteInfo = NeetIjiri;
+		};
+		AE5CF13C1C3AA507005A3088 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE5CF1111C3AA507005A3088 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AE5CF1181C3AA507005A3088;
+			remoteInfo = NeetIjiri;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		AE53D0311C4370010042DD35 /* MGoroku+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MGoroku+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		AE53D0321C4370010042DD35 /* MGoroku.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MGoroku.swift; sourceTree = "<group>"; };
+		AE5CF1191C3AA507005A3088 /* NeetIjiri.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NeetIjiri.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE5CF11C1C3AA507005A3088 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AE5CF11E1C3AA507005A3088 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		AE5CF1211C3AA507005A3088 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		AE5CF1261C3AA507005A3088 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AE5CF1291C3AA507005A3088 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		AE5CF12B1C3AA507005A3088 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AE5CF1301C3AA507005A3088 /* NeetIjiriTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NeetIjiriTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE5CF1341C3AA507005A3088 /* NeetIjiriTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeetIjiriTests.swift; sourceTree = "<group>"; };
+		AE5CF1361C3AA507005A3088 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AE5CF13B1C3AA507005A3088 /* NeetIjiriUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NeetIjiriUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE5CF13F1C3AA507005A3088 /* NeetIjiriUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeetIjiriUITests.swift; sourceTree = "<group>"; };
+		AE5CF1411C3AA507005A3088 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AE6AE7431C43937800172A15 /* NeetMaster.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = NeetMaster.sqlite; sourceTree = "<group>"; };
+		AEAD1BD51C3D5950006A6AC2 /* twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter.png; sourceTree = "<group>"; };
+		AEAD1BD71C3D59FF006A6AC2 /* facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook.png; sourceTree = "<group>"; };
+		AEAD1C231C3D681C006A6AC2 /* LINEActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LINEActivity.h; sourceTree = "<group>"; };
+		AEAD1C241C3D681C006A6AC2 /* LINEActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LINEActivity.m; sourceTree = "<group>"; };
+		AEAD1C251C3D681C006A6AC2 /* LINEActivityIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LINEActivityIcon.png; sourceTree = "<group>"; };
+		AEAD1C261C3D681C006A6AC2 /* LINEActivityIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LINEActivityIcon@2x.png"; sourceTree = "<group>"; };
+		AEAD1C271C3D681C006A6AC2 /* LINEActivityIcon@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LINEActivityIcon@2x~ipad.png"; sourceTree = "<group>"; };
+		AEAD1C281C3D681C006A6AC2 /* LINEActivityIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LINEActivityIcon@3x.png"; sourceTree = "<group>"; };
+		AEAD1C291C3D681C006A6AC2 /* LINEActivityIcon~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LINEActivityIcon~ipad.png"; sourceTree = "<group>"; };
+		AEAD1C301C3D6948006A6AC2 /* NeetIjiri-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NeetIjiri-Bridging-Header.h"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AE5CF1161C3AA507005A3088 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AE5CF12D1C3AA507005A3088 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AE5CF1381C3AA507005A3088 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AE5CF1101C3AA507005A3088 = {
+			isa = PBXGroup;
+			children = (
+				AE5CF11B1C3AA507005A3088 /* NeetIjiri */,
+				AE5CF1331C3AA507005A3088 /* NeetIjiriTests */,
+				AE5CF13E1C3AA507005A3088 /* NeetIjiriUITests */,
+				AE5CF11A1C3AA507005A3088 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AE5CF11A1C3AA507005A3088 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AE5CF1191C3AA507005A3088 /* NeetIjiri.app */,
+				AE5CF1301C3AA507005A3088 /* NeetIjiriTests.xctest */,
+				AE5CF13B1C3AA507005A3088 /* NeetIjiriUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AE5CF11B1C3AA507005A3088 /* NeetIjiri */ = {
+			isa = PBXGroup;
+			children = (
+				AE53D0311C4370010042DD35 /* MGoroku+CoreDataProperties.swift */,
+				AE53D0321C4370010042DD35 /* MGoroku.swift */,
+				AE6AE7421C43937800172A15 /* Resources */,
+				AEAD1C221C3D681C006A6AC2 /* LINEActivity */,
+				AEAD1BD41C3D5950006A6AC2 /* Image */,
+				AE5CF11C1C3AA507005A3088 /* AppDelegate.swift */,
+				AE5CF11E1C3AA507005A3088 /* ViewController.swift */,
+				AE5CF1201C3AA507005A3088 /* Main.storyboard */,
+				AE5CF1261C3AA507005A3088 /* Assets.xcassets */,
+				AE5CF1281C3AA507005A3088 /* LaunchScreen.storyboard */,
+				AE5CF12B1C3AA507005A3088 /* Info.plist */,
+				AEAD1C301C3D6948006A6AC2 /* NeetIjiri-Bridging-Header.h */,
+			);
+			path = NeetIjiri;
+			sourceTree = "<group>";
+		};
+		AE5CF1331C3AA507005A3088 /* NeetIjiriTests */ = {
+			isa = PBXGroup;
+			children = (
+				AE5CF1341C3AA507005A3088 /* NeetIjiriTests.swift */,
+				AE5CF1361C3AA507005A3088 /* Info.plist */,
+			);
+			path = NeetIjiriTests;
+			sourceTree = "<group>";
+		};
+		AE5CF13E1C3AA507005A3088 /* NeetIjiriUITests */ = {
+			isa = PBXGroup;
+			children = (
+				AE5CF13F1C3AA507005A3088 /* NeetIjiriUITests.swift */,
+				AE5CF1411C3AA507005A3088 /* Info.plist */,
+			);
+			path = NeetIjiriUITests;
+			sourceTree = "<group>";
+		};
+		AE6AE7421C43937800172A15 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AE6AE7431C43937800172A15 /* NeetMaster.sqlite */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		AEAD1BD41C3D5950006A6AC2 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				AEAD1BD71C3D59FF006A6AC2 /* facebook.png */,
+				AEAD1BD51C3D5950006A6AC2 /* twitter.png */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		AEAD1C221C3D681C006A6AC2 /* LINEActivity */ = {
+			isa = PBXGroup;
+			children = (
+				AEAD1C231C3D681C006A6AC2 /* LINEActivity.h */,
+				AEAD1C241C3D681C006A6AC2 /* LINEActivity.m */,
+				AEAD1C251C3D681C006A6AC2 /* LINEActivityIcon.png */,
+				AEAD1C261C3D681C006A6AC2 /* LINEActivityIcon@2x.png */,
+				AEAD1C271C3D681C006A6AC2 /* LINEActivityIcon@2x~ipad.png */,
+				AEAD1C281C3D681C006A6AC2 /* LINEActivityIcon@3x.png */,
+				AEAD1C291C3D681C006A6AC2 /* LINEActivityIcon~ipad.png */,
+			);
+			path = LINEActivity;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AE5CF1181C3AA507005A3088 /* NeetIjiri */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AE5CF1441C3AA507005A3088 /* Build configuration list for PBXNativeTarget "NeetIjiri" */;
+			buildPhases = (
+				AE5CF1151C3AA507005A3088 /* Sources */,
+				AE5CF1161C3AA507005A3088 /* Frameworks */,
+				AE5CF1171C3AA507005A3088 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NeetIjiri;
+			productName = NeetIjiri;
+			productReference = AE5CF1191C3AA507005A3088 /* NeetIjiri.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AE5CF12F1C3AA507005A3088 /* NeetIjiriTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AE5CF1471C3AA507005A3088 /* Build configuration list for PBXNativeTarget "NeetIjiriTests" */;
+			buildPhases = (
+				AE5CF12C1C3AA507005A3088 /* Sources */,
+				AE5CF12D1C3AA507005A3088 /* Frameworks */,
+				AE5CF12E1C3AA507005A3088 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AE5CF1321C3AA507005A3088 /* PBXTargetDependency */,
+			);
+			name = NeetIjiriTests;
+			productName = NeetIjiriTests;
+			productReference = AE5CF1301C3AA507005A3088 /* NeetIjiriTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		AE5CF13A1C3AA507005A3088 /* NeetIjiriUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AE5CF14A1C3AA507005A3088 /* Build configuration list for PBXNativeTarget "NeetIjiriUITests" */;
+			buildPhases = (
+				AE5CF1371C3AA507005A3088 /* Sources */,
+				AE5CF1381C3AA507005A3088 /* Frameworks */,
+				AE5CF1391C3AA507005A3088 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AE5CF13D1C3AA507005A3088 /* PBXTargetDependency */,
+			);
+			name = NeetIjiriUITests;
+			productName = NeetIjiriUITests;
+			productReference = AE5CF13B1C3AA507005A3088 /* NeetIjiriUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AE5CF1111C3AA507005A3088 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = v2_system;
+				TargetAttributes = {
+					AE5CF1181C3AA507005A3088 = {
+						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 9HQFTNT59D;
+					};
+					AE5CF12F1C3AA507005A3088 = {
+						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 9HQFTNT59D;
+						TestTargetID = AE5CF1181C3AA507005A3088;
+					};
+					AE5CF13A1C3AA507005A3088 = {
+						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 9HQFTNT59D;
+						TestTargetID = AE5CF1181C3AA507005A3088;
+					};
+				};
+			};
+			buildConfigurationList = AE5CF1141C3AA507005A3088 /* Build configuration list for PBXProject "NeetIjiri" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AE5CF1101C3AA507005A3088;
+			productRefGroup = AE5CF11A1C3AA507005A3088 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AE5CF1181C3AA507005A3088 /* NeetIjiri */,
+				AE5CF12F1C3AA507005A3088 /* NeetIjiriTests */,
+				AE5CF13A1C3AA507005A3088 /* NeetIjiriUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AE5CF1171C3AA507005A3088 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AEAD1C2F1C3D681C006A6AC2 /* LINEActivityIcon~ipad.png in Resources */,
+				AE6AE7441C43937800172A15 /* NeetMaster.sqlite in Resources */,
+				AEAD1BD81C3D59FF006A6AC2 /* facebook.png in Resources */,
+				AEAD1C2B1C3D681C006A6AC2 /* LINEActivityIcon.png in Resources */,
+				AE5CF12A1C3AA507005A3088 /* LaunchScreen.storyboard in Resources */,
+				AEAD1C2D1C3D681C006A6AC2 /* LINEActivityIcon@2x~ipad.png in Resources */,
+				AEAD1C2E1C3D681C006A6AC2 /* LINEActivityIcon@3x.png in Resources */,
+				AEAD1BD61C3D5950006A6AC2 /* twitter.png in Resources */,
+				AE5CF1271C3AA507005A3088 /* Assets.xcassets in Resources */,
+				AE5CF1221C3AA507005A3088 /* Main.storyboard in Resources */,
+				AEAD1C2C1C3D681C006A6AC2 /* LINEActivityIcon@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AE5CF12E1C3AA507005A3088 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AE5CF1391C3AA507005A3088 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AE5CF1151C3AA507005A3088 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE5CF11F1C3AA507005A3088 /* ViewController.swift in Sources */,
+				AE53D0341C4370010042DD35 /* MGoroku.swift in Sources */,
+				AEAD1C2A1C3D681C006A6AC2 /* LINEActivity.m in Sources */,
+				AE5CF11D1C3AA507005A3088 /* AppDelegate.swift in Sources */,
+				AE53D0331C4370010042DD35 /* MGoroku+CoreDataProperties.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AE5CF12C1C3AA507005A3088 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE5CF1351C3AA507005A3088 /* NeetIjiriTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AE5CF1371C3AA507005A3088 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE5CF1401C3AA507005A3088 /* NeetIjiriUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AE5CF1321C3AA507005A3088 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AE5CF1181C3AA507005A3088 /* NeetIjiri */;
+			targetProxy = AE5CF1311C3AA507005A3088 /* PBXContainerItemProxy */;
+		};
+		AE5CF13D1C3AA507005A3088 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AE5CF1181C3AA507005A3088 /* NeetIjiri */;
+			targetProxy = AE5CF13C1C3AA507005A3088 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		AE5CF1201C3AA507005A3088 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AE5CF1211C3AA507005A3088 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		AE5CF1281C3AA507005A3088 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AE5CF1291C3AA507005A3088 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AE5CF1421C3AA507005A3088 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AE5CF1431C3AA507005A3088 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AE5CF1451C3AA507005A3088 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = NeetIjiri/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "v2-system.NeetIjiri";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "NeetIjiri/NeetIjiri-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		AE5CF1461C3AA507005A3088 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = NeetIjiri/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "v2-system.NeetIjiri";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "NeetIjiri/NeetIjiri-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		AE5CF1481C3AA507005A3088 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = NeetIjiriTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "v2-system.NeetIjiriTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NeetIjiri.app/NeetIjiri";
+			};
+			name = Debug;
+		};
+		AE5CF1491C3AA507005A3088 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = NeetIjiriTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "v2-system.NeetIjiriTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NeetIjiri.app/NeetIjiri";
+			};
+			name = Release;
+		};
+		AE5CF14B1C3AA507005A3088 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = NeetIjiriUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "v2-system.NeetIjiriUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = NeetIjiri;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		AE5CF14C1C3AA507005A3088 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = NeetIjiriUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "v2-system.NeetIjiriUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = NeetIjiri;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AE5CF1141C3AA507005A3088 /* Build configuration list for PBXProject "NeetIjiri" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AE5CF1421C3AA507005A3088 /* Debug */,
+				AE5CF1431C3AA507005A3088 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AE5CF1441C3AA507005A3088 /* Build configuration list for PBXNativeTarget "NeetIjiri" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AE5CF1451C3AA507005A3088 /* Debug */,
+				AE5CF1461C3AA507005A3088 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AE5CF1471C3AA507005A3088 /* Build configuration list for PBXNativeTarget "NeetIjiriTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AE5CF1481C3AA507005A3088 /* Debug */,
+				AE5CF1491C3AA507005A3088 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AE5CF14A1C3AA507005A3088 /* Build configuration list for PBXNativeTarget "NeetIjiriUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AE5CF14B1C3AA507005A3088 /* Debug */,
+				AE5CF14C1C3AA507005A3088 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AE5CF1111C3AA507005A3088 /* Project object */;
+}

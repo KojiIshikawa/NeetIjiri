@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController storyboardIdentifier="story1" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="ViewController" customModule="NeetIjiri" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4A6-E9-z0r">
+                                <rect key="frame" x="20" y="145" width="96" height="96"/>
+                                <state key="normal" title="ソーシャル" image="twitter.png"/>
+                                <connections>
+                                    <action selector="tapTwitter:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cIK-23-WGP"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mkC-Qy-NGg">
+                                <rect key="frame" x="130" y="148" width="90" height="90"/>
+                                <state key="normal" title="Button" image="facebook.png"/>
+                                <connections>
+                                    <action selector="tapFacebookBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UqC-IY-hGx"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zbu-IW-OW7">
+                                <rect key="frame" x="238" y="208" width="47" height="30"/>
+                                <state key="normal" title="Line"/>
+                                <connections>
+                                    <action selector="tapLine:" destination="BYZ-38-t0r" eventType="touchUpInside" id="U8o-Mm-GV6"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e7K-1Z-8GH">
+                                <rect key="frame" x="20" y="99" width="149" height="30"/>
+                                <state key="normal" title="popOverSample"/>
+                                <connections>
+                                    <action selector="popOver:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ske-lI-v36"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.75514678565558158" green="0.93728122989562823" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <segue destination="Nud-Vo-oWy" kind="popoverPresentation" identifier="showView" popoverAnchorView="e7K-1Z-8GH" id="KyL-Ef-gnL">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES"/>
+                        </segue>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="208" y="316"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="bcA-i3-nRz">
+            <objects>
+                <viewController id="Nud-Vo-oWy" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gBk-2C-ugL"/>
+                        <viewControllerLayoutGuide type="bottom" id="HFj-Pe-lpO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XZ5-e7-bba">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="popoverTest" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rf6-Fv-6Kw">
+                                <rect key="frame" x="97" y="40" width="112" height="27"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.87052140341921902" green="0.73823511919182438" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TFZ-oU-bdG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="720" y="316"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="facebook.png" width="325" height="325"/>
+        <image name="twitter.png" width="300" height="300"/>
+    </resources>
+</document>
