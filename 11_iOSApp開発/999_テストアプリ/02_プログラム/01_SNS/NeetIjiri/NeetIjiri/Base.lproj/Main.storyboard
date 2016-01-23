@@ -24,13 +24,6 @@
                                     <action selector="tapTwitter:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cIK-23-WGP"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mkC-Qy-NGg">
-                                <rect key="frame" x="130" y="148" width="90" height="90"/>
-                                <state key="normal" title="Button" image="facebook.png"/>
-                                <connections>
-                                    <action selector="tapFacebookBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UqC-IY-hGx"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zbu-IW-OW7">
                                 <rect key="frame" x="238" y="208" width="47" height="30"/>
                                 <state key="normal" title="Line"/>
@@ -43,6 +36,13 @@
                                 <state key="normal" title="popOverSample"/>
                                 <connections>
                                     <action selector="popOver:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ske-lI-v36"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mkC-Qy-NGg">
+                                <rect key="frame" x="124" y="148" width="90" height="90"/>
+                                <state key="normal" title="Button" image="facebook.png"/>
+                                <connections>
+                                    <action selector="tapFacebookBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UqC-IY-hGx"/>
                                 </connections>
                             </button>
                         </subviews>

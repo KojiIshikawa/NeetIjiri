@@ -330,9 +330,9 @@
 			files = (
 				AE5CF11F1C3AA507005A3088 /* ViewController.swift in Sources */,
 				AE53D0341C4370010042DD35 /* MGoroku.swift in Sources */,
-				AEAD1C2A1C3D681C006A6AC2 /* LINEActivity.m in Sources */,
 				AE5CF11D1C3AA507005A3088 /* AppDelegate.swift in Sources */,
 				AE53D0331C4370010042DD35 /* MGoroku+CoreDataProperties.swift in Sources */,
+				AEAD1C2A1C3D681C006A6AC2 /* LINEActivity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
