@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15C50" minimumToolsVersion="Automatic">
+    <entity name="GorokuM" representedClassName="GorokuM" syncable="YES">
+        <attribute name="deleteFlg" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="gorokuCode" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="gorokuValue" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="OkanM" representedClassName="OkanM" syncable="YES">
+        <attribute name="deleteFlg" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="okanCode" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="okanValue" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="GorokuM" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="OkanM" positionX="-63" positionY="9" width="128" height="90"/>
+    </elements>
+</model>
