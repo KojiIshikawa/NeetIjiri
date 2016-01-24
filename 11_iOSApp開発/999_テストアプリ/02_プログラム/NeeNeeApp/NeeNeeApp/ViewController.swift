@@ -12,40 +12,65 @@ import iAd
 import AVFoundation
 
 class ViewController: UIViewController, AVAudioPlayerDelegate {
-    
+
+    // 壁紙オブジェクト
     private var myImageView: UIImageView!
+    
+    // キャラクターオブジェクト
     private var myCharImageView: UIImageView!
+    
+    // 吹き出しオブジェクト
     private var myFukidasiImageView: UIImageView!
     private var fukidasiLabel: UILabel!
+
+    // BGM・SEの再生用オブジェクト
     private var myAudioPlayer: AVAudioPlayer!
     private var mySePlayer: AVAudioPlayer!
     
+    // メニューボタン
     private var manuBtn: UIButton!
     private var mainBtn: UIButton!
     private var detailBtn: UIButton!
     private var shareBtn: UIButton!
-    
-    private var facebookBtn: UIButton!
-    private var lineBtn: UIButton!
-    private var twitterBtn: UIButton!
-    
-    private var configBtn: UIButton!
-    
-    private var bgmMuteBtn: UIButton!
-    private var bgmVolumeSBar: UISlider!
-    private var bgmLabel: UILabel!
 
-    private var seMuteBtn: UIButton!
-    private var seVolumeSBar: UISlider!
-    private var seLabel: UILabel!
-    
+    // メニューのサブビュー
     private var mainConView: UIView!
     private var detailConView: UIView!
     private var shareConView: UIView!
     private var configConView: UIView!
+    
+    // 履歴書メニューのオブジェクト
+    private var nameTitleLabel: UILabel!
+    private var nameDataLabel: UILabel!
+    private var birthTitleLabel: UILabel!
+    private var birthDataLabel: UILabel!
+    private var positionTitleLabel: UILabel!
+    private var positionDataLabel: UILabel!
+    private var compTitleLabel: UILabel!
+    private var compDataLabel: UILabel!
+    private var kakugenTitleLabel: UILabel!
+    private var kakugenDataLabel: UILabel!
+    private var himaTitleLabel: UILabel!
+    private var himaDataLabel: UILabel!
+    
+    // シェアメニューのオブジェクト
+    private var facebookBtn: UIButton!
+    private var lineBtn: UIButton!
+    private var twitterBtn: UIButton!
+    private var configBtn: UIButton!
+    
+    // 設定メニューのオブジェクト
+    private var bgmMuteBtn: UIButton!
+    private var bgmVolumeSBar: UISlider!
+    private var bgmLabel: UILabel!
+    private var seMuteBtn: UIButton!
+    private var seVolumeSBar: UISlider!
+    private var seLabel: UILabel!
 
+    // バナー
     private var footerBaner: ADBannerView!
     
+    // 定数宣言
     private let mySongPath = NSBundle.mainBundle().pathForResource("暇で忙しい", ofType:"mp3")
     private let mySeYesPath = NSBundle.mainBundle().pathForResource("se4", ofType:"mp3")
     private let mySeNoPath = NSBundle.mainBundle().pathForResource("se6", ofType:"mp3")
@@ -63,10 +88,9 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         // 画像をUIImageViewに設定する.
         myImageView.image = myImage
         
+        // キャラクターを初期設定する.
         // UIImageViewをViewに追加する.
         self.view.addSubview(myImageView)
-        
-        // キャラクターを初期設定する.
         myCharImageView = UIImageView(frame: CGRectMake(-100,300,300,350))
         myCharImageView.tag = 1
         
@@ -137,141 +161,6 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         shareBtn.hidden = true
         configBtn.hidden = true
         
-        //ポップ生成
-        mainConView = UIView(frame: CGRectMake(18,100,340,400))
-        
-        if mainConView != nil {
-            
-            // ポップの背景色を設定する.
-            mainConView.backgroundColor = UIColor(red: 20, green: 20, blue: 20, alpha: 0.9)
-            
-            // 初期表示は非表示
-            mainConView.hidden = true
-            
-            // ViewをViewに追加する.
-            self.view.addSubview(mainConView)
-            
-        }
-        
-        //ポップ生成
-        detailConView = UIView(frame: CGRectMake(18,100,340,400))
-        if detailConView != nil {
-            
-            // ポップの背景色を設定する.
-            detailConView.backgroundColor = UIColor(red: 20, green: 20, blue: 20, alpha: 0.9)
-            
-            // 初期表示は非表示
-            detailConView.hidden = true
-            
-            // ViewをViewに追加する.
-            self.view.addSubview(detailConView)
-            
-        }
-        
-        //ポップ生成
-        shareConView = UIView(frame: CGRectMake(18,100,340,400))
-        if shareConView != nil {
-            
-            // ポップの背景色を設定する.
-            shareConView.backgroundColor = UIColor(red: 20, green: 20, blue: 20, alpha: 0.9)
-            
-            // 初期表示は非表示
-            shareConView.hidden = true
-            
-            // ViewをViewに追加する.
-            self.view.addSubview(shareConView)
-            
-        }
-        
-        // FaceBookボタンを生成
-        facebookBtn = UIButton(frame: CGRectMake(20,120,50,50))
-        let facebookImage = UIImage(named: "facebook.png")! as UIImage
-        facebookBtn.setImage(facebookImage, forState: .Normal)
-        facebookBtn.addTarget(self, action: "tapFacebookBtn:", forControlEvents: .TouchUpInside)
-
-        // Twitterボタンを生成
-        twitterBtn = UIButton(frame: CGRectMake(100,120,50,50))
-        let twitterImage = UIImage(named: "twitter.png")! as UIImage
-        twitterBtn.setImage(twitterImage, forState: .Normal)
-        twitterBtn.addTarget(self, action: "tapTwitterBtn:", forControlEvents: .TouchUpInside)
-
-        // LINEボタンを生成
-        lineBtn = UIButton(frame: CGRectMake(180,120,50,50))
-        let lineImage = UIImage(named: "line.png")! as UIImage
-        lineBtn.setImage(lineImage, forState: .Normal)
-        lineBtn.addTarget(self, action: "tapLineBtn:", forControlEvents: .TouchUpInside)
-        
-        // ポップ上に表示するオブジェクトをViewに追加する.
-        shareConView.addSubview(facebookBtn)
-        shareConView.addSubview(twitterBtn)
-        shareConView.addSubview(lineBtn)
-
-        // 非表示にしておく.
-        facebookBtn.hidden = true
-        twitterBtn.hidden = true
-        lineBtn.hidden = true
-        
-        //ポップ生成
-        configConView = UIView(frame: CGRectMake(18,100,340,400))
-        if configConView != nil {
-            
-            // ポップの背景色を設定する.
-            configConView.backgroundColor = UIColor(red: 20, green: 20, blue: 20, alpha: 0.9)
-            
-            // 初期表示は非表示
-            configConView.hidden = true
-            
-            // ポップアップViewをViewに追加する.
-            self.view.addSubview(configConView)
-            
-            // ポップ上に表示するオブジェクトを生成する.
-            // BGMのラベルを生成
-            bgmLabel = UILabel(frame: CGRectMake(20,60,100,120))
-            bgmLabel.text = "BGM"
-            
-            // BGMのスライドバーを生成
-            bgmVolumeSBar = UISlider(frame: CGRectMake(100,60,100,120))
-            bgmVolumeSBar.addTarget(self, action: "slideBgmVolume:", forControlEvents: .TouchUpInside)
-            bgmVolumeSBar.value = 0.5
-            
-            // BGMのミュートボタンを生成
-            bgmMuteBtn = UIButton(frame: CGRectMake(200,60,100,120))
-            bgmMuteBtn.setTitle("ミュート",  forState: .Normal)
-            bgmMuteBtn.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
-            bgmMuteBtn.addTarget(self, action: "tapBgmMuteBtn:", forControlEvents: .TouchUpInside)
-
-            // SEのラベルを生成
-            seLabel = UILabel(frame: CGRectMake(20,120,100,120))
-            seLabel.text = "SE"
-            
-            // SEのスライドバーを生成
-            seVolumeSBar = UISlider(frame: CGRectMake(100,120,100,120))
-            seVolumeSBar.addTarget(self, action: "slideSeVolume:", forControlEvents: .TouchUpInside)
-            seVolumeSBar.value = 0.5
-            
-            // SEのミュートボタンを生成
-            seMuteBtn = UIButton(frame: CGRectMake(200,120,100,120))
-            seMuteBtn.setTitle("ミュート",  forState: .Normal)
-            seMuteBtn.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
-            seMuteBtn.addTarget(self, action: "tapSeMuteBtn:", forControlEvents: .TouchUpInside)
-            
-            // ポップ上に表示するオブジェクトをViewに追加する.
-            configConView.addSubview(bgmLabel)
-            configConView.addSubview(bgmVolumeSBar)
-            configConView.addSubview(bgmMuteBtn)
-            configConView.addSubview(seLabel)
-            configConView.addSubview(seVolumeSBar)
-            configConView.addSubview(seMuteBtn)
-    
-            // 非表示にしておく.
-            bgmLabel.hidden = true
-            bgmVolumeSBar.hidden = true
-            bgmMuteBtn.hidden = true
-            seLabel.hidden = true
-            seVolumeSBar.hidden = true
-            seMuteBtn.hidden = true
-        }
-        
         // テーマソングを再生する.
         do {
             myAudioPlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath:mySongPath!))
@@ -281,6 +170,18 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         }catch{
             // 例外発生
         }
+        
+        // メイン（ひまつぶし）メニューの生成
+        mainInit()
+
+        // 履歴書メニューの生成
+        detailInit()
+        
+        // シェアメニューの生成
+        shareInit()
+        
+        // 設定メニューの生成
+        configInit()
     }
     
     func tapManuBtn(sender: AnyObject) {
@@ -684,6 +585,206 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         }catch{
             // 例外発生
         }
+    }
+    
+    func mainInit()
+    {
+        //ポップ生成
+        mainConView = UIView(frame: CGRectMake(18,100,340,400))
+        
+        if mainConView != nil {
+            
+            // ポップの背景色を設定する.
+            mainConView.backgroundColor = UIColor(red: 20, green: 20, blue: 20, alpha: 0.9)
+            
+            // 初期表示は非表示
+            mainConView.hidden = true
+            
+            // ViewをViewに追加する.
+            self.view.addSubview(mainConView)
+            
+        }
+    }
+    
+    func detailInit()
+    {
+        //ポップ生成
+        detailConView = UIView(frame: CGRectMake(18,100,340,400))
+        if detailConView != nil {
+            
+            // ポップの背景色を設定する.
+            detailConView.backgroundColor = UIColor(red: 20, green: 20, blue: 20, alpha: 0.9)
+            
+            // 初期表示は非表示
+            detailConView.hidden = true
+            
+            // ViewをViewに追加する.
+            self.view.addSubview(detailConView)
+            
+        }
+
+        self.nameTitleLabel = UILabel(frame: CGRectMake(20,10,120,20))
+        self.nameTitleLabel.text = "名前"
+        
+        self.nameDataLabel = UILabel(frame: CGRectMake(130,10,200,20))
+        self.nameDataLabel.text = "こうじ"
+
+        self.birthTitleLabel = UILabel(frame: CGRectMake(20,30,120,20))
+        self.birthTitleLabel.text = "生年月日"
+        
+        self.birthDataLabel = UILabel(frame: CGRectMake(130,30,200,20))
+        self.birthDataLabel.text = "1990年3月31日"
+        
+        self.positionTitleLabel = UILabel(frame: CGRectMake(20,50,120,20))
+        self.positionTitleLabel.text = "役職"
+        
+        self.positionDataLabel = UILabel(frame: CGRectMake(130,50,200,20))
+        self.positionDataLabel.text = "ひきニート"
+        
+        self.compTitleLabel = UILabel(frame: CGRectMake(20,70,120,30))
+        self.compTitleLabel.text = "行ったこと\nのある場所"
+        self.compTitleLabel.numberOfLines = 2
+        
+        self.compDataLabel = UILabel(frame: CGRectMake(130,70,200,30))
+        self.compDataLabel.text = "部屋、台所、トイレ"
+        
+        self.kakugenTitleLabel = UILabel(frame: CGRectMake(20,100,120,20))
+        self.kakugenTitleLabel.text = "今日の格言"
+        
+        self.kakugenDataLabel = UILabel(frame: CGRectMake(130,100,200,20))
+        self.kakugenDataLabel.text = "やる気！元気！いわき！"
+        
+        self.himaTitleLabel = UILabel(frame: CGRectMake(20,120,120,60))
+        self.himaTitleLabel.text = "つぶせるひま"
+        
+        self.himaDataLabel = UILabel(frame: CGRectMake(130,120,200,120))
+        self.himaDataLabel.text = "家でゴロゴロ" + "\n" + "近所の公園でブランコ" + "\n" + "台所で冷蔵庫あさり"
+        self.himaDataLabel.numberOfLines = 3
+
+        // ポップ上に表示するオブジェクトをViewに追加する.
+        detailConView.addSubview(nameTitleLabel)
+        detailConView.addSubview(nameDataLabel)
+        detailConView.addSubview(birthTitleLabel)
+        detailConView.addSubview(birthDataLabel)
+        detailConView.addSubview(positionTitleLabel)
+        detailConView.addSubview(positionDataLabel)
+        detailConView.addSubview(compTitleLabel)
+        detailConView.addSubview(compDataLabel)
+        detailConView.addSubview(kakugenTitleLabel)
+        detailConView.addSubview(kakugenDataLabel)
+        detailConView.addSubview(himaTitleLabel)
+        detailConView.addSubview(himaDataLabel)
+    }
+
+    func shareInit()
+    {
+        //ポップ生成
+        shareConView = UIView(frame: CGRectMake(18,100,340,400))
+        if shareConView != nil {
+            
+            // ポップの背景色を設定する.
+            shareConView.backgroundColor = UIColor(red: 20, green: 20, blue: 20, alpha: 0.9)
+            
+            // 初期表示は非表示
+            shareConView.hidden = true
+            
+            // ViewをViewに追加する.
+            self.view.addSubview(shareConView)
+            
+        }
+        
+        // FaceBookボタンを生成
+        facebookBtn = UIButton(frame: CGRectMake(20,120,50,50))
+        let facebookImage = UIImage(named: "facebook.png")! as UIImage
+        facebookBtn.setImage(facebookImage, forState: .Normal)
+        facebookBtn.addTarget(self, action: "tapFacebookBtn:", forControlEvents: .TouchUpInside)
+        
+        // Twitterボタンを生成
+        twitterBtn = UIButton(frame: CGRectMake(100,120,50,50))
+        let twitterImage = UIImage(named: "twitter.png")! as UIImage
+        twitterBtn.setImage(twitterImage, forState: .Normal)
+        twitterBtn.addTarget(self, action: "tapTwitterBtn:", forControlEvents: .TouchUpInside)
+        
+        // LINEボタンを生成
+        lineBtn = UIButton(frame: CGRectMake(180,120,50,50))
+        let lineImage = UIImage(named: "line.png")! as UIImage
+        lineBtn.setImage(lineImage, forState: .Normal)
+        lineBtn.addTarget(self, action: "tapLineBtn:", forControlEvents: .TouchUpInside)
+        
+        // ポップ上に表示するオブジェクトをViewに追加する.
+        shareConView.addSubview(facebookBtn)
+        shareConView.addSubview(twitterBtn)
+        shareConView.addSubview(lineBtn)
+        
+        // 非表示にしておく.
+        facebookBtn.hidden = true
+        twitterBtn.hidden = true
+        lineBtn.hidden = true
+    }
+
+    func configInit()
+    {
+        //ポップ生成
+        configConView = UIView(frame: CGRectMake(18,100,340,400))
+        if configConView != nil {
+            
+            // ポップの背景色を設定する.
+            configConView.backgroundColor = UIColor(red: 20, green: 20, blue: 20, alpha: 0.9)
+            
+            // 初期表示は非表示
+            configConView.hidden = true
+            
+            // ポップアップViewをViewに追加する.
+            self.view.addSubview(configConView)
+            
+            // ポップ上に表示するオブジェクトを生成する.
+            // BGMのラベルを生成
+            bgmLabel = UILabel(frame: CGRectMake(20,60,100,120))
+            bgmLabel.text = "BGM"
+            
+            // BGMのスライドバーを生成
+            bgmVolumeSBar = UISlider(frame: CGRectMake(100,60,100,120))
+            bgmVolumeSBar.addTarget(self, action: "slideBgmVolume:", forControlEvents: .TouchUpInside)
+            bgmVolumeSBar.value = 0.5
+            
+            // BGMのミュートボタンを生成
+            bgmMuteBtn = UIButton(frame: CGRectMake(200,60,100,120))
+            bgmMuteBtn.setTitle("ミュート",  forState: .Normal)
+            bgmMuteBtn.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+            bgmMuteBtn.addTarget(self, action: "tapBgmMuteBtn:", forControlEvents: .TouchUpInside)
+            
+            // SEのラベルを生成
+            seLabel = UILabel(frame: CGRectMake(20,120,100,120))
+            seLabel.text = "SE"
+            
+            // SEのスライドバーを生成
+            seVolumeSBar = UISlider(frame: CGRectMake(100,120,100,120))
+            seVolumeSBar.addTarget(self, action: "slideSeVolume:", forControlEvents: .TouchUpInside)
+            seVolumeSBar.value = 0.5
+            
+            // SEのミュートボタンを生成
+            seMuteBtn = UIButton(frame: CGRectMake(200,120,100,120))
+            seMuteBtn.setTitle("ミュート",  forState: .Normal)
+            seMuteBtn.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+            seMuteBtn.addTarget(self, action: "tapSeMuteBtn:", forControlEvents: .TouchUpInside)
+            
+            // ポップ上に表示するオブジェクトをViewに追加する.
+            configConView.addSubview(bgmLabel)
+            configConView.addSubview(bgmVolumeSBar)
+            configConView.addSubview(bgmMuteBtn)
+            configConView.addSubview(seLabel)
+            configConView.addSubview(seVolumeSBar)
+            configConView.addSubview(seMuteBtn)
+            
+            // 非表示にしておく.
+            bgmLabel.hidden = true
+            bgmVolumeSBar.hidden = true
+            bgmMuteBtn.hidden = true
+            seLabel.hidden = true
+            seVolumeSBar.hidden = true
+            seMuteBtn.hidden = true
+        }
+
     }
     
     func bannerViewDidLoadAd(banner: ADBannerView!) {
