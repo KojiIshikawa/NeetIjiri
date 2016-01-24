@@ -99,7 +99,8 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     private func reloadData() {
         print(NSDate().description, __FUNCTION__, __LINE__)
-        GorokuObjects = GorokuM.MR_findAll() as! [GorokuM]
+//        GorokuObjects = GorokuM.MR_findAll() as! [GorokuM]
+        GorokuObjects = GorokuM.MR_findAllSortedBy("gorokuCode", ascending: true) as! [GorokuM]
         tableView.reloadData()
     }
 
