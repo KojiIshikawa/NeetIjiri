@@ -273,7 +273,7 @@
 				TargetAttributes = {
 					AE1ADC3A1C512ECA00FA8CEB = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 82Y66MPE59;
+						DevelopmentTeam = 9HQFTNT59D;
 					};
 					AE1ADC511C512ECB00FA8CEB = {
 						CreatedOnToolsVersion = 7.2;
@@ -540,13 +540,10 @@
 			baseConfigurationReference = 56FE489A29B72BFF9FB1330E /* Pods-v2MagicalRecord.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = v2MagicalRecord/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "v2-system.v2MagicalRecord";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "v2MagicalRecord/v2MagicalRecord-Bridging-Header.h";
 			};
 			name = Debug;
@@ -556,13 +553,10 @@
 			baseConfigurationReference = 05E8AF1955245A8DF5351DDB /* Pods-v2MagicalRecord.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = v2MagicalRecord/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "v2-system.v2MagicalRecord";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "v2MagicalRecord/v2MagicalRecord-Bridging-Header.h";
 			};
 			name = Release;
