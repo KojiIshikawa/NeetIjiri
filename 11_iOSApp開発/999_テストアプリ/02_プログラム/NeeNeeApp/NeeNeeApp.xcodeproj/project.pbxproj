@@ -90,7 +90,7 @@
 		F441496B1C45559600E7FC53 /* se5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = se5.mp3; path = "../../../../001_ニートいじり/03_サウンド/se5.mp3"; sourceTree = "<group>"; };
 		F441496C1C45559600E7FC53 /* se6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = se6.mp3; path = "../../../../001_ニートいじり/03_サウンド/se6.mp3"; sourceTree = "<group>"; };
 		F441496D1C45559600E7FC53 /* 落ち着くところ.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "落ち着くところ.mp3"; path = "../../../../001_ニートいじり/03_サウンド/落ち着くところ.mp3"; sourceTree = "<group>"; };
-		F44C0DE81C43EFF400B0CB27 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../../../../../../.Trash/Main.storyboard; sourceTree = "<group>"; };
+		F44C0DE81C43EFF400B0CB27 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F483300A1C2F040D00234B18 /* NeeNeeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NeeNeeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F483300D1C2F040D00234B18 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F483300F1C2F040D00234B18 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
