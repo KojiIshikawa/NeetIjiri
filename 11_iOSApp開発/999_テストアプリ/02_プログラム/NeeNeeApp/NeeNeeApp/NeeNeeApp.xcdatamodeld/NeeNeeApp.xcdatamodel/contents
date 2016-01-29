@@ -1,4 +1,59 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15C50" minimumToolsVersion="Automatic">
+    <entity name="DropItemM" representedClassName="DropItemM" syncable="YES">
+        <attribute name="dropItemID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="dropPer" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
+        <attribute name="itemID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="ItemM" representedClassName="ItemM" syncable="YES">
+        <attribute name="actID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="itemID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="itemName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="itemText" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="point" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="procTime" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="stageID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="useArea" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="viewNo" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="JobM" representedClassName="JobM" syncable="YES">
+        <attribute name="jobID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="jobName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="jobText" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="maxStageID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="viewNo" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="MeigenM" representedClassName="MeigenM" syncable="YES">
+        <attribute name="meigenID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="meigenText" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="viewNo" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="OkanM" representedClassName="OkanM" syncable="YES">
+        <attribute name="okanID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="okanText" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="ResultActionM" representedClassName="ResultActionM" syncable="YES">
+        <attribute name="itemID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="message" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="resPer" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="resultID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="StageM" representedClassName="StageM" syncable="YES">
+        <attribute name="bgm" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="stageID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="stageName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="stageText" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="viewNo" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="wallPaper" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="MeigenM" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="JobM" positionX="-54" positionY="18" width="128" height="120"/>
+        <element name="OkanM" positionX="-36" positionY="45" width="128" height="75"/>
+        <element name="ItemM" positionX="-18" positionY="63" width="128" height="195"/>
+        <element name="StageM" positionX="0" positionY="72" width="128" height="135"/>
+        <element name="DropItemM" positionX="18" positionY="144" width="128" height="90"/>
+        <element name="ResultActionM" positionX="36" positionY="153" width="128" height="105"/>
+    </elements>
 </model>
