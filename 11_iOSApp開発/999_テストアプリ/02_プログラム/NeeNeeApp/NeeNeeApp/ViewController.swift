@@ -11,7 +11,7 @@ import Social
 import iAd
 import AVFoundation
 
-class ViewController: UIViewController, AVAudioPlayerDelegate {
+class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UIGestureRecognizerDelegate {
 
     // 壁紙オブジェクト
     private var myImageView: UIImageView!
@@ -38,6 +38,12 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
     private var detailConView: UIView!
     private var shareConView: UIView!
     private var configConView: UIView!
+    
+    // 暇つぶしメニューのオブジェクト
+    var itemCollectionView: UICollectionView!
+    private var setItem1View: UIImageView!
+    private var setItem2View: UIImageView!
+    private var setItem3View: UIImageView!
     
     // 履歴書メニューのオブジェクト
     private var nameTitleLabel: UILabel!
@@ -77,6 +83,10 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
     private let myImage = UIImage(named: "s-01_1.JPG")
     private let fukidasiImage = UIImage( named: "fukidasi.png")!
 
+    required init(coder aDecoder: NSCoder){
+        super.init(coder: aDecoder)!
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -215,46 +225,41 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
             seSoundPlay(mySeNoPath!)
         
         }
-        
-
-
     }
     
     func tapMainBtn(sender: AnyObject) {
         
         // SEを再生する.
         seSoundPlay(mySeYesPath!)
-
-        if mainConView != nil {
-            
-            // ポップの表示・非表示を切り替える.
-            mainConView.hidden = mainConView.hidden ? false:true
-            
-            // その他メニューボタンの制御を切り替える.
-            manuBtn.userInteractionEnabled = mainConView.hidden ? true:false
-            detailBtn.userInteractionEnabled = mainConView.hidden ? true:false
-            shareBtn.userInteractionEnabled = mainConView.hidden ? true:false
-            configBtn.userInteractionEnabled = mainConView.hidden ? true:false
-        }
+        
+        // ポップの表示・非表示を切り替える.
+        mainConView.hidden = mainConView.hidden ? false:true
+        
+        // その他メニューボタンの制御を切り替える.
+        manuBtn.userInteractionEnabled = mainConView.hidden ? true:false
+        detailBtn.userInteractionEnabled = mainConView.hidden ? true:false
+        shareBtn.userInteractionEnabled = mainConView.hidden ? true:false
+        configBtn.userInteractionEnabled = mainConView.hidden ? true:false
+        
+        setItem1View.hidden = mainConView.hidden ? true:false
+        setItem2View.hidden = mainConView.hidden ? true:false
+        setItem3View.hidden = mainConView.hidden ? true:false
+        itemCollectionView.hidden = mainConView.hidden ? true:false
     }
-    
     
     func tapDetailBtn(sender: AnyObject) {
         
         // SEを再生する.
         seSoundPlay(mySeYesPath!)
         
-        if detailConView != nil {
-            
-            // ポップの表示・非表示を切り替える.
-            detailConView.hidden = detailConView.hidden ? false:true
-            
-            // その他メニューボタンの制御を切り替える.
-            manuBtn.userInteractionEnabled = detailConView.hidden ? true:false
-            mainBtn.userInteractionEnabled = detailConView.hidden ? true:false
-            shareBtn.userInteractionEnabled = detailConView.hidden ? true:false
-            configBtn.userInteractionEnabled = detailConView.hidden ? true:false
-        }
+        // ポップの表示・非表示を切り替える.
+        detailConView.hidden = detailConView.hidden ? false:true
+        
+        // その他メニューボタンの制御を切り替える.
+        manuBtn.userInteractionEnabled = detailConView.hidden ? true:false
+        mainBtn.userInteractionEnabled = detailConView.hidden ? true:false
+        shareBtn.userInteractionEnabled = detailConView.hidden ? true:false
+        configBtn.userInteractionEnabled = detailConView.hidden ? true:false
     }
     
     func tapShareBtn(sender: AnyObject) {
@@ -262,47 +267,41 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         // SEを再生する.
         seSoundPlay(mySeYesPath!)
         
-        if shareConView != nil {
-            
-            // ポップの表示・非表示を切り替える.
-            shareConView.hidden = shareConView.hidden ? false:true
-            
-            // オブジェクトの表示・非表示を切り替える.
-            facebookBtn.hidden = facebookBtn.hidden ? false:true
-            twitterBtn.hidden = twitterBtn.hidden ? false:true
-            lineBtn.hidden = lineBtn.hidden ? false:true
-
-            // その他メニューボタンの制御を切り替える.
-            manuBtn.userInteractionEnabled = shareConView.hidden ? true:false
-            mainBtn.userInteractionEnabled = shareConView.hidden ? true:false
-            detailBtn.userInteractionEnabled = shareConView.hidden ? true:false
-            configBtn.userInteractionEnabled = shareConView.hidden ? true:false
-        }
+        // ポップの表示・非表示を切り替える.
+        shareConView.hidden = shareConView.hidden ? false:true
+        
+        // オブジェクトの表示・非表示を切り替える.
+        facebookBtn.hidden = facebookBtn.hidden ? false:true
+        twitterBtn.hidden = twitterBtn.hidden ? false:true
+        lineBtn.hidden = lineBtn.hidden ? false:true
+        
+        // その他メニューボタンの制御を切り替える.
+        manuBtn.userInteractionEnabled = shareConView.hidden ? true:false
+        mainBtn.userInteractionEnabled = shareConView.hidden ? true:false
+        detailBtn.userInteractionEnabled = shareConView.hidden ? true:false
+        configBtn.userInteractionEnabled = shareConView.hidden ? true:false
         
     }
-    
+
     func tapConfigBtn(sender: AnyObject) {
         
         // SEを再生する.
         seSoundPlay(mySeYesPath!)
         
-            if configConView != nil {
-                
-                // オブジェクトの表示・非表示を切り替える.
-                configConView.hidden = configConView.hidden ? false:true
-                bgmLabel.hidden = bgmLabel.hidden ? false:true
-                bgmVolumeSBar.hidden = bgmVolumeSBar.hidden ? false:true
-                bgmMuteBtn.hidden = bgmMuteBtn.hidden ? false:true
-                seLabel.hidden = seLabel.hidden ? false:true
-                seVolumeSBar.hidden = seVolumeSBar.hidden ? false:true
-                seMuteBtn.hidden = seMuteBtn.hidden ? false:true
-                
-                // その他メニューボタンの制御を切り替える.
-                manuBtn.userInteractionEnabled = configConView.hidden ? true:false
-                mainBtn.userInteractionEnabled = configConView.hidden ? true:false
-                detailBtn.userInteractionEnabled = configConView.hidden ? true:false
-                shareBtn.userInteractionEnabled = configConView.hidden ? true:false
-            }
+        // オブジェクトの表示・非表示を切り替える.
+        configConView.hidden = configConView.hidden ? false:true
+        bgmLabel.hidden = bgmLabel.hidden ? false:true
+        bgmVolumeSBar.hidden = bgmVolumeSBar.hidden ? false:true
+        bgmMuteBtn.hidden = bgmMuteBtn.hidden ? false:true
+        seLabel.hidden = seLabel.hidden ? false:true
+        seVolumeSBar.hidden = seVolumeSBar.hidden ? false:true
+        seMuteBtn.hidden = seMuteBtn.hidden ? false:true
+        
+        // その他メニューボタンの制御を切り替える.
+        manuBtn.userInteractionEnabled = configConView.hidden ? true:false
+        mainBtn.userInteractionEnabled = configConView.hidden ? true:false
+        detailBtn.userInteractionEnabled = configConView.hidden ? true:false
+        shareBtn.userInteractionEnabled = configConView.hidden ? true:false
     }
     
     func tapBgmMuteBtn(sender: AnyObject) {
@@ -372,6 +371,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
     
     //ラインボタン押下
     func tapLineBtn(sender: AnyObject) {
+        
         //　共有する項目
         let shareImage = UIImage(named: "LINEActivityIcon.png")!
         let shareItems = [shareImage]
@@ -380,13 +380,10 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         let line = LINEActivity()
         let avc = UIActivityViewController(activityItems: shareItems, applicationActivities: [line])
         
-        
         presentViewController(avc, animated: true, completion: nil)
-        
-        
     }
     
-    //Twitterボタン
+    //Twitterボタン押下
     func tapTwitterBtn(sender: AnyObject) {
         
         // 共有する項目
@@ -409,18 +406,19 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         // タッチイベントを取得
         let touchEvent = touches.first!
 
-        //キャラクターの座標を取得
-        print(touchEvent.previousLocationInView(myCharImageView).x)
-        print(touchEvent.previousLocationInView(myCharImageView).y)
         print(touchEvent.view?.tag.description)
         
-        // キャラクター画像がタップされた場合
+        // キャラクター画像がタップされた場合かつ、メニューが非表示の場合
         if touchEvent.view?.tag == 1
+        && mainConView.hidden == true
+        && detailConView.hidden == true
+        && shareConView.hidden == true
+        && configConView.hidden == true
         {
             if self.myFukidasiImageView.hidden
             {
                 // ダイアログを表示
-                let alertController = UIAlertController(title: "ニートのつぶやき", message: "チラシを表示して、今日のニートの一言を取得しますか？", preferredStyle: .Alert)
+                let alertController = UIAlertController(title: "ニートの格言入手", message: "チラシを表示して、今日のニートの格言を取得しますか？", preferredStyle: .Alert)
                 
                 let defaultActionYes = UIAlertAction(title: "表示する", style: .Default, handler:{
                     (action:UIAlertAction!) -> Void in
@@ -449,6 +447,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         
     }
     
+    /** キャラクター移動設定用 **/
     func callbackCharaMove() {
         
         // 開始位置を設定する.
@@ -574,6 +573,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         
     }
     
+    /** SE再生 **/
     func seSoundPlay(sePath: String)
     {
         // SEを再生する.
@@ -587,42 +587,87 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         }
     }
     
+    /** ひまつぶしメニューのポップアップ作成 **/
     func mainInit()
     {
         //ポップ生成
         mainConView = UIView(frame: CGRectMake(18,100,340,400))
         
-        if mainConView != nil {
+        // ポップの背景色を設定する.
+        mainConView.backgroundColor = UIColor(red: 20, green: 20, blue: 20, alpha: 0.9)
             
-            // ポップの背景色を設定する.
-            mainConView.backgroundColor = UIColor(red: 20, green: 20, blue: 20, alpha: 0.9)
+        // 初期表示は非表示
+        mainConView.hidden = true
             
-            // 初期表示は非表示
-            mainConView.hidden = true
-            
-            // ViewをViewに追加する.
-            self.view.addSubview(mainConView)
-            
-        }
+        // ViewをViewに追加する.
+        self.view.addSubview(mainConView)
+
+        // セット済みアイテムの初期設定.
+        let setItem1Image = UIImage(named: "item.JPG")
+        let setItem2Image = UIImage(named: "item.JPG")
+        let setItem3Image = UIImage(named: "item.JPG")
+        setItem1View = UIImageView(frame: CGRectMake(20,20,50,50))
+        setItem2View = UIImageView(frame: CGRectMake(100,20,50,50))
+        setItem3View = UIImageView(frame: CGRectMake(180,20,50,50))
+        setItem1View.image = setItem1Image
+        setItem2View.image = setItem2Image
+        setItem3View.image = setItem3Image
+        
+        // 画像をUIImageViewに設定する.
+        myImageView.image = myImage
+        
+        // CollectionViewのレイアウトを生成.
+        let layout = UICollectionViewFlowLayout()
+        
+        // Cell一つ一つの大きさ.
+        layout.itemSize = CGSizeMake(50, 50)
+        
+        // Cellのマージン.
+        layout.sectionInset = UIEdgeInsetsMake(16, 16, 32, 16)
+        
+        // セクション毎のヘッダーサイズ.
+        layout.headerReferenceSize = CGSizeMake(0,0)
+        
+        itemCollectionView = UICollectionView(frame: self.mainConView.frame, collectionViewLayout: layout)
+        itemCollectionView.frame.origin.y = itemCollectionView.frame.origin.y - 20
+        itemCollectionView.frame.size = CGSizeMake(itemCollectionView.frame.width - 44,itemCollectionView.frame.height - 100)
+        itemCollectionView.registerClass(itemCell.self, forCellWithReuseIdentifier: "cell")
+        itemCollectionView.delegate = self
+        itemCollectionView.dataSource = self
+ 
+        // セル長押しイベント登録
+        let longTapRecognizer = UILongPressGestureRecognizer(target: self, action: "cellLongTap:")
+        longTapRecognizer.delegate = self
+        itemCollectionView.addGestureRecognizer(longTapRecognizer)
+        
+        // ポップ上に表示するオブジェクトをViewに追加する.
+        mainConView.addSubview(setItem1View)
+        mainConView.addSubview(setItem2View)
+        mainConView.addSubview(setItem3View)
+        mainConView.addSubview(itemCollectionView)
+        
+        // 非表示にしておく.
+        setItem1View.hidden = true
+        setItem2View.hidden = true
+        setItem3View.hidden = true
+        itemCollectionView.hidden = true
     }
     
+    /** 履歴書メニューのポップアップ作成 **/
     func detailInit()
     {
         //ポップ生成
         detailConView = UIView(frame: CGRectMake(18,100,340,400))
-        if detailConView != nil {
             
-            // ポップの背景色を設定する.
-            detailConView.backgroundColor = UIColor(red: 20, green: 20, blue: 20, alpha: 0.9)
+        // ポップの背景色を設定する.
+        detailConView.backgroundColor = UIColor(red: 20, green: 20, blue: 20, alpha: 0.9)
             
-            // 初期表示は非表示
-            detailConView.hidden = true
+        // 初期表示は非表示
+        detailConView.hidden = true
             
-            // ViewをViewに追加する.
-            self.view.addSubview(detailConView)
-            
-        }
-
+        // ViewをViewに追加する.
+        self.view.addSubview(detailConView)
+        
         self.nameTitleLabel = UILabel(frame: CGRectMake(20,10,120,20))
         self.nameTitleLabel.text = "名前"
         
@@ -642,7 +687,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         self.positionDataLabel.text = "ひきニート"
         
         self.compTitleLabel = UILabel(frame: CGRectMake(20,70,120,30))
-        self.compTitleLabel.text = "行ったこと\nのある場所"
+        self.compTitleLabel.text = "行った場所"
         self.compTitleLabel.numberOfLines = 2
         
         self.compDataLabel = UILabel(frame: CGRectMake(130,70,200,30))
@@ -672,26 +717,24 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         detailConView.addSubview(compDataLabel)
         detailConView.addSubview(kakugenTitleLabel)
         detailConView.addSubview(kakugenDataLabel)
-        detailConView.addSubview(himaTitleLabel)
-        detailConView.addSubview(himaDataLabel)
+        //detailConView.addSubview(himaTitleLabel)
+        //detailConView.addSubview(himaDataLabel)
     }
 
+    /** シェアメニューのポップアップ作成 **/
     func shareInit()
     {
         //ポップ生成
         shareConView = UIView(frame: CGRectMake(18,100,340,400))
-        if shareConView != nil {
             
-            // ポップの背景色を設定する.
-            shareConView.backgroundColor = UIColor(red: 20, green: 20, blue: 20, alpha: 0.9)
+        // ポップの背景色を設定する.
+        shareConView.backgroundColor = UIColor(red: 20, green: 20, blue: 20, alpha: 0.9)
             
-            // 初期表示は非表示
-            shareConView.hidden = true
+        // 初期表示は非表示
+        shareConView.hidden = true
             
-            // ViewをViewに追加する.
-            self.view.addSubview(shareConView)
-            
-        }
+        // ViewをViewに追加する.
+        self.view.addSubview(shareConView)
         
         // FaceBookボタンを生成
         facebookBtn = UIButton(frame: CGRectMake(20,120,50,50))
@@ -722,75 +765,122 @@ class ViewController: UIViewController, AVAudioPlayerDelegate {
         lineBtn.hidden = true
     }
 
+    /** 設定メニューのポップアップ作成 **/
     func configInit()
     {
         //ポップ生成
         configConView = UIView(frame: CGRectMake(18,100,340,400))
-        if configConView != nil {
-            
-            // ポップの背景色を設定する.
-            configConView.backgroundColor = UIColor(red: 20, green: 20, blue: 20, alpha: 0.9)
-            
-            // 初期表示は非表示
-            configConView.hidden = true
-            
-            // ポップアップViewをViewに追加する.
-            self.view.addSubview(configConView)
-            
-            // ポップ上に表示するオブジェクトを生成する.
-            // BGMのラベルを生成
-            bgmLabel = UILabel(frame: CGRectMake(20,60,100,120))
-            bgmLabel.text = "BGM"
-            
-            // BGMのスライドバーを生成
-            bgmVolumeSBar = UISlider(frame: CGRectMake(100,60,100,120))
-            bgmVolumeSBar.addTarget(self, action: "slideBgmVolume:", forControlEvents: .TouchUpInside)
-            bgmVolumeSBar.value = 0.5
-            
-            // BGMのミュートボタンを生成
-            bgmMuteBtn = UIButton(frame: CGRectMake(200,60,100,120))
-            bgmMuteBtn.setTitle("ミュート",  forState: .Normal)
-            bgmMuteBtn.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
-            bgmMuteBtn.addTarget(self, action: "tapBgmMuteBtn:", forControlEvents: .TouchUpInside)
-            
-            // SEのラベルを生成
-            seLabel = UILabel(frame: CGRectMake(20,120,100,120))
-            seLabel.text = "SE"
-            
-            // SEのスライドバーを生成
-            seVolumeSBar = UISlider(frame: CGRectMake(100,120,100,120))
-            seVolumeSBar.addTarget(self, action: "slideSeVolume:", forControlEvents: .TouchUpInside)
-            seVolumeSBar.value = 0.5
-            
-            // SEのミュートボタンを生成
-            seMuteBtn = UIButton(frame: CGRectMake(200,120,100,120))
-            seMuteBtn.setTitle("ミュート",  forState: .Normal)
-            seMuteBtn.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
-            seMuteBtn.addTarget(self, action: "tapSeMuteBtn:", forControlEvents: .TouchUpInside)
-            
-            // ポップ上に表示するオブジェクトをViewに追加する.
-            configConView.addSubview(bgmLabel)
-            configConView.addSubview(bgmVolumeSBar)
-            configConView.addSubview(bgmMuteBtn)
-            configConView.addSubview(seLabel)
-            configConView.addSubview(seVolumeSBar)
-            configConView.addSubview(seMuteBtn)
-            
-            // 非表示にしておく.
-            bgmLabel.hidden = true
-            bgmVolumeSBar.hidden = true
-            bgmMuteBtn.hidden = true
-            seLabel.hidden = true
-            seVolumeSBar.hidden = true
-            seMuteBtn.hidden = true
-        }
-
+        
+        // ポップの背景色を設定する.
+        configConView.backgroundColor = UIColor(red: 20, green: 20, blue: 20, alpha: 0.9)
+        
+        // 初期表示は非表示
+        configConView.hidden = true
+        
+        // ポップアップViewをViewに追加する.
+        self.view.addSubview(configConView)
+        
+        // ポップ上に表示するオブジェクトを生成する.
+        // BGMのラベルを生成
+        bgmLabel = UILabel(frame: CGRectMake(20,60,100,120))
+        bgmLabel.text = "BGM"
+        
+        // BGMのスライドバーを生成
+        bgmVolumeSBar = UISlider(frame: CGRectMake(100,60,100,120))
+        bgmVolumeSBar.addTarget(self, action: "slideBgmVolume:", forControlEvents: .TouchUpInside)
+        bgmVolumeSBar.value = 0.5
+        
+        // BGMのミュートボタンを生成
+        bgmMuteBtn = UIButton(frame: CGRectMake(200,60,100,120))
+        bgmMuteBtn.setTitle("ミュート",  forState: .Normal)
+        bgmMuteBtn.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        bgmMuteBtn.addTarget(self, action: "tapBgmMuteBtn:", forControlEvents: .TouchUpInside)
+        
+        // SEのラベルを生成
+        seLabel = UILabel(frame: CGRectMake(20,120,100,120))
+        seLabel.text = "SE"
+        
+        // SEのスライドバーを生成
+        seVolumeSBar = UISlider(frame: CGRectMake(100,120,100,120))
+        seVolumeSBar.addTarget(self, action: "slideSeVolume:", forControlEvents: .TouchUpInside)
+        seVolumeSBar.value = 0.5
+        
+        // SEのミュートボタンを生成
+        seMuteBtn = UIButton(frame: CGRectMake(200,120,100,120))
+        seMuteBtn.setTitle("ミュート",  forState: .Normal)
+        seMuteBtn.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        seMuteBtn.addTarget(self, action: "tapSeMuteBtn:", forControlEvents: .TouchUpInside)
+        
+        // ポップ上に表示するオブジェクトをViewに追加する.
+        configConView.addSubview(bgmLabel)
+        configConView.addSubview(bgmVolumeSBar)
+        configConView.addSubview(bgmMuteBtn)
+        configConView.addSubview(seLabel)
+        configConView.addSubview(seVolumeSBar)
+        configConView.addSubview(seMuteBtn)
+        
+        // 非表示にしておく.
+        bgmLabel.hidden = true
+        bgmVolumeSBar.hidden = true
+        bgmMuteBtn.hidden = true
+        seLabel.hidden = true
+        seVolumeSBar.hidden = true
+        seMuteBtn.hidden = true
+        
     }
     
+    /** バナーが読みこまれた時に呼ばれる **/
     func bannerViewDidLoadAd(banner: ADBannerView!) {
         self.footerBaner?.hidden = false
         print("bannerViewDidLoadAd")
     }
     
+    // Cellが選択された際に呼び出される
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        print("Num: \(indexPath.row)")
+        
+    }
+    
+    /** セクションの数 **/
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    /** 表示するセルの数 **/
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 100
+    }
+    
+    /** セルが表示されるときに呼ばれる処理（1個のセルを描画する毎に呼び出されます） **/
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! itemCell
+
+        // セルの情報を設定する.
+        cell._name.text = "×"+"1"
+        cell._img.image = UIImage(named: "item.jpg")
+
+        // セルを返却する.
+        return cell
+    }
+    
+    /** 暇つぶしアイテム長押し時の処理 **/
+    func cellLongTap(recognizer: UILongPressGestureRecognizer) {
+        
+        print("長押し")
+
+        // 押された位置でcellのPathを取得
+        let point = recognizer.locationInView(itemCollectionView)
+
+        let indexPath = self.itemCollectionView.indexPathForItemAtPoint(point)
+        
+        if indexPath == nil {
+            
+        } else if recognizer.state == UIGestureRecognizerState.Began  {
+            // 長押しされた場合の処理
+            print("長押しされたcellのindexPath:\(indexPath?.row)")
+        }
+    }
 }
 

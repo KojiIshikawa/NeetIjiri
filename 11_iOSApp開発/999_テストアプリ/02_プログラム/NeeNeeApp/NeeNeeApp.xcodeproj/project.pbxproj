@@ -48,6 +48,8 @@
 		F41FD6391C4D3B640086A607 /* LINEActivityIcon~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F41FD6321C4D3B640086A607 /* LINEActivityIcon~ipad.png */; };
 		F439B4BE1C3FFC33004E92B4 /* screen_01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F439B4BD1C3FFC33004E92B4 /* screen_01.jpg */; };
 		F439B4C01C3FFD4A004E92B4 /* 暇で忙しい.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F439B4BF1C3FFD4A004E92B4 /* 暇で忙しい.mp3 */; };
+		F43D9B641C5D24240080F75D /* itemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D9B631C5D24240080F75D /* itemCell.swift */; };
+		F43D9B661C5D24D40080F75D /* item.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F43D9B651C5D24D40080F75D /* item.jpg */; };
 		F441496E1C45559600E7FC53 /* se1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F44149671C45559600E7FC53 /* se1.mp3 */; };
 		F441496F1C45559600E7FC53 /* se2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F44149681C45559600E7FC53 /* se2.mp3 */; };
 		F44149701C45559600E7FC53 /* se3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F44149691C45559600E7FC53 /* se3.mp3 */; };
@@ -142,6 +144,8 @@
 		F41FD6321C4D3B640086A607 /* LINEActivityIcon~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LINEActivityIcon~ipad.png"; sourceTree = "<group>"; };
 		F439B4BD1C3FFC33004E92B4 /* screen_01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = screen_01.jpg; path = "../../../../001_ニートいじり/04_画像/screen_01.jpg"; sourceTree = "<group>"; };
 		F439B4BF1C3FFD4A004E92B4 /* 暇で忙しい.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "暇で忙しい.mp3"; path = "../../../../001_ニートいじり/03_サウンド/暇で忙しい.mp3"; sourceTree = "<group>"; };
+		F43D9B631C5D24240080F75D /* itemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = itemCell.swift; sourceTree = "<group>"; };
+		F43D9B651C5D24D40080F75D /* item.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = item.jpg; path = "../../../../001_ニートいじり/04_画像/item.jpg"; sourceTree = "<group>"; };
 		F44149671C45559600E7FC53 /* se1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = se1.mp3; path = "../../../../001_ニートいじり/03_サウンド/se1.mp3"; sourceTree = "<group>"; };
 		F44149681C45559600E7FC53 /* se2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = se2.mp3; path = "../../../../001_ニートいじり/03_サウンド/se2.mp3"; sourceTree = "<group>"; };
 		F44149691C45559600E7FC53 /* se3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = se3.mp3; path = "../../../../001_ニートいじり/03_サウンド/se3.mp3"; sourceTree = "<group>"; };
@@ -263,6 +267,7 @@
 		F41FD5F01C4D23C40086A607 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				F43D9B651C5D24D40080F75D /* item.jpg */,
 				F4FA4F0D1C511544004B0B78 /* fukidasi.png */,
 				F4FA4EEF1C510EB4004B0B78 /* c-01-b-1.PNG */,
 				F4FA4EF01C510EB4004B0B78 /* c-01-b-2.PNG */,
@@ -347,6 +352,7 @@
 				F41FD5F01C4D23C40086A607 /* Image */,
 				F483300D1C2F040D00234B18 /* AppDelegate.swift */,
 				F483300F1C2F040D00234B18 /* ViewController.swift */,
+				F43D9B631C5D24240080F75D /* itemCell.swift */,
 				F41FD6021C4D29930086A607 /* NeeNeeApp-Bridging-Header.h */,
 				F48330171C2F040D00234B18 /* Assets.xcassets */,
 				F44C0DE81C43EFF400B0CB27 /* Main.storyboard */,
@@ -511,6 +517,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F43D9B661C5D24D40080F75D /* item.jpg in Resources */,
 				F4FA4F051C510EB4004B0B78 /* c-01-l-2.PNG in Resources */,
 				F41FD6381C4D3B640086A607 /* LINEActivityIcon@3x.png in Resources */,
 				F4FA4F031C510EB4004B0B78 /* c-01-f-3.PNG in Resources */,
@@ -624,6 +631,7 @@
 				AE05CAC11C5BDD9A00451A00 /* _OkanM.m in Sources */,
 				F48330101C2F040D00234B18 /* ViewController.swift in Sources */,
 				AE05CACD1C5BDD9A00451A00 /* MeigenM.m in Sources */,
+				F43D9B641C5D24240080F75D /* itemCell.swift in Sources */,
 				AE05CABD1C5BDD9A00451A00 /* _JobM.m in Sources */,
 				AE05CAC31C5BDD9A00451A00 /* _ResultActionM.m in Sources */,
 				AE05CAD11C5BDD9A00451A00 /* ResultActionM.m in Sources */,
