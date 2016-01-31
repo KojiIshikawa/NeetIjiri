@@ -13,6 +13,7 @@ import AVFoundation
 
 class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UIGestureRecognizerDelegate {
     //ViewController test
+    //石川マージようコメント
     // 壁紙オブジェクト
     private var myImageView: UIImageView!
     
@@ -639,14 +640,6 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         mainConView.addSubview(setItem3View)
         mainConView.addSubview(itemCollectionView)
         
-        /**
-        // 非表示にしておく.
-        setItem1View.hidden = true
-        setItem2View.hidden = true
-        setItem3View.hidden = true
-        itemCollectionView.hidden = true
-        **/
-
     }
     
     /** 履歴書メニューのポップアップ作成 **/
