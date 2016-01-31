@@ -10,7 +10,7 @@ import UIKit
 import Social
 import iAd
 import AVFoundation
-import MisterFusion
+//import MisterFusion
 
 class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UIGestureRecognizerDelegate {
 
@@ -219,35 +219,35 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         // 設定メニューの生成
         configInit()
         
-        // メニューボタンの制約設定
-        self.view.addLayoutSubview(manuBtn, andConstraints:
-            manuBtn.Bottom |==| footerBaner.Top |-| 5,
-            manuBtn.Right  |-|  15
-        )
-
-        // ひまつぶしボタンの制約設定
-        self.view.addLayoutSubview(mainBtn, andConstraints:
-            mainBtn.Bottom |==| footerBaner.Top |-| 5,
-            mainBtn.Right  |==| manuBtn.Left |-| 8
-        )
-
-        // 履歴書ボタンの制約設定
-        self.view.addLayoutSubview(detailBtn, andConstraints:
-            detailBtn.Bottom |==| footerBaner.Top |-| 5,
-            detailBtn.Right  |==| mainBtn.Left |-| 8
-        )
-        
-        // シェアボタンの制約設定
-        self.view.addLayoutSubview(shareBtn, andConstraints:
-            shareBtn.Bottom |==| footerBaner.Top |-| 5,
-            shareBtn.Right  |==| detailBtn.Left |-| 8
-        )
-
-        // 設定ボタンの制約設定
-        self.view.addLayoutSubview(configBtn, andConstraints:
-            configBtn.Bottom |==| footerBaner.Top |-| 5,
-            configBtn.Right  |==| shareBtn.Left |-| 8
-        )
+//        // メニューボタンの制約設定
+//        self.view.addLayoutSubview(manuBtn, andConstraints:
+//            manuBtn.Bottom |==| footerBaner.Top |-| 5,
+//            manuBtn.Right  |-|  15
+//        )
+//
+//        // ひまつぶしボタンの制約設定
+//        self.view.addLayoutSubview(mainBtn, andConstraints:
+//            mainBtn.Bottom |==| footerBaner.Top |-| 5,
+//            mainBtn.Right  |==| manuBtn.Left |-| 8
+//        )
+//
+//        // 履歴書ボタンの制約設定
+//        self.view.addLayoutSubview(detailBtn, andConstraints:
+//            detailBtn.Bottom |==| footerBaner.Top |-| 5,
+//            detailBtn.Right  |==| mainBtn.Left |-| 8
+//        )
+//        
+//        // シェアボタンの制約設定
+//        self.view.addLayoutSubview(shareBtn, andConstraints:
+//            shareBtn.Bottom |==| footerBaner.Top |-| 5,
+//            shareBtn.Right  |==| detailBtn.Left |-| 8
+//        )
+//
+//        // 設定ボタンの制約設定
+//        self.view.addLayoutSubview(configBtn, andConstraints:
+//            configBtn.Bottom |==| footerBaner.Top |-| 5,
+//            configBtn.Right  |==| shareBtn.Left |-| 8
+//        )
         
         
     }
@@ -451,56 +451,56 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         self.presentViewController(cv, animated: true, completion:nil )
     }
     
-//    // 画面にタッチで呼ばれる
-//    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-//        
-//        // タッチイベントを取得
-//        let touchEvent = touches.first!
-//
-//        print(touchEvent.view?.tag.description)
-//        
-//        // キャラクター画像がタップされた場合かつ、メニューが非表示の場合
-//        if touchEvent.view?.tag == 1
-//        && mainConView.hidden == true
-//        && detailConView.hidden == true
-//        && shareConView.hidden == true
-//        && configConView.hidden == true
-//        {
-//            if self.myFukidasiImageView.hidden
-//            {
-//                // ダイアログを表示
-//                let alertController = UIAlertController(title: "ニートの格言入手", message: "チラシを表示して、今日のニートの格言を取得しますか？", preferredStyle: .Alert)
-//                
-//                let defaultActionYes = UIAlertAction(title: "表示する", style: .Default, handler:{
-//                    (action:UIAlertAction!) -> Void in
-//                    
-//                    // iAd(インタースティシャル)の表示
-//                    self.requestInterstitialAdPresentation()
-//                    
-//                    // 吹き出しの表示
-//                    self.myFukidasiImageView.hidden = false
-//                    
-//                    
-//                    
-//                    
-//                    self.fukidasiLabel.text = self.getMeigen()
-//                    
-//                })
-//                
-//                let defaultActionNo = UIAlertAction(title: "表示しない", style: .Default, handler: nil)
-//                alertController.addAction(defaultActionYes)
-//                alertController.addAction(defaultActionNo)
-//                
-//                presentViewController(alertController, animated: true, completion: nil)
-//            
-//            } else {
-//                self.myFukidasiImageView.hidden = true
-//            }
-//            
-//        }
-//        
-//        
-//    }
+    // 画面にタッチで呼ばれる
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
+        // タッチイベントを取得
+        let touchEvent = touches.first!
+
+        print(touchEvent.view?.tag.description)
+        
+        // キャラクター画像がタップされた場合かつ、メニューが非表示の場合
+        if touchEvent.view?.tag == 1
+        && mainConView.hidden == true
+        && detailConView.hidden == true
+        && shareConView.hidden == true
+        && configConView.hidden == true
+        {
+            if self.myFukidasiImageView.hidden
+            {
+                // ダイアログを表示
+                let alertController = UIAlertController(title: "ニートの格言入手", message: "チラシを表示して、今日のニートの格言を取得しますか？", preferredStyle: .Alert)
+                
+                let defaultActionYes = UIAlertAction(title: "表示する", style: .Default, handler:{
+                    (action:UIAlertAction!) -> Void in
+                    
+                    // iAd(インタースティシャル)の表示
+                    self.requestInterstitialAdPresentation()
+                    
+                    // 吹き出しの表示
+                    self.myFukidasiImageView.hidden = false
+                    
+                    
+                    
+                    
+                    self.fukidasiLabel.text = self.getMeigen()
+                    
+                })
+                
+                let defaultActionNo = UIAlertAction(title: "表示しない", style: .Default, handler: nil)
+                alertController.addAction(defaultActionYes)
+                alertController.addAction(defaultActionNo)
+                
+                presentViewController(alertController, animated: true, completion: nil)
+            
+            } else {
+                self.myFukidasiImageView.hidden = true
+            }
+            
+        }
+        
+        
+    }
     
     
     
