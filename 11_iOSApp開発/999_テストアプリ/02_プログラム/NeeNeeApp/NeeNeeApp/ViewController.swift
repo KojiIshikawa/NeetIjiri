@@ -12,7 +12,7 @@ import iAd
 import AVFoundation
 
 class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UIGestureRecognizerDelegate {
-
+    //ViewController test
     // 壁紙オブジェクト
     private var myImageView: UIImageView!
     
