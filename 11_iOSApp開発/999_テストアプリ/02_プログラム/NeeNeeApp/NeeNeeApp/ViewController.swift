@@ -13,6 +13,11 @@ import AVFoundation
 
 class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UIGestureRecognizerDelegate {
 
+    
+    //****************************************
+    // MARK: - メンバ変数
+    //****************************************
+
     //石川マージようコメント
     // 壁紙オブジェクト
     private var myImageView: UIImageView!
@@ -88,6 +93,13 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         super.init(coder: aDecoder)!
     }
     
+    
+    
+    //****************************************
+    // MARK: - イベント
+    //****************************************
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -98,6 +110,13 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         
         // 画像をUIImageViewに設定する.
         myImageView.image = myImage
+//        // ジェスチャーの生成
+//        let aSelector = Selector("tapGesture:")
+//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: aSelector)
+//        
+//        // ジェスチャーの追加
+//        myImageView.addGestureRecognizer(tapGestureRecognizer)
+        
         
         // キャラクターを初期設定する.
         // UIImageViewをViewに追加する.
@@ -354,7 +373,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
     }
 
     func tapCharaImage(sender: UITapGestureRecognizer) {
-        
+        print("testtt")
     }
     
     //facebookボタン押下時の処理
@@ -394,51 +413,73 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         self.presentViewController(cv, animated: true, completion:nil )
     }
     
-    // 画面にタッチで呼ばれる
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        
-        // タッチイベントを取得
-        let touchEvent = touches.first!
+//    // 画面にタッチで呼ばれる
+//    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+//        
+//        // タッチイベントを取得
+//        let touchEvent = touches.first!
+//
+//        print(touchEvent.view?.tag.description)
+//        
+//        // キャラクター画像がタップされた場合かつ、メニューが非表示の場合
+//        if touchEvent.view?.tag == 1
+//        && mainConView.hidden == true
+//        && detailConView.hidden == true
+//        && shareConView.hidden == true
+//        && configConView.hidden == true
+//        {
+//            if self.myFukidasiImageView.hidden
+//            {
+//                // ダイアログを表示
+//                let alertController = UIAlertController(title: "ニートの格言入手", message: "チラシを表示して、今日のニートの格言を取得しますか？", preferredStyle: .Alert)
+//                
+//                let defaultActionYes = UIAlertAction(title: "表示する", style: .Default, handler:{
+//                    (action:UIAlertAction!) -> Void in
+//                    
+//                    // iAd(インタースティシャル)の表示
+//                    self.requestInterstitialAdPresentation()
+//                    
+//                    // 吹き出しの表示
+//                    self.myFukidasiImageView.hidden = false
+//                    
+//                    
+//                    
+//                    
+//                    self.fukidasiLabel.text = self.getMeigen()
+//                    
+//                })
+//                
+//                let defaultActionNo = UIAlertAction(title: "表示しない", style: .Default, handler: nil)
+//                alertController.addAction(defaultActionYes)
+//                alertController.addAction(defaultActionNo)
+//                
+//                presentViewController(alertController, animated: true, completion: nil)
+//            
+//            } else {
+//                self.myFukidasiImageView.hidden = true
+//            }
+//            
+//        }
+//        
+//        
+//    }
+    
+    
+    
+    
+    
+    //****************************************
+    // MARK: - その他メソッド
+    //****************************************
 
-        print(touchEvent.view?.tag.description)
-        
-        // キャラクター画像がタップされた場合かつ、メニューが非表示の場合
-        if touchEvent.view?.tag == 1
-        && mainConView.hidden == true
-        && detailConView.hidden == true
-        && shareConView.hidden == true
-        && configConView.hidden == true
+    
+    func getUncachedImage (named name : String) -> UIImage?
+    {
+        if let imgPath = NSBundle.mainBundle().pathForResource(name, ofType: nil)
         {
-            if self.myFukidasiImageView.hidden
-            {
-                // ダイアログを表示
-                let alertController = UIAlertController(title: "ニートの格言入手", message: "チラシを表示して、今日のニートの格言を取得しますか？", preferredStyle: .Alert)
-                
-                let defaultActionYes = UIAlertAction(title: "表示する", style: .Default, handler:{
-                    (action:UIAlertAction!) -> Void in
-                    
-                    // iAd(インタースティシャル)の表示
-                    self.requestInterstitialAdPresentation()
-                    
-                    // 吹き出しの表示
-                    self.myFukidasiImageView.hidden = false
-                    self.fukidasiLabel.text = "やる気！元気！いわき！"
-                    
-                })
-                
-                let defaultActionNo = UIAlertAction(title: "表示しない", style: .Default, handler: nil)
-                alertController.addAction(defaultActionYes)
-                alertController.addAction(defaultActionNo)
-                
-                presentViewController(alertController, animated: true, completion: nil)
-            
-            } else {
-                self.myFukidasiImageView.hidden = true
-            }
-            
+            return UIImage(contentsOfFile: imgPath)
         }
-        
-        
+        return nil
     }
     
     /** キャラクター移動設定用 **/
@@ -448,43 +489,40 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         myCharImageView.animationDuration = 4.0
         
         // キャラクターアニメーションを設定する.
-        autoreleasepool {
         let charaImages = [
-            UIImage( named: "c-01-l-1.PNG")!,
-            UIImage( named: "c-01-l-2.PNG")!,
-            UIImage( named: "c-01-l-1.PNG")!,
-            UIImage( named: "c-01-l-3.PNG")!
+            self.getUncachedImage( named: "c-01-l-1.PNG")!,
+            self.getUncachedImage( named: "c-01-l-2.PNG")!,
+            self.getUncachedImage( named: "c-01-l-1.PNG")!,
+            self.getUncachedImage( named: "c-01-l-3.PNG")!
         ]
         myCharImageView.animationImages = charaImages
-        }
-
+        
         self.myCharImageView.startAnimating()
 
+        
         // 左→右の横移動
         UIView.animateWithDuration(
             8.0, // アニメーションの時間
             delay:1.0,
             options:[UIViewAnimationOptions.TransitionCrossDissolve
-                    ,UIViewAnimationOptions.AllowUserInteraction],
+                ,UIViewAnimationOptions.AllowUserInteraction],
             animations: {() -> Void  in
                 
-                // 左端から右端へ移動
-                self.myCharImageView.frame.origin.x
-                    = UIScreen.mainScreen().bounds.width - 200
-            },
-            completion: {(finished: Bool) -> Void in
+            // 左端から右端へ移動
+            self.myCharImageView.frame.origin.x
+                = UIScreen.mainScreen().bounds.width - 200
+        },
+        completion: {(finished: Bool) -> Void in
                 
                 // 後ろ移動
                 // キャラクターアニメーションを設定する.
-                autoreleasepool {
                 let charaImages = [
-                    UIImage( named: "c-01-b-1.PNG")!,
-                    UIImage( named: "c-01-b-2.PNG")!,
-                    UIImage( named: "c-01-b-1.PNG")!,
-                    UIImage( named: "c-01-b-3.PNG")!
+                    self.getUncachedImage( named: "c-01-b-1.PNG")!,
+                    self.getUncachedImage( named: "c-01-b-2.PNG")!,
+                    self.getUncachedImage( named: "c-01-b-1.PNG")!,
+                    self.getUncachedImage( named: "c-01-b-3.PNG")!
                 ]
                 self.myCharImageView.animationImages = charaImages
-                }
                 self.myCharImageView.startAnimating()
                 
                 // アニメーション終了後の処理
@@ -492,7 +530,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
                     4.0, // アニメーションの時間
                     delay:2.0,
                     options:[UIViewAnimationOptions.TransitionCrossDissolve
-                            ,UIViewAnimationOptions.AllowUserInteraction],
+                        ,UIViewAnimationOptions.AllowUserInteraction],
                     animations: {() -> Void  in
                         self.myCharImageView.frame.origin.y
                             = self.myCharImageView.frame.origin.y - 30
@@ -501,15 +539,13 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
                         
                         // 右→左の横移動
                         // キャラクターアニメーションを設定する.
-                        autoreleasepool {
                         let charaImages = [
-                            UIImage( named: "c-01-r-1.PNG")!,
-                            UIImage( named: "c-01-r-2.PNG")!,
-                            UIImage( named: "c-01-r-1.PNG")!,
-                            UIImage( named: "c-01-r-3.PNG")!
+                            self.getUncachedImage( named: "c-01-r-1.PNG")!,
+                            self.getUncachedImage( named: "c-01-r-2.PNG")!,
+                            self.getUncachedImage( named: "c-01-r-1.PNG")!,
+                            self.getUncachedImage( named: "c-01-r-3.PNG")!
                         ]
                         self.myCharImageView.animationImages = charaImages
-                        }
                         self.myCharImageView.startAnimating()
                         
                         UIView.animateWithDuration(
@@ -524,10 +560,10 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
                                 // 手前への移動
                                 // キャラクターアニメーションを設定する.
                                 let charaImages = [
-                                    UIImage( named: "c-01-f-1.PNG")!,
-                                    UIImage( named: "c-01-f-2.PNG")!,
-                                    UIImage( named: "c-01-f-1.PNG")!,
-                                    UIImage( named: "c-01-f-3.PNG")!
+                                    self.getUncachedImage( named: "c-01-f-1.PNG")!,
+                                    self.getUncachedImage( named: "c-01-f-2.PNG")!,
+                                    self.getUncachedImage( named: "c-01-f-1.PNG")!,
+                                    self.getUncachedImage( named: "c-01-f-3.PNG")!
                                 ]
                                 self.myCharImageView.animationImages = charaImages
                                 self.myCharImageView.startAnimating()
@@ -537,7 +573,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
                                     4.0, // アニメーションの時間
                                     delay:2.0,
                                     options:[UIViewAnimationOptions.TransitionCrossDissolve
-                                            ,UIViewAnimationOptions.AllowUserInteraction],
+                                        ,UIViewAnimationOptions.AllowUserInteraction],
                                     animations: {() -> Void  in
                                         self.myCharImageView.frame.origin.y
                                             = self.myCharImageView.frame.origin.y + 30
@@ -546,26 +582,25 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
                                         
                                         // 繰り返し設定
                                         // キャラクターアニメーションを設定する.
-                                        autoreleasepool {
                                         let charaImages = [
-                                            UIImage( named: "c-01-l-1.PNG")!,
-                                            UIImage( named: "c-01-l-2.PNG")!,
-                                            UIImage( named: "c-01-l-1.PNG")!,
-                                            UIImage( named: "c-01-l-3.PNG")!
+                                            self.getUncachedImage( named: "c-01-l-1.PNG")!,
+                                            self.getUncachedImage( named: "c-01-l-2.PNG")!,
+                                            self.getUncachedImage( named: "c-01-l-1.PNG")!,
+                                            self.getUncachedImage( named: "c-01-l-3.PNG")!
                                         ]
                                         self.myCharImageView.animationImages = charaImages
-                                        }
                                         // アニメーション終了後の処理
                                         // 再帰処理でアニメーションを繰り返す.
                                         self.callbackCharaMove()
                                 })
                         })
-
+                        
                 })
                 
         })
         
     }
+
     
     /** SE再生 **/
     func seSoundPlay(sePath: String)
@@ -580,6 +615,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
             // 例外発生
         }
     }
+    
     
     /** ひまつぶしメニューのポップアップ作成 **/
     func mainInit()
@@ -642,6 +678,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         
     }
     
+
     /** 履歴書メニューのポップアップ作成 **/
     func detailInit()
     {
@@ -811,12 +848,43 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         print("bannerViewDidLoadAd")
     }
     
+    
+    /** 暇つぶしアイテム長押し時の処理 **/
+    func cellLongTap(recognizer: UILongPressGestureRecognizer) {
+        
+        print("長押し")
+        
+        // 押された位置でcellのPathを取得
+        let point = recognizer.locationInView(itemCollectionView)
+        
+        let indexPath = self.itemCollectionView.indexPathForItemAtPoint(point)
+        
+        if indexPath == nil {
+            
+        } else if recognizer.state == UIGestureRecognizerState.Began  {
+            // 長押しされた場合の処理
+            print("長押しされたcellのindexPath:\(indexPath?.row)")
+        }
+    }
+
+    func tapGesture(gestureRecognizer: UITapGestureRecognizer){
+        // タップviewの色を変える (Red <=> Blue)
+        print("触ったな")
+    }
+    
+    
+    //****************************************
+    // MARK: - Collection View Delegate
+    //****************************************
+    
     // Cellが選択された際に呼び出される
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
         print("Num: \(indexPath.row)")
         
     }
+    
+    
     
     /** セクションの数 **/
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -841,22 +909,24 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         return cell
     }
     
-    /** 暇つぶしアイテム長押し時の処理 **/
-    func cellLongTap(recognizer: UILongPressGestureRecognizer) {
-        
-        print("長押し")
+    
+    
+    //****************************************
+    // MARK: - DB Access
+    //****************************************
 
-        // 押された位置でcellのPathを取得
-        let point = recognizer.locationInView(itemCollectionView)
+    //迷言の取得
+    func getMeigen() -> String  {
 
-        let indexPath = self.itemCollectionView.indexPathForItemAtPoint(point)
+        print(NSDate().description, __FUNCTION__, __LINE__)
         
-        if indexPath == nil {
-            
-        } else if recognizer.state == UIGestureRecognizerState.Began  {
-            // 長押しされた場合の処理
-            print("長押しされたcellのindexPath:\(indexPath?.row)")
-        }
+        let meigenList :[MeigenM] = MeigenM.MR_findAll() as! [MeigenM];
+        let randInt = arc4random_uniform(UInt32(meigenList.count));
+        print(meigenList.count)
+        return meigenList[Int(randInt)].meigenText
+        
     }
+
+    
 }
 

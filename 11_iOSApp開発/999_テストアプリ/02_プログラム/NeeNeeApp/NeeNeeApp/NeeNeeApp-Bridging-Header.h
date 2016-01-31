@@ -11,5 +11,6 @@
 
 #import "LINEActivity.h"
 #import "MagicalRecord/MagicalRecord.h"
+#import "MeigenM.h"
 
 #endif /* NeeNeeApp_Bridging_Header_h */

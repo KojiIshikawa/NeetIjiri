@@ -36,6 +36,9 @@
 		AE05CAD11C5BDD9A00451A00 /* ResultActionM.m in Sources */ = {isa = PBXBuildFile; fileRef = AE05CAB51C5BDD9A00451A00 /* ResultActionM.m */; };
 		AE05CAD21C5BDD9A00451A00 /* StageM.h in Headers */ = {isa = PBXBuildFile; fileRef = AE05CAB61C5BDD9A00451A00 /* StageM.h */; };
 		AE05CAD31C5BDD9A00451A00 /* StageM.m in Sources */ = {isa = PBXBuildFile; fileRef = AE05CAB71C5BDD9A00451A00 /* StageM.m */; };
+		AE8E93961C5DE80D0031BF79 /* NeetMaster.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = AE8E93931C5DE80D0031BF79 /* NeetMaster.sqlite */; };
+		AE8E93971C5DE80D0031BF79 /* NeetMaster.sqlite-shm in Resources */ = {isa = PBXBuildFile; fileRef = AE8E93941C5DE80D0031BF79 /* NeetMaster.sqlite-shm */; };
+		AE8E93981C5DE80D0031BF79 /* NeetMaster.sqlite-wal in Resources */ = {isa = PBXBuildFile; fileRef = AE8E93951C5DE80D0031BF79 /* NeetMaster.sqlite-wal */; };
 		F41FD5F21C4D24920086A607 /* facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = F41FD5F11C4D24920086A607 /* facebook.png */; };
 		F41FD5F61C4D24B90086A607 /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = F41FD5F51C4D24B90086A607 /* twitter.png */; };
 		F41FD5FA1C4D26170086A607 /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = F41FD5F91C4D26170086A607 /* line.png */; };
@@ -131,6 +134,9 @@
 		AE05CAB51C5BDD9A00451A00 /* ResultActionM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultActionM.m; sourceTree = "<group>"; };
 		AE05CAB61C5BDD9A00451A00 /* StageM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageM.h; sourceTree = "<group>"; };
 		AE05CAB71C5BDD9A00451A00 /* StageM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StageM.m; sourceTree = "<group>"; };
+		AE8E93931C5DE80D0031BF79 /* NeetMaster.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = NeetMaster.sqlite; sourceTree = "<group>"; };
+		AE8E93941C5DE80D0031BF79 /* NeetMaster.sqlite-shm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeetMaster.sqlite-shm"; sourceTree = "<group>"; };
+		AE8E93951C5DE80D0031BF79 /* NeetMaster.sqlite-wal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "NeetMaster.sqlite-wal"; sourceTree = "<group>"; };
 		F41FD5F11C4D24920086A607 /* facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = facebook.png; path = ../../01_SNS/NeetIjiri/NeetIjiri/Image/facebook.png; sourceTree = "<group>"; };
 		F41FD5F51C4D24B90086A607 /* twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = twitter.png; path = ../../01_SNS/NeetIjiri/NeetIjiri/Image/twitter.png; sourceTree = "<group>"; };
 		F41FD5F91C4D26170086A607 /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = line.png; path = "../../../../001_ニートいじり/04_画像/line.png"; sourceTree = "<group>"; };
@@ -256,6 +262,16 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		AE8E93921C5DE2BE0031BF79 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AE8E93931C5DE80D0031BF79 /* NeetMaster.sqlite */,
+				AE8E93941C5DE80D0031BF79 /* NeetMaster.sqlite-shm */,
+				AE8E93951C5DE80D0031BF79 /* NeetMaster.sqlite-wal */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		E0948DE9BFEBC44A9DFED657 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -346,6 +362,7 @@
 		F483300C1C2F040D00234B18 /* NeeNeeApp */ = {
 			isa = PBXGroup;
 			children = (
+				AE8E93921C5DE2BE0031BF79 /* Resources */,
 				AE05CA9B1C5BDD9A00451A00 /* Model */,
 				F41FD62B1C4D3B640086A607 /* LINEActivity */,
 				F41FD6031C4D2B4B0086A607 /* Sound */,
@@ -539,7 +556,9 @@
 				F4FA4F091C510EB4004B0B78 /* c-01-r-3.PNG in Resources */,
 				F4FA4F001C510EB4004B0B78 /* c-01-b-3.PNG in Resources */,
 				F41FD6361C4D3B640086A607 /* LINEActivityIcon@2x.png in Resources */,
+				AE8E93981C5DE80D0031BF79 /* NeetMaster.sqlite-wal in Resources */,
 				F4FA4F071C510EB4004B0B78 /* c-01-r-1.PNG in Resources */,
+				AE8E93971C5DE80D0031BF79 /* NeetMaster.sqlite-shm in Resources */,
 				F41FD5FA1C4D26170086A607 /* line.png in Resources */,
 				F4FA4F061C510EB4004B0B78 /* c-01-l-3.PNG in Resources */,
 				F4FA4F081C510EB4004B0B78 /* c-01-r-2.PNG in Resources */,
@@ -552,6 +571,7 @@
 				F4FA4EFF1C510EB4004B0B78 /* c-01-b-2.PNG in Resources */,
 				F4FA4F041C510EB4004B0B78 /* c-01-l-1.PNG in Resources */,
 				F44149741C45559600E7FC53 /* 落ち着くところ.mp3 in Resources */,
+				AE8E93961C5DE80D0031BF79 /* NeetMaster.sqlite in Resources */,
 				F41FD6391C4D3B640086A607 /* LINEActivityIcon~ipad.png in Resources */,
 				F48330181C2F040D00234B18 /* Assets.xcassets in Resources */,
 			);

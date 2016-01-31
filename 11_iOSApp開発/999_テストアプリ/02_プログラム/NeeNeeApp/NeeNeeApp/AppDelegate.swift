@@ -16,6 +16,63 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+
+        print(NSDate().description, __FUNCTION__, __LINE__)
+
+//
+//        print(NSPersistentStore.MR_urlForStoreName("NeetMaster.sqlite"))
+        // Override point for customization after application launch.
+        
+        let fileManager = NSFileManager.defaultManager()
+        
+        do {
+            //端末内にSQLiteファイルが存在するか確認
+            let storeSQLiteURL = NSPersistentStore.MR_urlForStoreName("NeetMaster.sqlite")
+            let storeSQLshmURL = NSURL(fileURLWithPath: storeSQLiteURL!.URLByDeletingLastPathComponent!.path! + "/NeetMaster.sqlite-shm")
+            let storeSQLwalURL = NSURL(fileURLWithPath: storeSQLiteURL!.URLByDeletingLastPathComponent!.path! + "/NeetMaster.sqlite-wal")
+            //let pathToStore = storeSQLiteURL?.URLByDeletingLastPathComponent
+            
+            
+            if fileManager.fileExistsAtPath(storeSQLiteURL!.path!) {
+                
+                //端末内の自動生成ファイルを削除する
+                try fileManager.removeItemAtURL(storeSQLiteURL!)
+                try fileManager.removeItemAtURL(storeSQLshmURL)
+                try fileManager.removeItemAtURL(storeSQLwalURL)
+                
+            } else {
+                print("storeSQLiteFile not exist")
+            }
+            
+            
+            
+            // file URL to preload
+            let preloadSQLiteURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("NeetMaster", ofType: "sqlite")!)
+            let preloadSQLshmURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("NeetMaster", ofType: "sqlite-shm")!)
+            let preloadSQLwalURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("NeetMaster", ofType: "sqlite-wal")!)
+            
+            
+            print("storeSQLiteURL:  \(storeSQLiteURL)")
+            print("storeSQLshmURL:  \(storeSQLshmURL)")
+            print("storeSQLwalURL:  \(storeSQLwalURL)")
+            print("sql:  \(preloadSQLiteURL)")
+            print("shm:  \(preloadSQLshmURL)")
+            print("wal:  \(preloadSQLwalURL)")
+            
+            //コピーする
+            try fileManager.copyItemAtURL(preloadSQLiteURL, toURL: storeSQLiteURL!)
+            try fileManager.copyItemAtURL(preloadSQLshmURL, toURL: storeSQLshmURL)
+            try fileManager.copyItemAtURL(preloadSQLwalURL, toURL: storeSQLwalURL)
+            
+            
+        } catch let error {
+            print("Error...\(error)")
+        }
+        
+        MagicalRecord.setupCoreDataStackWithAutoMigratingSqliteStoreNamed("NeetMaster.sqlite")
+
+        
+        
         return true
     }
 
@@ -40,7 +97,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
-        self.saveContext()
+ //       self.saveContext()
+        MagicalRecord.cleanUp()
     }
 
     // MARK: - Core Data stack
