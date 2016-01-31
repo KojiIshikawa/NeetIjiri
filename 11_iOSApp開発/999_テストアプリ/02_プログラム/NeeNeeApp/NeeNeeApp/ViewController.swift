@@ -10,6 +10,7 @@ import UIKit
 import Social
 import iAd
 import AVFoundation
+import MisterFusion
 
 class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UIGestureRecognizerDelegate {
 
@@ -163,26 +164,31 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         manuBtn = UIButton(frame: CGRectMake(self.view.bounds.width - 80,self.view.bounds.height-footerBaner.frame.height-70,60,100))
         manuBtn.setTitle("MENU",  forState: .Normal)
         manuBtn.addTarget(self, action: "tapManuBtn:", forControlEvents: .TouchUpInside)
+        manuBtn.sizeToFit()
         self.view.addSubview(manuBtn)
         
         mainBtn = UIButton(frame: CGRectMake(180,self.view.bounds.height-footerBaner.frame.height-70,100,100))
         mainBtn.setTitle("ひまつぶし",  forState: .Normal)
         mainBtn.addTarget(self, action: "tapMainBtn:", forControlEvents: .TouchUpInside)
+        manuBtn.sizeToFit()
         self.view.addSubview(mainBtn)
         
         detailBtn = UIButton(frame: CGRectMake(120,self.view.bounds.height-footerBaner.frame.height-70,60,100))
         detailBtn.setTitle("履歴書",  forState: .Normal)
         detailBtn.addTarget(self, action: "tapDetailBtn:", forControlEvents: .TouchUpInside)
+        detailBtn.sizeToFit()
         self.view.addSubview(detailBtn)
         
         shareBtn = UIButton(frame: CGRectMake(60,self.view.bounds.height-footerBaner.frame.height-70,60,100))
         shareBtn.setTitle("シェア",  forState: .Normal)
         shareBtn.addTarget(self, action: "tapShareBtn:", forControlEvents: .TouchUpInside)
+        shareBtn.sizeToFit()
         self.view.addSubview(shareBtn)
         
         configBtn = UIButton(frame: CGRectMake(0,self.view.bounds.height-footerBaner.frame.height-70,60,100))
         configBtn.setTitle("設定",  forState: .Normal)
         configBtn.addTarget(self, action: "tapConfigBtn:", forControlEvents: .TouchUpInside)
+        configBtn.sizeToFit()
         self.view.addSubview(configBtn)
         
         // メニューボタン以外のボタンを非表示にする
@@ -212,6 +218,38 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         
         // 設定メニューの生成
         configInit()
+        
+        // メニューボタンの制約設定
+        self.view.addLayoutSubview(manuBtn, andConstraints:
+            manuBtn.Bottom |==| footerBaner.Top |-| 5,
+            manuBtn.Right  |-|  15
+        )
+
+        // ひまつぶしボタンの制約設定
+        self.view.addLayoutSubview(mainBtn, andConstraints:
+            mainBtn.Bottom |==| footerBaner.Top |-| 5,
+            mainBtn.Right  |==| manuBtn.Left |-| 8
+        )
+
+        // 履歴書ボタンの制約設定
+        self.view.addLayoutSubview(detailBtn, andConstraints:
+            detailBtn.Bottom |==| footerBaner.Top |-| 5,
+            detailBtn.Right  |==| mainBtn.Left |-| 8
+        )
+        
+        // シェアボタンの制約設定
+        self.view.addLayoutSubview(shareBtn, andConstraints:
+            shareBtn.Bottom |==| footerBaner.Top |-| 5,
+            shareBtn.Right  |==| detailBtn.Left |-| 8
+        )
+
+        // 設定ボタンの制約設定
+        self.view.addLayoutSubview(configBtn, andConstraints:
+            configBtn.Bottom |==| footerBaner.Top |-| 5,
+            configBtn.Right  |==| shareBtn.Left |-| 8
+        )
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
