@@ -194,6 +194,13 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         configInit()
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+        print("didReceiveMemoryWarning")
+    }
+    
+    /** メニューボタン押下時の処理 **/
     func tapManuBtn(sender: AnyObject) {
         
         if  manuBtn.titleLabel?.text == "MENU" {
@@ -227,6 +234,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         }
     }
     
+    /** ひまつぶしボタン押下時の処理 **/
     func tapMainBtn(sender: AnyObject) {
         
         // SEを再生する.
@@ -240,12 +248,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         detailBtn.userInteractionEnabled = mainConView.hidden ? true:false
         shareBtn.userInteractionEnabled = mainConView.hidden ? true:false
         configBtn.userInteractionEnabled = mainConView.hidden ? true:false
-        
-        setItem1View.hidden = mainConView.hidden ? true:false
-        setItem2View.hidden = mainConView.hidden ? true:false
-        setItem3View.hidden = mainConView.hidden ? true:false
-        itemCollectionView.hidden = mainConView.hidden ? true:false
-    }
+}
     
     func tapDetailBtn(sender: AnyObject) {
         
@@ -262,6 +265,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         configBtn.userInteractionEnabled = detailConView.hidden ? true:false
     }
     
+    /** シェアボタン押下時の処理 **/
     func tapShareBtn(sender: AnyObject) {
         
         // SEを再生する.
@@ -269,12 +273,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         
         // ポップの表示・非表示を切り替える.
         shareConView.hidden = shareConView.hidden ? false:true
-        
-        // オブジェクトの表示・非表示を切り替える.
-        facebookBtn.hidden = facebookBtn.hidden ? false:true
-        twitterBtn.hidden = twitterBtn.hidden ? false:true
-        lineBtn.hidden = lineBtn.hidden ? false:true
-        
+
         // その他メニューボタンの制御を切り替える.
         manuBtn.userInteractionEnabled = shareConView.hidden ? true:false
         mainBtn.userInteractionEnabled = shareConView.hidden ? true:false
@@ -283,6 +282,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         
     }
 
+    /** 設定ボタン押下時の処理 **/
     func tapConfigBtn(sender: AnyObject) {
         
         // SEを再生する.
@@ -290,12 +290,6 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         
         // オブジェクトの表示・非表示を切り替える.
         configConView.hidden = configConView.hidden ? false:true
-        bgmLabel.hidden = bgmLabel.hidden ? false:true
-        bgmVolumeSBar.hidden = bgmVolumeSBar.hidden ? false:true
-        bgmMuteBtn.hidden = bgmMuteBtn.hidden ? false:true
-        seLabel.hidden = seLabel.hidden ? false:true
-        seVolumeSBar.hidden = seVolumeSBar.hidden ? false:true
-        seMuteBtn.hidden = seMuteBtn.hidden ? false:true
         
         // その他メニューボタンの制御を切り替える.
         manuBtn.userInteractionEnabled = configConView.hidden ? true:false
@@ -304,6 +298,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         shareBtn.userInteractionEnabled = configConView.hidden ? true:false
     }
     
+    /** BGMミュートボタン押下時の処理 **/
     func tapBgmMuteBtn(sender: AnyObject) {
         
         // SEを再生する.
@@ -322,6 +317,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         }
     }
 
+    /** BGMボリューム変更時の処理 **/
     func slideBgmVolume(sender: AnyObject) {
         
         // スライド値をBGM音量にセットする
@@ -329,6 +325,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         
     }
 
+    /** SEミュートボタン押下時の処理 **/
     func tapSeMuteBtn(sender: AnyObject) {
         
         // SEを再生する.
@@ -347,6 +344,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         }
     }
     
+    /** SEボリューム変更時の処理 **/
     func slideSeVolume(sender: AnyObject) {
         
         // スライド値をBGM音量にセットする
@@ -358,7 +356,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         
     }
     
-    //facebookボタン押下
+    //facebookボタン押下時の処理
     func tapFacebookBtn(sender: AnyObject) {
         
         // Facebookの投稿ダイアログを作って
@@ -369,7 +367,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         self.presentViewController(cv, animated: true, completion: nil)
     }
     
-    //ラインボタン押下
+    //ラインボタン押下時の処理
     func tapLineBtn(sender: AnyObject) {
         
         //　共有する項目
@@ -383,7 +381,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         presentViewController(avc, animated: true, completion: nil)
     }
     
-    //Twitterボタン押下
+    //Twitterボタン押下時の処理
     func tapTwitterBtn(sender: AnyObject) {
         
         // 共有する項目
@@ -393,11 +391,6 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         cv.setInitialText("メッセージを入力してください。")
         // 投稿ダイアログを表示する
         self.presentViewController(cv, animated: true, completion:nil )
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // 画面にタッチで呼ばれる
@@ -646,11 +639,14 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         mainConView.addSubview(setItem3View)
         mainConView.addSubview(itemCollectionView)
         
+        /**
         // 非表示にしておく.
         setItem1View.hidden = true
         setItem2View.hidden = true
         setItem3View.hidden = true
         itemCollectionView.hidden = true
+        **/
+
     }
     
     /** 履歴書メニューのポップアップ作成 **/
@@ -758,11 +754,6 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         shareConView.addSubview(facebookBtn)
         shareConView.addSubview(twitterBtn)
         shareConView.addSubview(lineBtn)
-        
-        // 非表示にしておく.
-        facebookBtn.hidden = true
-        twitterBtn.hidden = true
-        lineBtn.hidden = true
     }
 
     /** 設定メニューのポップアップ作成 **/
@@ -818,14 +809,6 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         configConView.addSubview(seLabel)
         configConView.addSubview(seVolumeSBar)
         configConView.addSubview(seMuteBtn)
-        
-        // 非表示にしておく.
-        bgmLabel.hidden = true
-        bgmVolumeSBar.hidden = true
-        bgmMuteBtn.hidden = true
-        seLabel.hidden = true
-        seVolumeSBar.hidden = true
-        seMuteBtn.hidden = true
         
     }
     
