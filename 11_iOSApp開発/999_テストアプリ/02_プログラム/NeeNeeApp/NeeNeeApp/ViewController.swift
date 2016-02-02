@@ -95,17 +95,17 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
     }
     
     
-    
+    private var atimer: NSTimer!
     //****************************************
     // MARK: - イベント
     //****************************************
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         /* 以下の行を追加する */
-        
         // UIImageViewを作成する.
         myImageView = UIImageView(frame: CGRectMake(0,0,self.view.bounds.width,self.view.bounds.height))
         
@@ -122,7 +122,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         // キャラクターを初期設定する.
         // UIImageViewをViewに追加する.
         self.view.addSubview(myImageView)
-        myCharImageView = UIImageView(frame: CGRectMake(-100,300,300,350))
+        myCharImageView = UIImageView(frame: CGRectMake(50,300,300,350))
         myCharImageView.tag = 1
         
         // 吹き出しを生成する.
@@ -143,8 +143,10 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
              = UITapGestureRecognizer(target: self, action: "tapCharaImage:")
         myCharImageView.addGestureRecognizer(charaTap)
         
-        // キャラクターを移動させる（無限ループ）
-        callbackCharaMove()
+        // TODO:キャラクターを移動させる（無限ループ）
+//        callbackCharaMove()
+        self.animationStart()
+
 
         // UIImageViewをViewに追加する.
         self.view.addSubview(myCharImageView)
@@ -909,6 +911,76 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         // タップviewの色を変える (Red <=> Blue)
         print("触ったな")
     }
+    
+    
+    
+    
+    func animationStart() {
+        atimer = NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+    }
+    
+    func update() {
+        print("aaaa")
+        
+        // 開始位置を設定する.
+        myCharImageView.animationDuration = 1.5
+        
+        // キャラクターアニメーションを設定する.
+        let charaImages = [
+            self.getUncachedImage( named: "c-01-l-1.PNG")!,
+            self.getUncachedImage( named: "c-01-l-2.PNG")!,
+            self.getUncachedImage( named: "c-01-l-1.PNG")!,
+            self.getUncachedImage( named: "c-01-l-3.PNG")!
+        ]
+        myCharImageView.animationImages = charaImages
+        
+        self.myCharImageView.startAnimating()
+        
+        
+        // 左→右の横移動
+        UIView.animateWithDuration(
+            2.0, // アニメーションの時間
+            delay:0.0,
+            options:[UIViewAnimationOptions.TransitionCrossDissolve
+                ,UIViewAnimationOptions.AllowUserInteraction],
+            animations: {() -> Void  in
+                
+                let indexX = Int(arc4random_uniform(2))
+                let indexY = Int(arc4random_uniform(2))
+                var x: CGFloat
+                var y: CGFloat
+                switch indexX {
+                case 0:
+                    x = -30.0
+                case 1:
+                    x = 30.0
+                default:
+                    x = 0.0
+                }
+                switch indexY {
+                case 0:
+                    y = -30.0
+                case 1:
+                    y = 30.0
+                default:
+                    y = 0.0
+                }
+                self.myCharImageView.frame.origin.x
+                    = self.myCharImageView.frame.origin.x - x
+                
+                self.myCharImageView.frame.origin.y
+                    = self.myCharImageView.frame.origin.y - y
+                
+                
+                
+            },
+            completion: {(
+                finished: Bool) -> Void in
+        })
+        
+    }
+
+    
     
     
     //****************************************
