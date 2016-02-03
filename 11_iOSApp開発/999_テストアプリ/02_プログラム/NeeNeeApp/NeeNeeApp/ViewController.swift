@@ -19,32 +19,44 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
     // MARK: - メンバ変数
     //****************************************
 
-    //石川マージようコメント
+    // BGM・SEの再生用オブジェクト
+    private var myAudioPlayer: AVAudioPlayer!
+    private var mySePlayer: AVAudioPlayer!
+    
+    // バナー
+    private var footerBaner: ADBannerView!
+    
+    // メニューボタン制御用
+    private var manuBtnFlg = true
+    
     // 壁紙オブジェクト
     private var myImageView: UIImageView!
     
     // キャラクターオブジェクト
     private var myCharImageView: UIImageView!
-    
-    // 吹き出しオブジェクト
     private var myFukidasiImageView: UIImageView!
     private var fukidasiLabel: UILabel!
 
-    // BGM・SEの再生用オブジェクト
-    private var myAudioPlayer: AVAudioPlayer!
-    private var mySePlayer: AVAudioPlayer!
-    
     // メニューボタン
     private var manuBtn: UIButton!
     private var mainBtn: UIButton!
-    private var detailBtn: UIButton!
     private var shareBtn: UIButton!
-
+    private var detailBtn: UIButton!
+    private var configBtn: UIButton!
+    
     // メニューのサブビュー
     private var mainConView: UIView!
     private var detailConView: UIView!
     private var shareConView: UIView!
     private var configConView: UIView!
+    
+    // メインの背景画像用オブジェクト
+    private var mainImgView: UIImageView!
+    private var mainImgSubView: UIImageView!
+    private var detailImgView: UIImageView!
+    private var detailImgSubView: UIImageView!
+    private var shareImgView: UIImageView!
+    private var configImgView: UIImageView!
     
     // 暇つぶしメニューのオブジェクト
     var itemCollectionView: UICollectionView!
@@ -53,24 +65,16 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
     private var setItem3View: UIImageView!
     
     // 履歴書メニューのオブジェクト
-    private var nameTitleLabel: UILabel!
     private var nameDataLabel: UILabel!
-    private var birthTitleLabel: UILabel!
     private var birthDataLabel: UILabel!
-    private var positionTitleLabel: UILabel!
     private var positionDataLabel: UILabel!
-    private var compTitleLabel: UILabel!
     private var compDataLabel: UILabel!
-    private var kakugenTitleLabel: UILabel!
     private var kakugenDataLabel: UILabel!
-    private var himaTitleLabel: UILabel!
-    private var himaDataLabel: UILabel!
     
     // シェアメニューのオブジェクト
     private var facebookBtn: UIButton!
     private var lineBtn: UIButton!
     private var twitterBtn: UIButton!
-    private var configBtn: UIButton!
     
     // 設定メニューのオブジェクト
     private var bgmMuteBtn: UIButton!
@@ -79,9 +83,6 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
     private var seMuteBtn: UIButton!
     private var seVolumeSBar: UISlider!
     private var seLabel: UILabel!
-
-    // バナー
-    private var footerBaner: ADBannerView!
     
     // 定数宣言
     private let mySongPath = NSBundle.mainBundle().pathForResource("暇で忙しい", ofType:"mp3")
@@ -89,6 +90,27 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
     private let mySeNoPath = NSBundle.mainBundle().pathForResource("se6", ofType:"mp3")
     private let myImage = UIImage(named: "03_01_01")
     private let fukidasiImage = UIImage( named: "05_01_01")!
+
+    // メニュー画面の画像設定
+    private let mainViewImage = UIImage(named: "02_01_01.png")
+    private let mainViewSubImage = UIImage(named: "02_05_01.png")
+    private let detailViewImage = UIImage(named: "02_02_01.png")
+    private let detailViewSubImage = UIImage(named: "02_06_01.png")
+    private let shareViewImage = UIImage(named: "02_03_01.png")
+    private let configViewImage = UIImage(named: "02_04_01.png")
+
+    // メニューボタンの画像設定
+    private let manuBtnNextImage = UIImage(named: "01_01_01.png")
+    private let manuBtnBackActImage = UIImage(named: "01_02_01.png")
+    private let manuBtnBackInActImage = UIImage(named: "01_02_02.png")
+    private let mainBtnActImage = UIImage(named: "01_03_01.png")
+    private let mainBtnInActImage = UIImage(named: "01_03_02.png")
+    private let detailBtnActImage = UIImage(named: "01_04_01.png")
+    private let detailBtnInActImage = UIImage(named: "01_04_02.png")
+    private let shareBtnActImage = UIImage(named: "01_05_01.png")
+    private let shareBtnInActImage = UIImage(named: "01_05_02.png")
+    private let configBtnActImage = UIImage(named: "01_06_01.png")
+    private let configBtnInActImage = UIImage(named: "01_06_02.png")
 
     required init(coder aDecoder: NSCoder){
         super.init(coder: aDecoder)!
@@ -165,30 +187,31 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         // メニューボタン及びサブメニューボタンの設定.
         manuBtn = UIButton(frame: CGRectMake(self.view.bounds.width - 80,self.view.bounds.height-footerBaner.frame.height-70,60,100))
         manuBtn.setTitle("MENU",  forState: .Normal)
+        manuBtn.setImage(manuBtnNextImage, forState: .Normal)
         manuBtn.addTarget(self, action: "tapManuBtn:", forControlEvents: .TouchUpInside)
         manuBtn.sizeToFit()
         self.view.addSubview(manuBtn)
         
         mainBtn = UIButton(frame: CGRectMake(180,self.view.bounds.height-footerBaner.frame.height-70,100,100))
-        mainBtn.setTitle("ひまつぶし",  forState: .Normal)
+        mainBtn.setImage(mainBtnActImage, forState: .Normal)
         mainBtn.addTarget(self, action: "tapMainBtn:", forControlEvents: .TouchUpInside)
         manuBtn.sizeToFit()
         self.view.addSubview(mainBtn)
         
         detailBtn = UIButton(frame: CGRectMake(120,self.view.bounds.height-footerBaner.frame.height-70,60,100))
-        detailBtn.setTitle("履歴書",  forState: .Normal)
+        detailBtn.setImage(detailBtnActImage, forState: .Normal)
         detailBtn.addTarget(self, action: "tapDetailBtn:", forControlEvents: .TouchUpInside)
         detailBtn.sizeToFit()
         self.view.addSubview(detailBtn)
         
         shareBtn = UIButton(frame: CGRectMake(60,self.view.bounds.height-footerBaner.frame.height-70,60,100))
-        shareBtn.setTitle("シェア",  forState: .Normal)
+        shareBtn.setImage(shareBtnActImage, forState: .Normal)
         shareBtn.addTarget(self, action: "tapShareBtn:", forControlEvents: .TouchUpInside)
         shareBtn.sizeToFit()
         self.view.addSubview(shareBtn)
         
         configBtn = UIButton(frame: CGRectMake(0,self.view.bounds.height-footerBaner.frame.height-70,60,100))
-        configBtn.setTitle("設定",  forState: .Normal)
+        configBtn.setImage(configBtnActImage, forState: .Normal)
         configBtn.addTarget(self, action: "tapConfigBtn:", forControlEvents: .TouchUpInside)
         configBtn.sizeToFit()
         self.view.addSubview(configBtn)
@@ -221,37 +244,8 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         // 設定メニューの生成
         configInit()
         
-//        // メニューボタンの制約設定
-//        self.view.addLayoutSubview(manuBtn, andConstraints:
-//            manuBtn.Bottom |==| footerBaner.Top |-| 5,
-//            manuBtn.Right  |-|  15
-//        )
-//
-//        // ひまつぶしボタンの制約設定
-//        self.view.addLayoutSubview(mainBtn, andConstraints:
-//            mainBtn.Bottom |==| footerBaner.Top |-| 5,
-//            mainBtn.Right  |==| manuBtn.Left |-| 8
-//        )
-//
-//        // 履歴書ボタンの制約設定
-//        self.view.addLayoutSubview(detailBtn, andConstraints:
-//            detailBtn.Bottom |==| footerBaner.Top |-| 5,
-//            detailBtn.Right  |==| mainBtn.Left |-| 8
-//        )
-//        
-//        // シェアボタンの制約設定
-//        self.view.addLayoutSubview(shareBtn, andConstraints:
-//            shareBtn.Bottom |==| footerBaner.Top |-| 5,
-//            shareBtn.Right  |==| detailBtn.Left |-| 8
-//        )
-//
-//        // 設定ボタンの制約設定
-//        self.view.addLayoutSubview(configBtn, andConstraints:
-//            configBtn.Bottom |==| footerBaner.Top |-| 5,
-//            configBtn.Right  |==| shareBtn.Left |-| 8
-//        )
-        
-        
+        // オブジェクトの制約の設定
+        objConstraints()
     }
     
     override func didReceiveMemoryWarning() {
@@ -263,10 +257,11 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
     /** メニューボタン押下時の処理 **/
     func tapManuBtn(sender: AnyObject) {
         
-        if  manuBtn.titleLabel?.text == "MENU" {
+        if  manuBtnFlg {
             
             // ボタンの文言を変える
-            manuBtn.setTitle("×",  forState: .Normal)
+            manuBtn.setImage(manuBtnBackActImage,  forState: .Normal)
+            manuBtnFlg = false
             
             // メニュー内ボタンの制御を切り替える.
             mainBtn.hidden = false
@@ -280,7 +275,8 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         } else {
             
             // ボタンの文言を変える
-            manuBtn.setTitle("MENU",  forState: .Normal)
+            manuBtn.setImage(manuBtnNextImage,  forState: .Normal)
+            manuBtnFlg = true
             
             // メニュー内ボタンの制御を切り替える.
             mainBtn.hidden = true
@@ -308,7 +304,30 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         detailBtn.userInteractionEnabled = mainConView.hidden ? true:false
         shareBtn.userInteractionEnabled = mainConView.hidden ? true:false
         configBtn.userInteractionEnabled = mainConView.hidden ? true:false
-}
+        
+        // ポップが非表示の場合
+        if mainConView.hidden {
+
+            // 全てのボタンを活性に変更
+            manuBtn.setImage(manuBtnBackActImage, forState: .Normal)
+            mainBtn.setImage(mainBtnActImage, forState: .Normal)
+            detailBtn.setImage(detailBtnActImage, forState: .Normal)
+            shareBtn.setImage(shareBtnActImage, forState: .Normal)
+            configBtn.setImage(configBtnActImage, forState: .Normal)
+            
+            
+        // ポップが表示された場合
+        } else {
+
+            // 該当メニューのボタン以外を非活性に変更
+            //mainBtn.setImage(mainBtnInActImage, forState: .Normal)
+            manuBtn.setImage(manuBtnBackInActImage, forState: .Normal)
+            detailBtn.setImage(detailBtnInActImage, forState: .Normal)
+            shareBtn.setImage(shareBtnInActImage, forState: .Normal)
+            configBtn.setImage(configBtnInActImage, forState: .Normal)
+
+        }
+    }
     
     func tapDetailBtn(sender: AnyObject) {
         
@@ -323,6 +342,29 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         mainBtn.userInteractionEnabled = detailConView.hidden ? true:false
         shareBtn.userInteractionEnabled = detailConView.hidden ? true:false
         configBtn.userInteractionEnabled = detailConView.hidden ? true:false
+        
+        // ポップが非表示の場合
+        if detailConView.hidden {
+            
+            // 全てのボタンを活性に変更
+            manuBtn.setImage(manuBtnBackActImage, forState: .Normal)
+            mainBtn.setImage(mainBtnActImage, forState: .Normal)
+            detailBtn.setImage(detailBtnActImage, forState: .Normal)
+            shareBtn.setImage(shareBtnActImage, forState: .Normal)
+            configBtn.setImage(configBtnActImage, forState: .Normal)
+            
+            
+            // ポップが表示された場合
+        } else {
+            
+            // 該当メニューのボタン以外を非活性に変更
+            manuBtn.setImage(manuBtnBackInActImage, forState: .Normal)
+            mainBtn.setImage(mainBtnInActImage, forState: .Normal)
+            //detailBtn.setImage(detailBtnInActImage, forState: .Normal)
+            shareBtn.setImage(shareBtnInActImage, forState: .Normal)
+            configBtn.setImage(configBtnInActImage, forState: .Normal)
+            
+        }
     }
     
     /** シェアボタン押下時の処理 **/
@@ -340,6 +382,29 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         detailBtn.userInteractionEnabled = shareConView.hidden ? true:false
         configBtn.userInteractionEnabled = shareConView.hidden ? true:false
         
+        // ポップが非表示の場合
+        if shareConView.hidden {
+            
+            // 全てのボタンを活性に変更
+            manuBtn.setImage(manuBtnBackActImage, forState: .Normal)
+            mainBtn.setImage(mainBtnActImage, forState: .Normal)
+            detailBtn.setImage(detailBtnActImage, forState: .Normal)
+            shareBtn.setImage(shareBtnActImage, forState: .Normal)
+            configBtn.setImage(configBtnActImage, forState: .Normal)
+            
+            
+            // ポップが表示された場合
+        } else {
+            
+            // 該当メニューのボタン以外を非活性に変更
+            manuBtn.setImage(manuBtnBackInActImage, forState: .Normal)
+            mainBtn.setImage(mainBtnInActImage, forState: .Normal)
+            detailBtn.setImage(detailBtnInActImage, forState: .Normal)
+            //shareBtn.setImage(shareBtnInActImage, forState: .Normal)
+            configBtn.setImage(configBtnInActImage, forState: .Normal)
+            
+        }
+        
     }
 
     /** 設定ボタン押下時の処理 **/
@@ -356,6 +421,29 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         mainBtn.userInteractionEnabled = configConView.hidden ? true:false
         detailBtn.userInteractionEnabled = configConView.hidden ? true:false
         shareBtn.userInteractionEnabled = configConView.hidden ? true:false
+        
+        // ポップが非表示の場合
+        if configConView.hidden {
+            
+            // 全てのボタンを活性に変更
+            manuBtn.setImage(manuBtnBackActImage, forState: .Normal)
+            mainBtn.setImage(mainBtnActImage, forState: .Normal)
+            detailBtn.setImage(detailBtnActImage, forState: .Normal)
+            shareBtn.setImage(shareBtnActImage, forState: .Normal)
+            configBtn.setImage(configBtnActImage, forState: .Normal)
+            
+            
+            // ポップが表示された場合
+        } else {
+            
+            // 該当メニューのボタン以外を非活性に変更
+            manuBtn.setImage(manuBtnBackInActImage, forState: .Normal)
+            mainBtn.setImage(mainBtnInActImage, forState: .Normal)
+            detailBtn.setImage(detailBtnInActImage, forState: .Normal)
+            shareBtn.setImage(shareBtnInActImage, forState: .Normal)
+            //configBtn.setImage(configBtnInActImage, forState: .Normal)
+            
+        }
     }
     
     /** BGMミュートボタン押下時の処理 **/
@@ -481,10 +569,6 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
                     
                     // 吹き出しの表示
                     self.myFukidasiImageView.hidden = false
-                    
-                    
-                    
-                    
                     self.fukidasiLabel.text = self.getMeigen()
                     
                 })
@@ -504,7 +588,28 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         
     }
     
+    /** 暇つぶしアイテム長押し時の処理 **/
+    func cellLongTap(recognizer: UILongPressGestureRecognizer) {
+        
+        print("長押し")
+        
+        // 押された位置でcellのPathを取得
+        let point = recognizer.locationInView(itemCollectionView)
+        
+        let indexPath = self.itemCollectionView.indexPathForItemAtPoint(point)
+        
+        if indexPath == nil {
+            
+        } else if recognizer.state == UIGestureRecognizerState.Began  {
+            // 長押しされた場合の処理
+            print("長押しされたcellのindexPath:\(indexPath?.row)")
+        }
+    }
     
+    func tapGesture(gestureRecognizer: UITapGestureRecognizer){
+        // タップviewの色を変える (Red <=> Blue)
+        print("触ったな")
+    }
     
     
     
@@ -656,32 +761,46 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         }
     }
     
-    
     /** ひまつぶしメニューのポップアップ作成 **/
     func mainInit()
     {
         //ポップ生成
         mainConView = UIView(frame: CGRectMake(18,100,340,400))
+        mainImgView = UIImageView()
+        mainImgView.frame.size = mainConView.frame.size
+        mainImgSubView = UIImageView(frame: CGRectMake(20,50,mainConView.frame.width-60,mainConView.frame.height-60))
+
+        // ポップの背景を設定する.
+        mainImgView.image = mainViewImage
+        mainImgView.alpha = 0.9
+        mainImgSubView.image = mainViewSubImage
+        mainImgSubView.alpha = 0.9
         
-        // ポップの背景色を設定する.
-        mainConView.backgroundColor = UIColor(red: 20, green: 20, blue: 20, alpha: 0.9)
-            
         // 初期表示は非表示
         mainConView.hidden = true
             
         // ViewをViewに追加する.
         self.view.addSubview(mainConView)
-
+        
         // セット済みアイテムの初期設定.
         let setItem1Image = UIImage(named: "06_01_01.png")
-        let setItem2Image = UIImage(named: "06_01_02.png")
-        let setItem3Image = UIImage(named: "06_01_03.png")
-        setItem1View = UIImageView(frame: CGRectMake(20,20,50,50))
+        //let setItem2Image = UIImage(named: "06_01_02.png")
+        //let setItem3Image = UIImage(named: "06_01_03.png")
+        
+        setItem1View = UIImageView()
+        setItem1View.frame.origin.x = 100
+        setItem1View.frame.origin.y = 100
+        setItem1View.frame.size.width = 160
+        setItem1View.frame.size.height = 160
+
+
+/**
         setItem2View = UIImageView(frame: CGRectMake(100,20,50,50))
         setItem3View = UIImageView(frame: CGRectMake(180,20,50,50))
+**/
         setItem1View.image = setItem1Image
-        setItem2View.image = setItem2Image
-        setItem3View.image = setItem3Image
+        //setItem2View.image = setItem2Image
+        //setItem3View.image = setItem3Image
         
         // 画像をUIImageViewに設定する.
         myImageView.image = myImage
@@ -697,10 +816,13 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         
         // セクション毎のヘッダーサイズ.
         layout.headerReferenceSize = CGSizeMake(0,0)
+
         
         itemCollectionView = UICollectionView(frame: self.mainConView.frame, collectionViewLayout: layout)
-        itemCollectionView.frame.origin.y = itemCollectionView.frame.origin.y - 20
-        itemCollectionView.frame.size = CGSizeMake(itemCollectionView.frame.width - 44,itemCollectionView.frame.height - 100)
+        itemCollectionView.frame.origin.x = 0
+        itemCollectionView.frame.origin.y
+            = self.mainConView.frame.height + self.mainConView.frame.origin.y - 200
+        itemCollectionView.frame.size.height = 120
         itemCollectionView.registerClass(itemCell.self, forCellWithReuseIdentifier: "cell")
         itemCollectionView.delegate = self
         itemCollectionView.dataSource = self
@@ -711,9 +833,11 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         itemCollectionView.addGestureRecognizer(longTapRecognizer)
         
         // ポップ上に表示するオブジェクトをViewに追加する.
+        mainConView.addSubview(mainImgView)
+        mainConView.addSubview(mainImgSubView)
         mainConView.addSubview(setItem1View)
-        mainConView.addSubview(setItem2View)
-        mainConView.addSubview(setItem3View)
+        //mainConView.addSubview(setItem2View)
+        //mainConView.addSubview(setItem3View)
         mainConView.addSubview(itemCollectionView)
         
     }
@@ -724,67 +848,41 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
     {
         //ポップ生成
         detailConView = UIView(frame: CGRectMake(18,100,340,400))
-            
-        // ポップの背景色を設定する.
-        detailConView.backgroundColor = UIColor(red: 20, green: 20, blue: 20, alpha: 0.9)
+        detailImgView = UIImageView()
+        detailImgView.frame.size = detailConView.frame.size
+        detailImgSubView = UIImageView(frame: CGRectMake(20,50,detailConView.frame.width-60,detailConView.frame.height-60))
+        
+        // ポップの背景を設定する.
+        detailImgView.image = detailViewImage
+        detailImgView.alpha = 0.9
+        detailImgSubView.image = detailViewSubImage
+        detailImgSubView.alpha = 0.9
             
         // 初期表示は非表示
         detailConView.hidden = true
             
         // ViewをViewに追加する.
         self.view.addSubview(detailConView)
-        
-        self.nameTitleLabel = UILabel(frame: CGRectMake(20,10,120,20))
-        self.nameTitleLabel.text = "名前"
-        
+
         self.nameDataLabel = UILabel(frame: CGRectMake(130,10,200,20))
         self.nameDataLabel.text = "こうじ"
-
-        self.birthTitleLabel = UILabel(frame: CGRectMake(20,30,120,20))
-        self.birthTitleLabel.text = "生年月日"
-        
         self.birthDataLabel = UILabel(frame: CGRectMake(130,30,200,20))
         self.birthDataLabel.text = "1990年3月31日"
-        
-        self.positionTitleLabel = UILabel(frame: CGRectMake(20,50,120,20))
-        self.positionTitleLabel.text = "役職"
-        
         self.positionDataLabel = UILabel(frame: CGRectMake(130,50,200,20))
         self.positionDataLabel.text = "ひきニート"
-        
-        self.compTitleLabel = UILabel(frame: CGRectMake(20,70,120,30))
-        self.compTitleLabel.text = "行った場所"
-        self.compTitleLabel.numberOfLines = 2
-        
         self.compDataLabel = UILabel(frame: CGRectMake(130,70,200,30))
         self.compDataLabel.text = "部屋、台所、トイレ"
-        
-        self.kakugenTitleLabel = UILabel(frame: CGRectMake(20,100,120,20))
-        self.kakugenTitleLabel.text = "今日の格言"
-        
         self.kakugenDataLabel = UILabel(frame: CGRectMake(130,100,200,20))
         self.kakugenDataLabel.text = "やる気！元気！いわき！"
-        
-        self.himaTitleLabel = UILabel(frame: CGRectMake(20,120,120,60))
-        self.himaTitleLabel.text = "つぶせるひま"
-        
-        self.himaDataLabel = UILabel(frame: CGRectMake(130,120,200,120))
-        self.himaDataLabel.text = "家でゴロゴロ" + "\n" + "近所の公園でブランコ" + "\n" + "台所で冷蔵庫あさり"
-        self.himaDataLabel.numberOfLines = 3
 
         // ポップ上に表示するオブジェクトをViewに追加する.
-        detailConView.addSubview(nameTitleLabel)
+        detailConView.addSubview(detailImgView)
+        detailConView.addSubview(detailImgSubView)
         detailConView.addSubview(nameDataLabel)
-        detailConView.addSubview(birthTitleLabel)
         detailConView.addSubview(birthDataLabel)
-        detailConView.addSubview(positionTitleLabel)
         detailConView.addSubview(positionDataLabel)
-        detailConView.addSubview(compTitleLabel)
         detailConView.addSubview(compDataLabel)
-        detailConView.addSubview(kakugenTitleLabel)
         detailConView.addSubview(kakugenDataLabel)
-        //detailConView.addSubview(himaTitleLabel)
-        //detailConView.addSubview(himaDataLabel)
     }
 
     /** シェアメニューのポップアップ作成 **/
@@ -792,10 +890,13 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
     {
         //ポップ生成
         shareConView = UIView(frame: CGRectMake(18,100,340,400))
-            
-        // ポップの背景色を設定する.
-        shareConView.backgroundColor = UIColor(red: 20, green: 20, blue: 20, alpha: 0.9)
-            
+        shareImgView = UIImageView()
+        shareImgView.frame.size = shareConView.frame.size
+        
+        // ポップの背景を設定する.
+        shareImgView.image = shareViewImage
+        shareImgView.alpha = 0.9
+        
         // 初期表示は非表示
         shareConView.hidden = true
             
@@ -821,6 +922,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         lineBtn.addTarget(self, action: "tapLineBtn:", forControlEvents: .TouchUpInside)
         
         // ポップ上に表示するオブジェクトをViewに追加する.
+        shareConView.addSubview(shareImgView)
         shareConView.addSubview(facebookBtn)
         shareConView.addSubview(twitterBtn)
         shareConView.addSubview(lineBtn)
@@ -831,9 +933,12 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
     {
         //ポップ生成
         configConView = UIView(frame: CGRectMake(18,100,340,400))
-        
-        // ポップの背景色を設定する.
-        configConView.backgroundColor = UIColor(red: 20, green: 20, blue: 20, alpha: 0.9)
+        configImgView = UIImageView()
+        configImgView.frame.size = configConView.frame.size
+
+        // ポップの背景を設定する.
+        configImgView.image = configViewImage
+        configImgView.alpha = 0.9
         
         // 初期表示は非表示
         configConView.hidden = true
@@ -873,6 +978,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         seMuteBtn.addTarget(self, action: "tapSeMuteBtn:", forControlEvents: .TouchUpInside)
         
         // ポップ上に表示するオブジェクトをViewに追加する.
+        configConView.addSubview(configImgView)
         configConView.addSubview(bgmLabel)
         configConView.addSubview(bgmVolumeSBar)
         configConView.addSubview(bgmMuteBtn)
@@ -887,33 +993,6 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         self.footerBaner?.hidden = false
         print("bannerViewDidLoadAd")
     }
-    
-    
-    /** 暇つぶしアイテム長押し時の処理 **/
-    func cellLongTap(recognizer: UILongPressGestureRecognizer) {
-        
-        print("長押し")
-        
-        // 押された位置でcellのPathを取得
-        let point = recognizer.locationInView(itemCollectionView)
-        
-        let indexPath = self.itemCollectionView.indexPathForItemAtPoint(point)
-        
-        if indexPath == nil {
-            
-        } else if recognizer.state == UIGestureRecognizerState.Began  {
-            // 長押しされた場合の処理
-            print("長押しされたcellのindexPath:\(indexPath?.row)")
-        }
-    }
-
-    func tapGesture(gestureRecognizer: UITapGestureRecognizer){
-        // タップviewの色を変える (Red <=> Blue)
-        print("触ったな")
-    }
-    
-    
-    
     
     func animationStart() {
         atimer = NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
@@ -980,6 +1059,256 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         
     }
 
+
+    /** 全オブジェクトの制約設定 **/
+    func objConstraints() {
+   
+        manuBtn.translatesAutoresizingMaskIntoConstraints = false
+        mainBtn.translatesAutoresizingMaskIntoConstraints = false
+        detailBtn.translatesAutoresizingMaskIntoConstraints = false
+        shareBtn.translatesAutoresizingMaskIntoConstraints = false
+        configBtn.translatesAutoresizingMaskIntoConstraints = false
+        
+        // メニューボタンの制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.manuBtn,
+                attribute:  NSLayoutAttribute.Right,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.Right,
+                multiplier: 1.0,
+                constant: -10
+            ),
+
+            // y座標
+            NSLayoutConstraint(
+                item: self.manuBtn,
+                attribute: NSLayoutAttribute.Bottom,
+                relatedBy: .Equal,
+                toItem: self.footerBaner,
+                attribute:  NSLayoutAttribute.Top,
+                multiplier: 1.0,
+                constant: -10
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.manuBtn,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Width,
+                multiplier: 1.0 / 6.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.manuBtn,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Height,
+                multiplier: 1.0 / 12.0,
+                constant: 0
+            )]
+        )
+        
+        // メインボタンの制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.mainBtn,
+                attribute:  NSLayoutAttribute.Right,
+                relatedBy: .Equal,
+                toItem: self.manuBtn,
+                attribute:  NSLayoutAttribute.Left,
+                multiplier: 1.0,
+                constant: -10
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.mainBtn,
+                attribute: NSLayoutAttribute.Top,
+                relatedBy: .Equal,
+                toItem: self.manuBtn,
+                attribute:  NSLayoutAttribute.Top,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.mainBtn,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.manuBtn,
+                attribute: .Width,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.mainBtn,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.manuBtn,
+                attribute: .Height,
+                multiplier: 1.0,
+                constant: 0
+            )]
+        )
+
+        // 履歴書ボタンの制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.detailBtn,
+                attribute:  NSLayoutAttribute.Right,
+                relatedBy: .Equal,
+                toItem: self.mainBtn,
+                attribute:  NSLayoutAttribute.Left,
+                multiplier: 1.0,
+                constant: -10
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.detailBtn,
+                attribute: NSLayoutAttribute.Top,
+                relatedBy: .Equal,
+                toItem: self.manuBtn,
+                attribute:  NSLayoutAttribute.Top,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.detailBtn,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.manuBtn,
+                attribute: .Width,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.detailBtn,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.manuBtn,
+                attribute: .Height,
+                multiplier: 1.0,
+                constant: 0
+            )]
+        )
+
+        // シェアボタンの制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.shareBtn,
+                attribute:  NSLayoutAttribute.Right,
+                relatedBy: .Equal,
+                toItem: self.detailBtn,
+                attribute:  NSLayoutAttribute.Left,
+                multiplier: 1.0,
+                constant: -10
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.shareBtn,
+                attribute: NSLayoutAttribute.Top,
+                relatedBy: .Equal,
+                toItem: self.manuBtn,
+                attribute:  NSLayoutAttribute.Top,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.shareBtn,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.manuBtn,
+                attribute: .Width,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.shareBtn,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.manuBtn,
+                attribute: .Height,
+                multiplier: 1.0,
+                constant: 0
+            )]
+        )
+
+        // 設定ボタンの制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.configBtn,
+                attribute:  NSLayoutAttribute.Right,
+                relatedBy: .Equal,
+                toItem: self.shareBtn,
+                attribute:  NSLayoutAttribute.Left,
+                multiplier: 1.0,
+                constant: -10
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.configBtn,
+                attribute: NSLayoutAttribute.Top,
+                relatedBy: .Equal,
+                toItem: self.manuBtn,
+                attribute:  NSLayoutAttribute.Top,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.configBtn,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.manuBtn,
+                attribute: .Width,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.configBtn,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.manuBtn,
+                attribute: .Height,
+                multiplier: 1.0,
+                constant: 0
+            )]
+        )
+    }
     
     
     
@@ -994,8 +1323,6 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         
     }
     
-    
-    
     /** セクションの数 **/
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
@@ -1003,7 +1330,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
     
     /** 表示するセルの数 **/
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 100
+        return 26
     }
     
     /** セルが表示されるときに呼ばれる処理（1個のセルを描画する毎に呼び出されます） **/
@@ -1013,7 +1340,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
 
         // セルの情報を設定する.
         cell._name.text = "×"+"1"
-        cell._img.image = UIImage(named: "item.jpg")
+        cell._img.image = UIImage(named: "06_01_01.png")
 
         // セルを返却する.
         return cell
