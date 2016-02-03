@@ -87,8 +87,8 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
     private let mySongPath = NSBundle.mainBundle().pathForResource("暇で忙しい", ofType:"mp3")
     private let mySeYesPath = NSBundle.mainBundle().pathForResource("se4", ofType:"mp3")
     private let mySeNoPath = NSBundle.mainBundle().pathForResource("se6", ofType:"mp3")
-    private let myImage = UIImage(named: "s-01_1.JPG")
-    private let fukidasiImage = UIImage( named: "fukidasi.png")!
+    private let myImage = UIImage(named: "03_01_01")
+    private let fukidasiImage = UIImage( named: "05_01_01")!
 
     required init(coder aDecoder: NSCoder){
         super.init(coder: aDecoder)!
@@ -422,7 +422,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         // Facebookの投稿ダイアログを作って
         let cv = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
         // 画像を追加
-        cv.addImage(UIImage(named: "facebook.png"))
+        cv.addImage(UIImage(named: "01_07_01.png"))
         // 投稿ダイアログを表示する
         self.presentViewController(cv, animated: true, completion: nil)
     }
@@ -431,7 +431,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
     func tapLineBtn(sender: AnyObject) {
         
         //　共有する項目
-        let shareImage = UIImage(named: "LINEActivityIcon.png")!
+        let shareImage = UIImage(named: "01_09_01.png")!
         let shareItems = [shareImage]
         
         // LINEで送るボタンを追加
@@ -530,10 +530,10 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         
         // キャラクターアニメーションを設定する.
         let charaImages = [
-            self.getUncachedImage( named: "c-01-l-1.PNG")!,
-            self.getUncachedImage( named: "c-01-l-2.PNG")!,
-            self.getUncachedImage( named: "c-01-l-1.PNG")!,
-            self.getUncachedImage( named: "c-01-l-3.PNG")!
+            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+            self.getUncachedImage( named: "04_01_01_01_01.PNG")!
         ]
         myCharImageView.animationImages = charaImages
         
@@ -557,10 +557,10 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
                 // 後ろ移動
                 // キャラクターアニメーションを設定する.
                 let charaImages = [
-                    self.getUncachedImage( named: "c-01-b-1.PNG")!,
-                    self.getUncachedImage( named: "c-01-b-2.PNG")!,
-                    self.getUncachedImage( named: "c-01-b-1.PNG")!,
-                    self.getUncachedImage( named: "c-01-b-3.PNG")!
+                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!
                 ]
                 self.myCharImageView.animationImages = charaImages
                 self.myCharImageView.startAnimating()
@@ -580,10 +580,10 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
                         // 右→左の横移動
                         // キャラクターアニメーションを設定する.
                         let charaImages = [
-                            self.getUncachedImage( named: "c-01-r-1.PNG")!,
-                            self.getUncachedImage( named: "c-01-r-2.PNG")!,
-                            self.getUncachedImage( named: "c-01-r-1.PNG")!,
-                            self.getUncachedImage( named: "c-01-r-3.PNG")!
+                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!
                         ]
                         self.myCharImageView.animationImages = charaImages
                         self.myCharImageView.startAnimating()
@@ -600,10 +600,10 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
                                 // 手前への移動
                                 // キャラクターアニメーションを設定する.
                                 let charaImages = [
-                                    self.getUncachedImage( named: "c-01-f-1.PNG")!,
-                                    self.getUncachedImage( named: "c-01-f-2.PNG")!,
-                                    self.getUncachedImage( named: "c-01-f-1.PNG")!,
-                                    self.getUncachedImage( named: "c-01-f-3.PNG")!
+                                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+                                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+                                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+                                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!
                                 ]
                                 self.myCharImageView.animationImages = charaImages
                                 self.myCharImageView.startAnimating()
@@ -623,10 +623,10 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
                                         // 繰り返し設定
                                         // キャラクターアニメーションを設定する.
                                         let charaImages = [
-                                            self.getUncachedImage( named: "c-01-l-1.PNG")!,
-                                            self.getUncachedImage( named: "c-01-l-2.PNG")!,
-                                            self.getUncachedImage( named: "c-01-l-1.PNG")!,
-                                            self.getUncachedImage( named: "c-01-l-3.PNG")!
+                                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+                                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+                                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+                                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!
                                         ]
                                         self.myCharImageView.animationImages = charaImages
                                         // アニメーション終了後の処理
@@ -673,9 +673,9 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         self.view.addSubview(mainConView)
 
         // セット済みアイテムの初期設定.
-        let setItem1Image = UIImage(named: "item.JPG")
-        let setItem2Image = UIImage(named: "item.JPG")
-        let setItem3Image = UIImage(named: "item.JPG")
+        let setItem1Image = UIImage(named: "06_01_01.png")
+        let setItem2Image = UIImage(named: "06_01_02.png")
+        let setItem3Image = UIImage(named: "06_01_03.png")
         setItem1View = UIImageView(frame: CGRectMake(20,20,50,50))
         setItem2View = UIImageView(frame: CGRectMake(100,20,50,50))
         setItem3View = UIImageView(frame: CGRectMake(180,20,50,50))
@@ -804,19 +804,19 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         
         // FaceBookボタンを生成
         facebookBtn = UIButton(frame: CGRectMake(20,120,50,50))
-        let facebookImage = UIImage(named: "facebook.png")! as UIImage
+        let facebookImage = UIImage(named: "01_07_01.png")! as UIImage
         facebookBtn.setImage(facebookImage, forState: .Normal)
         facebookBtn.addTarget(self, action: "tapFacebookBtn:", forControlEvents: .TouchUpInside)
         
         // Twitterボタンを生成
         twitterBtn = UIButton(frame: CGRectMake(100,120,50,50))
-        let twitterImage = UIImage(named: "twitter.png")! as UIImage
+        let twitterImage = UIImage(named: "01_08_01.png")! as UIImage
         twitterBtn.setImage(twitterImage, forState: .Normal)
         twitterBtn.addTarget(self, action: "tapTwitterBtn:", forControlEvents: .TouchUpInside)
         
         // LINEボタンを生成
         lineBtn = UIButton(frame: CGRectMake(180,120,50,50))
-        let lineImage = UIImage(named: "line.png")! as UIImage
+        let lineImage = UIImage(named: "01_09_01.png")! as UIImage
         lineBtn.setImage(lineImage, forState: .Normal)
         lineBtn.addTarget(self, action: "tapLineBtn:", forControlEvents: .TouchUpInside)
         
@@ -927,10 +927,10 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         
         // キャラクターアニメーションを設定する.
         let charaImages = [
-            self.getUncachedImage( named: "c-01-l-1.PNG")!,
-            self.getUncachedImage( named: "c-01-l-2.PNG")!,
-            self.getUncachedImage( named: "c-01-l-1.PNG")!,
-            self.getUncachedImage( named: "c-01-l-3.PNG")!
+            self.getUncachedImage( named: "04_01_01_01_07.PNG")!,
+            self.getUncachedImage( named: "04_01_01_01_08.PNG")!,
+            self.getUncachedImage( named: "04_01_01_01_07.PNG")!,
+            self.getUncachedImage( named: "04_01_01_01_08.PNG")!
         ]
         myCharImageView.animationImages = charaImages
         
