@@ -1,0 +1,1459 @@
+//
+//  ViewController.swift
+//  NeeNeeApp
+//
+//  Created by 石川晃次 on 2015/12/27.
+//  Copyright © 2015年 KojiIshikawa. All rights reserved.
+//
+
+import UIKit
+import Social
+import iAd
+import AVFoundation
+
+
+class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UIGestureRecognizerDelegate {
+
+    
+    //****************************************
+    // MARK: - メンバ変数
+    //****************************************
+
+    // BGM・SEの再生用オブジェクト
+    private var myAudioPlayer: AVAudioPlayer!
+    private var mySePlayer: AVAudioPlayer!
+    
+    // バナー
+    private var footerBaner: ADBannerView!
+    
+    // メニューボタン制御用
+    private var manuBtnFlg = true
+    
+    // 壁紙オブジェクト
+    private var myImageView: UIImageView!
+    
+    // キャラクターオブジェクト
+    private var myCharImageView: UIImageView!
+    private var myFukidasiImageView: UIImageView!
+    private var fukidasiLabel: UILabel!
+
+    // メニューボタン
+    private var manuBtn: UIButton!
+    private var mainBtn: UIButton!
+    private var shareBtn: UIButton!
+    private var detailBtn: UIButton!
+    private var configBtn: UIButton!
+    
+    // メニューのサブビュー
+    private var mainConView: UIView!
+    private var detailConView: UIView!
+    private var shareConView: UIView!
+    private var configConView: UIView!
+    
+    // メインの背景画像用オブジェクト
+    private var mainImgView: UIImageView!
+    private var mainImgSubView: UIImageView!
+    private var detailImgView: UIImageView!
+    private var detailImgSubView: UIImageView!
+    private var shareImgView: UIImageView!
+    private var configImgView: UIImageView!
+    
+    // 暇つぶしメニューのオブジェクト
+    var itemCollectionView: UICollectionView!
+    private var setItem1View: UIImageView!
+    private var setItem2View: UIImageView!
+    private var setItem3View: UIImageView!
+    
+    // 履歴書メニューのオブジェクト
+    private var nameDataLabel: UILabel!
+    private var birthDataLabel: UILabel!
+    private var positionDataLabel: UILabel!
+    private var compDataLabel: UILabel!
+    private var kakugenDataLabel: UILabel!
+    
+    // シェアメニューのオブジェクト
+    private var facebookBtn: UIButton!
+    private var lineBtn: UIButton!
+    private var twitterBtn: UIButton!
+    
+    // 設定メニューのオブジェクト
+    private var bgmMuteBtn: UIButton!
+    private var bgmVolumeSBar: UISlider!
+    private var bgmLabel: UILabel!
+    private var seMuteBtn: UIButton!
+    private var seVolumeSBar: UISlider!
+    private var seLabel: UILabel!
+    
+    // 定数宣言
+    private let mySongPath = NSBundle.mainBundle().pathForResource("暇で忙しい", ofType:"mp3")
+    private let mySeYesPath = NSBundle.mainBundle().pathForResource("se4", ofType:"mp3")
+    private let mySeNoPath = NSBundle.mainBundle().pathForResource("se6", ofType:"mp3")
+
+    
+    private let myImage = UIImage(named: "03_01_01")
+    private let fukidasiImage = UIImage( named: "05_01_01")!
+
+    // メニュー画面の画像設定
+    private let mainViewImage = UIImage(named: "02_01_01.png")
+    private let mainViewSubImage = UIImage(named: "02_05_01.png")
+    private let detailViewImage = UIImage(named: "02_02_01.png")
+    private let detailViewSubImage = UIImage(named: "02_06_01.png")
+    private let shareViewImage = UIImage(named: "02_03_01.png")
+    private let configViewImage = UIImage(named: "02_04_01.png")
+
+    // メニューボタンの画像設定
+    private let manuBtnNextImage = UIImage(named: "01_01_01.png")
+    private let manuBtnBackActImage = UIImage(named: "01_02_01.png")
+    private let manuBtnBackInActImage = UIImage(named: "01_02_02.png")
+    private let mainBtnActImage = UIImage(named: "01_03_01.png")
+    private let mainBtnInActImage = UIImage(named: "01_03_02.png")
+    private let detailBtnActImage = UIImage(named: "01_04_01.png")
+    private let detailBtnInActImage = UIImage(named: "01_04_02.png")
+    private let shareBtnActImage = UIImage(named: "01_05_01.png")
+    private let shareBtnInActImage = UIImage(named: "01_05_02.png")
+    private let configBtnActImage = UIImage(named: "01_06_01.png")
+    private let configBtnInActImage = UIImage(named: "01_06_02.png")
+
+    required init(coder aDecoder: NSCoder){
+        super.init(coder: aDecoder)!
+    }
+    
+    //アニメーションタイマー
+    private var animeTimer: NSTimer!
+    
+    
+    
+    
+    //****************************************
+    // MARK: - イベント
+    //****************************************
+    
+    
+    
+    override func viewDidLoad() {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+        /* 以下の行を追加する */
+        // UIImageViewを作成する.
+        myImageView = UIImageView(frame: CGRectMake(0,0,self.view.bounds.width,self.view.bounds.height))
+        
+        // 画像をUIImageViewに設定する.
+        myImageView.image = myImage
+//        // ジェスチャーの生成
+//        let aSelector = Selector("tapGesture:")
+//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: aSelector)
+//        
+//        // ジェスチャーの追加
+//        myImageView.addGestureRecognizer(tapGestureRecognizer)
+        
+        // キャラクターを初期設定する.
+        // UIImageViewをViewに追加する.
+        self.view.addSubview(myImageView)
+        myCharImageView = UIImageView(frame: CGRectMake(150,300,300,350))
+        myCharImageView.center.x = self.view.center.x
+        myCharImageView.center.y = self.view.center.y
+        //myCharImageView.center
+        
+        myCharImageView.tag = 1
+        
+        // 吹き出しを生成する.
+        myFukidasiImageView = UIImageView(frame: CGRectMake(0,0,200,100))
+        myFukidasiImageView.frame.origin.x = myCharImageView.frame.origin.x
+        myFukidasiImageView.frame.origin.y = myCharImageView.frame.origin.y - 300
+        myFukidasiImageView.image = fukidasiImage
+        myFukidasiImageView.hidden = true
+
+        // 吹き出しのラベルを設定する.
+        fukidasiLabel = UILabel()
+        fukidasiLabel.frame = myFukidasiImageView.bounds
+        fukidasiLabel.textAlignment = NSTextAlignment.Center
+        
+        // キャラクターをタップ可能にする.
+        myCharImageView.userInteractionEnabled = true
+        let charaTap:UITapGestureRecognizer
+             = UITapGestureRecognizer(target: self, action: "tapCharaImage:")
+        myCharImageView.addGestureRecognizer(charaTap)
+        
+
+
+        // UIImageViewをViewに追加する.
+        self.view.addSubview(myCharImageView)
+        myCharImageView.addSubview(myFukidasiImageView)
+        myFukidasiImageView.addSubview(fukidasiLabel)
+
+        
+        //        callbackCharaMove()
+        self.animationStart()
+        
+        // フッタのバナーを生成する.
+        self.footerBaner = ADBannerView()
+        self.footerBaner.frame.offsetInPlace(dx: 0, dy: self.view.bounds.height-footerBaner.frame.height)
+        self.footerBaner?.hidden = false
+        self.view.addSubview(footerBaner)
+
+        // iAd(インタースティシャル)のマニュアル表示設定
+        self.interstitialPresentationPolicy = ADInterstitialPresentationPolicy.Manual
+        
+        // メニューボタン及びサブメニューボタンの設定.
+        manuBtn = UIButton(frame: CGRectMake(self.view.bounds.width - 80,self.view.bounds.height-footerBaner.frame.height-70,60,100))
+        manuBtn.setTitle("MENU",  forState: .Normal)
+        manuBtn.setImage(manuBtnNextImage, forState: .Normal)
+        manuBtn.addTarget(self, action: "tapManuBtn:", forControlEvents: .TouchUpInside)
+        manuBtn.sizeToFit()
+        self.view.addSubview(manuBtn)
+        
+        mainBtn = UIButton(frame: CGRectMake(180,self.view.bounds.height-footerBaner.frame.height-70,100,100))
+        mainBtn.setImage(mainBtnActImage, forState: .Normal)
+        mainBtn.addTarget(self, action: "tapMainBtn:", forControlEvents: .TouchUpInside)
+        manuBtn.sizeToFit()
+        self.view.addSubview(mainBtn)
+        
+        detailBtn = UIButton(frame: CGRectMake(120,self.view.bounds.height-footerBaner.frame.height-70,60,100))
+        detailBtn.setImage(detailBtnActImage, forState: .Normal)
+        detailBtn.addTarget(self, action: "tapDetailBtn:", forControlEvents: .TouchUpInside)
+        detailBtn.sizeToFit()
+        self.view.addSubview(detailBtn)
+        
+        shareBtn = UIButton(frame: CGRectMake(60,self.view.bounds.height-footerBaner.frame.height-70,60,100))
+        shareBtn.setImage(shareBtnActImage, forState: .Normal)
+        shareBtn.addTarget(self, action: "tapShareBtn:", forControlEvents: .TouchUpInside)
+        shareBtn.sizeToFit()
+        self.view.addSubview(shareBtn)
+        
+        configBtn = UIButton(frame: CGRectMake(0,self.view.bounds.height-footerBaner.frame.height-70,60,100))
+        configBtn.setImage(configBtnActImage, forState: .Normal)
+        configBtn.addTarget(self, action: "tapConfigBtn:", forControlEvents: .TouchUpInside)
+        configBtn.sizeToFit()
+        self.view.addSubview(configBtn)
+        
+        // メニューボタン以外のボタンを非表示にする
+        mainBtn.hidden = true
+        detailBtn.hidden = true
+        shareBtn.hidden = true
+        configBtn.hidden = true
+        
+        // テーマソングを再生する.
+        do {
+            myAudioPlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath:mySongPath!))
+            myAudioPlayer.numberOfLoops = -1
+            myAudioPlayer.play()
+            
+        }catch{
+            // 例外発生
+        }
+        
+        // メイン（ひまつぶし）メニューの生成
+        mainInit()
+
+        // 履歴書メニューの生成
+        detailInit()
+        
+        // シェアメニューの生成
+        shareInit()
+        
+        // 設定メニューの生成
+        configInit()
+        
+        // オブジェクトの制約の設定
+        objConstraints()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+        print("didReceiveMemoryWarning")
+    }
+    
+    /** メニューボタン押下時の処理 **/
+    func tapManuBtn(sender: AnyObject) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        
+        if  manuBtnFlg {
+            
+            // ボタンの文言を変える
+            manuBtn.setImage(manuBtnBackActImage,  forState: .Normal)
+            manuBtnFlg = false
+            
+            // メニュー内ボタンの制御を切り替える.
+            mainBtn.hidden = false
+            detailBtn.hidden = false
+            shareBtn.hidden = false
+            configBtn.hidden = false
+
+            // SEを再生する.
+            seSoundPlay(mySeYesPath!)
+            
+        } else {
+            
+            // ボタンの文言を変える
+            manuBtn.setImage(manuBtnNextImage,  forState: .Normal)
+            manuBtnFlg = true
+            
+            // メニュー内ボタンの制御を切り替える.
+            mainBtn.hidden = true
+            detailBtn.hidden = true
+            shareBtn.hidden = true
+            configBtn.hidden = true
+            
+            // SEを再生する.
+            seSoundPlay(mySeNoPath!)
+        
+        }
+    }
+    
+    /** ひまつぶしボタン押下時の処理 **/
+    func tapMainBtn(sender: AnyObject) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        
+        // SEを再生する.
+        seSoundPlay(mySeYesPath!)
+        
+        // ポップの表示・非表示を切り替える.
+        mainConView.hidden = mainConView.hidden ? false:true
+        
+        // その他メニューボタンの制御を切り替える.
+        manuBtn.userInteractionEnabled = mainConView.hidden ? true:false
+        detailBtn.userInteractionEnabled = mainConView.hidden ? true:false
+        shareBtn.userInteractionEnabled = mainConView.hidden ? true:false
+        configBtn.userInteractionEnabled = mainConView.hidden ? true:false
+        
+        // ポップが非表示の場合
+        if mainConView.hidden {
+
+            // 全てのボタンを活性に変更
+            manuBtn.setImage(manuBtnBackActImage, forState: .Normal)
+            mainBtn.setImage(mainBtnActImage, forState: .Normal)
+            detailBtn.setImage(detailBtnActImage, forState: .Normal)
+            shareBtn.setImage(shareBtnActImage, forState: .Normal)
+            configBtn.setImage(configBtnActImage, forState: .Normal)
+            
+            
+        // ポップが表示された場合
+        } else {
+
+            // 該当メニューのボタン以外を非活性に変更
+            //mainBtn.setImage(mainBtnInActImage, forState: .Normal)
+            manuBtn.setImage(manuBtnBackInActImage, forState: .Normal)
+            detailBtn.setImage(detailBtnInActImage, forState: .Normal)
+            shareBtn.setImage(shareBtnInActImage, forState: .Normal)
+            configBtn.setImage(configBtnInActImage, forState: .Normal)
+
+        }
+    }
+    
+    func tapDetailBtn(sender: AnyObject) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        
+        // SEを再生する.
+        seSoundPlay(mySeYesPath!)
+        
+        // ポップの表示・非表示を切り替える.
+        detailConView.hidden = detailConView.hidden ? false:true
+        
+        // その他メニューボタンの制御を切り替える.
+        manuBtn.userInteractionEnabled = detailConView.hidden ? true:false
+        mainBtn.userInteractionEnabled = detailConView.hidden ? true:false
+        shareBtn.userInteractionEnabled = detailConView.hidden ? true:false
+        configBtn.userInteractionEnabled = detailConView.hidden ? true:false
+        
+        // ポップが非表示の場合
+        if detailConView.hidden {
+            
+            // 全てのボタンを活性に変更
+            manuBtn.setImage(manuBtnBackActImage, forState: .Normal)
+            mainBtn.setImage(mainBtnActImage, forState: .Normal)
+            detailBtn.setImage(detailBtnActImage, forState: .Normal)
+            shareBtn.setImage(shareBtnActImage, forState: .Normal)
+            configBtn.setImage(configBtnActImage, forState: .Normal)
+            
+            
+            // ポップが表示された場合
+        } else {
+            
+            // 該当メニューのボタン以外を非活性に変更
+            manuBtn.setImage(manuBtnBackInActImage, forState: .Normal)
+            mainBtn.setImage(mainBtnInActImage, forState: .Normal)
+            //detailBtn.setImage(detailBtnInActImage, forState: .Normal)
+            shareBtn.setImage(shareBtnInActImage, forState: .Normal)
+            configBtn.setImage(configBtnInActImage, forState: .Normal)
+            
+        }
+    }
+    
+    /** シェアボタン押下時の処理 **/
+    func tapShareBtn(sender: AnyObject) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        
+        // SEを再生する.
+        seSoundPlay(mySeYesPath!)
+        
+        // ポップの表示・非表示を切り替える.
+        shareConView.hidden = shareConView.hidden ? false:true
+
+        // その他メニューボタンの制御を切り替える.
+        manuBtn.userInteractionEnabled = shareConView.hidden ? true:false
+        mainBtn.userInteractionEnabled = shareConView.hidden ? true:false
+        detailBtn.userInteractionEnabled = shareConView.hidden ? true:false
+        configBtn.userInteractionEnabled = shareConView.hidden ? true:false
+        
+        // ポップが非表示の場合
+        if shareConView.hidden {
+            
+            // 全てのボタンを活性に変更
+            manuBtn.setImage(manuBtnBackActImage, forState: .Normal)
+            mainBtn.setImage(mainBtnActImage, forState: .Normal)
+            detailBtn.setImage(detailBtnActImage, forState: .Normal)
+            shareBtn.setImage(shareBtnActImage, forState: .Normal)
+            configBtn.setImage(configBtnActImage, forState: .Normal)
+            
+            
+            // ポップが表示された場合
+        } else {
+            
+            // 該当メニューのボタン以外を非活性に変更
+            manuBtn.setImage(manuBtnBackInActImage, forState: .Normal)
+            mainBtn.setImage(mainBtnInActImage, forState: .Normal)
+            detailBtn.setImage(detailBtnInActImage, forState: .Normal)
+            //shareBtn.setImage(shareBtnInActImage, forState: .Normal)
+            configBtn.setImage(configBtnInActImage, forState: .Normal)
+            
+        }
+        
+    }
+
+    /** 設定ボタン押下時の処理 **/
+    func tapConfigBtn(sender: AnyObject) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        
+        // SEを再生する.
+        seSoundPlay(mySeYesPath!)
+        
+        // オブジェクトの表示・非表示を切り替える.
+        configConView.hidden = configConView.hidden ? false:true
+        
+        // その他メニューボタンの制御を切り替える.
+        manuBtn.userInteractionEnabled = configConView.hidden ? true:false
+        mainBtn.userInteractionEnabled = configConView.hidden ? true:false
+        detailBtn.userInteractionEnabled = configConView.hidden ? true:false
+        shareBtn.userInteractionEnabled = configConView.hidden ? true:false
+        
+        // ポップが非表示の場合
+        if configConView.hidden {
+            
+            // 全てのボタンを活性に変更
+            manuBtn.setImage(manuBtnBackActImage, forState: .Normal)
+            mainBtn.setImage(mainBtnActImage, forState: .Normal)
+            detailBtn.setImage(detailBtnActImage, forState: .Normal)
+            shareBtn.setImage(shareBtnActImage, forState: .Normal)
+            configBtn.setImage(configBtnActImage, forState: .Normal)
+            
+            
+            // ポップが表示された場合
+        } else {
+            
+            // 該当メニューのボタン以外を非活性に変更
+            manuBtn.setImage(manuBtnBackInActImage, forState: .Normal)
+            mainBtn.setImage(mainBtnInActImage, forState: .Normal)
+            detailBtn.setImage(detailBtnInActImage, forState: .Normal)
+            shareBtn.setImage(shareBtnInActImage, forState: .Normal)
+            //configBtn.setImage(configBtnInActImage, forState: .Normal)
+            
+        }
+    }
+    
+    /** BGMミュートボタン押下時の処理 **/
+    func tapBgmMuteBtn(sender: AnyObject) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        
+        // SEを再生する.
+        seSoundPlay(mySeYesPath!)
+        
+        // ミュート切り替え
+        if myAudioPlayer.volume == 0.0 {
+            
+            myAudioPlayer.volume = 0.5
+            bgmVolumeSBar.value = 0.5
+            
+        } else {
+            
+            myAudioPlayer.volume = 0.0
+            bgmVolumeSBar.value = 0.0
+        }
+    }
+
+    /** BGMボリューム変更時の処理 **/
+    func slideBgmVolume(sender: AnyObject) {
+        
+        // スライド値をBGM音量にセットする
+        myAudioPlayer.volume = bgmVolumeSBar.value
+        
+    }
+
+    /** SEミュートボタン押下時の処理 **/
+    func tapSeMuteBtn(sender: AnyObject) {
+        
+        // SEを再生する.
+        seSoundPlay(mySeYesPath!)
+        
+        // ミュート切り替え
+        if mySePlayer.volume == 0.0 {
+            
+            mySePlayer.volume = 1.0
+            seVolumeSBar.value = 0.5
+            
+        } else {
+            
+            mySePlayer.volume = 0.0
+            seVolumeSBar.value = 0.0
+        }
+    }
+    
+    /** SEボリューム変更時の処理 **/
+    func slideSeVolume(sender: AnyObject) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        
+        // スライド値をBGM音量にセットする
+        mySePlayer.volume = seVolumeSBar.value * 2
+        
+    }
+
+    
+    //facebookボタン押下時の処理
+    func tapFacebookBtn(sender: AnyObject) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        
+        // Facebookの投稿ダイアログを作って
+        let cv = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+        // 画像を追加
+        cv.addImage(UIImage(named: "01_07_01.png"))
+        // 投稿ダイアログを表示する
+        self.presentViewController(cv, animated: true, completion: nil)
+    }
+    
+    //ラインボタン押下時の処理
+    func tapLineBtn(sender: AnyObject) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        
+        //　共有する項目
+        let shareImage = UIImage(named: "01_09_01.png")!
+        let shareItems = [shareImage]
+        
+        // LINEで送るボタンを追加
+        let line = LINEActivity()
+        let avc = UIActivityViewController(activityItems: shareItems, applicationActivities: [line])
+        
+        presentViewController(avc, animated: true, completion: nil)
+    }
+    
+    //Twitterボタン押下時の処理
+    func tapTwitterBtn(sender: AnyObject) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        
+        // 共有する項目
+        // Twitterの投稿ダイアログを作って
+        let cv = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+        // 文字を追加
+        cv.setInitialText("メッセージを入力してください。")
+        // 投稿ダイアログを表示する
+        self.presentViewController(cv, animated: true, completion:nil )
+    }
+    
+    // 画面にタッチで呼ばれる
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        
+        // タッチイベントを取得
+        let touchEvent = touches.first!
+
+        print(touchEvent.view?.tag.description)
+        
+        // キャラクター画像がタップされた場合かつ、メニューが非表示の場合
+        if touchEvent.view?.tag == 1
+        && mainConView.hidden == true
+        && detailConView.hidden == true
+        && shareConView.hidden == true
+        && configConView.hidden == true
+        {
+            if self.myFukidasiImageView.hidden
+            {
+                // ダイアログを表示
+                let alertController = UIAlertController(title: "ニートの格言入手", message: "チラシを表示して、今日のニートの格言を取得しますか？", preferredStyle: .Alert)
+                
+                let defaultActionYes = UIAlertAction(title: "表示する", style: .Default, handler:{
+                    (action:UIAlertAction!) -> Void in
+                    
+                    // iAd(インタースティシャル)の表示
+                    self.requestInterstitialAdPresentation()
+                    
+                    // 吹き出しの表示
+                    self.myFukidasiImageView.hidden = false
+                    self.fukidasiLabel.text = self.getMeigen()
+                    
+                })
+                
+                let defaultActionNo = UIAlertAction(title: "表示しない", style: .Default, handler: nil)
+                alertController.addAction(defaultActionYes)
+                alertController.addAction(defaultActionNo)
+                
+                presentViewController(alertController, animated: true, completion: nil)
+            
+            } else {
+                self.myFukidasiImageView.hidden = true
+            }
+            
+        }
+        
+        
+    }
+    
+    /** 暇つぶしアイテム長押し時の処理 **/
+    func cellLongTap(recognizer: UILongPressGestureRecognizer) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        
+        print("長押し")
+        
+        // 押された位置でcellのPathを取得
+        let point = recognizer.locationInView(itemCollectionView)
+        
+        let indexPath = self.itemCollectionView.indexPathForItemAtPoint(point)
+        
+        if indexPath == nil {
+            
+        } else if recognizer.state == UIGestureRecognizerState.Began  {
+            // 長押しされた場合の処理
+            print("長押しされたcellのindexPath:\(indexPath?.row)")
+        }
+    }
+    
+    
+    
+    //****************************************
+    // MARK: - その他メソッド
+    //****************************************
+
+    
+    func getUncachedImage (named name : String) -> UIImage?
+    {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+
+        if let imgPath = NSBundle.mainBundle().pathForResource(name, ofType: nil)
+        {
+            return UIImage(contentsOfFile: imgPath)
+        }
+        return nil
+    }
+    
+//    /** キャラクター移動設定用 **/
+//    func callbackCharaMove() {
+//        
+//        // 開始位置を設定する.
+//        myCharImageView.animationDuration = 4.0
+//        
+//        // キャラクターアニメーションを設定する.
+//        let charaImages = [
+//            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+//            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+//            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+//            self.getUncachedImage( named: "04_01_01_01_01.PNG")!
+//        ]
+//        myCharImageView.animationImages = charaImages
+//        
+//        self.myCharImageView.startAnimating()
+//
+//        
+//        // 左→右の横移動
+//        UIView.animateWithDuration(
+//            8.0, // アニメーションの時間
+//            delay:1.0,
+//            options:[UIViewAnimationOptions.TransitionCrossDissolve
+//                ,UIViewAnimationOptions.AllowUserInteraction],
+//            animations: {() -> Void  in
+//                
+//            // 左端から右端へ移動
+//            self.myCharImageView.frame.origin.x
+//                = UIScreen.mainScreen().bounds.width - 200
+//        },
+//        completion: {(finished: Bool) -> Void in
+//                
+//                // 後ろ移動
+//                // キャラクターアニメーションを設定する.
+//                let charaImages = [
+//                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+//                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+//                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+//                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!
+//                ]
+//                self.myCharImageView.animationImages = charaImages
+//                self.myCharImageView.startAnimating()
+//                
+//                // アニメーション終了後の処理
+//                UIView.animateWithDuration(
+//                    4.0, // アニメーションの時間
+//                    delay:2.0,
+//                    options:[UIViewAnimationOptions.TransitionCrossDissolve
+//                        ,UIViewAnimationOptions.AllowUserInteraction],
+//                    animations: {() -> Void  in
+//                        self.myCharImageView.frame.origin.y
+//                            = self.myCharImageView.frame.origin.y - 30
+//                    },
+//                    completion: {(finished: Bool) -> Void in
+//                        
+//                        // 右→左の横移動
+//                        // キャラクターアニメーションを設定する.
+//                        let charaImages = [
+//                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+//                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+//                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+//                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!
+//                        ]
+//                        self.myCharImageView.animationImages = charaImages
+//                        self.myCharImageView.startAnimating()
+//                        
+//                        UIView.animateWithDuration(
+//                            8.0, // アニメーションの時間
+//                            delay:1.0,
+//                            options:[UIViewAnimationOptions.TransitionCrossDissolve,UIViewAnimationOptions.AllowUserInteraction],
+//                            animations: {() -> Void  in
+//                                self.myCharImageView.frame.origin.x = -100
+//                            },
+//                            completion: {(finished: Bool) -> Void in
+//                                
+//                                // 手前への移動
+//                                // キャラクターアニメーションを設定する.
+//                                let charaImages = [
+//                                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+//                                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+//                                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+//                                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!
+//                                ]
+//                                self.myCharImageView.animationImages = charaImages
+//                                self.myCharImageView.startAnimating()
+//                                
+//                                // アニメーション終了後の処理
+//                                UIView.animateWithDuration(
+//                                    4.0, // アニメーションの時間
+//                                    delay:2.0,
+//                                    options:[UIViewAnimationOptions.TransitionCrossDissolve
+//                                        ,UIViewAnimationOptions.AllowUserInteraction],
+//                                    animations: {() -> Void  in
+//                                        self.myCharImageView.frame.origin.y
+//                                            = self.myCharImageView.frame.origin.y + 30
+//                                    },
+//                                    completion: {(finished: Bool) -> Void in
+//                                        
+//                                        // 繰り返し設定
+//                                        // キャラクターアニメーションを設定する.
+//                                        let charaImages = [
+//                                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+//                                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+//                                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+//                                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!
+//                                        ]
+//                                        self.myCharImageView.animationImages = charaImages
+//                                        // アニメーション終了後の処理
+//                                        // 再帰処理でアニメーションを繰り返す.
+//                                        self.callbackCharaMove()
+//                                })
+//                        })
+//                        
+//                })
+//                
+//        })
+//        
+//    }
+
+    
+    /** SE再生 **/
+    func seSoundPlay(sePath: String)
+    {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+
+        // SEを再生する.
+        do {
+            mySePlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath:sePath))
+            mySePlayer.volume = seVolumeSBar.value * 2
+            mySePlayer.play()
+            
+        }catch{
+            // 例外発生
+        }
+    }
+    
+    /** ひまつぶしメニューのポップアップ作成 **/
+    func mainInit()
+    {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+
+        //ポップ生成
+        mainConView = UIView(frame: CGRectMake(18,100,340,400))
+        mainImgView = UIImageView()
+        mainImgView.frame.size = mainConView.frame.size
+        mainImgSubView = UIImageView(frame: CGRectMake(20,50,mainConView.frame.width-60,mainConView.frame.height-60))
+
+        // ポップの背景を設定する.
+        mainImgView.image = mainViewImage
+        mainImgView.alpha = 0.9
+        mainImgSubView.image = mainViewSubImage
+        mainImgSubView.alpha = 0.9
+        
+        // 初期表示は非表示
+        mainConView.hidden = true
+            
+        // ViewをViewに追加する.
+        self.view.addSubview(mainConView)
+        
+        // セット済みアイテムの初期設定.
+        let setItem1Image = self.getUncachedImage( named: "06_01_01.png")
+        //let setItem2Image = UIImage(named: "06_01_02.png")
+        //let setItem3Image = UIImage(named: "06_01_03.png")
+        
+        setItem1View = UIImageView()
+        setItem1View.frame.origin.x = 100
+        setItem1View.frame.origin.y = 100
+        setItem1View.frame.size.width = 160
+        setItem1View.frame.size.height = 160
+
+
+/**
+        setItem2View = UIImageView(frame: CGRectMake(100,20,50,50))
+        setItem3View = UIImageView(frame: CGRectMake(180,20,50,50))
+**/
+        setItem1View.image = setItem1Image
+        //setItem2View.image = setItem2Image
+        //setItem3View.image = setItem3Image
+        
+        // 画像をUIImageViewに設定する.
+        myImageView.image = myImage
+        
+        // CollectionViewのレイアウトを生成.
+        let layout = UICollectionViewFlowLayout()
+        
+        // Cell一つ一つの大きさ.
+        layout.itemSize = CGSizeMake(50, 50)
+        
+        // Cellのマージン.
+        layout.sectionInset = UIEdgeInsetsMake(16, 16, 32, 16)
+        
+        // セクション毎のヘッダーサイズ.
+        layout.headerReferenceSize = CGSizeMake(0,0)
+
+        
+        itemCollectionView = UICollectionView(frame: self.mainConView.frame, collectionViewLayout: layout)
+        itemCollectionView.frame.origin.x = 0
+        itemCollectionView.frame.origin.y
+            = self.mainConView.frame.height + self.mainConView.frame.origin.y - 200
+        itemCollectionView.frame.size.height = 120
+        itemCollectionView.registerClass(itemCell.self, forCellWithReuseIdentifier: "cell")
+        itemCollectionView.delegate = self
+        itemCollectionView.dataSource = self
+ 
+        // セル長押しイベント登録
+        let longTapRecognizer = UILongPressGestureRecognizer(target: self, action: "cellLongTap:")
+        longTapRecognizer.delegate = self
+        itemCollectionView.addGestureRecognizer(longTapRecognizer)
+        
+        // ポップ上に表示するオブジェクトをViewに追加する.
+        mainConView.addSubview(mainImgView)
+        mainConView.addSubview(mainImgSubView)
+        mainConView.addSubview(setItem1View)
+        //mainConView.addSubview(setItem2View)
+        //mainConView.addSubview(setItem3View)
+        mainConView.addSubview(itemCollectionView)
+        
+    }
+    
+
+    /** 履歴書メニューのポップアップ作成 **/
+    func detailInit()
+    {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+
+        //ポップ生成
+        detailConView = UIView(frame: CGRectMake(18,100,340,400))
+        detailImgView = UIImageView()
+        detailImgView.frame.size = detailConView.frame.size
+        detailImgSubView = UIImageView(frame: CGRectMake(20,50,detailConView.frame.width-60,detailConView.frame.height-60))
+        
+        // ポップの背景を設定する.
+        detailImgView.image = detailViewImage
+        detailImgView.alpha = 0.9
+        detailImgSubView.image = detailViewSubImage
+        detailImgSubView.alpha = 0.9
+            
+        // 初期表示は非表示
+        detailConView.hidden = true
+            
+        // ViewをViewに追加する.
+        self.view.addSubview(detailConView)
+
+        self.nameDataLabel = UILabel(frame: CGRectMake(130,10,200,20))
+        self.nameDataLabel.text = "こうじ"
+        self.birthDataLabel = UILabel(frame: CGRectMake(130,30,200,20))
+        self.birthDataLabel.text = "1990年3月31日"
+        self.positionDataLabel = UILabel(frame: CGRectMake(130,50,200,20))
+        self.positionDataLabel.text = "ひきニート"
+        self.compDataLabel = UILabel(frame: CGRectMake(130,70,200,30))
+        self.compDataLabel.text = "部屋、台所、トイレ"
+        self.kakugenDataLabel = UILabel(frame: CGRectMake(130,100,200,20))
+        self.kakugenDataLabel.text = "やる気！元気！いわき！"
+
+        // ポップ上に表示するオブジェクトをViewに追加する.
+        detailConView.addSubview(detailImgView)
+        detailConView.addSubview(detailImgSubView)
+        detailConView.addSubview(nameDataLabel)
+        detailConView.addSubview(birthDataLabel)
+        detailConView.addSubview(positionDataLabel)
+        detailConView.addSubview(compDataLabel)
+        detailConView.addSubview(kakugenDataLabel)
+    }
+
+    /** シェアメニューのポップアップ作成 **/
+    func shareInit()
+    {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+
+        //ポップ生成
+        shareConView = UIView(frame: CGRectMake(18,100,340,400))
+        shareImgView = UIImageView()
+        shareImgView.frame.size = shareConView.frame.size
+        
+        // ポップの背景を設定する.
+        shareImgView.image = shareViewImage
+        shareImgView.alpha = 0.9
+        
+        // 初期表示は非表示
+        shareConView.hidden = true
+            
+        // ViewをViewに追加する.
+        self.view.addSubview(shareConView)
+        
+        // FaceBookボタンを生成
+        facebookBtn = UIButton(frame: CGRectMake(20,120,50,50))
+        let facebookImage = self.getUncachedImage( named: "01_07_01.png")! as UIImage
+        facebookBtn.setImage(facebookImage, forState: .Normal)
+        facebookBtn.addTarget(self, action: "tapFacebookBtn:", forControlEvents: .TouchUpInside)
+        
+        // Twitterボタンを生成
+        twitterBtn = UIButton(frame: CGRectMake(100,120,50,50))
+        let twitterImage = self.getUncachedImage( named: "01_08_01.png")! as UIImage
+        twitterBtn.setImage(twitterImage, forState: .Normal)
+        twitterBtn.addTarget(self, action: "tapTwitterBtn:", forControlEvents: .TouchUpInside)
+        
+        // LINEボタンを生成
+        lineBtn = UIButton(frame: CGRectMake(180,120,50,50))
+        let lineImage = self.getUncachedImage( named: "01_09_01.png")! as UIImage
+        lineBtn.setImage(lineImage, forState: .Normal)
+        lineBtn.addTarget(self, action: "tapLineBtn:", forControlEvents: .TouchUpInside)
+        
+        // ポップ上に表示するオブジェクトをViewに追加する.
+        shareConView.addSubview(shareImgView)
+        shareConView.addSubview(facebookBtn)
+        shareConView.addSubview(twitterBtn)
+        shareConView.addSubview(lineBtn)
+    }
+
+    /** 設定メニューのポップアップ作成 **/
+    func configInit()
+    {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+
+        //ポップ生成
+        configConView = UIView(frame: CGRectMake(18,100,340,400))
+        configImgView = UIImageView()
+        configImgView.frame.size = configConView.frame.size
+
+        // ポップの背景を設定する.
+        configImgView.image = configViewImage
+        configImgView.alpha = 0.9
+        
+        // 初期表示は非表示
+        configConView.hidden = true
+        
+        // ポップアップViewをViewに追加する.
+        self.view.addSubview(configConView)
+        
+        // ポップ上に表示するオブジェクトを生成する.
+        // BGMのラベルを生成
+        bgmLabel = UILabel(frame: CGRectMake(20,60,100,120))
+        bgmLabel.text = "BGM"
+        
+        // BGMのスライドバーを生成
+        bgmVolumeSBar = UISlider(frame: CGRectMake(100,60,100,120))
+        bgmVolumeSBar.addTarget(self, action: "slideBgmVolume:", forControlEvents: .TouchUpInside)
+        bgmVolumeSBar.value = 0.5
+        
+        // BGMのミュートボタンを生成
+        bgmMuteBtn = UIButton(frame: CGRectMake(200,60,100,120))
+        bgmMuteBtn.setTitle("ミュート",  forState: .Normal)
+        bgmMuteBtn.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        bgmMuteBtn.addTarget(self, action: "tapBgmMuteBtn:", forControlEvents: .TouchUpInside)
+        
+        // SEのラベルを生成
+        seLabel = UILabel(frame: CGRectMake(20,120,100,120))
+        seLabel.text = "SE"
+        
+        // SEのスライドバーを生成
+        seVolumeSBar = UISlider(frame: CGRectMake(100,120,100,120))
+        seVolumeSBar.addTarget(self, action: "slideSeVolume:", forControlEvents: .TouchUpInside)
+        seVolumeSBar.value = 0.5
+        
+        // SEのミュートボタンを生成
+        seMuteBtn = UIButton(frame: CGRectMake(200,120,100,120))
+        seMuteBtn.setTitle("ミュート",  forState: .Normal)
+        seMuteBtn.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        seMuteBtn.addTarget(self, action: "tapSeMuteBtn:", forControlEvents: .TouchUpInside)
+        
+        // ポップ上に表示するオブジェクトをViewに追加する.
+        configConView.addSubview(configImgView)
+        configConView.addSubview(bgmLabel)
+        configConView.addSubview(bgmVolumeSBar)
+        configConView.addSubview(bgmMuteBtn)
+        configConView.addSubview(seLabel)
+        configConView.addSubview(seVolumeSBar)
+        configConView.addSubview(seMuteBtn)
+        
+    }
+    
+    /** バナーが読みこまれた時に呼ばれる **/
+    func bannerViewDidLoadAd(banner: ADBannerView!) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+
+        self.footerBaner?.hidden = false
+        print("bannerViewDidLoadAd")
+    }
+    
+    
+    //ニートを動かすアニメーション
+    func animationStart() {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        animeTimer = NSTimer.scheduledTimerWithTimeInterval(0.0, target: self, selector: Selector("randomWalk"), userInfo: nil, repeats: true)
+    }
+    
+    
+    //ランダムウォーク
+    func randomWalk() {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        //("x = \(self.myCharImageView.center.x) y = \(self.myCharImageView.center.y)")
+
+        //初期値
+        var x: CGFloat = 0.0
+        var y: CGFloat = 0.0
+        var wkX: CGFloat
+        var wkY: CGFloat
+        let curX = self.myCharImageView.frame.origin.x
+        let curY = self.myCharImageView.frame.origin.y
+        
+        
+        //動く方向を決める(8方向)
+        repeat {
+            wkX = 0.0
+            wkY = 0.0
+        
+            let indexX = Int(arc4random_uniform(3))
+            switch indexX {
+            case 0:
+                wkX = -20.0
+            case 1:
+                wkX = 20.0
+            default:
+                wkX = 0.0
+            }
+        
+            let indexY = Int(arc4random_uniform(3))
+            switch indexY {
+            case 0:
+                wkY = -20.0
+            case 1:
+                wkY = 20.0
+            default:
+                wkY = 0.0
+            }
+            //TODO:画面範囲内の場合のみ移動先を設定
+            if 30 <= (curX+wkX) &&
+                (curX+wkX) <= self.view.bounds.width - 30 &&
+               30 <= (curY+wkY) &&
+                (curY+wkY) <= self.view.bounds.height - 30 {
+                    x = wkX
+                    y = wkY
+            }
+        } while (x == 0.0 && y == 0.0)
+    
+
+        //print("x = \(x) y = \(y)")
+
+        // キャラクターアニメーションを設定する.
+        var charaImages :[UIImage]?
+
+        if curX == curX+x && curY <= curY+y {
+            charaImages = [
+                self.getUncachedImage( named: "04_01_01_01_04.PNG")!,
+                self.getUncachedImage( named: "04_01_01_01_05.PNG")!,
+                self.getUncachedImage( named: "04_01_01_01_04.PNG")!,
+                self.getUncachedImage( named: "04_01_01_01_06.PNG")!
+        ]
+        
+        } else if curX == curX+x && curY > curY+y {
+            charaImages = [
+                self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+                self.getUncachedImage( named: "04_01_01_01_02.PNG")!,
+                self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+                self.getUncachedImage( named: "04_01_01_01_03.PNG")!
+        ]
+        
+        } else if curX <= curX+x  {
+            charaImages = [
+                self.getUncachedImage( named: "04_01_01_01_07.PNG")!,
+                self.getUncachedImage( named: "04_01_01_01_08.PNG")!,
+                self.getUncachedImage( named: "04_01_01_01_07.PNG")!,
+                self.getUncachedImage( named: "04_01_01_01_09.PNG")!
+            ]
+        }else if curX > curX+x {
+            charaImages = [
+                self.getUncachedImage( named: "04_01_01_01_10.PNG")!,
+                self.getUncachedImage( named: "04_01_01_01_11.PNG")!,
+                self.getUncachedImage( named: "04_01_01_01_10.PNG")!,
+                self.getUncachedImage( named: "04_01_01_01_12.PNG")!
+            ]
+            
+        }
+        
+        self.myCharImageView.animationImages = charaImages
+        self.myCharImageView.animationDuration = 3
+        self.myCharImageView.startAnimating()
+        
+        // 移動
+        UIView.animateWithDuration(
+            2.0, // アニメーションの時間
+            delay:0.0,
+            options:[UIViewAnimationOptions.TransitionCrossDissolve
+                ,UIViewAnimationOptions.AllowUserInteraction],
+            animations: {() -> Void  in
+                
+            self.myCharImageView.frame.origin.x += x
+            self.myCharImageView.frame.origin.y += y
+                
+            },
+            completion: {(
+                finished: Bool) -> Void in
+            }
+        )
+
+        //タイマー再設定
+        animeTimer.invalidate()
+        animeTimer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: Selector("randomWalk"), userInfo: nil, repeats: true)
+    }
+
+
+    /** 全オブジェクトの制約設定 **/
+    func objConstraints() {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+   
+        manuBtn.translatesAutoresizingMaskIntoConstraints = false
+        mainBtn.translatesAutoresizingMaskIntoConstraints = false
+        detailBtn.translatesAutoresizingMaskIntoConstraints = false
+        shareBtn.translatesAutoresizingMaskIntoConstraints = false
+        configBtn.translatesAutoresizingMaskIntoConstraints = false
+        
+        // メニューボタンの制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.manuBtn,
+                attribute:  NSLayoutAttribute.Right,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.Right,
+                multiplier: 1.0,
+                constant: -10
+            ),
+
+            // y座標
+            NSLayoutConstraint(
+                item: self.manuBtn,
+                attribute: NSLayoutAttribute.Bottom,
+                relatedBy: .Equal,
+                toItem: self.footerBaner,
+                attribute:  NSLayoutAttribute.Top,
+                multiplier: 1.0,
+                constant: -10
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.manuBtn,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Width,
+                multiplier: 1.0 / 6.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.manuBtn,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Height,
+                multiplier: 1.0 / 12.0,
+                constant: 0
+            )]
+        )
+        
+        // メインボタンの制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.mainBtn,
+                attribute:  NSLayoutAttribute.Right,
+                relatedBy: .Equal,
+                toItem: self.manuBtn,
+                attribute:  NSLayoutAttribute.Left,
+                multiplier: 1.0,
+                constant: -10
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.mainBtn,
+                attribute: NSLayoutAttribute.Top,
+                relatedBy: .Equal,
+                toItem: self.manuBtn,
+                attribute:  NSLayoutAttribute.Top,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.mainBtn,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.manuBtn,
+                attribute: .Width,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.mainBtn,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.manuBtn,
+                attribute: .Height,
+                multiplier: 1.0,
+                constant: 0
+            )]
+        )
+
+        // 履歴書ボタンの制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.detailBtn,
+                attribute:  NSLayoutAttribute.Right,
+                relatedBy: .Equal,
+                toItem: self.mainBtn,
+                attribute:  NSLayoutAttribute.Left,
+                multiplier: 1.0,
+                constant: -10
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.detailBtn,
+                attribute: NSLayoutAttribute.Top,
+                relatedBy: .Equal,
+                toItem: self.manuBtn,
+                attribute:  NSLayoutAttribute.Top,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.detailBtn,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.manuBtn,
+                attribute: .Width,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.detailBtn,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.manuBtn,
+                attribute: .Height,
+                multiplier: 1.0,
+                constant: 0
+            )]
+        )
+
+        // シェアボタンの制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.shareBtn,
+                attribute:  NSLayoutAttribute.Right,
+                relatedBy: .Equal,
+                toItem: self.detailBtn,
+                attribute:  NSLayoutAttribute.Left,
+                multiplier: 1.0,
+                constant: -10
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.shareBtn,
+                attribute: NSLayoutAttribute.Top,
+                relatedBy: .Equal,
+                toItem: self.manuBtn,
+                attribute:  NSLayoutAttribute.Top,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.shareBtn,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.manuBtn,
+                attribute: .Width,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.shareBtn,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.manuBtn,
+                attribute: .Height,
+                multiplier: 1.0,
+                constant: 0
+            )]
+        )
+
+        // 設定ボタンの制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.configBtn,
+                attribute:  NSLayoutAttribute.Right,
+                relatedBy: .Equal,
+                toItem: self.shareBtn,
+                attribute:  NSLayoutAttribute.Left,
+                multiplier: 1.0,
+                constant: -10
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.configBtn,
+                attribute: NSLayoutAttribute.Top,
+                relatedBy: .Equal,
+                toItem: self.manuBtn,
+                attribute:  NSLayoutAttribute.Top,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.configBtn,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.manuBtn,
+                attribute: .Width,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.configBtn,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.manuBtn,
+                attribute: .Height,
+                multiplier: 1.0,
+                constant: 0
+            )]
+        )
+    }
+    
+    
+    
+    //****************************************
+    // MARK: - Collection View Delegate
+    //****************************************
+    
+    // Cellが選択された際に呼び出される
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        
+        print("Num: \(indexPath.row)")
+        
+    }
+    
+    /** セクションの数 **/
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        return 1
+    }
+    
+    /** 表示するセルの数 **/
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        return 26
+    }
+    
+    /** セルが表示されるときに呼ばれる処理（1個のセルを描画する毎に呼び出されます） **/
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! itemCell
+
+        // セルの情報を設定する.
+        cell._name.text = "×"+"1"
+        cell._img.image = self.getUncachedImage( named: "06_01_01.png")
+
+        // セルを返却する.
+        return cell
+    }
+    
+    
+    
+    //****************************************
+    // MARK: - DB Access
+    //****************************************
+
+    //迷言の取得
+    func getMeigen() -> String  {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        
+        let meigenList :[MeigenM] = MeigenM.MR_findAll() as! [MeigenM];
+        let randInt = arc4random_uniform(UInt32(meigenList.count));
+        print(meigenList.count)
+        return meigenList[Int(randInt)].meigenText
+        
+    }
+
+    
+}
+

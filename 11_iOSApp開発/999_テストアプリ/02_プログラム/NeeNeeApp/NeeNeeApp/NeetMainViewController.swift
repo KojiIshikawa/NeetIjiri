@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  NeetMainViewController.swift
 //  NeeNeeApp
 //
 //  Created by 石川晃次 on 2015/12/27.
@@ -10,9 +10,9 @@ import UIKit
 import Social
 import iAd
 import AVFoundation
-//import MisterFusion
 
-class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UIGestureRecognizerDelegate {
+
+class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UIGestureRecognizerDelegate,UIPopoverPresentationControllerDelegate {
 
     
     //****************************************
@@ -84,13 +84,18 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
     private var seVolumeSBar: UISlider!
     private var seLabel: UILabel!
     
+    
     // 定数宣言
     private let mySongPath = NSBundle.mainBundle().pathForResource("暇で忙しい", ofType:"mp3")
     private let mySeYesPath = NSBundle.mainBundle().pathForResource("se4", ofType:"mp3")
     private let mySeNoPath = NSBundle.mainBundle().pathForResource("se6", ofType:"mp3")
+
+    
     private let myImage = UIImage(named: "03_01_01")
     private let fukidasiImage = UIImage( named: "05_01_01")!
 
+    
+    //TODO:メモリ使用量削減のため、極力必要な時に、宣言、解放すること
     // メニュー画面の画像設定
     private let mainViewImage = UIImage(named: "02_01_01.png")
     private let mainViewSubImage = UIImage(named: "02_05_01.png")
@@ -116,8 +121,12 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         super.init(coder: aDecoder)!
     }
     
+    //アニメーションタイマー
+    private var animeTimer: NSTimer!
     
-    private var atimer: NSTimer!
+    
+    
+    
     //****************************************
     // MARK: - イベント
     //****************************************
@@ -125,6 +134,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
     
     
     override func viewDidLoad() {
+        print(NSDate().description, __FUNCTION__, __LINE__)
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         /* 以下の行を追加する */
@@ -140,11 +150,14 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
 //        // ジェスチャーの追加
 //        myImageView.addGestureRecognizer(tapGestureRecognizer)
         
-        
         // キャラクターを初期設定する.
         // UIImageViewをViewに追加する.
         self.view.addSubview(myImageView)
-        myCharImageView = UIImageView(frame: CGRectMake(50,300,300,350))
+        myCharImageView = UIImageView(frame: CGRectMake(150,300,300,350))
+        myCharImageView.center.x = self.view.center.x
+        myCharImageView.center.y = self.view.center.y
+        //myCharImageView.center
+        
         myCharImageView.tag = 1
         
         // 吹き出しを生成する.
@@ -161,19 +174,20 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         
         // キャラクターをタップ可能にする.
         myCharImageView.userInteractionEnabled = true
-        let charaTap:UITapGestureRecognizer
-             = UITapGestureRecognizer(target: self, action: "tapCharaImage:")
-        myCharImageView.addGestureRecognizer(charaTap)
+//        let charaTap:UITapGestureRecognizer
+//             = UITapGestureRecognizer(target: self, action: "tapCharaImage:")
+//        myCharImageView.addGestureRecognizer(charaTap)
         
-        // TODO:キャラクターを移動させる（無限ループ）
-//        callbackCharaMove()
-        self.animationStart()
 
 
         // UIImageViewをViewに追加する.
         self.view.addSubview(myCharImageView)
         myCharImageView.addSubview(myFukidasiImageView)
         myFukidasiImageView.addSubview(fukidasiLabel)
+
+        
+        //        callbackCharaMove()
+        self.animationStart()
         
         // フッタのバナーを生成する.
         self.footerBaner = ADBannerView()
@@ -249,6 +263,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
     }
     
     override func didReceiveMemoryWarning() {
+        print(NSDate().description, __FUNCTION__, __LINE__)
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
         print("didReceiveMemoryWarning")
@@ -256,6 +271,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
     
     /** メニューボタン押下時の処理 **/
     func tapManuBtn(sender: AnyObject) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
         
         if  manuBtnFlg {
             
@@ -290,46 +306,70 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         }
     }
     
+    
+    
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController)
+        -> UIModalPresentationStyle {
+            return .None
+    }
+    
     /** ひまつぶしボタン押下時の処理 **/
     func tapMainBtn(sender: AnyObject) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
         
         // SEを再生する.
         seSoundPlay(mySeYesPath!)
         
-        // ポップの表示・非表示を切り替える.
-        mainConView.hidden = mainConView.hidden ? false:true
-        
-        // その他メニューボタンの制御を切り替える.
-        manuBtn.userInteractionEnabled = mainConView.hidden ? true:false
-        detailBtn.userInteractionEnabled = mainConView.hidden ? true:false
-        shareBtn.userInteractionEnabled = mainConView.hidden ? true:false
-        configBtn.userInteractionEnabled = mainConView.hidden ? true:false
-        
-        // ポップが非表示の場合
-        if mainConView.hidden {
-
-            // 全てのボタンを活性に変更
-            manuBtn.setImage(manuBtnBackActImage, forState: .Normal)
-            mainBtn.setImage(mainBtnActImage, forState: .Normal)
-            detailBtn.setImage(detailBtnActImage, forState: .Normal)
-            shareBtn.setImage(shareBtnActImage, forState: .Normal)
-            configBtn.setImage(configBtnActImage, forState: .Normal)
-            
-            
-        // ポップが表示された場合
-        } else {
-
-            // 該当メニューのボタン以外を非活性に変更
-            //mainBtn.setImage(mainBtnInActImage, forState: .Normal)
-            manuBtn.setImage(manuBtnBackInActImage, forState: .Normal)
-            detailBtn.setImage(detailBtnInActImage, forState: .Normal)
-            shareBtn.setImage(shareBtnInActImage, forState: .Normal)
-            configBtn.setImage(configBtnInActImage, forState: .Normal)
-
+        let popoverView = self.storyboard!.instantiateViewControllerWithIdentifier("ActionSet") as UIViewController
+        popoverView.modalPresentationStyle = .Popover
+        popoverView.preferredContentSize = CGSizeMake(400, 500)
+        //TODO:独自のpopoverBackGroundViewを作成し追加すれば、吹き出しのデザインも変えられる
+        popoverView.view.backgroundColor = UIColor.clearColor()
+        if let presentationController = popoverView.popoverPresentationController {
+            presentationController.permittedArrowDirections = .Down
+            presentationController.sourceView = sender as! UIButton
+            presentationController.sourceRect = sender.bounds
+            presentationController.delegate = self
         }
+        self.presentViewController(popoverView, animated: true, completion: nil)
+
+        //TODO:以下、適した場所へ移動させる。
+
+//        // ポップの表示・非表示を切り替える.
+//        mainConView.hidden = mainConView.hidden ? false:true
+//        
+//        // その他メニューボタンの制御を切り替える.
+//        manuBtn.userInteractionEnabled = mainConView.hidden ? true:false
+//        detailBtn.userInteractionEnabled = mainConView.hidden ? true:false
+//        shareBtn.userInteractionEnabled = mainConView.hidden ? true:false
+//        configBtn.userInteractionEnabled = mainConView.hidden ? true:false
+//        
+//        // ポップが非表示の場合
+//        if mainConView.hidden {
+//
+//            // 全てのボタンを活性に変更
+//            manuBtn.setImage(manuBtnBackActImage, forState: .Normal)
+//            mainBtn.setImage(mainBtnActImage, forState: .Normal)
+//            detailBtn.setImage(detailBtnActImage, forState: .Normal)
+//            shareBtn.setImage(shareBtnActImage, forState: .Normal)
+//            configBtn.setImage(configBtnActImage, forState: .Normal)
+//            
+//            
+//        // ポップが表示された場合
+//        } else {
+//
+//            // 該当メニューのボタン以外を非活性に変更
+//            //mainBtn.setImage(mainBtnInActImage, forState: .Normal)
+//            manuBtn.setImage(manuBtnBackInActImage, forState: .Normal)
+//            detailBtn.setImage(detailBtnInActImage, forState: .Normal)
+//            shareBtn.setImage(shareBtnInActImage, forState: .Normal)
+//            configBtn.setImage(configBtnInActImage, forState: .Normal)
+//
+//        }
     }
     
     func tapDetailBtn(sender: AnyObject) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
         
         // SEを再生する.
         seSoundPlay(mySeYesPath!)
@@ -369,6 +409,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
     
     /** シェアボタン押下時の処理 **/
     func tapShareBtn(sender: AnyObject) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
         
         // SEを再生する.
         seSoundPlay(mySeYesPath!)
@@ -409,6 +450,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
 
     /** 設定ボタン押下時の処理 **/
     func tapConfigBtn(sender: AnyObject) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
         
         // SEを再生する.
         seSoundPlay(mySeYesPath!)
@@ -448,6 +490,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
     
     /** BGMミュートボタン押下時の処理 **/
     func tapBgmMuteBtn(sender: AnyObject) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
         
         // SEを再生する.
         seSoundPlay(mySeYesPath!)
@@ -494,18 +537,17 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
     
     /** SEボリューム変更時の処理 **/
     func slideSeVolume(sender: AnyObject) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
         
         // スライド値をBGM音量にセットする
         mySePlayer.volume = seVolumeSBar.value * 2
         
     }
 
-    func tapCharaImage(sender: UITapGestureRecognizer) {
-        print("testtt")
-    }
     
     //facebookボタン押下時の処理
     func tapFacebookBtn(sender: AnyObject) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
         
         // Facebookの投稿ダイアログを作って
         let cv = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
@@ -517,6 +559,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
     
     //ラインボタン押下時の処理
     func tapLineBtn(sender: AnyObject) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
         
         //　共有する項目
         let shareImage = UIImage(named: "01_09_01.png")!
@@ -531,6 +574,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
     
     //Twitterボタン押下時の処理
     func tapTwitterBtn(sender: AnyObject) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
         
         // 共有する項目
         // Twitterの投稿ダイアログを作って
@@ -543,6 +587,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
     
     // 画面にタッチで呼ばれる
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
         
         // タッチイベントを取得
         let touchEvent = touches.first!
@@ -590,6 +635,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
     
     /** 暇つぶしアイテム長押し時の処理 **/
     func cellLongTap(recognizer: UILongPressGestureRecognizer) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
         
         print("長押し")
         
@@ -606,11 +652,6 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         }
     }
     
-    func tapGesture(gestureRecognizer: UITapGestureRecognizer){
-        // タップviewの色を変える (Red <=> Blue)
-        print("触ったな")
-    }
-    
     
     
     //****************************************
@@ -620,6 +661,8 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
     
     func getUncachedImage (named name : String) -> UIImage?
     {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+
         if let imgPath = NSBundle.mainBundle().pathForResource(name, ofType: nil)
         {
             return UIImage(contentsOfFile: imgPath)
@@ -627,129 +670,131 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         return nil
     }
     
-    /** キャラクター移動設定用 **/
-    func callbackCharaMove() {
-        
-        // 開始位置を設定する.
-        myCharImageView.animationDuration = 4.0
-        
-        // キャラクターアニメーションを設定する.
-        let charaImages = [
-            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
-            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
-            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
-            self.getUncachedImage( named: "04_01_01_01_01.PNG")!
-        ]
-        myCharImageView.animationImages = charaImages
-        
-        self.myCharImageView.startAnimating()
-
-        
-        // 左→右の横移動
-        UIView.animateWithDuration(
-            8.0, // アニメーションの時間
-            delay:1.0,
-            options:[UIViewAnimationOptions.TransitionCrossDissolve
-                ,UIViewAnimationOptions.AllowUserInteraction],
-            animations: {() -> Void  in
-                
-            // 左端から右端へ移動
-            self.myCharImageView.frame.origin.x
-                = UIScreen.mainScreen().bounds.width - 200
-        },
-        completion: {(finished: Bool) -> Void in
-                
-                // 後ろ移動
-                // キャラクターアニメーションを設定する.
-                let charaImages = [
-                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
-                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
-                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
-                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!
-                ]
-                self.myCharImageView.animationImages = charaImages
-                self.myCharImageView.startAnimating()
-                
-                // アニメーション終了後の処理
-                UIView.animateWithDuration(
-                    4.0, // アニメーションの時間
-                    delay:2.0,
-                    options:[UIViewAnimationOptions.TransitionCrossDissolve
-                        ,UIViewAnimationOptions.AllowUserInteraction],
-                    animations: {() -> Void  in
-                        self.myCharImageView.frame.origin.y
-                            = self.myCharImageView.frame.origin.y - 30
-                    },
-                    completion: {(finished: Bool) -> Void in
-                        
-                        // 右→左の横移動
-                        // キャラクターアニメーションを設定する.
-                        let charaImages = [
-                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
-                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
-                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
-                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!
-                        ]
-                        self.myCharImageView.animationImages = charaImages
-                        self.myCharImageView.startAnimating()
-                        
-                        UIView.animateWithDuration(
-                            8.0, // アニメーションの時間
-                            delay:1.0,
-                            options:[UIViewAnimationOptions.TransitionCrossDissolve,UIViewAnimationOptions.AllowUserInteraction],
-                            animations: {() -> Void  in
-                                self.myCharImageView.frame.origin.x = -100
-                            },
-                            completion: {(finished: Bool) -> Void in
-                                
-                                // 手前への移動
-                                // キャラクターアニメーションを設定する.
-                                let charaImages = [
-                                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
-                                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
-                                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
-                                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!
-                                ]
-                                self.myCharImageView.animationImages = charaImages
-                                self.myCharImageView.startAnimating()
-                                
-                                // アニメーション終了後の処理
-                                UIView.animateWithDuration(
-                                    4.0, // アニメーションの時間
-                                    delay:2.0,
-                                    options:[UIViewAnimationOptions.TransitionCrossDissolve
-                                        ,UIViewAnimationOptions.AllowUserInteraction],
-                                    animations: {() -> Void  in
-                                        self.myCharImageView.frame.origin.y
-                                            = self.myCharImageView.frame.origin.y + 30
-                                    },
-                                    completion: {(finished: Bool) -> Void in
-                                        
-                                        // 繰り返し設定
-                                        // キャラクターアニメーションを設定する.
-                                        let charaImages = [
-                                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
-                                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
-                                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
-                                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!
-                                        ]
-                                        self.myCharImageView.animationImages = charaImages
-                                        // アニメーション終了後の処理
-                                        // 再帰処理でアニメーションを繰り返す.
-                                        self.callbackCharaMove()
-                                })
-                        })
-                        
-                })
-                
-        })
-        
-    }
+//    /** キャラクター移動設定用 **/
+//    func callbackCharaMove() {
+//        
+//        // 開始位置を設定する.
+//        myCharImageView.animationDuration = 4.0
+//        
+//        // キャラクターアニメーションを設定する.
+//        let charaImages = [
+//            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+//            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+//            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+//            self.getUncachedImage( named: "04_01_01_01_01.PNG")!
+//        ]
+//        myCharImageView.animationImages = charaImages
+//        
+//        self.myCharImageView.startAnimating()
+//
+//        
+//        // 左→右の横移動
+//        UIView.animateWithDuration(
+//            8.0, // アニメーションの時間
+//            delay:1.0,
+//            options:[UIViewAnimationOptions.TransitionCrossDissolve
+//                ,UIViewAnimationOptions.AllowUserInteraction],
+//            animations: {() -> Void  in
+//                
+//            // 左端から右端へ移動
+//            self.myCharImageView.frame.origin.x
+//                = UIScreen.mainScreen().bounds.width - 200
+//        },
+//        completion: {(finished: Bool) -> Void in
+//                
+//                // 後ろ移動
+//                // キャラクターアニメーションを設定する.
+//                let charaImages = [
+//                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+//                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+//                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+//                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!
+//                ]
+//                self.myCharImageView.animationImages = charaImages
+//                self.myCharImageView.startAnimating()
+//                
+//                // アニメーション終了後の処理
+//                UIView.animateWithDuration(
+//                    4.0, // アニメーションの時間
+//                    delay:2.0,
+//                    options:[UIViewAnimationOptions.TransitionCrossDissolve
+//                        ,UIViewAnimationOptions.AllowUserInteraction],
+//                    animations: {() -> Void  in
+//                        self.myCharImageView.frame.origin.y
+//                            = self.myCharImageView.frame.origin.y - 30
+//                    },
+//                    completion: {(finished: Bool) -> Void in
+//                        
+//                        // 右→左の横移動
+//                        // キャラクターアニメーションを設定する.
+//                        let charaImages = [
+//                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+//                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+//                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+//                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!
+//                        ]
+//                        self.myCharImageView.animationImages = charaImages
+//                        self.myCharImageView.startAnimating()
+//                        
+//                        UIView.animateWithDuration(
+//                            8.0, // アニメーションの時間
+//                            delay:1.0,
+//                            options:[UIViewAnimationOptions.TransitionCrossDissolve,UIViewAnimationOptions.AllowUserInteraction],
+//                            animations: {() -> Void  in
+//                                self.myCharImageView.frame.origin.x = -100
+//                            },
+//                            completion: {(finished: Bool) -> Void in
+//                                
+//                                // 手前への移動
+//                                // キャラクターアニメーションを設定する.
+//                                let charaImages = [
+//                                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+//                                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+//                                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+//                                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!
+//                                ]
+//                                self.myCharImageView.animationImages = charaImages
+//                                self.myCharImageView.startAnimating()
+//                                
+//                                // アニメーション終了後の処理
+//                                UIView.animateWithDuration(
+//                                    4.0, // アニメーションの時間
+//                                    delay:2.0,
+//                                    options:[UIViewAnimationOptions.TransitionCrossDissolve
+//                                        ,UIViewAnimationOptions.AllowUserInteraction],
+//                                    animations: {() -> Void  in
+//                                        self.myCharImageView.frame.origin.y
+//                                            = self.myCharImageView.frame.origin.y + 30
+//                                    },
+//                                    completion: {(finished: Bool) -> Void in
+//                                        
+//                                        // 繰り返し設定
+//                                        // キャラクターアニメーションを設定する.
+//                                        let charaImages = [
+//                                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+//                                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+//                                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+//                                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!
+//                                        ]
+//                                        self.myCharImageView.animationImages = charaImages
+//                                        // アニメーション終了後の処理
+//                                        // 再帰処理でアニメーションを繰り返す.
+//                                        self.callbackCharaMove()
+//                                })
+//                        })
+//                        
+//                })
+//                
+//        })
+//        
+//    }
 
     
     /** SE再生 **/
     func seSoundPlay(sePath: String)
     {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+
         // SEを再生する.
         do {
             mySePlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath:sePath))
@@ -764,6 +809,8 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
     /** ひまつぶしメニューのポップアップ作成 **/
     func mainInit()
     {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+
         //ポップ生成
         mainConView = UIView(frame: CGRectMake(18,100,340,400))
         mainImgView = UIImageView()
@@ -783,7 +830,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         self.view.addSubview(mainConView)
         
         // セット済みアイテムの初期設定.
-        let setItem1Image = UIImage(named: "06_01_01.png")
+        let setItem1Image = self.getUncachedImage( named: "06_01_01.png")
         //let setItem2Image = UIImage(named: "06_01_02.png")
         //let setItem3Image = UIImage(named: "06_01_03.png")
         
@@ -846,6 +893,8 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
     /** 履歴書メニューのポップアップ作成 **/
     func detailInit()
     {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+
         //ポップ生成
         detailConView = UIView(frame: CGRectMake(18,100,340,400))
         detailImgView = UIImageView()
@@ -888,6 +937,8 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
     /** シェアメニューのポップアップ作成 **/
     func shareInit()
     {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+
         //ポップ生成
         shareConView = UIView(frame: CGRectMake(18,100,340,400))
         shareImgView = UIImageView()
@@ -905,19 +956,19 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
         
         // FaceBookボタンを生成
         facebookBtn = UIButton(frame: CGRectMake(20,120,50,50))
-        let facebookImage = UIImage(named: "01_07_01.png")! as UIImage
+        let facebookImage = self.getUncachedImage( named: "01_07_01.png")! as UIImage
         facebookBtn.setImage(facebookImage, forState: .Normal)
         facebookBtn.addTarget(self, action: "tapFacebookBtn:", forControlEvents: .TouchUpInside)
         
         // Twitterボタンを生成
         twitterBtn = UIButton(frame: CGRectMake(100,120,50,50))
-        let twitterImage = UIImage(named: "01_08_01.png")! as UIImage
+        let twitterImage = self.getUncachedImage( named: "01_08_01.png")! as UIImage
         twitterBtn.setImage(twitterImage, forState: .Normal)
         twitterBtn.addTarget(self, action: "tapTwitterBtn:", forControlEvents: .TouchUpInside)
         
         // LINEボタンを生成
         lineBtn = UIButton(frame: CGRectMake(180,120,50,50))
-        let lineImage = UIImage(named: "01_09_01.png")! as UIImage
+        let lineImage = self.getUncachedImage( named: "01_09_01.png")! as UIImage
         lineBtn.setImage(lineImage, forState: .Normal)
         lineBtn.addTarget(self, action: "tapLineBtn:", forControlEvents: .TouchUpInside)
         
@@ -931,6 +982,8 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
     /** 設定メニューのポップアップ作成 **/
     func configInit()
     {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+
         //ポップ生成
         configConView = UIView(frame: CGRectMake(18,100,340,400))
         configImgView = UIImageView()
@@ -990,33 +1043,112 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
     
     /** バナーが読みこまれた時に呼ばれる **/
     func bannerViewDidLoadAd(banner: ADBannerView!) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+
         self.footerBaner?.hidden = false
         print("bannerViewDidLoadAd")
     }
     
+    
+    //ニートを動かすアニメーション
     func animationStart() {
-        atimer = NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        animeTimer = NSTimer.scheduledTimerWithTimeInterval(0.0, target: self, selector: Selector("randomWalk"), userInfo: nil, repeats: true)
     }
     
-    func update() {
-        print("aaaa")
+    
+    //ランダムウォーク
+    func randomWalk() {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        //("x = \(self.myCharImageView.center.x) y = \(self.myCharImageView.center.y)")
+
+        //初期値
+        var x: CGFloat = 0.0
+        var y: CGFloat = 0.0
+        var wkX: CGFloat
+        var wkY: CGFloat
+        let curX = self.myCharImageView.frame.origin.x
+        let curY = self.myCharImageView.frame.origin.y
         
-        // 開始位置を設定する.
-        myCharImageView.animationDuration = 1.5
         
+        //動く方向を決める(8方向)
+        repeat {
+            wkX = 0.0
+            wkY = 0.0
+        
+            let indexX = Int(arc4random_uniform(3))
+            switch indexX {
+            case 0:
+                wkX = -20.0
+            case 1:
+                wkX = 20.0
+            default:
+                wkX = 0.0
+            }
+        
+            let indexY = Int(arc4random_uniform(3))
+            switch indexY {
+            case 0:
+                wkY = -20.0
+            case 1:
+                wkY = 20.0
+            default:
+                wkY = 0.0
+            }
+            //TODO:画面範囲内の場合のみ移動先を設定
+            if 30 <= (curX+wkX) &&
+                (curX+wkX) <= self.view.bounds.width - 30 &&
+               30 <= (curY+wkY) &&
+                (curY+wkY) <= self.view.bounds.height - 30 {
+                    x = wkX
+                    y = wkY
+            }
+        } while (x == 0.0 && y == 0.0)
+    
+
+        //print("x = \(x) y = \(y)")
+
         // キャラクターアニメーションを設定する.
-        let charaImages = [
-            self.getUncachedImage( named: "04_01_01_01_07.PNG")!,
-            self.getUncachedImage( named: "04_01_01_01_08.PNG")!,
-            self.getUncachedImage( named: "04_01_01_01_07.PNG")!,
-            self.getUncachedImage( named: "04_01_01_01_08.PNG")!
+        var charaImages :[UIImage]?
+
+        if curX == curX+x && curY <= curY+y {
+            charaImages = [
+                self.getUncachedImage( named: "04_01_01_01_04.PNG")!,
+                self.getUncachedImage( named: "04_01_01_01_05.PNG")!,
+                self.getUncachedImage( named: "04_01_01_01_04.PNG")!,
+                self.getUncachedImage( named: "04_01_01_01_06.PNG")!
         ]
-        myCharImageView.animationImages = charaImages
         
+        } else if curX == curX+x && curY > curY+y {
+            charaImages = [
+                self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+                self.getUncachedImage( named: "04_01_01_01_02.PNG")!,
+                self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+                self.getUncachedImage( named: "04_01_01_01_03.PNG")!
+        ]
+        
+        } else if curX <= curX+x  {
+            charaImages = [
+                self.getUncachedImage( named: "04_01_01_01_07.PNG")!,
+                self.getUncachedImage( named: "04_01_01_01_08.PNG")!,
+                self.getUncachedImage( named: "04_01_01_01_07.PNG")!,
+                self.getUncachedImage( named: "04_01_01_01_09.PNG")!
+            ]
+        }else if curX > curX+x {
+            charaImages = [
+                self.getUncachedImage( named: "04_01_01_01_10.PNG")!,
+                self.getUncachedImage( named: "04_01_01_01_11.PNG")!,
+                self.getUncachedImage( named: "04_01_01_01_10.PNG")!,
+                self.getUncachedImage( named: "04_01_01_01_12.PNG")!
+            ]
+            
+        }
+        
+        self.myCharImageView.animationImages = charaImages
+        self.myCharImageView.animationDuration = 3
         self.myCharImageView.startAnimating()
         
-        
-        // 左→右の横移動
+        // 移動
         UIView.animateWithDuration(
             2.0, // アニメーションの時間
             delay:0.0,
@@ -1024,44 +1156,24 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
                 ,UIViewAnimationOptions.AllowUserInteraction],
             animations: {() -> Void  in
                 
-                let indexX = Int(arc4random_uniform(2))
-                let indexY = Int(arc4random_uniform(2))
-                var x: CGFloat
-                var y: CGFloat
-                switch indexX {
-                case 0:
-                    x = -30.0
-                case 1:
-                    x = 30.0
-                default:
-                    x = 0.0
-                }
-                switch indexY {
-                case 0:
-                    y = -30.0
-                case 1:
-                    y = 30.0
-                default:
-                    y = 0.0
-                }
-                self.myCharImageView.frame.origin.x
-                    = self.myCharImageView.frame.origin.x - x
-                
-                self.myCharImageView.frame.origin.y
-                    = self.myCharImageView.frame.origin.y - y
-                
-                
+            self.myCharImageView.frame.origin.x += x
+            self.myCharImageView.frame.origin.y += y
                 
             },
             completion: {(
                 finished: Bool) -> Void in
-        })
-        
+            }
+        )
+
+        //タイマー再設定
+        animeTimer.invalidate()
+        animeTimer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: Selector("randomWalk"), userInfo: nil, repeats: true)
     }
 
 
     /** 全オブジェクトの制約設定 **/
     func objConstraints() {
+        print(NSDate().description, __FUNCTION__, __LINE__)
    
         manuBtn.translatesAutoresizingMaskIntoConstraints = false
         mainBtn.translatesAutoresizingMaskIntoConstraints = false
@@ -1318,6 +1430,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
     
     // Cellが選択された際に呼び出される
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
         
         print("Num: \(indexPath.row)")
         
@@ -1325,22 +1438,25 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
     
     /** セクションの数 **/
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        print(NSDate().description, __FUNCTION__, __LINE__)
         return 1
     }
     
     /** 表示するセルの数 **/
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print(NSDate().description, __FUNCTION__, __LINE__)
         return 26
     }
     
     /** セルが表示されるときに呼ばれる処理（1個のセルを描画する毎に呼び出されます） **/
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        print(NSDate().description, __FUNCTION__, __LINE__)
 
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! itemCell
 
         // セルの情報を設定する.
         cell._name.text = "×"+"1"
-        cell._img.image = UIImage(named: "06_01_01.png")
+        cell._img.image = self.getUncachedImage( named: "06_01_01.png")
 
         // セルを返却する.
         return cell
@@ -1354,7 +1470,6 @@ class ViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDa
 
     //迷言の取得
     func getMeigen() -> String  {
-
         print(NSDate().description, __FUNCTION__, __LINE__)
         
         let meigenList :[MeigenM] = MeigenM.MR_findAll() as! [MeigenM];
