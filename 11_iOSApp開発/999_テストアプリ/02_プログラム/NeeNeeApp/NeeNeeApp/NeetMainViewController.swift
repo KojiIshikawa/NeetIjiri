@@ -12,7 +12,7 @@ import iAd
 import AVFoundation
 
 
-class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UIGestureRecognizerDelegate,UIPopoverPresentationControllerDelegate {
+class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDelegate,UIGestureRecognizerDelegate,UIPopoverPresentationControllerDelegate {
 
     
     //****************************************
@@ -45,7 +45,6 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     private var configBtn: UIButton!
     
     // メニューのサブビュー
-    private var mainConView: UIView!
     private var detailConView: UIView!
     private var shareConView: UIView!
     private var configConView: UIView!
@@ -57,13 +56,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     private var detailImgSubView: UIImageView!
     private var shareImgView: UIImageView!
     private var configImgView: UIImageView!
-    
-    // 暇つぶしメニューのオブジェクト
-    var itemCollectionView: UICollectionView!
-    private var setItem1View: UIImageView!
-    private var setItem2View: UIImageView!
-    private var setItem3View: UIImageView!
-    
+
     // 履歴書メニューのオブジェクト
     private var nameDataLabel: UILabel!
     private var birthDataLabel: UILabel!
@@ -124,14 +117,10 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     //アニメーションタイマー
     private var animeTimer: NSTimer!
     
-    
-    
-    
+
     //****************************************
     // MARK: - イベント
     //****************************************
-    
-    
     
     override func viewDidLoad() {
         print(NSDate().description, __FUNCTION__, __LINE__)
@@ -246,8 +235,10 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
             // 例外発生
         }
         
+        /**
         // メイン（ひまつぶし）メニューの生成
         mainInit()
+        **/
 
         // 履歴書メニューの生成
         detailInit()
@@ -323,6 +314,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         let popoverView = self.storyboard!.instantiateViewControllerWithIdentifier("ActionSet") as UIViewController
         popoverView.modalPresentationStyle = .Popover
         popoverView.preferredContentSize = CGSizeMake(400, 500)
+        
         //TODO:独自のpopoverBackGroundViewを作成し追加すれば、吹き出しのデザインも変えられる
         popoverView.view.backgroundColor = UIColor.clearColor()
         if let presentationController = popoverView.popoverPresentationController {
@@ -332,40 +324,6 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
             presentationController.delegate = self
         }
         self.presentViewController(popoverView, animated: true, completion: nil)
-
-        //TODO:以下、適した場所へ移動させる。
-
-//        // ポップの表示・非表示を切り替える.
-//        mainConView.hidden = mainConView.hidden ? false:true
-//        
-//        // その他メニューボタンの制御を切り替える.
-//        manuBtn.userInteractionEnabled = mainConView.hidden ? true:false
-//        detailBtn.userInteractionEnabled = mainConView.hidden ? true:false
-//        shareBtn.userInteractionEnabled = mainConView.hidden ? true:false
-//        configBtn.userInteractionEnabled = mainConView.hidden ? true:false
-//        
-//        // ポップが非表示の場合
-//        if mainConView.hidden {
-//
-//            // 全てのボタンを活性に変更
-//            manuBtn.setImage(manuBtnBackActImage, forState: .Normal)
-//            mainBtn.setImage(mainBtnActImage, forState: .Normal)
-//            detailBtn.setImage(detailBtnActImage, forState: .Normal)
-//            shareBtn.setImage(shareBtnActImage, forState: .Normal)
-//            configBtn.setImage(configBtnActImage, forState: .Normal)
-//            
-//            
-//        // ポップが表示された場合
-//        } else {
-//
-//            // 該当メニューのボタン以外を非活性に変更
-//            //mainBtn.setImage(mainBtnInActImage, forState: .Normal)
-//            manuBtn.setImage(manuBtnBackInActImage, forState: .Normal)
-//            detailBtn.setImage(detailBtnInActImage, forState: .Normal)
-//            shareBtn.setImage(shareBtnInActImage, forState: .Normal)
-//            configBtn.setImage(configBtnInActImage, forState: .Normal)
-//
-//        }
     }
     
     func tapDetailBtn(sender: AnyObject) {
@@ -596,7 +554,6 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         
         // キャラクター画像がタップされた場合かつ、メニューが非表示の場合
         if touchEvent.view?.tag == 1
-        && mainConView.hidden == true
         && detailConView.hidden == true
         && shareConView.hidden == true
         && configConView.hidden == true
@@ -633,27 +590,6 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         
     }
     
-    /** 暇つぶしアイテム長押し時の処理 **/
-    func cellLongTap(recognizer: UILongPressGestureRecognizer) {
-        print(NSDate().description, __FUNCTION__, __LINE__)
-        
-        print("長押し")
-        
-        // 押された位置でcellのPathを取得
-        let point = recognizer.locationInView(itemCollectionView)
-        
-        let indexPath = self.itemCollectionView.indexPathForItemAtPoint(point)
-        
-        if indexPath == nil {
-            
-        } else if recognizer.state == UIGestureRecognizerState.Began  {
-            // 長押しされた場合の処理
-            print("長押しされたcellのindexPath:\(indexPath?.row)")
-        }
-    }
-    
-    
-    
     //****************************************
     // MARK: - その他メソッド
     //****************************************
@@ -670,126 +606,6 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         return nil
     }
     
-//    /** キャラクター移動設定用 **/
-//    func callbackCharaMove() {
-//        
-//        // 開始位置を設定する.
-//        myCharImageView.animationDuration = 4.0
-//        
-//        // キャラクターアニメーションを設定する.
-//        let charaImages = [
-//            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
-//            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
-//            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
-//            self.getUncachedImage( named: "04_01_01_01_01.PNG")!
-//        ]
-//        myCharImageView.animationImages = charaImages
-//        
-//        self.myCharImageView.startAnimating()
-//
-//        
-//        // 左→右の横移動
-//        UIView.animateWithDuration(
-//            8.0, // アニメーションの時間
-//            delay:1.0,
-//            options:[UIViewAnimationOptions.TransitionCrossDissolve
-//                ,UIViewAnimationOptions.AllowUserInteraction],
-//            animations: {() -> Void  in
-//                
-//            // 左端から右端へ移動
-//            self.myCharImageView.frame.origin.x
-//                = UIScreen.mainScreen().bounds.width - 200
-//        },
-//        completion: {(finished: Bool) -> Void in
-//                
-//                // 後ろ移動
-//                // キャラクターアニメーションを設定する.
-//                let charaImages = [
-//                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
-//                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
-//                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
-//                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!
-//                ]
-//                self.myCharImageView.animationImages = charaImages
-//                self.myCharImageView.startAnimating()
-//                
-//                // アニメーション終了後の処理
-//                UIView.animateWithDuration(
-//                    4.0, // アニメーションの時間
-//                    delay:2.0,
-//                    options:[UIViewAnimationOptions.TransitionCrossDissolve
-//                        ,UIViewAnimationOptions.AllowUserInteraction],
-//                    animations: {() -> Void  in
-//                        self.myCharImageView.frame.origin.y
-//                            = self.myCharImageView.frame.origin.y - 30
-//                    },
-//                    completion: {(finished: Bool) -> Void in
-//                        
-//                        // 右→左の横移動
-//                        // キャラクターアニメーションを設定する.
-//                        let charaImages = [
-//                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
-//                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
-//                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
-//                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!
-//                        ]
-//                        self.myCharImageView.animationImages = charaImages
-//                        self.myCharImageView.startAnimating()
-//                        
-//                        UIView.animateWithDuration(
-//                            8.0, // アニメーションの時間
-//                            delay:1.0,
-//                            options:[UIViewAnimationOptions.TransitionCrossDissolve,UIViewAnimationOptions.AllowUserInteraction],
-//                            animations: {() -> Void  in
-//                                self.myCharImageView.frame.origin.x = -100
-//                            },
-//                            completion: {(finished: Bool) -> Void in
-//                                
-//                                // 手前への移動
-//                                // キャラクターアニメーションを設定する.
-//                                let charaImages = [
-//                                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
-//                                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
-//                                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
-//                                    self.getUncachedImage( named: "04_01_01_01_01.PNG")!
-//                                ]
-//                                self.myCharImageView.animationImages = charaImages
-//                                self.myCharImageView.startAnimating()
-//                                
-//                                // アニメーション終了後の処理
-//                                UIView.animateWithDuration(
-//                                    4.0, // アニメーションの時間
-//                                    delay:2.0,
-//                                    options:[UIViewAnimationOptions.TransitionCrossDissolve
-//                                        ,UIViewAnimationOptions.AllowUserInteraction],
-//                                    animations: {() -> Void  in
-//                                        self.myCharImageView.frame.origin.y
-//                                            = self.myCharImageView.frame.origin.y + 30
-//                                    },
-//                                    completion: {(finished: Bool) -> Void in
-//                                        
-//                                        // 繰り返し設定
-//                                        // キャラクターアニメーションを設定する.
-//                                        let charaImages = [
-//                                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
-//                                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
-//                                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
-//                                            self.getUncachedImage( named: "04_01_01_01_01.PNG")!
-//                                        ]
-//                                        self.myCharImageView.animationImages = charaImages
-//                                        // アニメーション終了後の処理
-//                                        // 再帰処理でアニメーションを繰り返す.
-//                                        self.callbackCharaMove()
-//                                })
-//                        })
-//                        
-//                })
-//                
-//        })
-//        
-//    }
-
-    
     /** SE再生 **/
     func seSoundPlay(sePath: String)
     {
@@ -805,90 +621,6 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
             // 例外発生
         }
     }
-    
-    /** ひまつぶしメニューのポップアップ作成 **/
-    func mainInit()
-    {
-        print(NSDate().description, __FUNCTION__, __LINE__)
-
-        //ポップ生成
-        mainConView = UIView(frame: CGRectMake(18,100,340,400))
-        mainImgView = UIImageView()
-        mainImgView.frame.size = mainConView.frame.size
-        mainImgSubView = UIImageView(frame: CGRectMake(20,50,mainConView.frame.width-60,mainConView.frame.height-60))
-
-        // ポップの背景を設定する.
-        mainImgView.image = mainViewImage
-        mainImgView.alpha = 0.9
-        mainImgSubView.image = mainViewSubImage
-        mainImgSubView.alpha = 0.9
-        
-        // 初期表示は非表示
-        mainConView.hidden = true
-            
-        // ViewをViewに追加する.
-        self.view.addSubview(mainConView)
-        
-        // セット済みアイテムの初期設定.
-        let setItem1Image = self.getUncachedImage( named: "06_01_01.png")
-        //let setItem2Image = UIImage(named: "06_01_02.png")
-        //let setItem3Image = UIImage(named: "06_01_03.png")
-        
-        setItem1View = UIImageView()
-        setItem1View.frame.origin.x = 100
-        setItem1View.frame.origin.y = 100
-        setItem1View.frame.size.width = 160
-        setItem1View.frame.size.height = 160
-
-
-/**
-        setItem2View = UIImageView(frame: CGRectMake(100,20,50,50))
-        setItem3View = UIImageView(frame: CGRectMake(180,20,50,50))
-**/
-        setItem1View.image = setItem1Image
-        //setItem2View.image = setItem2Image
-        //setItem3View.image = setItem3Image
-        
-        // 画像をUIImageViewに設定する.
-        myImageView.image = myImage
-        
-        // CollectionViewのレイアウトを生成.
-        let layout = UICollectionViewFlowLayout()
-        
-        // Cell一つ一つの大きさ.
-        layout.itemSize = CGSizeMake(50, 50)
-        
-        // Cellのマージン.
-        layout.sectionInset = UIEdgeInsetsMake(16, 16, 32, 16)
-        
-        // セクション毎のヘッダーサイズ.
-        layout.headerReferenceSize = CGSizeMake(0,0)
-
-        
-        itemCollectionView = UICollectionView(frame: self.mainConView.frame, collectionViewLayout: layout)
-        itemCollectionView.frame.origin.x = 0
-        itemCollectionView.frame.origin.y
-            = self.mainConView.frame.height + self.mainConView.frame.origin.y - 200
-        itemCollectionView.frame.size.height = 120
-        itemCollectionView.registerClass(itemCell.self, forCellWithReuseIdentifier: "cell")
-        itemCollectionView.delegate = self
-        itemCollectionView.dataSource = self
- 
-        // セル長押しイベント登録
-        let longTapRecognizer = UILongPressGestureRecognizer(target: self, action: "cellLongTap:")
-        longTapRecognizer.delegate = self
-        itemCollectionView.addGestureRecognizer(longTapRecognizer)
-        
-        // ポップ上に表示するオブジェクトをViewに追加する.
-        mainConView.addSubview(mainImgView)
-        mainConView.addSubview(mainImgSubView)
-        mainConView.addSubview(setItem1View)
-        //mainConView.addSubview(setItem2View)
-        //mainConView.addSubview(setItem3View)
-        mainConView.addSubview(itemCollectionView)
-        
-    }
-    
 
     /** 履歴書メニューのポップアップ作成 **/
     func detailInit()
@@ -1422,47 +1154,9 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         )
     }
     
-    
-    
     //****************************************
     // MARK: - Collection View Delegate
     //****************************************
-    
-    // Cellが選択された際に呼び出される
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        print(NSDate().description, __FUNCTION__, __LINE__)
-        
-        print("Num: \(indexPath.row)")
-        
-    }
-    
-    /** セクションの数 **/
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        print(NSDate().description, __FUNCTION__, __LINE__)
-        return 1
-    }
-    
-    /** 表示するセルの数 **/
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(NSDate().description, __FUNCTION__, __LINE__)
-        return 26
-    }
-    
-    /** セルが表示されるときに呼ばれる処理（1個のセルを描画する毎に呼び出されます） **/
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        print(NSDate().description, __FUNCTION__, __LINE__)
-
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! itemCell
-
-        // セルの情報を設定する.
-        cell._name.text = "×"+"1"
-        cell._img.image = self.getUncachedImage( named: "06_01_01.png")
-
-        // セルを返却する.
-        return cell
-    }
-    
-    
     
     //****************************************
     // MARK: - DB Access
