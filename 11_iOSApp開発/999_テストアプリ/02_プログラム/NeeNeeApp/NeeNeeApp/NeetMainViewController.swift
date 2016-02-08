@@ -12,7 +12,8 @@ import iAd
 import AVFoundation
 
 
-class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDelegate,UIGestureRecognizerDelegate,UIPopoverPresentationControllerDelegate {
+class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDelegate,
+                                UIGestureRecognizerDelegate,UIPopoverPresentationControllerDelegate {
 
     
     //****************************************
@@ -83,12 +84,13 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     private let mySeYesPath = NSBundle.mainBundle().pathForResource("se4", ofType:"mp3")
     private let mySeNoPath = NSBundle.mainBundle().pathForResource("se6", ofType:"mp3")
 
+
     
+    //TODO:メモリ使用量削減のため、極力必要な時に、宣言、解放すること
     private let myImage = UIImage(named: "03_01_01")
     private let fukidasiImage = UIImage( named: "05_01_01")!
 
     
-    //TODO:メモリ使用量削減のため、極力必要な時に、宣言、解放すること
     // メニュー画面の画像設定
     private let mainViewImage = UIImage(named: "02_01_01.png")
     private let mainViewSubImage = UIImage(named: "02_05_01.png")
@@ -122,142 +124,38 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     // MARK: - イベント
     //****************************************
     
+    
+    
+    // view ロード完了時
     override func viewDidLoad() {
         print(NSDate().description, __FUNCTION__, __LINE__)
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        /* 以下の行を追加する */
-        // UIImageViewを作成する.
-        myImageView = UIImageView(frame: CGRectMake(0,0,self.view.bounds.width,self.view.bounds.height))
         
-        // 画像をUIImageViewに設定する.
-        myImageView.image = myImage
-//        // ジェスチャーの生成
-//        let aSelector = Selector("tapGesture:")
-//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: aSelector)
-//        
-//        // ジェスチャーの追加
-//        myImageView.addGestureRecognizer(tapGestureRecognizer)
+        //オブジェクトの配置
+        self.createObjInit()
         
-        // キャラクターを初期設定する.
-        // UIImageViewをViewに追加する.
-        self.view.addSubview(myImageView)
-        myCharImageView = UIImageView(frame: CGRectMake(150,300,300,350))
-        myCharImageView.center.x = self.view.center.x
-        myCharImageView.center.y = self.view.center.y
-        //myCharImageView.center
-        
-        myCharImageView.tag = 1
-        
-        // 吹き出しを生成する.
-        myFukidasiImageView = UIImageView(frame: CGRectMake(0,0,200,100))
-        myFukidasiImageView.frame.origin.x = myCharImageView.frame.origin.x
-        myFukidasiImageView.frame.origin.y = myCharImageView.frame.origin.y - 300
-        myFukidasiImageView.image = fukidasiImage
-        myFukidasiImageView.hidden = true
-
-        // 吹き出しのラベルを設定する.
-        fukidasiLabel = UILabel()
-        fukidasiLabel.frame = myFukidasiImageView.bounds
-        fukidasiLabel.textAlignment = NSTextAlignment.Center
-        
-        // キャラクターをタップ可能にする.
-        myCharImageView.userInteractionEnabled = true
-//        let charaTap:UITapGestureRecognizer
-//             = UITapGestureRecognizer(target: self, action: "tapCharaImage:")
-//        myCharImageView.addGestureRecognizer(charaTap)
-        
-
-
-        // UIImageViewをViewに追加する.
-        self.view.addSubview(myCharImageView)
-        myCharImageView.addSubview(myFukidasiImageView)
-        myFukidasiImageView.addSubview(fukidasiLabel)
-
-        
-        //        callbackCharaMove()
-        self.animationStart()
-        
-        // フッタのバナーを生成する.
-        self.footerBaner = ADBannerView()
-        self.footerBaner.frame.offsetInPlace(dx: 0, dy: self.view.bounds.height-footerBaner.frame.height)
-        self.footerBaner?.hidden = false
-        self.view.addSubview(footerBaner)
-
-        // iAd(インタースティシャル)のマニュアル表示設定
-        self.interstitialPresentationPolicy = ADInterstitialPresentationPolicy.Manual
-        
-        // メニューボタン及びサブメニューボタンの設定.
-        manuBtn = UIButton(frame: CGRectMake(self.view.bounds.width - 80,self.view.bounds.height-footerBaner.frame.height-70,60,100))
-        manuBtn.setTitle("MENU",  forState: .Normal)
-        manuBtn.setImage(manuBtnNextImage, forState: .Normal)
-        manuBtn.addTarget(self, action: "tapManuBtn:", forControlEvents: .TouchUpInside)
-        manuBtn.sizeToFit()
-        self.view.addSubview(manuBtn)
-        
-        mainBtn = UIButton(frame: CGRectMake(180,self.view.bounds.height-footerBaner.frame.height-70,100,100))
-        mainBtn.setImage(mainBtnActImage, forState: .Normal)
-        mainBtn.addTarget(self, action: "tapMainBtn:", forControlEvents: .TouchUpInside)
-        manuBtn.sizeToFit()
-        self.view.addSubview(mainBtn)
-        
-        detailBtn = UIButton(frame: CGRectMake(120,self.view.bounds.height-footerBaner.frame.height-70,60,100))
-        detailBtn.setImage(detailBtnActImage, forState: .Normal)
-        detailBtn.addTarget(self, action: "tapDetailBtn:", forControlEvents: .TouchUpInside)
-        detailBtn.sizeToFit()
-        self.view.addSubview(detailBtn)
-        
-        shareBtn = UIButton(frame: CGRectMake(60,self.view.bounds.height-footerBaner.frame.height-70,60,100))
-        shareBtn.setImage(shareBtnActImage, forState: .Normal)
-        shareBtn.addTarget(self, action: "tapShareBtn:", forControlEvents: .TouchUpInside)
-        shareBtn.sizeToFit()
-        self.view.addSubview(shareBtn)
-        
-        configBtn = UIButton(frame: CGRectMake(0,self.view.bounds.height-footerBaner.frame.height-70,60,100))
-        configBtn.setImage(configBtnActImage, forState: .Normal)
-        configBtn.addTarget(self, action: "tapConfigBtn:", forControlEvents: .TouchUpInside)
-        configBtn.sizeToFit()
-        self.view.addSubview(configBtn)
-        
-        // メニューボタン以外のボタンを非表示にする
-        mainBtn.hidden = true
-        detailBtn.hidden = true
-        shareBtn.hidden = true
-        configBtn.hidden = true
-        
-        // テーマソングを再生する.
-        do {
-            myAudioPlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath:mySongPath!))
-            myAudioPlayer.numberOfLoops = -1
-            myAudioPlayer.play()
-            
-        }catch{
-            // 例外発生
-        }
-        
-        /**
-        // メイン（ひまつぶし）メニューの生成
-        mainInit()
-        **/
-
         // 履歴書メニューの生成
-        detailInit()
+        self.detailInit()
         
         // シェアメニューの生成
-        shareInit()
+        self.shareInit()
         
         // 設定メニューの生成
-        configInit()
+        self.configInit()
         
         // オブジェクトの制約の設定
-        objConstraints()
+        self.objConstraints()
+        
+        //アニメーション開始
+        self.animationStart()
+        
     }
+    
     
     override func didReceiveMemoryWarning() {
         print(NSDate().description, __FUNCTION__, __LINE__)
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-        print("didReceiveMemoryWarning")
     }
     
     /** メニューボタン押下時の処理 **/
@@ -595,38 +493,107 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     //****************************************
 
     
-    func getUncachedImage (named name : String) -> UIImage?
-    {
-        print(NSDate().description, __FUNCTION__, __LINE__)
-
-        if let imgPath = NSBundle.mainBundle().pathForResource(name, ofType: nil)
-        {
-            return UIImage(contentsOfFile: imgPath)
-        }
-        return nil
-    }
     
-    /** SE再生 **/
-    func seSoundPlay(sePath: String)
-    {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+    //初期表示時のオブジェクトを作成し設置する
+    func createObjInit() {
+        
+        // 背景設定
+        myImageView = UIImageView(frame: CGRectMake(0,0,self.view.bounds.width,self.view.bounds.height))
+        myImageView.image = self.getUncachedImage(named: "03_01_01.png")
+        self.view.addSubview(myImageView)
+        
+        //キャラクター設定
+        myCharImageView = UIImageView(frame: CGRectMake(150,300,300,350))
+        myCharImageView.center.x = self.view.center.x
+        myCharImageView.center.y = self.view.center.y
+        myCharImageView.tag = 1
+        myCharImageView.userInteractionEnabled = true
+        self.view.addSubview(myCharImageView)
+        
+        
+        // 吹き出しを生成する.
+        myFukidasiImageView = UIImageView(frame: CGRectMake(0,0,200,100))
+        myFukidasiImageView.frame.origin.x = myCharImageView.frame.origin.x
+        myFukidasiImageView.frame.origin.y = myCharImageView.frame.origin.y - 300
+        myFukidasiImageView.image = fukidasiImage
+        myFukidasiImageView.hidden = true
 
-        // SEを再生する.
+
+        // 吹き出しのラベルを設定する.
+        fukidasiLabel = UILabel()
+        fukidasiLabel.frame = myFukidasiImageView.bounds
+        fukidasiLabel.textAlignment = NSTextAlignment.Center
+
+
+        // UIImageViewをViewに追加する.
+        myCharImageView.addSubview(myFukidasiImageView)
+        myFukidasiImageView.addSubview(fukidasiLabel)
+        
+        
+        // フッタのバナーを生成する.
+        self.footerBaner = ADBannerView()
+        self.footerBaner.frame.offsetInPlace(dx: 0, dy: self.view.bounds.height-footerBaner.frame.height)
+        self.footerBaner?.hidden = false
+        self.view.addSubview(footerBaner)
+        
+        // iAd(インタースティシャル)のマニュアル表示設定
+        self.interstitialPresentationPolicy = ADInterstitialPresentationPolicy.Manual
+        
+        // メニューボタン及びサブメニューボタンの設定.
+        manuBtn = UIButton(frame: CGRectMake(self.view.bounds.width - 80,self.view.bounds.height-footerBaner.frame.height-70,60,100))
+        manuBtn.setTitle("MENU",  forState: .Normal)
+        manuBtn.setImage(manuBtnNextImage, forState: .Normal)
+        manuBtn.addTarget(self, action: "tapManuBtn:", forControlEvents: .TouchUpInside)
+        manuBtn.sizeToFit()
+        self.view.addSubview(manuBtn)
+        
+        mainBtn = UIButton(frame: CGRectMake(180,self.view.bounds.height-footerBaner.frame.height-70,100,100))
+        mainBtn.setImage(mainBtnActImage, forState: .Normal)
+        mainBtn.addTarget(self, action: "tapMainBtn:", forControlEvents: .TouchUpInside)
+        manuBtn.sizeToFit()
+        self.view.addSubview(mainBtn)
+        
+        detailBtn = UIButton(frame: CGRectMake(120,self.view.bounds.height-footerBaner.frame.height-70,60,100))
+        detailBtn.setImage(detailBtnActImage, forState: .Normal)
+        detailBtn.addTarget(self, action: "tapDetailBtn:", forControlEvents: .TouchUpInside)
+        detailBtn.sizeToFit()
+        self.view.addSubview(detailBtn)
+        
+        shareBtn = UIButton(frame: CGRectMake(60,self.view.bounds.height-footerBaner.frame.height-70,60,100))
+        shareBtn.setImage(shareBtnActImage, forState: .Normal)
+        shareBtn.addTarget(self, action: "tapShareBtn:", forControlEvents: .TouchUpInside)
+        shareBtn.sizeToFit()
+        self.view.addSubview(shareBtn)
+        
+        configBtn = UIButton(frame: CGRectMake(0,self.view.bounds.height-footerBaner.frame.height-70,60,100))
+        configBtn.setImage(configBtnActImage, forState: .Normal)
+        configBtn.addTarget(self, action: "tapConfigBtn:", forControlEvents: .TouchUpInside)
+        configBtn.sizeToFit()
+        self.view.addSubview(configBtn)
+        
+        // メニューボタン以外のボタンを非表示にする
+        mainBtn.hidden = true
+        detailBtn.hidden = true
+        shareBtn.hidden = true
+        configBtn.hidden = true
+        
+        // テーマソングを再生する.
         do {
-            mySePlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath:sePath))
-            mySePlayer.volume = seVolumeSBar.value * 2
-            mySePlayer.play()
+            myAudioPlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath:mySongPath!))
+            myAudioPlayer.numberOfLoops = -1
+            myAudioPlayer.play()
             
         }catch{
             // 例外発生
         }
     }
 
+    
     /** 履歴書メニューのポップアップ作成 **/
     func detailInit()
     {
         print(NSDate().description, __FUNCTION__, __LINE__)
-
+        
         //ポップ生成
         detailConView = UIView(frame: CGRectMake(18,100,340,400))
         detailImgView = UIImageView()
@@ -638,13 +605,13 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         detailImgView.alpha = 0.9
         detailImgSubView.image = detailViewSubImage
         detailImgSubView.alpha = 0.9
-            
+        
         // 初期表示は非表示
         detailConView.hidden = true
-            
+        
         // ViewをViewに追加する.
         self.view.addSubview(detailConView)
-
+        
         self.nameDataLabel = UILabel(frame: CGRectMake(130,10,200,20))
         self.nameDataLabel.text = "こうじ"
         self.birthDataLabel = UILabel(frame: CGRectMake(130,30,200,20))
@@ -655,7 +622,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         self.compDataLabel.text = "部屋、台所、トイレ"
         self.kakugenDataLabel = UILabel(frame: CGRectMake(130,100,200,20))
         self.kakugenDataLabel.text = "やる気！元気！いわき！"
-
+        
         // ポップ上に表示するオブジェクトをViewに追加する.
         detailConView.addSubview(detailImgView)
         detailConView.addSubview(detailImgSubView)
@@ -665,12 +632,17 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         detailConView.addSubview(compDataLabel)
         detailConView.addSubview(kakugenDataLabel)
     }
-
+    
+    
+    
+    
+    
+    
     /** シェアメニューのポップアップ作成 **/
     func shareInit()
     {
         print(NSDate().description, __FUNCTION__, __LINE__)
-
+        
         //ポップ生成
         shareConView = UIView(frame: CGRectMake(18,100,340,400))
         shareImgView = UIImageView()
@@ -682,7 +654,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         
         // 初期表示は非表示
         shareConView.hidden = true
-            
+        
         // ViewをViewに追加する.
         self.view.addSubview(shareConView)
         
@@ -710,17 +682,17 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         shareConView.addSubview(twitterBtn)
         shareConView.addSubview(lineBtn)
     }
-
+    
     /** 設定メニューのポップアップ作成 **/
     func configInit()
     {
         print(NSDate().description, __FUNCTION__, __LINE__)
-
+        
         //ポップ生成
         configConView = UIView(frame: CGRectMake(18,100,340,400))
         configImgView = UIImageView()
         configImgView.frame.size = configConView.frame.size
-
+        
         // ポップの背景を設定する.
         configImgView.image = configViewImage
         configImgView.alpha = 0.9
@@ -772,6 +744,45 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         configConView.addSubview(seMuteBtn)
         
     }
+
+    //ニートを動かすアニメーション
+    func animationStart() {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        animeTimer = NSTimer.scheduledTimerWithTimeInterval(0.0, target: self, selector: Selector("randomWalk"), userInfo: nil, repeats: true)
+    }
+   
+    
+    
+    
+    
+    
+    func getUncachedImage (named name : String) -> UIImage?
+    {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+
+        if let imgPath = NSBundle.mainBundle().pathForResource(name, ofType: nil)
+        {
+            return UIImage(contentsOfFile: imgPath)
+        }
+        return nil
+    }
+    
+    /** SE再生 **/
+    func seSoundPlay(sePath: String)
+    {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+
+        // SEを再生する.
+        do {
+            mySePlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath:sePath))
+            mySePlayer.volume = seVolumeSBar.value * 2
+            mySePlayer.play()
+            
+        }catch{
+            // 例外発生
+        }
+    }
+
     
     /** バナーが読みこまれた時に呼ばれる **/
     func bannerViewDidLoadAd(banner: ADBannerView!) {
@@ -782,11 +793,6 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     }
     
     
-    //ニートを動かすアニメーション
-    func animationStart() {
-        print(NSDate().description, __FUNCTION__, __LINE__)
-        animeTimer = NSTimer.scheduledTimerWithTimeInterval(0.0, target: self, selector: Selector("randomWalk"), userInfo: nil, repeats: true)
-    }
     
     
     //ランダムウォーク
@@ -1166,7 +1172,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     func getMeigen() -> String  {
         print(NSDate().description, __FUNCTION__, __LINE__)
         
-        let meigenList :[MeigenM] = MeigenM.MR_findAll() as! [MeigenM];
+        let meigenList :[M_Kakugen] = M_Kakugen.MR_findAll() as! [M_Kakugen];
         let randInt = arc4random_uniform(UInt32(meigenList.count));
         print(meigenList.count)
         return meigenList[Int(randInt)].meigenText
