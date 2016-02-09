@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15C50" minimumToolsVersion="Automatic">
-    <entity name="DropItemM" representedClassName="DropItemM" syncable="YES">
+    <entity name="M_DropItem" representedClassName="M_DropItem" syncable="YES">
         <attribute name="dropItemID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="dropPer" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
         <attribute name="itemID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
-    <entity name="ItemM" representedClassName="ItemM" syncable="YES">
+    <entity name="M_Item" representedClassName="M_Item" syncable="YES">
         <attribute name="actID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="itemID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -17,29 +17,29 @@
         <attribute name="useArea" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="viewNo" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
-    <entity name="JobM" representedClassName="JobM" syncable="YES">
+    <entity name="M_Job" representedClassName="M_Job" syncable="YES">
         <attribute name="jobID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="jobName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="jobText" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="maxStageID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="viewNo" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
-    <entity name="MeigenM" representedClassName="MeigenM" syncable="YES">
+    <entity name="M_Kakugen" representedClassName="M_Kakugen" syncable="YES">
         <attribute name="meigenID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="meigenText" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="viewNo" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
-    <entity name="OkanM" representedClassName="OkanM" syncable="YES">
+    <entity name="M_Okan" representedClassName="M_Okan" syncable="YES">
         <attribute name="okanID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="okanText" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="ResultActionM" representedClassName="ResultActionM" syncable="YES">
+    <entity name="M_ResultAction" representedClassName="M_ResultAction" syncable="YES">
         <attribute name="itemID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="message" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="resPer" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="resultID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
-    <entity name="StageM" representedClassName="StageM" syncable="YES">
+    <entity name="M_Stage" representedClassName="M_Stage" syncable="YES">
         <attribute name="bgm" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="stageID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="stageName" optional="YES" attributeType="String" syncable="YES"/>
@@ -47,13 +47,57 @@
         <attribute name="viewNo" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="wallPaper" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="T_ActionResult" representedClassName="T_ActionResult" syncable="YES">
+        <attribute name="actEndDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="actSetDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="actStartDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="itemID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="resultID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="T_CharaBase" representedClassName="T_CharaBase" syncable="YES">
+        <attribute name="charaBirth" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="charaName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="jobID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="kakugenID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="point1" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="point2" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="point3" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="T_GetItem" representedClassName="T_GetItem" syncable="YES">
+        <attribute name="charaID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="itemCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="itemID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="T_RefItem" representedClassName="T_RefItem" syncable="YES">
+        <attribute name="charaID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="itemID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="T_RefJob" representedClassName="T_RefJob" syncable="YES">
+        <attribute name="charaID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="jobID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="T_RefKakugen" representedClassName="T_RefKakugen" syncable="YES">
+        <attribute name="charaID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="kakugenID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="T_RefStage" representedClassName="T_RefStage" syncable="YES">
+        <attribute name="charaID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="stageID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="MeigenM" positionX="-63" positionY="-18" width="128" height="90"/>
-        <element name="JobM" positionX="-54" positionY="18" width="128" height="120"/>
-        <element name="OkanM" positionX="-36" positionY="45" width="128" height="75"/>
-        <element name="ItemM" positionX="-18" positionY="63" width="128" height="195"/>
-        <element name="StageM" positionX="0" positionY="72" width="128" height="135"/>
-        <element name="DropItemM" positionX="18" positionY="144" width="128" height="90"/>
-        <element name="ResultActionM" positionX="36" positionY="153" width="128" height="105"/>
+        <element name="M_DropItem" positionX="18" positionY="144" width="128" height="90"/>
+        <element name="M_Item" positionX="-18" positionY="63" width="128" height="195"/>
+        <element name="M_Job" positionX="-54" positionY="18" width="128" height="120"/>
+        <element name="M_Kakugen" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="M_Okan" positionX="-36" positionY="45" width="128" height="75"/>
+        <element name="M_ResultAction" positionX="36" positionY="153" width="128" height="105"/>
+        <element name="M_Stage" positionX="0" positionY="72" width="128" height="135"/>
+        <element name="T_CharaBase" positionX="-9" positionY="99" width="128" height="150"/>
+        <element name="T_GetItem" positionX="0" positionY="108" width="128" height="90"/>
+        <element name="T_RefItem" positionX="9" positionY="117" width="128" height="75"/>
+        <element name="T_ActionResult" positionX="18" positionY="126" width="128" height="120"/>
+        <element name="T_RefStage" positionX="27" positionY="135" width="128" height="75"/>
+        <element name="T_RefKakugen" positionX="36" positionY="144" width="128" height="75"/>
+        <element name="T_RefJob" positionX="45" positionY="153" width="128" height="75"/>
     </elements>
 </model>

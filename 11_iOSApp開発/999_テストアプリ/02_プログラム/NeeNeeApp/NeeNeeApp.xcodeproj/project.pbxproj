@@ -8,34 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		564CDF907C4EC18FA819679E /* libPods-NeeNeeApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4EB1D06214EC164462ADCDD /* libPods-NeeNeeApp.a */; };
-		AE05CAB81C5BDD9A00451A00 /* _DropItemM.h in Headers */ = {isa = PBXBuildFile; fileRef = AE05CA9C1C5BDD9A00451A00 /* _DropItemM.h */; };
-		AE05CAB91C5BDD9A00451A00 /* _DropItemM.m in Sources */ = {isa = PBXBuildFile; fileRef = AE05CA9D1C5BDD9A00451A00 /* _DropItemM.m */; };
-		AE05CABA1C5BDD9A00451A00 /* _ItemM.h in Headers */ = {isa = PBXBuildFile; fileRef = AE05CA9E1C5BDD9A00451A00 /* _ItemM.h */; };
-		AE05CABB1C5BDD9A00451A00 /* _ItemM.m in Sources */ = {isa = PBXBuildFile; fileRef = AE05CA9F1C5BDD9A00451A00 /* _ItemM.m */; };
-		AE05CABC1C5BDD9A00451A00 /* _JobM.h in Headers */ = {isa = PBXBuildFile; fileRef = AE05CAA01C5BDD9A00451A00 /* _JobM.h */; };
-		AE05CABD1C5BDD9A00451A00 /* _JobM.m in Sources */ = {isa = PBXBuildFile; fileRef = AE05CAA11C5BDD9A00451A00 /* _JobM.m */; };
-		AE05CABE1C5BDD9A00451A00 /* _MeigenM.h in Headers */ = {isa = PBXBuildFile; fileRef = AE05CAA21C5BDD9A00451A00 /* _MeigenM.h */; };
-		AE05CABF1C5BDD9A00451A00 /* _MeigenM.m in Sources */ = {isa = PBXBuildFile; fileRef = AE05CAA31C5BDD9A00451A00 /* _MeigenM.m */; };
-		AE05CAC01C5BDD9A00451A00 /* _OkanM.h in Headers */ = {isa = PBXBuildFile; fileRef = AE05CAA41C5BDD9A00451A00 /* _OkanM.h */; };
-		AE05CAC11C5BDD9A00451A00 /* _OkanM.m in Sources */ = {isa = PBXBuildFile; fileRef = AE05CAA51C5BDD9A00451A00 /* _OkanM.m */; };
-		AE05CAC21C5BDD9A00451A00 /* _ResultActionM.h in Headers */ = {isa = PBXBuildFile; fileRef = AE05CAA61C5BDD9A00451A00 /* _ResultActionM.h */; };
-		AE05CAC31C5BDD9A00451A00 /* _ResultActionM.m in Sources */ = {isa = PBXBuildFile; fileRef = AE05CAA71C5BDD9A00451A00 /* _ResultActionM.m */; };
-		AE05CAC41C5BDD9A00451A00 /* _StageM.h in Headers */ = {isa = PBXBuildFile; fileRef = AE05CAA81C5BDD9A00451A00 /* _StageM.h */; };
-		AE05CAC51C5BDD9A00451A00 /* _StageM.m in Sources */ = {isa = PBXBuildFile; fileRef = AE05CAA91C5BDD9A00451A00 /* _StageM.m */; };
-		AE05CAC61C5BDD9A00451A00 /* DropItemM.h in Headers */ = {isa = PBXBuildFile; fileRef = AE05CAAA1C5BDD9A00451A00 /* DropItemM.h */; };
-		AE05CAC71C5BDD9A00451A00 /* DropItemM.m in Sources */ = {isa = PBXBuildFile; fileRef = AE05CAAB1C5BDD9A00451A00 /* DropItemM.m */; };
-		AE05CAC81C5BDD9A00451A00 /* ItemM.h in Headers */ = {isa = PBXBuildFile; fileRef = AE05CAAC1C5BDD9A00451A00 /* ItemM.h */; };
-		AE05CAC91C5BDD9A00451A00 /* ItemM.m in Sources */ = {isa = PBXBuildFile; fileRef = AE05CAAD1C5BDD9A00451A00 /* ItemM.m */; };
-		AE05CACA1C5BDD9A00451A00 /* JobM.h in Headers */ = {isa = PBXBuildFile; fileRef = AE05CAAE1C5BDD9A00451A00 /* JobM.h */; };
-		AE05CACB1C5BDD9A00451A00 /* JobM.m in Sources */ = {isa = PBXBuildFile; fileRef = AE05CAAF1C5BDD9A00451A00 /* JobM.m */; };
-		AE05CACC1C5BDD9A00451A00 /* MeigenM.h in Headers */ = {isa = PBXBuildFile; fileRef = AE05CAB01C5BDD9A00451A00 /* MeigenM.h */; };
-		AE05CACD1C5BDD9A00451A00 /* MeigenM.m in Sources */ = {isa = PBXBuildFile; fileRef = AE05CAB11C5BDD9A00451A00 /* MeigenM.m */; };
-		AE05CACE1C5BDD9A00451A00 /* OkanM.h in Headers */ = {isa = PBXBuildFile; fileRef = AE05CAB21C5BDD9A00451A00 /* OkanM.h */; };
-		AE05CACF1C5BDD9A00451A00 /* OkanM.m in Sources */ = {isa = PBXBuildFile; fileRef = AE05CAB31C5BDD9A00451A00 /* OkanM.m */; };
-		AE05CAD01C5BDD9A00451A00 /* ResultActionM.h in Headers */ = {isa = PBXBuildFile; fileRef = AE05CAB41C5BDD9A00451A00 /* ResultActionM.h */; };
-		AE05CAD11C5BDD9A00451A00 /* ResultActionM.m in Sources */ = {isa = PBXBuildFile; fileRef = AE05CAB51C5BDD9A00451A00 /* ResultActionM.m */; };
-		AE05CAD21C5BDD9A00451A00 /* StageM.h in Headers */ = {isa = PBXBuildFile; fileRef = AE05CAB61C5BDD9A00451A00 /* StageM.h */; };
-		AE05CAD31C5BDD9A00451A00 /* StageM.m in Sources */ = {isa = PBXBuildFile; fileRef = AE05CAB71C5BDD9A00451A00 /* StageM.m */; };
 		AE8E93961C5DE80D0031BF79 /* NeetMaster.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = AE8E93931C5DE80D0031BF79 /* NeetMaster.sqlite */; };
 		AE8E93971C5DE80D0031BF79 /* NeetMaster.sqlite-shm in Resources */ = {isa = PBXBuildFile; fileRef = AE8E93941C5DE80D0031BF79 /* NeetMaster.sqlite-shm */; };
 		AE8E93981C5DE80D0031BF79 /* NeetMaster.sqlite-wal in Resources */ = {isa = PBXBuildFile; fileRef = AE8E93951C5DE80D0031BF79 /* NeetMaster.sqlite-wal */; };
@@ -123,6 +95,70 @@
 		AEDE9B1E1C66433700841902 /* 08_02_01.png in Resources */ = {isa = PBXBuildFile; fileRef = AEDE9ACC1C66433700841902 /* 08_02_01.png */; };
 		AEDE9B201C66435700841902 /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE9B1F1C66435700841902 /* Const.swift */; };
 		AEDE9B221C66471800841902 /* ActionSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE9B211C66471800841902 /* ActionSetViewController.swift */; };
+		AEFCBC511C68DC97000F5751 /* se1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AEFCBC491C68DC97000F5751 /* se1.mp3 */; };
+		AEFCBC521C68DC97000F5751 /* se2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AEFCBC4A1C68DC97000F5751 /* se2.mp3 */; };
+		AEFCBC531C68DC97000F5751 /* se3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AEFCBC4B1C68DC97000F5751 /* se3.mp3 */; };
+		AEFCBC541C68DC97000F5751 /* se4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AEFCBC4C1C68DC97000F5751 /* se4.mp3 */; };
+		AEFCBC551C68DC97000F5751 /* se5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AEFCBC4D1C68DC97000F5751 /* se5.mp3 */; };
+		AEFCBC561C68DC97000F5751 /* se6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AEFCBC4E1C68DC97000F5751 /* se6.mp3 */; };
+		AEFCBC571C68DC97000F5751 /* 暇で忙しい.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AEFCBC4F1C68DC97000F5751 /* 暇で忙しい.mp3 */; };
+		AEFCBC581C68DC97000F5751 /* 落ち着くところ.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AEFCBC501C68DC97000F5751 /* 落ち着くところ.mp3 */; };
+		AEFCBC921C68DD4B000F5751 /* _M_DropItem.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFCBC5A1C68DD4B000F5751 /* _M_DropItem.h */; };
+		AEFCBC931C68DD4B000F5751 /* _M_DropItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCBC5B1C68DD4B000F5751 /* _M_DropItem.m */; };
+		AEFCBC941C68DD4B000F5751 /* _M_Item.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFCBC5C1C68DD4B000F5751 /* _M_Item.h */; };
+		AEFCBC951C68DD4B000F5751 /* _M_Item.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCBC5D1C68DD4B000F5751 /* _M_Item.m */; };
+		AEFCBC961C68DD4B000F5751 /* _M_Job.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFCBC5E1C68DD4B000F5751 /* _M_Job.h */; };
+		AEFCBC971C68DD4B000F5751 /* _M_Job.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCBC5F1C68DD4B000F5751 /* _M_Job.m */; };
+		AEFCBC981C68DD4B000F5751 /* _M_Kakugen.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFCBC601C68DD4B000F5751 /* _M_Kakugen.h */; };
+		AEFCBC991C68DD4B000F5751 /* _M_Kakugen.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCBC611C68DD4B000F5751 /* _M_Kakugen.m */; };
+		AEFCBC9A1C68DD4B000F5751 /* _M_Okan.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFCBC621C68DD4B000F5751 /* _M_Okan.h */; };
+		AEFCBC9B1C68DD4B000F5751 /* _M_Okan.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCBC631C68DD4B000F5751 /* _M_Okan.m */; };
+		AEFCBC9C1C68DD4B000F5751 /* _M_ResultAction.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFCBC641C68DD4B000F5751 /* _M_ResultAction.h */; };
+		AEFCBC9D1C68DD4B000F5751 /* _M_ResultAction.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCBC651C68DD4B000F5751 /* _M_ResultAction.m */; };
+		AEFCBC9E1C68DD4B000F5751 /* _M_Stage.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFCBC661C68DD4B000F5751 /* _M_Stage.h */; };
+		AEFCBC9F1C68DD4B000F5751 /* _M_Stage.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCBC671C68DD4B000F5751 /* _M_Stage.m */; };
+		AEFCBCA01C68DD4B000F5751 /* _T_ActionResult.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFCBC681C68DD4B000F5751 /* _T_ActionResult.h */; };
+		AEFCBCA11C68DD4B000F5751 /* _T_ActionResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCBC691C68DD4B000F5751 /* _T_ActionResult.m */; };
+		AEFCBCA21C68DD4B000F5751 /* _T_CharaBase.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFCBC6A1C68DD4B000F5751 /* _T_CharaBase.h */; };
+		AEFCBCA31C68DD4B000F5751 /* _T_CharaBase.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCBC6B1C68DD4B000F5751 /* _T_CharaBase.m */; };
+		AEFCBCA41C68DD4B000F5751 /* _T_GetItem.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFCBC6C1C68DD4B000F5751 /* _T_GetItem.h */; };
+		AEFCBCA51C68DD4B000F5751 /* _T_GetItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCBC6D1C68DD4B000F5751 /* _T_GetItem.m */; };
+		AEFCBCA61C68DD4B000F5751 /* _T_RefItem.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFCBC6E1C68DD4B000F5751 /* _T_RefItem.h */; };
+		AEFCBCA71C68DD4B000F5751 /* _T_RefItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCBC6F1C68DD4B000F5751 /* _T_RefItem.m */; };
+		AEFCBCA81C68DD4B000F5751 /* _T_RefJob.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFCBC701C68DD4B000F5751 /* _T_RefJob.h */; };
+		AEFCBCA91C68DD4B000F5751 /* _T_RefJob.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCBC711C68DD4B000F5751 /* _T_RefJob.m */; };
+		AEFCBCAA1C68DD4B000F5751 /* _T_RefKakugen.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFCBC721C68DD4B000F5751 /* _T_RefKakugen.h */; };
+		AEFCBCAB1C68DD4B000F5751 /* _T_RefKakugen.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCBC731C68DD4B000F5751 /* _T_RefKakugen.m */; };
+		AEFCBCAC1C68DD4B000F5751 /* _T_RefStage.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFCBC741C68DD4B000F5751 /* _T_RefStage.h */; };
+		AEFCBCAD1C68DD4B000F5751 /* _T_RefStage.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCBC751C68DD4B000F5751 /* _T_RefStage.m */; };
+		AEFCBCAE1C68DD4B000F5751 /* M_DropItem.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFCBC761C68DD4B000F5751 /* M_DropItem.h */; };
+		AEFCBCAF1C68DD4B000F5751 /* M_DropItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCBC771C68DD4B000F5751 /* M_DropItem.m */; };
+		AEFCBCB01C68DD4B000F5751 /* M_Item.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFCBC781C68DD4B000F5751 /* M_Item.h */; };
+		AEFCBCB11C68DD4B000F5751 /* M_Item.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCBC791C68DD4B000F5751 /* M_Item.m */; };
+		AEFCBCB21C68DD4B000F5751 /* M_Job.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFCBC7A1C68DD4B000F5751 /* M_Job.h */; };
+		AEFCBCB31C68DD4B000F5751 /* M_Job.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCBC7B1C68DD4B000F5751 /* M_Job.m */; };
+		AEFCBCB41C68DD4B000F5751 /* M_Kakugen.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFCBC7C1C68DD4B000F5751 /* M_Kakugen.h */; };
+		AEFCBCB51C68DD4B000F5751 /* M_Kakugen.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCBC7D1C68DD4B000F5751 /* M_Kakugen.m */; };
+		AEFCBCB61C68DD4B000F5751 /* M_Okan.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFCBC7E1C68DD4B000F5751 /* M_Okan.h */; };
+		AEFCBCB71C68DD4B000F5751 /* M_Okan.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCBC7F1C68DD4B000F5751 /* M_Okan.m */; };
+		AEFCBCB81C68DD4B000F5751 /* M_ResultAction.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFCBC801C68DD4B000F5751 /* M_ResultAction.h */; };
+		AEFCBCB91C68DD4B000F5751 /* M_ResultAction.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCBC811C68DD4B000F5751 /* M_ResultAction.m */; };
+		AEFCBCBA1C68DD4B000F5751 /* M_Stage.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFCBC821C68DD4B000F5751 /* M_Stage.h */; };
+		AEFCBCBB1C68DD4B000F5751 /* M_Stage.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCBC831C68DD4B000F5751 /* M_Stage.m */; };
+		AEFCBCBC1C68DD4B000F5751 /* T_ActionResult.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFCBC841C68DD4B000F5751 /* T_ActionResult.h */; };
+		AEFCBCBD1C68DD4B000F5751 /* T_ActionResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCBC851C68DD4B000F5751 /* T_ActionResult.m */; };
+		AEFCBCBE1C68DD4B000F5751 /* T_CharaBase.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFCBC861C68DD4B000F5751 /* T_CharaBase.h */; };
+		AEFCBCBF1C68DD4B000F5751 /* T_CharaBase.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCBC871C68DD4B000F5751 /* T_CharaBase.m */; };
+		AEFCBCC01C68DD4B000F5751 /* T_GetItem.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFCBC881C68DD4B000F5751 /* T_GetItem.h */; };
+		AEFCBCC11C68DD4B000F5751 /* T_GetItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCBC891C68DD4B000F5751 /* T_GetItem.m */; };
+		AEFCBCC21C68DD4B000F5751 /* T_RefItem.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFCBC8A1C68DD4B000F5751 /* T_RefItem.h */; };
+		AEFCBCC31C68DD4B000F5751 /* T_RefItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCBC8B1C68DD4B000F5751 /* T_RefItem.m */; };
+		AEFCBCC41C68DD4B000F5751 /* T_RefJob.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFCBC8C1C68DD4B000F5751 /* T_RefJob.h */; };
+		AEFCBCC51C68DD4B000F5751 /* T_RefJob.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCBC8D1C68DD4B000F5751 /* T_RefJob.m */; };
+		AEFCBCC61C68DD4B000F5751 /* T_RefKakugen.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFCBC8E1C68DD4B000F5751 /* T_RefKakugen.h */; };
+		AEFCBCC71C68DD4B000F5751 /* T_RefKakugen.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCBC8F1C68DD4B000F5751 /* T_RefKakugen.m */; };
+		AEFCBCC81C68DD4B000F5751 /* T_RefStage.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFCBC901C68DD4B000F5751 /* T_RefStage.h */; };
+		AEFCBCC91C68DD4B000F5751 /* T_RefStage.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCBC911C68DD4B000F5751 /* T_RefStage.m */; };
 		F41FD6331C4D3B640086A607 /* LINEActivity.h in Headers */ = {isa = PBXBuildFile; fileRef = F41FD62C1C4D3B640086A607 /* LINEActivity.h */; };
 		F41FD6341C4D3B640086A607 /* LINEActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = F41FD62D1C4D3B640086A607 /* LINEActivity.m */; };
 		F41FD6351C4D3B640086A607 /* LINEActivityIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = F41FD62E1C4D3B640086A607 /* LINEActivityIcon.png */; };
@@ -130,15 +166,7 @@
 		F41FD6371C4D3B640086A607 /* LINEActivityIcon@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F41FD6301C4D3B640086A607 /* LINEActivityIcon@2x~ipad.png */; };
 		F41FD6381C4D3B640086A607 /* LINEActivityIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F41FD6311C4D3B640086A607 /* LINEActivityIcon@3x.png */; };
 		F41FD6391C4D3B640086A607 /* LINEActivityIcon~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F41FD6321C4D3B640086A607 /* LINEActivityIcon~ipad.png */; };
-		F439B4C01C3FFD4A004E92B4 /* 暇で忙しい.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F439B4BF1C3FFD4A004E92B4 /* 暇で忙しい.mp3 */; };
 		F43D9B641C5D24240080F75D /* itemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D9B631C5D24240080F75D /* itemCell.swift */; };
-		F441496E1C45559600E7FC53 /* se1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F44149671C45559600E7FC53 /* se1.mp3 */; };
-		F441496F1C45559600E7FC53 /* se2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F44149681C45559600E7FC53 /* se2.mp3 */; };
-		F44149701C45559600E7FC53 /* se3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F44149691C45559600E7FC53 /* se3.mp3 */; };
-		F44149711C45559600E7FC53 /* se4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F441496A1C45559600E7FC53 /* se4.mp3 */; };
-		F44149721C45559600E7FC53 /* se5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F441496B1C45559600E7FC53 /* se5.mp3 */; };
-		F44149731C45559600E7FC53 /* se6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F441496C1C45559600E7FC53 /* se6.mp3 */; };
-		F44149741C45559600E7FC53 /* 落ち着くところ.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F441496D1C45559600E7FC53 /* 落ち着くところ.mp3 */; };
 		F44C0DE91C43EFF400B0CB27 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F44C0DE81C43EFF400B0CB27 /* Main.storyboard */; };
 		F483300E1C2F040D00234B18 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F483300D1C2F040D00234B18 /* AppDelegate.swift */; };
 		F48330101C2F040D00234B18 /* NeetMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F483300F1C2F040D00234B18 /* NeetMainViewController.swift */; };
@@ -173,34 +201,6 @@
 /* Begin PBXFileReference section */
 		061F3FC4E89134E46B5F4A8E /* Pods-NeeNeeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NeeNeeApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NeeNeeApp/Pods-NeeNeeApp.debug.xcconfig"; sourceTree = "<group>"; };
 		76D912C337F465574C4CC36B /* Pods-NeeNeeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NeeNeeApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-NeeNeeApp/Pods-NeeNeeApp.release.xcconfig"; sourceTree = "<group>"; };
-		AE05CA9C1C5BDD9A00451A00 /* _DropItemM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _DropItemM.h; sourceTree = "<group>"; };
-		AE05CA9D1C5BDD9A00451A00 /* _DropItemM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _DropItemM.m; sourceTree = "<group>"; };
-		AE05CA9E1C5BDD9A00451A00 /* _ItemM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ItemM.h; sourceTree = "<group>"; };
-		AE05CA9F1C5BDD9A00451A00 /* _ItemM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ItemM.m; sourceTree = "<group>"; };
-		AE05CAA01C5BDD9A00451A00 /* _JobM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _JobM.h; sourceTree = "<group>"; };
-		AE05CAA11C5BDD9A00451A00 /* _JobM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _JobM.m; sourceTree = "<group>"; };
-		AE05CAA21C5BDD9A00451A00 /* _MeigenM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _MeigenM.h; sourceTree = "<group>"; };
-		AE05CAA31C5BDD9A00451A00 /* _MeigenM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _MeigenM.m; sourceTree = "<group>"; };
-		AE05CAA41C5BDD9A00451A00 /* _OkanM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _OkanM.h; sourceTree = "<group>"; };
-		AE05CAA51C5BDD9A00451A00 /* _OkanM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _OkanM.m; sourceTree = "<group>"; };
-		AE05CAA61C5BDD9A00451A00 /* _ResultActionM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ResultActionM.h; sourceTree = "<group>"; };
-		AE05CAA71C5BDD9A00451A00 /* _ResultActionM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ResultActionM.m; sourceTree = "<group>"; };
-		AE05CAA81C5BDD9A00451A00 /* _StageM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _StageM.h; sourceTree = "<group>"; };
-		AE05CAA91C5BDD9A00451A00 /* _StageM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _StageM.m; sourceTree = "<group>"; };
-		AE05CAAA1C5BDD9A00451A00 /* DropItemM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropItemM.h; sourceTree = "<group>"; };
-		AE05CAAB1C5BDD9A00451A00 /* DropItemM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropItemM.m; sourceTree = "<group>"; };
-		AE05CAAC1C5BDD9A00451A00 /* ItemM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemM.h; sourceTree = "<group>"; };
-		AE05CAAD1C5BDD9A00451A00 /* ItemM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemM.m; sourceTree = "<group>"; };
-		AE05CAAE1C5BDD9A00451A00 /* JobM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobM.h; sourceTree = "<group>"; };
-		AE05CAAF1C5BDD9A00451A00 /* JobM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobM.m; sourceTree = "<group>"; };
-		AE05CAB01C5BDD9A00451A00 /* MeigenM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeigenM.h; sourceTree = "<group>"; };
-		AE05CAB11C5BDD9A00451A00 /* MeigenM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeigenM.m; sourceTree = "<group>"; };
-		AE05CAB21C5BDD9A00451A00 /* OkanM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OkanM.h; sourceTree = "<group>"; };
-		AE05CAB31C5BDD9A00451A00 /* OkanM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OkanM.m; sourceTree = "<group>"; };
-		AE05CAB41C5BDD9A00451A00 /* ResultActionM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultActionM.h; sourceTree = "<group>"; };
-		AE05CAB51C5BDD9A00451A00 /* ResultActionM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultActionM.m; sourceTree = "<group>"; };
-		AE05CAB61C5BDD9A00451A00 /* StageM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageM.h; sourceTree = "<group>"; };
-		AE05CAB71C5BDD9A00451A00 /* StageM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StageM.m; sourceTree = "<group>"; };
 		AE8E93931C5DE80D0031BF79 /* NeetMaster.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = NeetMaster.sqlite; sourceTree = "<group>"; };
 		AE8E93941C5DE80D0031BF79 /* NeetMaster.sqlite-shm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeetMaster.sqlite-shm"; sourceTree = "<group>"; };
 		AE8E93951C5DE80D0031BF79 /* NeetMaster.sqlite-wal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "NeetMaster.sqlite-wal"; sourceTree = "<group>"; };
@@ -288,6 +288,70 @@
 		AEDE9ACC1C66433700841902 /* 08_02_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 08_02_01.png; sourceTree = "<group>"; };
 		AEDE9B1F1C66435700841902 /* Const.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		AEDE9B211C66471800841902 /* ActionSetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSetViewController.swift; sourceTree = "<group>"; };
+		AEFCBC491C68DC97000F5751 /* se1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = se1.mp3; sourceTree = "<group>"; };
+		AEFCBC4A1C68DC97000F5751 /* se2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = se2.mp3; sourceTree = "<group>"; };
+		AEFCBC4B1C68DC97000F5751 /* se3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = se3.mp3; sourceTree = "<group>"; };
+		AEFCBC4C1C68DC97000F5751 /* se4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = se4.mp3; sourceTree = "<group>"; };
+		AEFCBC4D1C68DC97000F5751 /* se5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = se5.mp3; sourceTree = "<group>"; };
+		AEFCBC4E1C68DC97000F5751 /* se6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = se6.mp3; sourceTree = "<group>"; };
+		AEFCBC4F1C68DC97000F5751 /* 暇で忙しい.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "暇で忙しい.mp3"; sourceTree = "<group>"; };
+		AEFCBC501C68DC97000F5751 /* 落ち着くところ.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "落ち着くところ.mp3"; sourceTree = "<group>"; };
+		AEFCBC5A1C68DD4B000F5751 /* _M_DropItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _M_DropItem.h; sourceTree = "<group>"; };
+		AEFCBC5B1C68DD4B000F5751 /* _M_DropItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _M_DropItem.m; sourceTree = "<group>"; };
+		AEFCBC5C1C68DD4B000F5751 /* _M_Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _M_Item.h; sourceTree = "<group>"; };
+		AEFCBC5D1C68DD4B000F5751 /* _M_Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _M_Item.m; sourceTree = "<group>"; };
+		AEFCBC5E1C68DD4B000F5751 /* _M_Job.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _M_Job.h; sourceTree = "<group>"; };
+		AEFCBC5F1C68DD4B000F5751 /* _M_Job.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _M_Job.m; sourceTree = "<group>"; };
+		AEFCBC601C68DD4B000F5751 /* _M_Kakugen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _M_Kakugen.h; sourceTree = "<group>"; };
+		AEFCBC611C68DD4B000F5751 /* _M_Kakugen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _M_Kakugen.m; sourceTree = "<group>"; };
+		AEFCBC621C68DD4B000F5751 /* _M_Okan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _M_Okan.h; sourceTree = "<group>"; };
+		AEFCBC631C68DD4B000F5751 /* _M_Okan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _M_Okan.m; sourceTree = "<group>"; };
+		AEFCBC641C68DD4B000F5751 /* _M_ResultAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _M_ResultAction.h; sourceTree = "<group>"; };
+		AEFCBC651C68DD4B000F5751 /* _M_ResultAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _M_ResultAction.m; sourceTree = "<group>"; };
+		AEFCBC661C68DD4B000F5751 /* _M_Stage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _M_Stage.h; sourceTree = "<group>"; };
+		AEFCBC671C68DD4B000F5751 /* _M_Stage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _M_Stage.m; sourceTree = "<group>"; };
+		AEFCBC681C68DD4B000F5751 /* _T_ActionResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _T_ActionResult.h; sourceTree = "<group>"; };
+		AEFCBC691C68DD4B000F5751 /* _T_ActionResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _T_ActionResult.m; sourceTree = "<group>"; };
+		AEFCBC6A1C68DD4B000F5751 /* _T_CharaBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _T_CharaBase.h; sourceTree = "<group>"; };
+		AEFCBC6B1C68DD4B000F5751 /* _T_CharaBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _T_CharaBase.m; sourceTree = "<group>"; };
+		AEFCBC6C1C68DD4B000F5751 /* _T_GetItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _T_GetItem.h; sourceTree = "<group>"; };
+		AEFCBC6D1C68DD4B000F5751 /* _T_GetItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _T_GetItem.m; sourceTree = "<group>"; };
+		AEFCBC6E1C68DD4B000F5751 /* _T_RefItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _T_RefItem.h; sourceTree = "<group>"; };
+		AEFCBC6F1C68DD4B000F5751 /* _T_RefItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _T_RefItem.m; sourceTree = "<group>"; };
+		AEFCBC701C68DD4B000F5751 /* _T_RefJob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _T_RefJob.h; sourceTree = "<group>"; };
+		AEFCBC711C68DD4B000F5751 /* _T_RefJob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _T_RefJob.m; sourceTree = "<group>"; };
+		AEFCBC721C68DD4B000F5751 /* _T_RefKakugen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _T_RefKakugen.h; sourceTree = "<group>"; };
+		AEFCBC731C68DD4B000F5751 /* _T_RefKakugen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _T_RefKakugen.m; sourceTree = "<group>"; };
+		AEFCBC741C68DD4B000F5751 /* _T_RefStage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _T_RefStage.h; sourceTree = "<group>"; };
+		AEFCBC751C68DD4B000F5751 /* _T_RefStage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _T_RefStage.m; sourceTree = "<group>"; };
+		AEFCBC761C68DD4B000F5751 /* M_DropItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M_DropItem.h; sourceTree = "<group>"; };
+		AEFCBC771C68DD4B000F5751 /* M_DropItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M_DropItem.m; sourceTree = "<group>"; };
+		AEFCBC781C68DD4B000F5751 /* M_Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M_Item.h; sourceTree = "<group>"; };
+		AEFCBC791C68DD4B000F5751 /* M_Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M_Item.m; sourceTree = "<group>"; };
+		AEFCBC7A1C68DD4B000F5751 /* M_Job.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M_Job.h; sourceTree = "<group>"; };
+		AEFCBC7B1C68DD4B000F5751 /* M_Job.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M_Job.m; sourceTree = "<group>"; };
+		AEFCBC7C1C68DD4B000F5751 /* M_Kakugen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M_Kakugen.h; sourceTree = "<group>"; };
+		AEFCBC7D1C68DD4B000F5751 /* M_Kakugen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M_Kakugen.m; sourceTree = "<group>"; };
+		AEFCBC7E1C68DD4B000F5751 /* M_Okan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M_Okan.h; sourceTree = "<group>"; };
+		AEFCBC7F1C68DD4B000F5751 /* M_Okan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M_Okan.m; sourceTree = "<group>"; };
+		AEFCBC801C68DD4B000F5751 /* M_ResultAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M_ResultAction.h; sourceTree = "<group>"; };
+		AEFCBC811C68DD4B000F5751 /* M_ResultAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M_ResultAction.m; sourceTree = "<group>"; };
+		AEFCBC821C68DD4B000F5751 /* M_Stage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M_Stage.h; sourceTree = "<group>"; };
+		AEFCBC831C68DD4B000F5751 /* M_Stage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M_Stage.m; sourceTree = "<group>"; };
+		AEFCBC841C68DD4B000F5751 /* T_ActionResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = T_ActionResult.h; sourceTree = "<group>"; };
+		AEFCBC851C68DD4B000F5751 /* T_ActionResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = T_ActionResult.m; sourceTree = "<group>"; };
+		AEFCBC861C68DD4B000F5751 /* T_CharaBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = T_CharaBase.h; sourceTree = "<group>"; };
+		AEFCBC871C68DD4B000F5751 /* T_CharaBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = T_CharaBase.m; sourceTree = "<group>"; };
+		AEFCBC881C68DD4B000F5751 /* T_GetItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = T_GetItem.h; sourceTree = "<group>"; };
+		AEFCBC891C68DD4B000F5751 /* T_GetItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = T_GetItem.m; sourceTree = "<group>"; };
+		AEFCBC8A1C68DD4B000F5751 /* T_RefItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = T_RefItem.h; sourceTree = "<group>"; };
+		AEFCBC8B1C68DD4B000F5751 /* T_RefItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = T_RefItem.m; sourceTree = "<group>"; };
+		AEFCBC8C1C68DD4B000F5751 /* T_RefJob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = T_RefJob.h; sourceTree = "<group>"; };
+		AEFCBC8D1C68DD4B000F5751 /* T_RefJob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = T_RefJob.m; sourceTree = "<group>"; };
+		AEFCBC8E1C68DD4B000F5751 /* T_RefKakugen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = T_RefKakugen.h; sourceTree = "<group>"; };
+		AEFCBC8F1C68DD4B000F5751 /* T_RefKakugen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = T_RefKakugen.m; sourceTree = "<group>"; };
+		AEFCBC901C68DD4B000F5751 /* T_RefStage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = T_RefStage.h; sourceTree = "<group>"; };
+		AEFCBC911C68DD4B000F5751 /* T_RefStage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = T_RefStage.m; sourceTree = "<group>"; };
 		F41FD6021C4D29930086A607 /* NeeNeeApp-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NeeNeeApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		F41FD62C1C4D3B640086A607 /* LINEActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LINEActivity.h; sourceTree = "<group>"; };
 		F41FD62D1C4D3B640086A607 /* LINEActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LINEActivity.m; sourceTree = "<group>"; };
@@ -296,15 +360,7 @@
 		F41FD6301C4D3B640086A607 /* LINEActivityIcon@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LINEActivityIcon@2x~ipad.png"; sourceTree = "<group>"; };
 		F41FD6311C4D3B640086A607 /* LINEActivityIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LINEActivityIcon@3x.png"; sourceTree = "<group>"; };
 		F41FD6321C4D3B640086A607 /* LINEActivityIcon~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LINEActivityIcon~ipad.png"; sourceTree = "<group>"; };
-		F439B4BF1C3FFD4A004E92B4 /* 暇で忙しい.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "暇で忙しい.mp3"; path = "../../../../001_ニートいじり/03_サウンド/暇で忙しい.mp3"; sourceTree = "<group>"; };
 		F43D9B631C5D24240080F75D /* itemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = itemCell.swift; sourceTree = "<group>"; };
-		F44149671C45559600E7FC53 /* se1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = se1.mp3; path = "../../../../001_ニートいじり/03_サウンド/se1.mp3"; sourceTree = "<group>"; };
-		F44149681C45559600E7FC53 /* se2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = se2.mp3; path = "../../../../001_ニートいじり/03_サウンド/se2.mp3"; sourceTree = "<group>"; };
-		F44149691C45559600E7FC53 /* se3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = se3.mp3; path = "../../../../001_ニートいじり/03_サウンド/se3.mp3"; sourceTree = "<group>"; };
-		F441496A1C45559600E7FC53 /* se4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = se4.mp3; path = "../../../../001_ニートいじり/03_サウンド/se4.mp3"; sourceTree = "<group>"; };
-		F441496B1C45559600E7FC53 /* se5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = se5.mp3; path = "../../../../001_ニートいじり/03_サウンド/se5.mp3"; sourceTree = "<group>"; };
-		F441496C1C45559600E7FC53 /* se6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = se6.mp3; path = "../../../../001_ニートいじり/03_サウンド/se6.mp3"; sourceTree = "<group>"; };
-		F441496D1C45559600E7FC53 /* 落ち着くところ.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "落ち着くところ.mp3"; path = "../../../../001_ニートいじり/03_サウンド/落ち着くところ.mp3"; sourceTree = "<group>"; };
 		F44C0DE81C43EFF400B0CB27 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F483300A1C2F040D00234B18 /* NeeNeeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NeeNeeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F483300D1C2F040D00234B18 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -359,41 +415,6 @@
 				76D912C337F465574C4CC36B /* Pods-NeeNeeApp.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		AE05CA9B1C5BDD9A00451A00 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				AE05CA9C1C5BDD9A00451A00 /* _DropItemM.h */,
-				AE05CA9D1C5BDD9A00451A00 /* _DropItemM.m */,
-				AE05CA9E1C5BDD9A00451A00 /* _ItemM.h */,
-				AE05CA9F1C5BDD9A00451A00 /* _ItemM.m */,
-				AE05CAA01C5BDD9A00451A00 /* _JobM.h */,
-				AE05CAA11C5BDD9A00451A00 /* _JobM.m */,
-				AE05CAA21C5BDD9A00451A00 /* _MeigenM.h */,
-				AE05CAA31C5BDD9A00451A00 /* _MeigenM.m */,
-				AE05CAA41C5BDD9A00451A00 /* _OkanM.h */,
-				AE05CAA51C5BDD9A00451A00 /* _OkanM.m */,
-				AE05CAA61C5BDD9A00451A00 /* _ResultActionM.h */,
-				AE05CAA71C5BDD9A00451A00 /* _ResultActionM.m */,
-				AE05CAA81C5BDD9A00451A00 /* _StageM.h */,
-				AE05CAA91C5BDD9A00451A00 /* _StageM.m */,
-				AE05CAAA1C5BDD9A00451A00 /* DropItemM.h */,
-				AE05CAAB1C5BDD9A00451A00 /* DropItemM.m */,
-				AE05CAAC1C5BDD9A00451A00 /* ItemM.h */,
-				AE05CAAD1C5BDD9A00451A00 /* ItemM.m */,
-				AE05CAAE1C5BDD9A00451A00 /* JobM.h */,
-				AE05CAAF1C5BDD9A00451A00 /* JobM.m */,
-				AE05CAB01C5BDD9A00451A00 /* MeigenM.h */,
-				AE05CAB11C5BDD9A00451A00 /* MeigenM.m */,
-				AE05CAB21C5BDD9A00451A00 /* OkanM.h */,
-				AE05CAB31C5BDD9A00451A00 /* OkanM.m */,
-				AE05CAB41C5BDD9A00451A00 /* ResultActionM.h */,
-				AE05CAB51C5BDD9A00451A00 /* ResultActionM.m */,
-				AE05CAB61C5BDD9A00451A00 /* StageM.h */,
-				AE05CAB71C5BDD9A00451A00 /* StageM.m */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		AE8E93921C5DE2BE0031BF79 /* Resources */ = {
@@ -499,27 +520,90 @@
 			path = Image;
 			sourceTree = "<group>";
 		};
+		AEFCBC481C68DC97000F5751 /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				AEFCBC491C68DC97000F5751 /* se1.mp3 */,
+				AEFCBC4A1C68DC97000F5751 /* se2.mp3 */,
+				AEFCBC4B1C68DC97000F5751 /* se3.mp3 */,
+				AEFCBC4C1C68DC97000F5751 /* se4.mp3 */,
+				AEFCBC4D1C68DC97000F5751 /* se5.mp3 */,
+				AEFCBC4E1C68DC97000F5751 /* se6.mp3 */,
+				AEFCBC4F1C68DC97000F5751 /* 暇で忙しい.mp3 */,
+				AEFCBC501C68DC97000F5751 /* 落ち着くところ.mp3 */,
+			);
+			path = Sound;
+			sourceTree = "<group>";
+		};
+		AEFCBC591C68DD4B000F5751 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AEFCBC5A1C68DD4B000F5751 /* _M_DropItem.h */,
+				AEFCBC5B1C68DD4B000F5751 /* _M_DropItem.m */,
+				AEFCBC5C1C68DD4B000F5751 /* _M_Item.h */,
+				AEFCBC5D1C68DD4B000F5751 /* _M_Item.m */,
+				AEFCBC5E1C68DD4B000F5751 /* _M_Job.h */,
+				AEFCBC5F1C68DD4B000F5751 /* _M_Job.m */,
+				AEFCBC601C68DD4B000F5751 /* _M_Kakugen.h */,
+				AEFCBC611C68DD4B000F5751 /* _M_Kakugen.m */,
+				AEFCBC621C68DD4B000F5751 /* _M_Okan.h */,
+				AEFCBC631C68DD4B000F5751 /* _M_Okan.m */,
+				AEFCBC641C68DD4B000F5751 /* _M_ResultAction.h */,
+				AEFCBC651C68DD4B000F5751 /* _M_ResultAction.m */,
+				AEFCBC661C68DD4B000F5751 /* _M_Stage.h */,
+				AEFCBC671C68DD4B000F5751 /* _M_Stage.m */,
+				AEFCBC681C68DD4B000F5751 /* _T_ActionResult.h */,
+				AEFCBC691C68DD4B000F5751 /* _T_ActionResult.m */,
+				AEFCBC6A1C68DD4B000F5751 /* _T_CharaBase.h */,
+				AEFCBC6B1C68DD4B000F5751 /* _T_CharaBase.m */,
+				AEFCBC6C1C68DD4B000F5751 /* _T_GetItem.h */,
+				AEFCBC6D1C68DD4B000F5751 /* _T_GetItem.m */,
+				AEFCBC6E1C68DD4B000F5751 /* _T_RefItem.h */,
+				AEFCBC6F1C68DD4B000F5751 /* _T_RefItem.m */,
+				AEFCBC701C68DD4B000F5751 /* _T_RefJob.h */,
+				AEFCBC711C68DD4B000F5751 /* _T_RefJob.m */,
+				AEFCBC721C68DD4B000F5751 /* _T_RefKakugen.h */,
+				AEFCBC731C68DD4B000F5751 /* _T_RefKakugen.m */,
+				AEFCBC741C68DD4B000F5751 /* _T_RefStage.h */,
+				AEFCBC751C68DD4B000F5751 /* _T_RefStage.m */,
+				AEFCBC761C68DD4B000F5751 /* M_DropItem.h */,
+				AEFCBC771C68DD4B000F5751 /* M_DropItem.m */,
+				AEFCBC781C68DD4B000F5751 /* M_Item.h */,
+				AEFCBC791C68DD4B000F5751 /* M_Item.m */,
+				AEFCBC7A1C68DD4B000F5751 /* M_Job.h */,
+				AEFCBC7B1C68DD4B000F5751 /* M_Job.m */,
+				AEFCBC7C1C68DD4B000F5751 /* M_Kakugen.h */,
+				AEFCBC7D1C68DD4B000F5751 /* M_Kakugen.m */,
+				AEFCBC7E1C68DD4B000F5751 /* M_Okan.h */,
+				AEFCBC7F1C68DD4B000F5751 /* M_Okan.m */,
+				AEFCBC801C68DD4B000F5751 /* M_ResultAction.h */,
+				AEFCBC811C68DD4B000F5751 /* M_ResultAction.m */,
+				AEFCBC821C68DD4B000F5751 /* M_Stage.h */,
+				AEFCBC831C68DD4B000F5751 /* M_Stage.m */,
+				AEFCBC841C68DD4B000F5751 /* T_ActionResult.h */,
+				AEFCBC851C68DD4B000F5751 /* T_ActionResult.m */,
+				AEFCBC861C68DD4B000F5751 /* T_CharaBase.h */,
+				AEFCBC871C68DD4B000F5751 /* T_CharaBase.m */,
+				AEFCBC881C68DD4B000F5751 /* T_GetItem.h */,
+				AEFCBC891C68DD4B000F5751 /* T_GetItem.m */,
+				AEFCBC8A1C68DD4B000F5751 /* T_RefItem.h */,
+				AEFCBC8B1C68DD4B000F5751 /* T_RefItem.m */,
+				AEFCBC8C1C68DD4B000F5751 /* T_RefJob.h */,
+				AEFCBC8D1C68DD4B000F5751 /* T_RefJob.m */,
+				AEFCBC8E1C68DD4B000F5751 /* T_RefKakugen.h */,
+				AEFCBC8F1C68DD4B000F5751 /* T_RefKakugen.m */,
+				AEFCBC901C68DD4B000F5751 /* T_RefStage.h */,
+				AEFCBC911C68DD4B000F5751 /* T_RefStage.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		E0948DE9BFEBC44A9DFED657 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				F4EB1D06214EC164462ADCDD /* libPods-NeeNeeApp.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		F41FD6031C4D2B4B0086A607 /* Sound */ = {
-			isa = PBXGroup;
-			children = (
-				F44149671C45559600E7FC53 /* se1.mp3 */,
-				F44149681C45559600E7FC53 /* se2.mp3 */,
-				F44149691C45559600E7FC53 /* se3.mp3 */,
-				F441496A1C45559600E7FC53 /* se4.mp3 */,
-				F441496B1C45559600E7FC53 /* se5.mp3 */,
-				F441496C1C45559600E7FC53 /* se6.mp3 */,
-				F441496D1C45559600E7FC53 /* 落ち着くところ.mp3 */,
-				F439B4BF1C3FFD4A004E92B4 /* 暇で忙しい.mp3 */,
-			);
-			name = Sound;
 			sourceTree = "<group>";
 		};
 		F41FD62B1C4D3B640086A607 /* LINEActivity */ = {
@@ -561,11 +645,11 @@
 		F483300C1C2F040D00234B18 /* NeeNeeApp */ = {
 			isa = PBXGroup;
 			children = (
+				AEFCBC591C68DD4B000F5751 /* Model */,
+				AEFCBC481C68DC97000F5751 /* Sound */,
 				AEDE9A7A1C66433700841902 /* Image */,
 				AE8E93921C5DE2BE0031BF79 /* Resources */,
-				AE05CA9B1C5BDD9A00451A00 /* Model */,
 				F41FD62B1C4D3B640086A607 /* LINEActivity */,
-				F41FD6031C4D2B4B0086A607 /* Sound */,
 				F483300D1C2F040D00234B18 /* AppDelegate.swift */,
 				AEDE9B1F1C66435700841902 /* Const.swift */,
 				F483300F1C2F040D00234B18 /* NeetMainViewController.swift */,
@@ -606,21 +690,35 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE05CABC1C5BDD9A00451A00 /* _JobM.h in Headers */,
-				AE05CACC1C5BDD9A00451A00 /* MeigenM.h in Headers */,
-				AE05CACE1C5BDD9A00451A00 /* OkanM.h in Headers */,
-				AE05CAC61C5BDD9A00451A00 /* DropItemM.h in Headers */,
-				AE05CAB81C5BDD9A00451A00 /* _DropItemM.h in Headers */,
-				AE05CABE1C5BDD9A00451A00 /* _MeigenM.h in Headers */,
-				AE05CACA1C5BDD9A00451A00 /* JobM.h in Headers */,
-				AE05CAC21C5BDD9A00451A00 /* _ResultActionM.h in Headers */,
-				AE05CAC01C5BDD9A00451A00 /* _OkanM.h in Headers */,
-				AE05CAD01C5BDD9A00451A00 /* ResultActionM.h in Headers */,
+				AEFCBCBE1C68DD4B000F5751 /* T_CharaBase.h in Headers */,
+				AEFCBCA61C68DD4B000F5751 /* _T_RefItem.h in Headers */,
+				AEFCBC961C68DD4B000F5751 /* _M_Job.h in Headers */,
+				AEFCBCB01C68DD4B000F5751 /* M_Item.h in Headers */,
+				AEFCBCBA1C68DD4B000F5751 /* M_Stage.h in Headers */,
+				AEFCBCB61C68DD4B000F5751 /* M_Okan.h in Headers */,
+				AEFCBCC61C68DD4B000F5751 /* T_RefKakugen.h in Headers */,
+				AEFCBCAE1C68DD4B000F5751 /* M_DropItem.h in Headers */,
+				AEFCBCC41C68DD4B000F5751 /* T_RefJob.h in Headers */,
+				AEFCBC9C1C68DD4B000F5751 /* _M_ResultAction.h in Headers */,
+				AEFCBCC21C68DD4B000F5751 /* T_RefItem.h in Headers */,
+				AEFCBCA21C68DD4B000F5751 /* _T_CharaBase.h in Headers */,
+				AEFCBCB21C68DD4B000F5751 /* M_Job.h in Headers */,
+				AEFCBCB41C68DD4B000F5751 /* M_Kakugen.h in Headers */,
+				AEFCBCC81C68DD4B000F5751 /* T_RefStage.h in Headers */,
+				AEFCBC9A1C68DD4B000F5751 /* _M_Okan.h in Headers */,
+				AEFCBCBC1C68DD4B000F5751 /* T_ActionResult.h in Headers */,
+				AEFCBCB81C68DD4B000F5751 /* M_ResultAction.h in Headers */,
+				AEFCBC981C68DD4B000F5751 /* _M_Kakugen.h in Headers */,
+				AEFCBC921C68DD4B000F5751 /* _M_DropItem.h in Headers */,
+				AEFCBC941C68DD4B000F5751 /* _M_Item.h in Headers */,
+				AEFCBCA81C68DD4B000F5751 /* _T_RefJob.h in Headers */,
 				F41FD6331C4D3B640086A607 /* LINEActivity.h in Headers */,
-				AE05CABA1C5BDD9A00451A00 /* _ItemM.h in Headers */,
-				AE05CAC41C5BDD9A00451A00 /* _StageM.h in Headers */,
-				AE05CAD21C5BDD9A00451A00 /* StageM.h in Headers */,
-				AE05CAC81C5BDD9A00451A00 /* ItemM.h in Headers */,
+				AEFCBCC01C68DD4B000F5751 /* T_GetItem.h in Headers */,
+				AEFCBCAA1C68DD4B000F5751 /* _T_RefKakugen.h in Headers */,
+				AEFCBCAC1C68DD4B000F5751 /* _T_RefStage.h in Headers */,
+				AEFCBCA41C68DD4B000F5751 /* _T_GetItem.h in Headers */,
+				AEFCBC9E1C68DD4B000F5751 /* _M_Stage.h in Headers */,
+				AEFCBCA01C68DD4B000F5751 /* _T_ActionResult.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -741,7 +839,6 @@
 				AEDE9AFE1C66433700841902 /* 04_01_03_02_01.png in Resources */,
 				AEDE9B0A1C66433700841902 /* 04_01_14_02_01.png in Resources */,
 				AEDE9B191C66433700841902 /* 06_10_01.png in Resources */,
-				F44149731C45559600E7FC53 /* se6.mp3 in Resources */,
 				AEDE9AD61C66433700841902 /* 01_06_01.png in Resources */,
 				AEDE9ADC1C66433700841902 /* 02_01_01.png in Resources */,
 				F41FD6351C4D3B640086A607 /* LINEActivityIcon.png in Resources */,
@@ -761,36 +858,37 @@
 				AEDE9B161C66433700841902 /* 06_06_01.png in Resources */,
 				AEDE9AF41C66433700841902 /* 04_01_01_01_07.PNG in Resources */,
 				AEDE9B181C66433700841902 /* 06_08_01.png in Resources */,
+				AEFCBC521C68DC97000F5751 /* se2.mp3 in Resources */,
 				AEDE9B111C66433700841902 /* 06_01_01.png in Resources */,
 				AEDE9AEF1C66433700841902 /* 04_01_01_01_02.PNG in Resources */,
 				AEDE9B1D1C66433700841902 /* 08_01_01.png in Resources */,
 				AEDE9AE51C66433700841902 /* 03_04_01.png in Resources */,
 				AEDE9AD91C66433700841902 /* 01_08_01.png in Resources */,
+				AEFCBC571C68DC97000F5751 /* 暇で忙しい.mp3 in Resources */,
+				AEFCBC541C68DC97000F5751 /* se4.mp3 in Resources */,
 				AEDE9AFF1C66433700841902 /* 04_01_04_02_01.png in Resources */,
 				AEDE9AEB1C66433700841902 /* 03_25_01.png in Resources */,
 				AEDE9B051C66433700841902 /* 04_01_08_02_01.png in Resources */,
-				F44149701C45559600E7FC53 /* se3.mp3 in Resources */,
 				AEDE9B021C66433700841902 /* 04_01_05_02_01.png in Resources */,
 				AEDE9AFD1C66433700841902 /* 04_01_02_03_01.png in Resources */,
 				AEDE9AE31C66433700841902 /* 03_02_01.png in Resources */,
 				AEDE9B0B1C66433700841902 /* 04_01_14_03_01.png in Resources */,
 				AEDE9AD21C66433700841902 /* 01_04_01.png in Resources */,
 				F41FD6371C4D3B640086A607 /* LINEActivityIcon@2x~ipad.png in Resources */,
+				AEFCBC581C68DC97000F5751 /* 落ち着くところ.mp3 in Resources */,
 				AEDE9B031C66433700841902 /* 04_01_05_03_01.png in Resources */,
-				F441496E1C45559600E7FC53 /* se1.mp3 in Resources */,
-				F439B4C01C3FFD4A004E92B4 /* 暇で忙しい.mp3 in Resources */,
 				AEDE9AE21C66433700841902 /* 03_01_01.png in Resources */,
 				AEDE9ADD1C66433700841902 /* 02_02_01.png in Resources */,
 				AEDE9AE41C66433700841902 /* 03_03_01.png in Resources */,
 				F4F135431C68E32900130069 /* 02_05_03.png in Resources */,
 				AEDE9ADA1C66433700841902 /* 01_09_01.png in Resources */,
-				F44149721C45559600E7FC53 /* se5.mp3 in Resources */,
 				AEDE9AF71C66433700841902 /* 04_01_01_01_10.PNG in Resources */,
 				AEDE9AF11C66433700841902 /* 04_01_01_01_04.PNG in Resources */,
 				F4F135481C68E39E00130069 /* 02_05_01.png in Resources */,
 				F483301B1C2F040D00234B18 /* LaunchScreen.storyboard in Resources */,
+				AEFCBC561C68DC97000F5751 /* se6.mp3 in Resources */,
 				AEDE9AE01C66433700841902 /* 02_05_01.png in Resources */,
-				F441496F1C45559600E7FC53 /* se2.mp3 in Resources */,
+				AEFCBC531C68DC97000F5751 /* se3.mp3 in Resources */,
 				AEDE9B061C66433700841902 /* 04_01_08_03_01.png in Resources */,
 				AEDE9AD41C66433700841902 /* 01_05_01.png in Resources */,
 				AEDE9AF51C66433700841902 /* 04_01_01_01_08.PNG in Resources */,
@@ -801,6 +899,7 @@
 				AEDE9ACE1C66433700841902 /* 01_02_01.png in Resources */,
 				AEDE9ACD1C66433700841902 /* 01_01_01.png in Resources */,
 				AEDE9ACF1C66433700841902 /* 01_02_02.png in Resources */,
+				AEFCBC551C68DC97000F5751 /* se5.mp3 in Resources */,
 				AEDE9AFC1C66433700841902 /* 04_01_02_02_01.png in Resources */,
 				AEDE9ADB1C66433700841902 /* 01_11_01.png in Resources */,
 				AE8E93971C5DE80D0031BF79 /* NeetMaster.sqlite-shm in Resources */,
@@ -810,9 +909,7 @@
 				AEDE9B091C66433700841902 /* 04_01_14_01_01.png in Resources */,
 				AEDE9B101C66433700841902 /* 05_01_02.png in Resources */,
 				F44C0DE91C43EFF400B0CB27 /* Main.storyboard in Resources */,
-				F44149711C45559600E7FC53 /* se4.mp3 in Resources */,
 				AEDE9AF61C66433700841902 /* 04_01_01_01_09.PNG in Resources */,
-				F44149741C45559600E7FC53 /* 落ち着くところ.mp3 in Resources */,
 				AEDE9B0F1C66433700841902 /* 05_01_01.png in Resources */,
 				AEDE9AED1C66433700841902 /* 03_27_01.png in Resources */,
 				AEDE9ADE1C66433700841902 /* 02_03_01.png in Resources */,
@@ -825,6 +922,7 @@
 				AEDE9B011C66433700841902 /* 04_01_04_06_01.png in Resources */,
 				AEDE9B121C66433700841902 /* 06_02_01.png in Resources */,
 				AEDE9B171C66433700841902 /* 06_07_01.png in Resources */,
+				AEFCBC511C68DC97000F5751 /* se1.mp3 in Resources */,
 				AEDE9AD71C66433700841902 /* 01_06_02.png in Resources */,
 				AEDE9B151C66433700841902 /* 06_05_01.png in Resources */,
 				AEDE9B141C66433700841902 /* 06_04_01.png in Resources */,
@@ -912,27 +1010,41 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE05CAC51C5BDD9A00451A00 /* _StageM.m in Sources */,
-				AE05CABB1C5BDD9A00451A00 /* _ItemM.m in Sources */,
-				AE05CAC11C5BDD9A00451A00 /* _OkanM.m in Sources */,
+				AEFCBCA91C68DD4B000F5751 /* _T_RefJob.m in Sources */,
+				AEFCBCAF1C68DD4B000F5751 /* M_DropItem.m in Sources */,
+				AEFCBCC51C68DD4B000F5751 /* T_RefJob.m in Sources */,
+				AEFCBCB71C68DD4B000F5751 /* M_Okan.m in Sources */,
 				F48330101C2F040D00234B18 /* NeetMainViewController.swift in Sources */,
-				AE05CACD1C5BDD9A00451A00 /* MeigenM.m in Sources */,
+				AEFCBCAD1C68DD4B000F5751 /* _T_RefStage.m in Sources */,
+				AEFCBCC31C68DD4B000F5751 /* T_RefItem.m in Sources */,
+				AEFCBCA71C68DD4B000F5751 /* _T_RefItem.m in Sources */,
+				AEFCBC9D1C68DD4B000F5751 /* _M_ResultAction.m in Sources */,
 				F43D9B641C5D24240080F75D /* itemCell.swift in Sources */,
-				AE05CABD1C5BDD9A00451A00 /* _JobM.m in Sources */,
-				AE05CAC31C5BDD9A00451A00 /* _ResultActionM.m in Sources */,
-				AE05CAD11C5BDD9A00451A00 /* ResultActionM.m in Sources */,
+				AEFCBCA51C68DD4B000F5751 /* _T_GetItem.m in Sources */,
+				AEFCBCC71C68DD4B000F5751 /* T_RefKakugen.m in Sources */,
 				AEDE9B201C66435700841902 /* Const.swift in Sources */,
+				AEFCBCB31C68DD4B000F5751 /* M_Job.m in Sources */,
 				AEDE9B221C66471800841902 /* ActionSetViewController.swift in Sources */,
-				AE05CAD31C5BDD9A00451A00 /* StageM.m in Sources */,
-				AE05CAC91C5BDD9A00451A00 /* ItemM.m in Sources */,
-				AE05CACF1C5BDD9A00451A00 /* OkanM.m in Sources */,
-				AE05CACB1C5BDD9A00451A00 /* JobM.m in Sources */,
-				AE05CAB91C5BDD9A00451A00 /* _DropItemM.m in Sources */,
-				AE05CAC71C5BDD9A00451A00 /* DropItemM.m in Sources */,
+				AEFCBCC91C68DD4B000F5751 /* T_RefStage.m in Sources */,
+				AEFCBCA31C68DD4B000F5751 /* _T_CharaBase.m in Sources */,
+				AEFCBC9B1C68DD4B000F5751 /* _M_Okan.m in Sources */,
+				AEFCBC9F1C68DD4B000F5751 /* _M_Stage.m in Sources */,
+				AEFCBC951C68DD4B000F5751 /* _M_Item.m in Sources */,
+				AEFCBCBB1C68DD4B000F5751 /* M_Stage.m in Sources */,
+				AEFCBC971C68DD4B000F5751 /* _M_Job.m in Sources */,
+				AEFCBCB91C68DD4B000F5751 /* M_ResultAction.m in Sources */,
 				F48330161C2F040D00234B18 /* NeeNeeApp.xcdatamodeld in Sources */,
+				AEFCBC991C68DD4B000F5751 /* _M_Kakugen.m in Sources */,
+				AEFCBCBF1C68DD4B000F5751 /* T_CharaBase.m in Sources */,
+				AEFCBCB11C68DD4B000F5751 /* M_Item.m in Sources */,
+				AEFCBCBD1C68DD4B000F5751 /* T_ActionResult.m in Sources */,
+				AEFCBCAB1C68DD4B000F5751 /* _T_RefKakugen.m in Sources */,
+				AEFCBCA11C68DD4B000F5751 /* _T_ActionResult.m in Sources */,
 				F483300E1C2F040D00234B18 /* AppDelegate.swift in Sources */,
-				AE05CABF1C5BDD9A00451A00 /* _MeigenM.m in Sources */,
 				F41FD6341C4D3B640086A607 /* LINEActivity.m in Sources */,
+				AEFCBC931C68DD4B000F5751 /* _M_DropItem.m in Sources */,
+				AEFCBCC11C68DD4B000F5751 /* T_GetItem.m in Sources */,
+				AEFCBCB51C68DD4B000F5751 /* M_Kakugen.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
