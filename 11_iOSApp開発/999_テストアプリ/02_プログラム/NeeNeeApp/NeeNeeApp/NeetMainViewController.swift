@@ -77,15 +77,12 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     private var seMuteBtn: UIButton!
     private var seVolumeSBar: UISlider!
     private var seLabel: UILabel!
-    
-    
+        
     // 定数宣言
     private let mySongPath = NSBundle.mainBundle().pathForResource("暇で忙しい", ofType:"mp3")
     internal let mySeYesPath = NSBundle.mainBundle().pathForResource("se4", ofType:"mp3")
     private let mySeNoPath = NSBundle.mainBundle().pathForResource("se6", ofType:"mp3")
 
-
-    
     //TODO:メモリ使用量削減のため、極力必要な時に、宣言、解放すること
     private let myImage = UIImage(named: "03_01_01")
     private let fukidasiImage = UIImage( named: "05_01_01")!
