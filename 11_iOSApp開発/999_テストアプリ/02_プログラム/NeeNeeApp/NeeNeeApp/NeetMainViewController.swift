@@ -492,14 +492,6 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     // MARK: - その他メソッド
     //****************************************
 
-    
-    
-<<<<<<< HEAD
-    /** SE再生 **/
-    internal func seSoundPlay(sePath: String)
-    {
-        print(NSDate().description, __FUNCTION__, __LINE__)
-=======
     //初期表示時のオブジェクトを作成し設置する
     func createObjInit() {
         
@@ -523,8 +515,6 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         myFukidasiImageView.frame.origin.y = myCharImageView.frame.origin.y - 300
         myFukidasiImageView.image = fukidasiImage
         myFukidasiImageView.hidden = true
->>>>>>> 56b906b973b203a5266a445b517e52d0be655838
-
 
         // 吹き出しのラベルを設定する.
         fukidasiLabel = UILabel()
