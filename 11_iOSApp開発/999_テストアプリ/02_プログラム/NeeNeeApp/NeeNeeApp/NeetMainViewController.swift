@@ -80,7 +80,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     
     // 定数宣言
     private let mySongPath = NSBundle.mainBundle().pathForResource("暇で忙しい", ofType:"mp3")
-    private let mySeYesPath = NSBundle.mainBundle().pathForResource("se4", ofType:"mp3")
+    internal let mySeYesPath = NSBundle.mainBundle().pathForResource("se4", ofType:"mp3")
     private let mySeNoPath = NSBundle.mainBundle().pathForResource("se6", ofType:"mp3")
 
     
@@ -607,7 +607,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     }
     
     /** SE再生 **/
-    func seSoundPlay(sePath: String)
+    internal func seSoundPlay(sePath: String)
     {
         print(NSDate().description, __FUNCTION__, __LINE__)
 

@@ -18,11 +18,13 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
     private var setItemView: UIImageView!
     private var selItemView: UIImageView!
     private var mainImgView: UIImageView!
-
     
     // 背景画像用オブジェクト
     private let mainViewImage = UIImage(named: "02_01_01.png")
     private var touchesPosition = CGPoint!()
+    private var setItemCnt: Int8 = 0
+    
+    private let mySeSetPath = NSBundle.mainBundle().pathForResource("se1", ofType:"mp3")
     
     override func viewDidLoad() {
         
@@ -34,15 +36,8 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         mainImgView.alpha = 0.9
 
         // セット済みアイテムの初期設定.
-        let setItem1Image = self.getUncachedImage( named: "02_05_01.png")
         setItemView = UIImageView()
-        /**
-        setItemView.frame.origin.x = 100
-        setItemView.frame.origin.y = 100
-        setItemView.frame.size.width = 160
-        setItemView.frame.size.height = 160
-        **/
-        setItemView.image = setItem1Image
+        setItemImageReLoad()
         
         // 画像をUIImageViewに設定する.
         let myImage = self.getUncachedImage( named: "02_01_01.png")
@@ -136,17 +131,20 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         print(NSDate().description, __FUNCTION__, __LINE__)
         print("長押し")
         
-        print(recognizer.locationInView(self.view).x)
-        print(recognizer.locationInView(self.view).y)
-        
         // 押された位置でcellのPathを取得
         let point = recognizer.locationInView(itemCollectionView)
         
         let indexPath = self.itemCollectionView.indexPathForItemAtPoint(point)
         
+        /**
+        // パスが取得できない場合は処理終了
         if indexPath == nil {
+            return
+        }
+        **/
+
+        if recognizer.state == UIGestureRecognizerState.Began  {
             
-        } else if recognizer.state == UIGestureRecognizerState.Began  {
             // 長押しされた場合の処理
             print("長押しされたcellのindexPath:\(indexPath?.row)")
 
@@ -155,22 +153,56 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
             
             // 選択中表示用アイテムが未作成なら作成する.
             if selItemView == nil {
+                
                 selItemView = UIImageView()
                 selItemView.image = myImage
                 selItemView.alpha = 0.8
                 selItemView.frame.size = CGSizeMake(50,50)
                 self.view.addSubview(selItemView)
             }
-        } else if recognizer.state == UIGestureRecognizerState.Ended  {
-        print("離した")
-        }
-        print(recognizer.state)
-        // 選択したアイテムの画像位置をタップ中の位置に常に合わせる.
-        selItemView.frame.origin.x = recognizer.locationInView(self.view).x
-        selItemView.frame.origin.y = recognizer.locationInView(self.view).y
+            
+            print(recognizer.state)
         
-        selItemView.frame.origin.x -= 20.0
-        selItemView.frame.origin.y -= 20.0
+        } else if recognizer.state == UIGestureRecognizerState.Ended  {
+            
+            print("離した")
+            
+            // セットアイテムの領域内の場合
+            if recognizer.locationInView(self.view).x <= setItemView.frame.maxX
+            && recognizer.locationInView(self.view).x >= setItemView.frame.origin.x
+            && recognizer.locationInView(self.view).y <= setItemView.frame.maxY
+            && recognizer.locationInView(self.view).y >= setItemView.frame.origin.y {
+                
+                // セット中アイテムをカウントアップ
+                setItemCnt += 1
+                
+                // 領域内の場合、セットアイテムをセットする.
+                setItemImageReLoad()
+                /**
+                let a : NeetMainViewController = NeetMainViewController()
+                UIApplication.
+                super.seSoundPlay(mySeSetPath!)
+                **/                
+
+                print("セットされたアイテムのアイテムコード：")
+            }
+
+            // 選択中アイテムのイメージを破棄する.
+            selItemView.removeFromSuperview()
+            selItemView = nil
+            
+        }
+        
+        // 画像がある場合は画像位置を移動
+        if selItemView != nil {
+            
+            // 選択したアイテムの画像位置をタップ中の位置に常に合わせる.
+            selItemView.frame.origin.x = recognizer.locationInView(self.view).x
+            selItemView.frame.origin.y = recognizer.locationInView(self.view).y
+            selItemView.frame.origin.x -= 40.0
+            selItemView.frame.origin.y -= 40.0
+            
+        }
     }
     
     //****************************************
@@ -206,7 +238,7 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         // セルの情報を設定する.
         cell._name.text = "×"+"1"
         cell._img.image = self.getUncachedImage( named: "06_01_01.png")
-        cell.contentView.addGestureRecognizer(collectionView.panGestureRecognizer)
+ //       cell.contentView.addGestureRecognizer(collectionView.panGestureRecognizer)
         
         // セルを返却する.
         return cell
@@ -327,5 +359,40 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
                 constant: 0
             )]
         )
+    }
+
+    /** セット済みアイテムの円グラフを再描画する. **/
+    func setItemImageReLoad ()
+    {
+        
+        // 行動実績テーブルを読み込む
+        // TODO トランザクションが読み込めるようになってから実装
+        switch setItemCnt {
+            
+        case 0:
+            setItemView.image = self.getUncachedImage( named: "02_05_01.png")
+            break
+        case 1:
+            setItemView.image = self.getUncachedImage( named: "02_05_02.png")
+            break
+        case 2:
+            setItemView.image = self.getUncachedImage( named: "02_05_03.png")
+            break
+        case 3:
+            setItemView.image = self.getUncachedImage( named: "02_05_04.png")
+            break
+        default:
+            
+            // ダイアログを表示
+            let alertController = UIAlertController(title: "忙しすぎて死んじゃう"
+                , message: "未実行のひまをキャンセルしてください。", preferredStyle: .Alert)
+            
+            let defaultActionYes = UIAlertAction(title: "OK", style: .Default, handler:nil)
+            
+            alertController.addAction(defaultActionYes)
+            
+            presentViewController(alertController, animated: true, completion: nil)
+            
+        }
     }
 }
