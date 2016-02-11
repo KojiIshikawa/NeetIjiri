@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="v8Z-1Z-wvX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="v8Z-1Z-wvX">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <scenes>
         <!--Opening View Controller-->
@@ -21,7 +21,61 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="byt-n6-Htj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-184" y="150"/>
+            <point key="canvasLocation" x="-184" y="283"/>
+        </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="h36-At-04e">
+            <objects>
+                <viewController storyboardIdentifier="ProfileView" id="dkr-WB-ioI" customClass="ProfileViewController" customModule="NeeNeeApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zWI-kO-Evi"/>
+                        <viewControllerLayoutGuide type="bottom" id="Wng-Un-WbJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="b8U-Iy-uTS">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="k9D-BJ-3qN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-184" y="989"/>
+        </scene>
+        <!--Sns View Controller-->
+        <scene sceneID="nHv-V4-ZPq">
+            <objects>
+                <viewController storyboardIdentifier="SnsView" id="pJy-ZU-ni8" customClass="SnsViewController" customModule="NeeNeeApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MkO-KH-rNY"/>
+                        <viewControllerLayoutGuide type="bottom" id="165-PU-v11"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NoO-9D-ezC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q4s-U4-ya0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="459" y="989"/>
+        </scene>
+        <!--Setting View Controller-->
+        <scene sceneID="ayv-zP-WwM">
+            <objects>
+                <viewController storyboardIdentifier="SettingView" id="jpK-9v-TED" customClass="SettingViewController" customModule="NeeNeeApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="QvH-O2-AXq"/>
+                        <viewControllerLayoutGuide type="bottom" id="Eqn-Pg-9ZR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Si3-xT-h1q">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a7o-BJ-mhw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1081" y="989"/>
         </scene>
         <!--Neet Main View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -44,7 +98,7 @@
         <!--Action Set View Controller-->
         <scene sceneID="uYN-s2-UfH">
             <objects>
-                <viewController storyboardIdentifier="ActionSet" id="5qv-Un-r1V" customClass="ActionSetViewController" customModule="NeeNeeApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ActionSetView" id="5qv-Un-r1V" customClass="ActionSetViewController" customModule="NeeNeeApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FM7-eB-DGe"/>
                         <viewControllerLayoutGuide type="bottom" id="fIM-jC-23X"/>

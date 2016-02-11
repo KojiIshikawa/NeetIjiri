@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		564CDF907C4EC18FA819679E /* libPods-NeeNeeApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4EB1D06214EC164462ADCDD /* libPods-NeeNeeApp.a */; };
+		AE0D3F571C6C501A0015F479 /* PopoverBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D3F561C6C501A0015F479 /* PopoverBackgroundView.swift */; };
+		AE0D3F591C6C58170015F479 /* SnsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D3F581C6C58170015F479 /* SnsViewController.swift */; };
+		AE0D3F5B1C6C58270015F479 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D3F5A1C6C58270015F479 /* SettingViewController.swift */; };
+		AE0D3F5D1C6C58550015F479 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D3F5C1C6C58550015F479 /* ProfileViewController.swift */; };
+		AE0D3F601C6C6DB40015F479 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D3F5F1C6C6DB40015F479 /* Utility.swift */; };
 		AE8E93961C5DE80D0031BF79 /* NeetMaster.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = AE8E93931C5DE80D0031BF79 /* NeetMaster.sqlite */; };
 		AE8E93971C5DE80D0031BF79 /* NeetMaster.sqlite-shm in Resources */ = {isa = PBXBuildFile; fileRef = AE8E93941C5DE80D0031BF79 /* NeetMaster.sqlite-shm */; };
 		AE8E93981C5DE80D0031BF79 /* NeetMaster.sqlite-wal in Resources */ = {isa = PBXBuildFile; fileRef = AE8E93951C5DE80D0031BF79 /* NeetMaster.sqlite-wal */; };
@@ -219,6 +224,11 @@
 /* Begin PBXFileReference section */
 		061F3FC4E89134E46B5F4A8E /* Pods-NeeNeeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NeeNeeApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NeeNeeApp/Pods-NeeNeeApp.debug.xcconfig"; sourceTree = "<group>"; };
 		76D912C337F465574C4CC36B /* Pods-NeeNeeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NeeNeeApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-NeeNeeApp/Pods-NeeNeeApp.release.xcconfig"; sourceTree = "<group>"; };
+		AE0D3F561C6C501A0015F479 /* PopoverBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverBackgroundView.swift; sourceTree = "<group>"; };
+		AE0D3F581C6C58170015F479 /* SnsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnsViewController.swift; sourceTree = "<group>"; };
+		AE0D3F5A1C6C58270015F479 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		AE0D3F5C1C6C58550015F479 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		AE0D3F5F1C6C6DB40015F479 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		AE8E93931C5DE80D0031BF79 /* NeetMaster.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = NeetMaster.sqlite; sourceTree = "<group>"; };
 		AE8E93941C5DE80D0031BF79 /* NeetMaster.sqlite-shm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NeetMaster.sqlite-shm"; sourceTree = "<group>"; };
 		AE8E93951C5DE80D0031BF79 /* NeetMaster.sqlite-wal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "NeetMaster.sqlite-wal"; sourceTree = "<group>"; };
@@ -451,6 +461,30 @@
 				76D912C337F465574C4CC36B /* Pods-NeeNeeApp.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		AE0D3F5E1C6C587B0015F479 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				F4EE57251C6A249A0021E876 /* OpeningViewController.swift */,
+				F483300F1C2F040D00234B18 /* NeetMainViewController.swift */,
+				AEDE9B211C66471800841902 /* ActionSetViewController.swift */,
+				AE0D3F5C1C6C58550015F479 /* ProfileViewController.swift */,
+				AE0D3F581C6C58170015F479 /* SnsViewController.swift */,
+				AE0D3F5A1C6C58270015F479 /* SettingViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		AE0D3F621C6C70460015F479 /* OtherClass */ = {
+			isa = PBXGroup;
+			children = (
+				AEDE9B1F1C66435700841902 /* Const.swift */,
+				AE0D3F5F1C6C6DB40015F479 /* Utility.swift */,
+				AE0D3F561C6C501A0015F479 /* PopoverBackgroundView.swift */,
+				F43D9B631C5D24240080F75D /* itemCell.swift */,
+			);
+			name = OtherClass;
 			sourceTree = "<group>";
 		};
 		AE8E93921C5DE2BE0031BF79 /* Resources */ = {
@@ -703,12 +737,9 @@
 				AEDE9A7A1C66433700841902 /* Image */,
 				AE8E93921C5DE2BE0031BF79 /* Resources */,
 				F41FD62B1C4D3B640086A607 /* LINEActivity */,
+				AE0D3F5E1C6C587B0015F479 /* ViewControllers */,
+				AE0D3F621C6C70460015F479 /* OtherClass */,
 				F483300D1C2F040D00234B18 /* AppDelegate.swift */,
-				AEDE9B1F1C66435700841902 /* Const.swift */,
-				F4EE57251C6A249A0021E876 /* OpeningViewController.swift */,
-				F483300F1C2F040D00234B18 /* NeetMainViewController.swift */,
-				AEDE9B211C66471800841902 /* ActionSetViewController.swift */,
-				F43D9B631C5D24240080F75D /* itemCell.swift */,
 				F41FD6021C4D29930086A607 /* NeeNeeApp-Bridging-Header.h */,
 				F48330171C2F040D00234B18 /* Assets.xcassets */,
 				F44C0DE81C43EFF400B0CB27 /* Main.storyboard */,
@@ -1088,6 +1119,7 @@
 				F48330101C2F040D00234B18 /* NeetMainViewController.swift in Sources */,
 				AEFCBCAD1C68DD4B000F5751 /* _T_RefStage.m in Sources */,
 				AEFCBCC31C68DD4B000F5751 /* T_RefItem.m in Sources */,
+				AE0D3F591C6C58170015F479 /* SnsViewController.swift in Sources */,
 				AEFCBCA71C68DD4B000F5751 /* _T_RefItem.m in Sources */,
 				AEFCBC9D1C68DD4B000F5751 /* _M_ResultAction.m in Sources */,
 				F43D9B641C5D24240080F75D /* itemCell.swift in Sources */,
@@ -1097,11 +1129,13 @@
 				AEFCBCB31C68DD4B000F5751 /* M_Job.m in Sources */,
 				AEDE9B221C66471800841902 /* ActionSetViewController.swift in Sources */,
 				AEFCBCC91C68DD4B000F5751 /* T_RefStage.m in Sources */,
+				AE0D3F601C6C6DB40015F479 /* Utility.swift in Sources */,
 				AEFCBCA31C68DD4B000F5751 /* _T_CharaBase.m in Sources */,
 				AEFCBC9B1C68DD4B000F5751 /* _M_Okan.m in Sources */,
 				AEFCBC9F1C68DD4B000F5751 /* _M_Stage.m in Sources */,
 				AEFCBC951C68DD4B000F5751 /* _M_Item.m in Sources */,
 				AEFCBCBB1C68DD4B000F5751 /* M_Stage.m in Sources */,
+				AE0D3F5D1C6C58550015F479 /* ProfileViewController.swift in Sources */,
 				AEFCBC971C68DD4B000F5751 /* _M_Job.m in Sources */,
 				AEFCBCB91C68DD4B000F5751 /* M_ResultAction.m in Sources */,
 				F48330161C2F040D00234B18 /* NeeNeeApp.xcdatamodeld in Sources */,
@@ -1109,9 +1143,11 @@
 				F4EE57261C6A249A0021E876 /* OpeningViewController.swift in Sources */,
 				AEFCBCBF1C68DD4B000F5751 /* T_CharaBase.m in Sources */,
 				AEFCBCB11C68DD4B000F5751 /* M_Item.m in Sources */,
+				AE0D3F5B1C6C58270015F479 /* SettingViewController.swift in Sources */,
 				AEFCBCBD1C68DD4B000F5751 /* T_ActionResult.m in Sources */,
 				AEFCBCAB1C68DD4B000F5751 /* _T_RefKakugen.m in Sources */,
 				AEFCBCA11C68DD4B000F5751 /* _T_ActionResult.m in Sources */,
+				AE0D3F571C6C501A0015F479 /* PopoverBackgroundView.swift in Sources */,
 				F483300E1C2F040D00234B18 /* AppDelegate.swift in Sources */,
 				F41FD6341C4D3B640086A607 /* LINEActivity.m in Sources */,
 				AEFCBC931C68DD4B000F5751 /* _M_DropItem.m in Sources */,
