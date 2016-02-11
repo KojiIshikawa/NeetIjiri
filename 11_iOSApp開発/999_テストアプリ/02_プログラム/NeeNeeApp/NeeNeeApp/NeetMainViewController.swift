@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Social
 import iAd
 import AVFoundation
 
@@ -46,17 +45,17 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     private var configBtn: UIButton!
     
     // メニューのサブビュー
-    private var detailConView: UIView!
-    private var shareConView: UIView!
-    private var configConView: UIView!
+//    private var detailConView: UIView!
+//    private var shareConView: UIView!
+//    private var configConView: UIView!
     
     // メインの背景画像用オブジェクト
     private var mainImgView: UIImageView!
     private var mainImgSubView: UIImageView!
-    private var detailImgView: UIImageView!
-    private var detailImgSubView: UIImageView!
-    private var shareImgView: UIImageView!
-    private var configImgView: UIImageView!
+//    private var detailImgView: UIImageView!
+//    private var detailImgSubView: UIImageView!
+//    private var shareImgView: UIImageView!
+//    private var configImgView: UIImageView!
 
     // 履歴書メニューのオブジェクト
     private var nameDataLabel: UILabel!
@@ -65,19 +64,19 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     private var compDataLabel: UILabel!
     private var kakugenDataLabel: UILabel!
     
-    // シェアメニューのオブジェクト
-    private var facebookBtn: UIButton!
-    private var lineBtn: UIButton!
-    private var twitterBtn: UIButton!
+//    // シェアメニューのオブジェクト
+//    private var facebookBtn: UIButton!
+//    private var lineBtn: UIButton!
+//    private var twitterBtn: UIButton!
     
-    // 設定メニューのオブジェクト
-    private var bgmMuteBtn: UIButton!
-    private var bgmVolumeSBar: UISlider!
-    private var bgmLabel: UILabel!
-    private var seMuteBtn: UIButton!
-    private var seVolumeSBar: UISlider!
-    private var seLabel: UILabel!
-        
+//    // 設定メニューのオブジェクト
+//    private var bgmMuteBtn: UIButton!
+//    private var bgmVolumeSBar: UISlider!
+//    private var bgmLabel: UILabel!
+//    private var seMuteBtn: UIButton!
+//    private var seVolumeSBar: UISlider!
+//    private var seLabel: UILabel!
+    
     // 定数宣言
     private let mySongPath = NSBundle.mainBundle().pathForResource("暇で忙しい", ofType:"mp3")
     internal let mySeYesPath = NSBundle.mainBundle().pathForResource("se4", ofType:"mp3")
@@ -91,10 +90,10 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     // メニュー画面の画像設定
     private let mainViewImage = UIImage(named: "02_01_01.png")
     private let mainViewSubImage = UIImage(named: "02_05_01.png")
-    private let detailViewImage = UIImage(named: "02_02_01.png")
-    private let detailViewSubImage = UIImage(named: "02_06_01.png")
-    private let shareViewImage = UIImage(named: "02_03_01.png")
-    private let configViewImage = UIImage(named: "02_04_01.png")
+//    private let detailViewImage = UIImage(named: "02_02_01.png")
+//    private let detailViewSubImage = UIImage(named: "02_06_01.png")
+//    private let shareViewImage = UIImage(named: "02_03_01.png")
+//    private let configViewImage = UIImage(named: "02_04_01.png")
 
     // メニューボタンの画像設定
     private let manuBtnNextImage = UIImage(named: "01_01_01.png")
@@ -131,11 +130,11 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         //オブジェクトの配置
         self.createObjInit()
         
-        // 履歴書メニューの生成
-        self.detailInit()
+//        // 履歴書メニューの生成
+//        self.detailInit()
         
-        // シェアメニューの生成
-        self.shareInit()
+//        // シェアメニューの生成
+//        self.shareInit()
         
         // 設定メニューの生成
         self.configInit()
@@ -148,7 +147,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         
     }
     
-    
+    //メモリ消費が多くなった時に動くイベント
     override func didReceiveMemoryWarning() {
         print(NSDate().description, __FUNCTION__, __LINE__)
         super.didReceiveMemoryWarning()
@@ -172,7 +171,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
             configBtn.hidden = false
 
             // SEを再生する.
-            seSoundPlay(mySeYesPath!)
+            Utility.seSoundPlay(mySeYesPath!)
             
         } else {
             
@@ -187,28 +186,26 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
             configBtn.hidden = true
             
             // SEを再生する.
-            seSoundPlay(mySeNoPath!)
+            Utility.seSoundPlay(mySeNoPath!)
         
         }
     }
     
     
-    
+    //POPOVER実装時に必要になるイベント　おまじない
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController)
         -> UIModalPresentationStyle {
             return .None
     }
+
     
-    /** ひまつぶしボタン押下時の処理 **/
-    func tapMainBtn(sender: AnyObject) {
-        print(NSDate().description, __FUNCTION__, __LINE__)
-        
-        // SEを再生する.
-        seSoundPlay(mySeYesPath!)
-        
-        let popoverView = self.storyboard!.instantiateViewControllerWithIdentifier("ActionSet") as UIViewController
+    
+    func showPopoverView(sender: AnyObject, identifier:String) {
+        let popoverView = self.storyboard!.instantiateViewControllerWithIdentifier(identifier) as UIViewController
         popoverView.modalPresentationStyle = .Popover
-        popoverView.preferredContentSize = CGSizeMake(400, 500)
+
+        //TODO:端末種類に依存しないサイズ指定を！
+        popoverView.preferredContentSize = CGSizeMake(self.view.bounds.width - 20, self.view.bounds.height - 20)
         
         //TODO:独自のpopoverBackGroundViewを作成し追加すれば、吹き出しのデザインも変えられる
         popoverView.view.backgroundColor = UIColor.clearColor()
@@ -217,47 +214,69 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
             presentationController.sourceView = sender as! UIButton
             presentationController.sourceRect = sender.bounds
             presentationController.delegate = self
+            presentationController.popoverBackgroundViewClass = PopoverBackgroundView.classForCoder()
         }
         self.presentViewController(popoverView, animated: true, completion: nil)
+    
     }
     
-    func tapDetailBtn(sender: AnyObject) {
+    
+    
+    /** ひまつぶしボタン押下時の処理 **/
+    func tapMainBtn(sender: AnyObject) {
         print(NSDate().description, __FUNCTION__, __LINE__)
         
         // SEを再生する.
-        seSoundPlay(mySeYesPath!)
+        Utility.seSoundPlay(mySeYesPath!)
         
-        // ポップの表示・非表示を切り替える.
-        detailConView.hidden = detailConView.hidden ? false:true
+        //PopOverを表示
+        self.showPopoverView(sender, identifier: "ActionSetView")
         
-        // その他メニューボタンの制御を切り替える.
-        manuBtn.userInteractionEnabled = detailConView.hidden ? true:false
-        mainBtn.userInteractionEnabled = detailConView.hidden ? true:false
-        shareBtn.userInteractionEnabled = detailConView.hidden ? true:false
-        configBtn.userInteractionEnabled = detailConView.hidden ? true:false
+    }
+
+    //詳細ボタン押下時
+    func tapDetailBtn(sender: AnyObject) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+
+        // SEを再生する.
+        Utility.seSoundPlay(mySeYesPath!)
         
-        // ポップが非表示の場合
-        if detailConView.hidden {
-            
-            // 全てのボタンを活性に変更
-            manuBtn.setImage(manuBtnBackActImage, forState: .Normal)
-            mainBtn.setImage(mainBtnActImage, forState: .Normal)
-            detailBtn.setImage(detailBtnActImage, forState: .Normal)
-            shareBtn.setImage(shareBtnActImage, forState: .Normal)
-            configBtn.setImage(configBtnActImage, forState: .Normal)
-            
-            
-            // ポップが表示された場合
-        } else {
-            
-            // 該当メニューのボタン以外を非活性に変更
-            manuBtn.setImage(manuBtnBackInActImage, forState: .Normal)
-            mainBtn.setImage(mainBtnInActImage, forState: .Normal)
-            //detailBtn.setImage(detailBtnInActImage, forState: .Normal)
-            shareBtn.setImage(shareBtnInActImage, forState: .Normal)
-            configBtn.setImage(configBtnInActImage, forState: .Normal)
-            
-        }
+        //PopOverを表示
+        self.showPopoverView(sender, identifier: "ProfileView")
+
+        
+        
+//        // ポップの表示・非表示を切り替える.
+//        detailConView.hidden = detailConView.hidden ? false:true
+        
+//        // その他メニューボタンの制御を切り替える.
+//        manuBtn.userInteractionEnabled = detailConView.hidden ? true:false
+//        mainBtn.userInteractionEnabled = detailConView.hidden ? true:false
+//        shareBtn.userInteractionEnabled = detailConView.hidden ? true:false
+//        configBtn.userInteractionEnabled = detailConView.hidden ? true:false
+//        
+//        // ポップが非表示の場合
+//        if detailConView.hidden {
+//            
+//            // 全てのボタンを活性に変更
+//            manuBtn.setImage(manuBtnBackActImage, forState: .Normal)
+//            mainBtn.setImage(mainBtnActImage, forState: .Normal)
+//            detailBtn.setImage(detailBtnActImage, forState: .Normal)
+//            shareBtn.setImage(shareBtnActImage, forState: .Normal)
+//            configBtn.setImage(configBtnActImage, forState: .Normal)
+//            
+//            
+//            // ポップが表示された場合
+//        } else {
+//            
+//            // 該当メニューのボタン以外を非活性に変更
+//            manuBtn.setImage(manuBtnBackInActImage, forState: .Normal)
+//            mainBtn.setImage(mainBtnInActImage, forState: .Normal)
+//            //detailBtn.setImage(detailBtnInActImage, forState: .Normal)
+//            shareBtn.setImage(shareBtnInActImage, forState: .Normal)
+//            configBtn.setImage(configBtnInActImage, forState: .Normal)
+//            
+//        }
     }
     
     /** シェアボタン押下時の処理 **/
@@ -265,39 +284,44 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         print(NSDate().description, __FUNCTION__, __LINE__)
         
         // SEを再生する.
-        seSoundPlay(mySeYesPath!)
+        Utility.seSoundPlay(mySeYesPath!)
         
-        // ポップの表示・非表示を切り替える.
-        shareConView.hidden = shareConView.hidden ? false:true
+        //PopOverを表示
+        self.showPopoverView(sender, identifier: "SnsView")
+        
 
-        // その他メニューボタンの制御を切り替える.
-        manuBtn.userInteractionEnabled = shareConView.hidden ? true:false
-        mainBtn.userInteractionEnabled = shareConView.hidden ? true:false
-        detailBtn.userInteractionEnabled = shareConView.hidden ? true:false
-        configBtn.userInteractionEnabled = shareConView.hidden ? true:false
         
-        // ポップが非表示の場合
-        if shareConView.hidden {
-            
-            // 全てのボタンを活性に変更
-            manuBtn.setImage(manuBtnBackActImage, forState: .Normal)
-            mainBtn.setImage(mainBtnActImage, forState: .Normal)
-            detailBtn.setImage(detailBtnActImage, forState: .Normal)
-            shareBtn.setImage(shareBtnActImage, forState: .Normal)
-            configBtn.setImage(configBtnActImage, forState: .Normal)
-            
-            
-            // ポップが表示された場合
-        } else {
-            
-            // 該当メニューのボタン以外を非活性に変更
-            manuBtn.setImage(manuBtnBackInActImage, forState: .Normal)
-            mainBtn.setImage(mainBtnInActImage, forState: .Normal)
-            detailBtn.setImage(detailBtnInActImage, forState: .Normal)
-            //shareBtn.setImage(shareBtnInActImage, forState: .Normal)
-            configBtn.setImage(configBtnInActImage, forState: .Normal)
-            
-        }
+//        // ポップの表示・非表示を切り替える.
+//        shareConView.hidden = shareConView.hidden ? false:true
+//
+//        // その他メニューボタンの制御を切り替える.
+//        manuBtn.userInteractionEnabled = shareConView.hidden ? true:false
+//        mainBtn.userInteractionEnabled = shareConView.hidden ? true:false
+//        detailBtn.userInteractionEnabled = shareConView.hidden ? true:false
+//        configBtn.userInteractionEnabled = shareConView.hidden ? true:false
+//        
+//        // ポップが非表示の場合
+//        if shareConView.hidden {
+//            
+//            // 全てのボタンを活性に変更
+//            manuBtn.setImage(manuBtnBackActImage, forState: .Normal)
+//            mainBtn.setImage(mainBtnActImage, forState: .Normal)
+//            detailBtn.setImage(detailBtnActImage, forState: .Normal)
+//            shareBtn.setImage(shareBtnActImage, forState: .Normal)
+//            configBtn.setImage(configBtnActImage, forState: .Normal)
+//            
+//            
+//            // ポップが表示された場合
+//        } else {
+//            
+//            // 該当メニューのボタン以外を非活性に変更
+//            manuBtn.setImage(manuBtnBackInActImage, forState: .Normal)
+//            mainBtn.setImage(mainBtnInActImage, forState: .Normal)
+//            detailBtn.setImage(detailBtnInActImage, forState: .Normal)
+//            //shareBtn.setImage(shareBtnInActImage, forState: .Normal)
+//            configBtn.setImage(configBtnInActImage, forState: .Normal)
+//            
+//        }
         
     }
 
@@ -306,137 +330,49 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         print(NSDate().description, __FUNCTION__, __LINE__)
         
         // SEを再生する.
-        seSoundPlay(mySeYesPath!)
+        Utility.seSoundPlay(mySeYesPath!)
         
-        // オブジェクトの表示・非表示を切り替える.
-        configConView.hidden = configConView.hidden ? false:true
+        //PopOverを表示
+        self.showPopoverView(sender, identifier: "SettingView")
         
-        // その他メニューボタンの制御を切り替える.
-        manuBtn.userInteractionEnabled = configConView.hidden ? true:false
-        mainBtn.userInteractionEnabled = configConView.hidden ? true:false
-        detailBtn.userInteractionEnabled = configConView.hidden ? true:false
-        shareBtn.userInteractionEnabled = configConView.hidden ? true:false
-        
-        // ポップが非表示の場合
-        if configConView.hidden {
-            
-            // 全てのボタンを活性に変更
-            manuBtn.setImage(manuBtnBackActImage, forState: .Normal)
-            mainBtn.setImage(mainBtnActImage, forState: .Normal)
-            detailBtn.setImage(detailBtnActImage, forState: .Normal)
-            shareBtn.setImage(shareBtnActImage, forState: .Normal)
-            configBtn.setImage(configBtnActImage, forState: .Normal)
-            
-            
-            // ポップが表示された場合
-        } else {
-            
-            // 該当メニューのボタン以外を非活性に変更
-            manuBtn.setImage(manuBtnBackInActImage, forState: .Normal)
-            mainBtn.setImage(mainBtnInActImage, forState: .Normal)
-            detailBtn.setImage(detailBtnInActImage, forState: .Normal)
-            shareBtn.setImage(shareBtnInActImage, forState: .Normal)
-            //configBtn.setImage(configBtnInActImage, forState: .Normal)
-            
-        }
+
+//        
+//        // オブジェクトの表示・非表示を切り替える.
+//        configConView.hidden = configConView.hidden ? false:true
+//        
+//        // その他メニューボタンの制御を切り替える.
+//        manuBtn.userInteractionEnabled = configConView.hidden ? true:false
+//        mainBtn.userInteractionEnabled = configConView.hidden ? true:false
+//        detailBtn.userInteractionEnabled = configConView.hidden ? true:false
+//        shareBtn.userInteractionEnabled = configConView.hidden ? true:false
+//        
+//        // ポップが非表示の場合
+//        if configConView.hidden {
+//            
+//            // 全てのボタンを活性に変更
+//            manuBtn.setImage(manuBtnBackActImage, forState: .Normal)
+//            mainBtn.setImage(mainBtnActImage, forState: .Normal)
+//            detailBtn.setImage(detailBtnActImage, forState: .Normal)
+//            shareBtn.setImage(shareBtnActImage, forState: .Normal)
+//            configBtn.setImage(configBtnActImage, forState: .Normal)
+//            
+//            
+//            // ポップが表示された場合
+//        } else {
+//            
+//            // 該当メニューのボタン以外を非活性に変更
+//            manuBtn.setImage(manuBtnBackInActImage, forState: .Normal)
+//            mainBtn.setImage(mainBtnInActImage, forState: .Normal)
+//            detailBtn.setImage(detailBtnInActImage, forState: .Normal)
+//            shareBtn.setImage(shareBtnInActImage, forState: .Normal)
+//            //configBtn.setImage(configBtnInActImage, forState: .Normal)
+//            
+//        }
     }
     
-    /** BGMミュートボタン押下時の処理 **/
-    func tapBgmMuteBtn(sender: AnyObject) {
-        print(NSDate().description, __FUNCTION__, __LINE__)
-        
-        // SEを再生する.
-        seSoundPlay(mySeYesPath!)
-        
-        // ミュート切り替え
-        if myAudioPlayer.volume == 0.0 {
-            
-            myAudioPlayer.volume = 0.5
-            bgmVolumeSBar.value = 0.5
-            
-        } else {
-            
-            myAudioPlayer.volume = 0.0
-            bgmVolumeSBar.value = 0.0
-        }
-    }
-
-    /** BGMボリューム変更時の処理 **/
-    func slideBgmVolume(sender: AnyObject) {
-        
-        // スライド値をBGM音量にセットする
-        myAudioPlayer.volume = bgmVolumeSBar.value
-        
-    }
-
-    /** SEミュートボタン押下時の処理 **/
-    func tapSeMuteBtn(sender: AnyObject) {
-        
-        // SEを再生する.
-        seSoundPlay(mySeYesPath!)
-        
-        // ミュート切り替え
-        if mySePlayer.volume == 0.0 {
-            
-            mySePlayer.volume = 1.0
-            seVolumeSBar.value = 0.5
-            
-        } else {
-            
-            mySePlayer.volume = 0.0
-            seVolumeSBar.value = 0.0
-        }
-    }
-    
-    /** SEボリューム変更時の処理 **/
-    func slideSeVolume(sender: AnyObject) {
-        print(NSDate().description, __FUNCTION__, __LINE__)
-        
-        // スライド値をBGM音量にセットする
-        mySePlayer.volume = seVolumeSBar.value * 2
-        
-    }
 
     
-    //facebookボタン押下時の処理
-    func tapFacebookBtn(sender: AnyObject) {
-        print(NSDate().description, __FUNCTION__, __LINE__)
-        
-        // Facebookの投稿ダイアログを作って
-        let cv = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-        // 画像を追加
-        cv.addImage(UIImage(named: "01_07_01.png"))
-        // 投稿ダイアログを表示する
-        self.presentViewController(cv, animated: true, completion: nil)
-    }
     
-    //ラインボタン押下時の処理
-    func tapLineBtn(sender: AnyObject) {
-        print(NSDate().description, __FUNCTION__, __LINE__)
-        
-        //　共有する項目
-        let shareImage = UIImage(named: "01_09_01.png")!
-        let shareItems = [shareImage]
-        
-        // LINEで送るボタンを追加
-        let line = LINEActivity()
-        let avc = UIActivityViewController(activityItems: shareItems, applicationActivities: [line])
-        
-        presentViewController(avc, animated: true, completion: nil)
-    }
-    
-    //Twitterボタン押下時の処理
-    func tapTwitterBtn(sender: AnyObject) {
-        print(NSDate().description, __FUNCTION__, __LINE__)
-        
-        // 共有する項目
-        // Twitterの投稿ダイアログを作って
-        let cv = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
-        // 文字を追加
-        cv.setInitialText("メッセージを入力してください。")
-        // 投稿ダイアログを表示する
-        self.presentViewController(cv, animated: true, completion:nil )
-    }
     
     // 画面にタッチで呼ばれる
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -449,12 +385,12 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         
         // キャラクター画像がタップされた場合かつ、メニューが非表示の場合
         if touchEvent.view?.tag == 1
-        && detailConView.hidden == true
-        && shareConView.hidden == true
-        && configConView.hidden == true
+//        && detailConView.hidden == true
+//        && shareConView.hidden == true
+//        && configConView.hidden == true
         {
-            if self.myFukidasiImageView.hidden
-            {
+//            if self.myFukidasiImageView.hidden
+//            {
                 // ダイアログを表示
                 let alertController = UIAlertController(title: "ニートの格言入手", message: "チラシを表示して、今日のニートの格言を取得しますか？", preferredStyle: .Alert)
                 
@@ -476,9 +412,9 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
                 
                 presentViewController(alertController, animated: true, completion: nil)
             
-            } else {
-                self.myFukidasiImageView.hidden = true
-            }
+//            } else {
+//                self.myFukidasiImageView.hidden = true
+//            }
             
         }
         
@@ -494,7 +430,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         
         // 背景設定
         myImageView = UIImageView(frame: CGRectMake(0,0,self.view.bounds.width,self.view.bounds.height))
-        myImageView.image = self.getUncachedImage(named: "03_01_01.png")
+        myImageView.image = Utility.getUncachedImage(named: "03_01_01.png")
         self.view.addSubview(myImageView)
         
         //キャラクター設定
@@ -588,43 +524,43 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     {
         print(NSDate().description, __FUNCTION__, __LINE__)
         
-        //ポップ生成
-        detailConView = UIView(frame: CGRectMake(18,100,340,400))
-        detailImgView = UIImageView()
-        detailImgView.frame.size = detailConView.frame.size
-        detailImgSubView = UIImageView(frame: CGRectMake(20,50,detailConView.frame.width-60,detailConView.frame.height-60))
-        
-        // ポップの背景を設定する.
-        detailImgView.image = detailViewImage
-        detailImgView.alpha = 0.9
-        detailImgSubView.image = detailViewSubImage
-        detailImgSubView.alpha = 0.9
-        
-        // 初期表示は非表示
-        detailConView.hidden = true
-        
-        // ViewをViewに追加する.
-        self.view.addSubview(detailConView)
-        
-        self.nameDataLabel = UILabel(frame: CGRectMake(130,10,200,20))
-        self.nameDataLabel.text = "こうじ"
-        self.birthDataLabel = UILabel(frame: CGRectMake(130,30,200,20))
-        self.birthDataLabel.text = "1990年3月31日"
-        self.positionDataLabel = UILabel(frame: CGRectMake(130,50,200,20))
-        self.positionDataLabel.text = "ひきニート"
-        self.compDataLabel = UILabel(frame: CGRectMake(130,70,200,30))
-        self.compDataLabel.text = "部屋、台所、トイレ"
-        self.kakugenDataLabel = UILabel(frame: CGRectMake(130,100,200,20))
-        self.kakugenDataLabel.text = "やる気！元気！いわき！"
-        
-        // ポップ上に表示するオブジェクトをViewに追加する.
-        detailConView.addSubview(detailImgView)
-        detailConView.addSubview(detailImgSubView)
-        detailConView.addSubview(nameDataLabel)
-        detailConView.addSubview(birthDataLabel)
-        detailConView.addSubview(positionDataLabel)
-        detailConView.addSubview(compDataLabel)
-        detailConView.addSubview(kakugenDataLabel)
+//        //ポップ生成
+//        detailConView = UIView(frame: CGRectMake(18,100,340,400))
+//        detailImgView = UIImageView()
+//        detailImgView.frame.size = detailConView.frame.size
+//        detailImgSubView = UIImageView(frame: CGRectMake(20,50,detailConView.frame.width-60,detailConView.frame.height-60))
+//        
+//        // ポップの背景を設定する.
+//        detailImgView.image = detailViewImage
+//        detailImgView.alpha = 0.9
+//        detailImgSubView.image = detailViewSubImage
+//        detailImgSubView.alpha = 0.9
+//        
+//        // 初期表示は非表示
+//        detailConView.hidden = true
+//        
+//        // ViewをViewに追加する.
+//        self.view.addSubview(detailConView)
+//        
+//        self.nameDataLabel = UILabel(frame: CGRectMake(130,10,200,20))
+//        self.nameDataLabel.text = "こうじ"
+//        self.birthDataLabel = UILabel(frame: CGRectMake(130,30,200,20))
+//        self.birthDataLabel.text = "1990年3月31日"
+//        self.positionDataLabel = UILabel(frame: CGRectMake(130,50,200,20))
+//        self.positionDataLabel.text = "ひきニート"
+//        self.compDataLabel = UILabel(frame: CGRectMake(130,70,200,30))
+//        self.compDataLabel.text = "部屋、台所、トイレ"
+//        self.kakugenDataLabel = UILabel(frame: CGRectMake(130,100,200,20))
+//        self.kakugenDataLabel.text = "やる気！元気！いわき！"
+//        
+//        // ポップ上に表示するオブジェクトをViewに追加する.
+//        detailConView.addSubview(detailImgView)
+//        detailConView.addSubview(detailImgSubView)
+//        detailConView.addSubview(nameDataLabel)
+//        detailConView.addSubview(birthDataLabel)
+//        detailConView.addSubview(positionDataLabel)
+//        detailConView.addSubview(compDataLabel)
+//        detailConView.addSubview(kakugenDataLabel)
     }
     
     
@@ -637,44 +573,44 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     {
         print(NSDate().description, __FUNCTION__, __LINE__)
         
-        //ポップ生成
-        shareConView = UIView(frame: CGRectMake(18,100,340,400))
-        shareImgView = UIImageView()
-        shareImgView.frame.size = shareConView.frame.size
-        
-        // ポップの背景を設定する.
-        shareImgView.image = shareViewImage
-        shareImgView.alpha = 0.9
-        
-        // 初期表示は非表示
-        shareConView.hidden = true
-        
-        // ViewをViewに追加する.
-        self.view.addSubview(shareConView)
-        
-        // FaceBookボタンを生成
-        facebookBtn = UIButton(frame: CGRectMake(20,120,50,50))
-        let facebookImage = self.getUncachedImage( named: "01_07_01.png")! as UIImage
-        facebookBtn.setImage(facebookImage, forState: .Normal)
-        facebookBtn.addTarget(self, action: "tapFacebookBtn:", forControlEvents: .TouchUpInside)
-        
-        // Twitterボタンを生成
-        twitterBtn = UIButton(frame: CGRectMake(100,120,50,50))
-        let twitterImage = self.getUncachedImage( named: "01_08_01.png")! as UIImage
-        twitterBtn.setImage(twitterImage, forState: .Normal)
-        twitterBtn.addTarget(self, action: "tapTwitterBtn:", forControlEvents: .TouchUpInside)
-        
-        // LINEボタンを生成
-        lineBtn = UIButton(frame: CGRectMake(180,120,50,50))
-        let lineImage = self.getUncachedImage( named: "01_09_01.png")! as UIImage
-        lineBtn.setImage(lineImage, forState: .Normal)
-        lineBtn.addTarget(self, action: "tapLineBtn:", forControlEvents: .TouchUpInside)
-        
-        // ポップ上に表示するオブジェクトをViewに追加する.
-        shareConView.addSubview(shareImgView)
-        shareConView.addSubview(facebookBtn)
-        shareConView.addSubview(twitterBtn)
-        shareConView.addSubview(lineBtn)
+//        //ポップ生成
+//        shareConView = UIView(frame: CGRectMake(18,100,340,400))
+//        shareImgView = UIImageView()
+//        shareImgView.frame.size = shareConView.frame.size
+//        
+//        // ポップの背景を設定する.
+//        shareImgView.image = shareViewImage
+//        shareImgView.alpha = 0.9
+//        
+//        // 初期表示は非表示
+//        shareConView.hidden = true
+//        
+//        // ViewをViewに追加する.
+//        self.view.addSubview(shareConView)
+//        
+//        // FaceBookボタンを生成
+//        facebookBtn = UIButton(frame: CGRectMake(20,120,50,50))
+//        let facebookImage = self.getUncachedImage( named: "01_07_01.png")! as UIImage
+//        facebookBtn.setImage(facebookImage, forState: .Normal)
+//        facebookBtn.addTarget(self, action: "tapFacebookBtn:", forControlEvents: .TouchUpInside)
+//        
+//        // Twitterボタンを生成
+//        twitterBtn = UIButton(frame: CGRectMake(100,120,50,50))
+//        let twitterImage = self.getUncachedImage( named: "01_08_01.png")! as UIImage
+//        twitterBtn.setImage(twitterImage, forState: .Normal)
+//        twitterBtn.addTarget(self, action: "tapTwitterBtn:", forControlEvents: .TouchUpInside)
+//        
+//        // LINEボタンを生成
+//        lineBtn = UIButton(frame: CGRectMake(180,120,50,50))
+//        let lineImage = self.getUncachedImage( named: "01_09_01.png")! as UIImage
+//        lineBtn.setImage(lineImage, forState: .Normal)
+//        lineBtn.addTarget(self, action: "tapLineBtn:", forControlEvents: .TouchUpInside)
+//        
+//        // ポップ上に表示するオブジェクトをViewに追加する.
+//        shareConView.addSubview(shareImgView)
+//        shareConView.addSubview(facebookBtn)
+//        shareConView.addSubview(twitterBtn)
+//        shareConView.addSubview(lineBtn)
     }
     
     /** 設定メニューのポップアップ作成 **/
@@ -682,60 +618,60 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     {
         print(NSDate().description, __FUNCTION__, __LINE__)
         
-        //ポップ生成
-        configConView = UIView(frame: CGRectMake(18,100,340,400))
-        configImgView = UIImageView()
-        configImgView.frame.size = configConView.frame.size
-        
-        // ポップの背景を設定する.
-        configImgView.image = configViewImage
-        configImgView.alpha = 0.9
-        
-        // 初期表示は非表示
-        configConView.hidden = true
-        
-        // ポップアップViewをViewに追加する.
-        self.view.addSubview(configConView)
-        
-        // ポップ上に表示するオブジェクトを生成する.
-        // BGMのラベルを生成
-        bgmLabel = UILabel(frame: CGRectMake(20,60,100,120))
-        bgmLabel.text = "BGM"
-        
-        // BGMのスライドバーを生成
-        bgmVolumeSBar = UISlider(frame: CGRectMake(100,60,100,120))
-        bgmVolumeSBar.addTarget(self, action: "slideBgmVolume:", forControlEvents: .TouchUpInside)
-        bgmVolumeSBar.value = 0.5
-        
-        // BGMのミュートボタンを生成
-        bgmMuteBtn = UIButton(frame: CGRectMake(200,60,100,120))
-        bgmMuteBtn.setTitle("ミュート",  forState: .Normal)
-        bgmMuteBtn.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
-        bgmMuteBtn.addTarget(self, action: "tapBgmMuteBtn:", forControlEvents: .TouchUpInside)
-        
-        // SEのラベルを生成
-        seLabel = UILabel(frame: CGRectMake(20,120,100,120))
-        seLabel.text = "SE"
-        
-        // SEのスライドバーを生成
-        seVolumeSBar = UISlider(frame: CGRectMake(100,120,100,120))
-        seVolumeSBar.addTarget(self, action: "slideSeVolume:", forControlEvents: .TouchUpInside)
-        seVolumeSBar.value = 0.5
-        
-        // SEのミュートボタンを生成
-        seMuteBtn = UIButton(frame: CGRectMake(200,120,100,120))
-        seMuteBtn.setTitle("ミュート",  forState: .Normal)
-        seMuteBtn.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
-        seMuteBtn.addTarget(self, action: "tapSeMuteBtn:", forControlEvents: .TouchUpInside)
-        
-        // ポップ上に表示するオブジェクトをViewに追加する.
-        configConView.addSubview(configImgView)
-        configConView.addSubview(bgmLabel)
-        configConView.addSubview(bgmVolumeSBar)
-        configConView.addSubview(bgmMuteBtn)
-        configConView.addSubview(seLabel)
-        configConView.addSubview(seVolumeSBar)
-        configConView.addSubview(seMuteBtn)
+//        //ポップ生成
+//        configConView = UIView(frame: CGRectMake(18,100,340,400))
+//        configImgView = UIImageView()
+//        configImgView.frame.size = configConView.frame.size
+//        
+//        // ポップの背景を設定する.
+//        configImgView.image = configViewImage
+//        configImgView.alpha = 0.9
+//        
+//        // 初期表示は非表示
+//        configConView.hidden = true
+//        
+//        // ポップアップViewをViewに追加する.
+//        self.view.addSubview(configConView)
+//        
+//        // ポップ上に表示するオブジェクトを生成する.
+//        // BGMのラベルを生成
+//        bgmLabel = UILabel(frame: CGRectMake(20,60,100,120))
+//        bgmLabel.text = "BGM"
+//        
+//        // BGMのスライドバーを生成
+//        bgmVolumeSBar = UISlider(frame: CGRectMake(100,60,100,120))
+//        bgmVolumeSBar.addTarget(self, action: "slideBgmVolume:", forControlEvents: .TouchUpInside)
+//        bgmVolumeSBar.value = 0.5
+//        
+//        // BGMのミュートボタンを生成
+//        bgmMuteBtn = UIButton(frame: CGRectMake(200,60,100,120))
+//        bgmMuteBtn.setTitle("ミュート",  forState: .Normal)
+//        bgmMuteBtn.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+//        bgmMuteBtn.addTarget(self, action: "tapBgmMuteBtn:", forControlEvents: .TouchUpInside)
+//        
+//        // SEのラベルを生成
+//        seLabel = UILabel(frame: CGRectMake(20,120,100,120))
+//        seLabel.text = "SE"
+//        
+//        // SEのスライドバーを生成
+//        seVolumeSBar = UISlider(frame: CGRectMake(100,120,100,120))
+//        seVolumeSBar.addTarget(self, action: "slideSeVolume:", forControlEvents: .TouchUpInside)
+//        seVolumeSBar.value = 0.5
+//        
+//        // SEのミュートボタンを生成
+//        seMuteBtn = UIButton(frame: CGRectMake(200,120,100,120))
+//        seMuteBtn.setTitle("ミュート",  forState: .Normal)
+//        seMuteBtn.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+//        seMuteBtn.addTarget(self, action: "tapSeMuteBtn:", forControlEvents: .TouchUpInside)
+//        
+//        // ポップ上に表示するオブジェクトをViewに追加する.
+//        configConView.addSubview(configImgView)
+//        configConView.addSubview(bgmLabel)
+//        configConView.addSubview(bgmVolumeSBar)
+//        configConView.addSubview(bgmMuteBtn)
+//        configConView.addSubview(seLabel)
+//        configConView.addSubview(seVolumeSBar)
+//        configConView.addSubview(seMuteBtn)
         
     }
 
@@ -750,32 +686,22 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     
     
     
-    func getUncachedImage (named name : String) -> UIImage?
-    {
-        print(NSDate().description, __FUNCTION__, __LINE__)
-
-        if let imgPath = NSBundle.mainBundle().pathForResource(name, ofType: nil)
-        {
-            return UIImage(contentsOfFile: imgPath)
-        }
-        return nil
-    }
     
-    /** SE再生 **/
-    func seSoundPlay(sePath: String)
-    {
-        print(NSDate().description, __FUNCTION__, __LINE__)
-
-        // SEを再生する.
-        do {
-            mySePlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath:sePath))
-            mySePlayer.volume = seVolumeSBar.value * 2
-            mySePlayer.play()
-            
-        }catch{
-            // 例外発生
-        }
-    }
+//    /** SE再生 **/
+//    func seSoundPlay(sePath: String)
+//    {
+//        print(NSDate().description, __FUNCTION__, __LINE__)
+//
+//        // SEを再生する.
+//        do {
+//            mySePlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath:sePath))
+////            mySePlayer.volume = seVolumeSBar.value * 2
+//            mySePlayer.play()
+//            
+//        }catch{
+//            // 例外発生
+//        }
+//    }
 
     
     /** バナーが読みこまれた時に呼ばれる **/
@@ -845,33 +771,33 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
 
         if curX == curX+x && curY <= curY+y {
             charaImages = [
-                self.getUncachedImage( named: "04_01_01_01_04.PNG")!,
-                self.getUncachedImage( named: "04_01_01_01_05.PNG")!,
-                self.getUncachedImage( named: "04_01_01_01_04.PNG")!,
-                self.getUncachedImage( named: "04_01_01_01_06.PNG")!
+                Utility.getUncachedImage( named: "04_01_01_01_04.PNG")!,
+                Utility.getUncachedImage( named: "04_01_01_01_05.PNG")!,
+                Utility.getUncachedImage( named: "04_01_01_01_04.PNG")!,
+                Utility.getUncachedImage( named: "04_01_01_01_06.PNG")!
         ]
         
         } else if curX == curX+x && curY > curY+y {
             charaImages = [
-                self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
-                self.getUncachedImage( named: "04_01_01_01_02.PNG")!,
-                self.getUncachedImage( named: "04_01_01_01_01.PNG")!,
-                self.getUncachedImage( named: "04_01_01_01_03.PNG")!
+                Utility.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+                Utility.getUncachedImage( named: "04_01_01_01_02.PNG")!,
+                Utility.getUncachedImage( named: "04_01_01_01_01.PNG")!,
+                Utility.getUncachedImage( named: "04_01_01_01_03.PNG")!
         ]
         
         } else if curX <= curX+x  {
             charaImages = [
-                self.getUncachedImage( named: "04_01_01_01_07.PNG")!,
-                self.getUncachedImage( named: "04_01_01_01_08.PNG")!,
-                self.getUncachedImage( named: "04_01_01_01_07.PNG")!,
-                self.getUncachedImage( named: "04_01_01_01_09.PNG")!
+                Utility.getUncachedImage( named: "04_01_01_01_07.PNG")!,
+                Utility.getUncachedImage( named: "04_01_01_01_08.PNG")!,
+                Utility.getUncachedImage( named: "04_01_01_01_07.PNG")!,
+                Utility.getUncachedImage( named: "04_01_01_01_09.PNG")!
             ]
         }else if curX > curX+x {
             charaImages = [
-                self.getUncachedImage( named: "04_01_01_01_10.PNG")!,
-                self.getUncachedImage( named: "04_01_01_01_11.PNG")!,
-                self.getUncachedImage( named: "04_01_01_01_10.PNG")!,
-                self.getUncachedImage( named: "04_01_01_01_12.PNG")!
+                Utility.getUncachedImage( named: "04_01_01_01_10.PNG")!,
+                Utility.getUncachedImage( named: "04_01_01_01_11.PNG")!,
+                Utility.getUncachedImage( named: "04_01_01_01_10.PNG")!,
+                Utility.getUncachedImage( named: "04_01_01_01_12.PNG")!
             ]
             
         }
