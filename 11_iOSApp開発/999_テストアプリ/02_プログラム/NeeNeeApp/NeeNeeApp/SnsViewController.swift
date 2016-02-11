@@ -16,14 +16,12 @@ import Social
 //SNS画面です。
 class SnsViewController: UIViewController {
 
-    
-    private var shareConView: UIView!
-    private var shareImgView: UIImageView!
-    
-    
     private let shareViewImage = UIImage(named: "02_03_01.png")
     private let configViewImage = UIImage(named: "02_04_01.png")
+    
     // シェアメニューのオブジェクト
+    private var shareImgView: UIImageView!
+    
     private var facebookBtn: UIButton!
     private var lineBtn: UIButton!
     private var twitterBtn: UIButton!
@@ -37,18 +35,10 @@ class SnsViewController: UIViewController {
         super.viewDidLoad()
         
         //ポップ生成
-//        shareConView = UIView(frame: CGRectMake(18,100,340,400))
         shareImgView = UIImageView(frame: self.view.frame)
         shareImgView.image = shareViewImage
         shareImgView.alpha = 0.9
 
-//        // ポップの背景を設定する.
-//        shareImgView.image = shareViewImage
-//        shareImgView.alpha = 0.9
-        
-//        // 初期表示は非表示
-//        shareConView.hidden = true
-        
         // ViewをViewに追加する.
         self.view.addSubview(shareImgView)
         
@@ -71,7 +61,6 @@ class SnsViewController: UIViewController {
         lineBtn.addTarget(self, action: "tapLineBtn:", forControlEvents: .TouchUpInside)
         
         // ポップ上に表示するオブジェクトをViewに追加する.
-//        shareImgView.addSubview(shareImgView)
         shareImgView.addSubview(facebookBtn)
         shareImgView.addSubview(twitterBtn)
         shareImgView.addSubview(lineBtn)

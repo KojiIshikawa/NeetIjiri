@@ -10,6 +10,11 @@ import Foundation
 import AVFoundation
 //設定画面です。
 class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
+    
+    // BGM・SEの再生用オブジェクト
+    private var myAudioPlayer: AVAudioPlayer!
+    private var mySePlayer: AVAudioPlayer!
+
     // 設定メニューのオブジェクト
     private var bgmMuteBtn: UIButton!
     private var bgmVolumeSBar: UISlider!
@@ -17,15 +22,6 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
     private var seMuteBtn: UIButton!
     private var seVolumeSBar: UISlider!
     private var seLabel: UILabel!
-
-    // BGM・SEの再生用オブジェクト
-    private var myAudioPlayer: AVAudioPlayer!
-    private var mySePlayer: AVAudioPlayer!
-
-    
-    internal let mySeYesPath = NSBundle.mainBundle().pathForResource("se4", ofType:"mp3")
-    private let mySeNoPath = NSBundle.mainBundle().pathForResource("se6", ofType:"mp3")
-   
     
     private var settingImgView: UIImageView!
     private let settingViewImage = UIImage(named: "02_04_01.png")
@@ -37,17 +33,8 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
         
         
         //ポップ生成
-//        settingConView = UIView(frame: CGRectMake(18,100,340,400))
         settingImgView = UIImageView(frame: self.view.frame)
-//        settingImgView.frame.size = settingConView.frame.size
-
         settingImgView.image = settingViewImage
-        settingImgView.alpha = 0.9
-        
-//        // 初期表示は非表示
-//        settingConView.hidden = true
-        
-        // ポップアップViewをViewに追加する.
         self.view.addSubview(settingImgView)
         
         // ポップ上に表示するオブジェクトを生成する.
@@ -84,7 +71,6 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
         seMuteBtn.addTarget(self, action: "tapSeMuteBtn:", forControlEvents: .TouchUpInside)
         
         // ポップ上に表示するオブジェクトをViewに追加する.
-//        settingImgView.addSubview(settingImgView)
         settingImgView.addSubview(bgmLabel)
         settingImgView.addSubview(bgmVolumeSBar)
         settingImgView.addSubview(bgmMuteBtn)
@@ -110,6 +96,7 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
     func slideBgmVolume(sender: AnyObject) {
         
         // スライド値をBGM音量にセットする
+        //TODO:NSUserDefaultに値を保存
         myAudioPlayer.volume = bgmVolumeSBar.value
         
     }
@@ -119,7 +106,7 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
         print(NSDate().description, __FUNCTION__, __LINE__)
         
         // SEを再生する.
-        Utility.seSoundPlay(mySeYesPath!)
+        Utility.seSoundPlay(Const.mySeYesPath!)
         
         // ミュート切り替え
         if myAudioPlayer.volume == 0.0 {
@@ -140,7 +127,7 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
         print(NSDate().description, __FUNCTION__, __LINE__)
         
         // スライド値をBGM音量にセットする
-        //        mySePlayer.volume = seVolumeSBar.value * 2
+        mySePlayer.volume = seVolumeSBar.value * 2
         
     }
 
@@ -149,7 +136,7 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
     func tapSeMuteBtn(sender: AnyObject) {
         
         // SEを再生する.
-        Utility.seSoundPlay(mySeYesPath!)
+        Utility.seSoundPlay(Const.mySeYesPath!)
         
         // ミュート切り替え
         if mySePlayer.volume == 0.0 {
