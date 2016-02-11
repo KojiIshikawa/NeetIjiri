@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15C50" minimumToolsVersion="Automatic">
+    <entity name="M_Action" representedClassName="M_Action" syncable="YES">
+        <attribute name="actID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="actName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imageAct" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="way" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
     <entity name="M_DropItem" representedClassName="M_DropItem" syncable="YES">
         <attribute name="dropItemID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="dropPer" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
@@ -7,10 +13,16 @@
     </entity>
     <entity name="M_Item" representedClassName="M_Item" syncable="YES">
         <attribute name="actID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstX" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="firstY" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="imageItem" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="itemID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="itemName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="itemText" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="maxX" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="maxY" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="minX" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="minY" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="point" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="procTime" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="stageID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -41,11 +53,11 @@
     </entity>
     <entity name="M_Stage" representedClassName="M_Stage" syncable="YES">
         <attribute name="bgm" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imageBack" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="stageID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="stageName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="stageText" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="viewNo" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="wallPaper" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="T_ActionResult" representedClassName="T_ActionResult" syncable="YES">
         <attribute name="actEndDate" optional="YES" attributeType="Date" syncable="YES"/>
@@ -85,19 +97,20 @@
         <attribute name="stageID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
+        <element name="M_Action" positionX="-9" positionY="135" width="128" height="105"/>
         <element name="M_DropItem" positionX="18" positionY="144" width="128" height="90"/>
-        <element name="M_Item" positionX="-18" positionY="63" width="128" height="195"/>
+        <element name="M_Item" positionX="-18" positionY="63" width="128" height="285"/>
         <element name="M_Job" positionX="-54" positionY="18" width="128" height="120"/>
         <element name="M_Kakugen" positionX="-63" positionY="-18" width="128" height="90"/>
         <element name="M_Okan" positionX="-36" positionY="45" width="128" height="75"/>
         <element name="M_ResultAction" positionX="36" positionY="153" width="128" height="105"/>
         <element name="M_Stage" positionX="0" positionY="72" width="128" height="135"/>
+        <element name="T_ActionResult" positionX="18" positionY="126" width="128" height="120"/>
         <element name="T_CharaBase" positionX="-9" positionY="99" width="128" height="150"/>
         <element name="T_GetItem" positionX="0" positionY="108" width="128" height="90"/>
         <element name="T_RefItem" positionX="9" positionY="117" width="128" height="75"/>
-        <element name="T_ActionResult" positionX="18" positionY="126" width="128" height="120"/>
-        <element name="T_RefStage" positionX="27" positionY="135" width="128" height="75"/>
-        <element name="T_RefKakugen" positionX="36" positionY="144" width="128" height="75"/>
         <element name="T_RefJob" positionX="45" positionY="153" width="128" height="75"/>
+        <element name="T_RefKakugen" positionX="36" positionY="144" width="128" height="75"/>
+        <element name="T_RefStage" positionX="27" positionY="135" width="128" height="75"/>
     </elements>
 </model>

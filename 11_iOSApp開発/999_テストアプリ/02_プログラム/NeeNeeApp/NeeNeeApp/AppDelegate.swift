@@ -28,8 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         do {
             //端末内にSQLiteファイルが存在するか確認
             let storeSQLiteURL = NSPersistentStore.MR_urlForStoreName("NeetMaster.sqlite")
-            let storeSQLshmURL = NSURL(fileURLWithPath: storeSQLiteURL!.URLByDeletingLastPathComponent!.path! + "/NeetMaster.sqlite-shm")
-            let storeSQLwalURL = NSURL(fileURLWithPath: storeSQLiteURL!.URLByDeletingLastPathComponent!.path! + "/NeetMaster.sqlite-wal")
+//            let storeSQLshmURL = NSURL(fileURLWithPath: storeSQLiteURL!.URLByDeletingLastPathComponent!.path! + "/NeetMaster.sqlite-shm")
+//            let storeSQLwalURL = NSURL(fileURLWithPath: storeSQLiteURL!.URLByDeletingLastPathComponent!.path! + "/NeetMaster.sqlite-wal")
             //let pathToStore = storeSQLiteURL?.URLByDeletingLastPathComponent
             
             
@@ -37,8 +37,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 //端末内の自動生成ファイルを削除する
                 try fileManager.removeItemAtURL(storeSQLiteURL!)
-                try fileManager.removeItemAtURL(storeSQLshmURL)
-                try fileManager.removeItemAtURL(storeSQLwalURL)
+//                try fileManager.removeItemAtURL(storeSQLshmURL)
+//                try fileManager.removeItemAtURL(storeSQLwalURL)
                 
             } else {
                 print("storeSQLiteFile not exist")
@@ -48,21 +48,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             // file URL to preload
             let preloadSQLiteURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("NeetMaster", ofType: "sqlite")!)
-            let preloadSQLshmURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("NeetMaster", ofType: "sqlite-shm")!)
-            let preloadSQLwalURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("NeetMaster", ofType: "sqlite-wal")!)
+//            let preloadSQLshmURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("NeetMaster", ofType: "sqlite-shm")!)
+//            let preloadSQLwalURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("NeetMaster", ofType: "sqlite-wal")!)
             
             
             print("storeSQLiteURL:  \(storeSQLiteURL)")
-            print("storeSQLshmURL:  \(storeSQLshmURL)")
-            print("storeSQLwalURL:  \(storeSQLwalURL)")
+//            print("storeSQLshmURL:  \(storeSQLshmURL)")
+//            print("storeSQLwalURL:  \(storeSQLwalURL)")
             print("sql:  \(preloadSQLiteURL)")
-            print("shm:  \(preloadSQLshmURL)")
-            print("wal:  \(preloadSQLwalURL)")
+//            print("shm:  \(preloadSQLshmURL)")
+//            print("wal:  \(preloadSQLwalURL)")
             
             //コピーする
             try fileManager.copyItemAtURL(preloadSQLiteURL, toURL: storeSQLiteURL!)
-            try fileManager.copyItemAtURL(preloadSQLshmURL, toURL: storeSQLshmURL)
-            try fileManager.copyItemAtURL(preloadSQLwalURL, toURL: storeSQLwalURL)
+//            try fileManager.copyItemAtURL(preloadSQLshmURL, toURL: storeSQLshmURL)
+//            try fileManager.copyItemAtURL(preloadSQLwalURL, toURL: storeSQLwalURL)
             
             
         } catch let error {

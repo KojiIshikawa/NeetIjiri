@@ -5,11 +5,11 @@
 
 extern const struct M_StageAttributes {
 	__unsafe_unretained NSString *bgm;
+	__unsafe_unretained NSString *imageBack;
 	__unsafe_unretained NSString *stageID;
 	__unsafe_unretained NSString *stageName;
 	__unsafe_unretained NSString *stageText;
 	__unsafe_unretained NSString *viewNo;
-	__unsafe_unretained NSString *wallPaper;
 } M_StageAttributes;
 
 @interface M_StageID : NSManagedObjectID {}
@@ -24,6 +24,10 @@ extern const struct M_StageAttributes {
 @property (nonatomic, strong) NSString* bgm;
 
 //- (BOOL)validateBgm:(id*)value_ error:(NSError**)error_;
+
+@property (nonatomic, strong) NSString* imageBack;
+
+//- (BOOL)validateImageBack:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) NSNumber* stageID;
 
@@ -49,16 +53,15 @@ extern const struct M_StageAttributes {
 
 //- (BOOL)validateViewNo:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, strong) NSString* wallPaper;
-
-//- (BOOL)validateWallPaper:(id*)value_ error:(NSError**)error_;
-
 @end
 
 @interface _M_Stage (CoreDataGeneratedPrimitiveAccessors)
 
 - (NSString*)primitiveBgm;
 - (void)setPrimitiveBgm:(NSString*)value;
+
+- (NSString*)primitiveImageBack;
+- (void)setPrimitiveImageBack:(NSString*)value;
 
 - (NSNumber*)primitiveStageID;
 - (void)setPrimitiveStageID:(NSNumber*)value;
@@ -77,8 +80,5 @@ extern const struct M_StageAttributes {
 
 - (int32_t)primitiveViewNoValue;
 - (void)setPrimitiveViewNoValue:(int32_t)value_;
-
-- (NSString*)primitiveWallPaper;
-- (void)setPrimitiveWallPaper:(NSString*)value;
 
 @end

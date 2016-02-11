@@ -112,5 +112,23 @@
             </objects>
             <point key="canvasLocation" x="1081" y="283"/>
         </scene>
+        <!--Result View Controller-->
+        <scene sceneID="52g-Gc-AcE">
+            <objects>
+                <viewController storyboardIdentifier="ResultView" id="7jM-2v-CSy" customClass="ResultViewController" customModule="NeeNeeApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zcl-Sw-NDZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="EFU-CC-1OV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="sWo-Dy-kDT">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ByD-dU-9FB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-184" y="1696"/>
+        </scene>
     </scenes>
 </document>
