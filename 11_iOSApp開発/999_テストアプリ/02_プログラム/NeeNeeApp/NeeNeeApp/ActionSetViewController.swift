@@ -47,14 +47,17 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         let layout = UICollectionViewFlowLayout()
         
         // Cell一つ一つの大きさ.
-        layout.itemSize = CGSizeMake(50, 50)
-        
+        layout.itemSize = CGSizeMake(100, 100)
+        /**
         // Cellのマージン.
-        layout.sectionInset = UIEdgeInsetsMake(16, 16, 32, 16)
+        layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
         
         // セクション毎のヘッダーサイズ.
         layout.headerReferenceSize = CGSizeMake(0,0)
-    
+        **/
+        // 横スクロール
+        layout.scrollDirection = .Horizontal
+        
         itemCollectionView = UICollectionView(frame: CGRectMake(0,0,0,0), collectionViewLayout: layout)
         itemCollectionView.registerClass(itemCell.self, forCellWithReuseIdentifier: "cell")
         itemCollectionView.delegate = self
@@ -157,7 +160,7 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
                 selItemView = UIImageView()
                 selItemView.image = myImage
                 selItemView.alpha = 0.8
-                selItemView.frame.size = CGSizeMake(50,50)
+                selItemView.frame.size = CGSizeMake(100,100)
                 self.view.addSubview(selItemView)
             }
             
@@ -287,7 +290,7 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
                 toItem: self.view,
                 attribute:  NSLayoutAttribute.Top,
                 multiplier: 1.0,
-                constant: 60
+                constant: 100
             ),
 
             // 横幅
@@ -297,7 +300,7 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
                 relatedBy: .Equal,
                 toItem: self.view,
                 attribute: .Width,
-                multiplier: 1.0 / 4.0,
+                multiplier: 1.0 / 2.0,
                 constant: 0
             ),
             
@@ -308,7 +311,7 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
                 relatedBy: .Equal,
                 toItem: self.view,
                 attribute: .Height,
-                multiplier: 1.0 / 6.0,
+                multiplier: 1.0 / 3.0,
                 constant: 0
             )]
         )
@@ -334,7 +337,7 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
                 toItem: self.setItemView,
                 attribute:  NSLayoutAttribute.Bottom,
                 multiplier: 1.0,
-                constant: 20
+                constant: 60
             ),
             
             // 横幅
@@ -353,10 +356,10 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
                 item: self.itemCollectionView,
                 attribute: .Height,
                 relatedBy: .Equal,
-                toItem: self.view,
+                toItem: nil,
                 attribute: .Height,
-                multiplier: 1.0 / 1.5,
-                constant: 0
+                multiplier: 1.0,
+                constant: 100
             )]
         )
     }
