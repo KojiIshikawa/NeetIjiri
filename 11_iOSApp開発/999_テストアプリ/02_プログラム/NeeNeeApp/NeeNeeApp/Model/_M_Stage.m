@@ -5,11 +5,11 @@
 
 const struct M_StageAttributes M_StageAttributes = {
 	.bgm = @"bgm",
+	.imageBack = @"imageBack",
 	.stageID = @"stageID",
 	.stageName = @"stageName",
 	.stageText = @"stageText",
 	.viewNo = @"viewNo",
-	.wallPaper = @"wallPaper",
 };
 
 @implementation M_StageID
@@ -54,6 +54,8 @@ const struct M_StageAttributes M_StageAttributes = {
 
 @dynamic bgm;
 
+@dynamic imageBack;
+
 @dynamic stageID;
 
 - (int32_t)stageIDValue {
@@ -97,8 +99,6 @@ const struct M_StageAttributes M_StageAttributes = {
 - (void)setPrimitiveViewNoValue:(int32_t)value_ {
 	[self setPrimitiveViewNo:[NSNumber numberWithInt:value_]];
 }
-
-@dynamic wallPaper;
 
 @end
 
