@@ -12,5 +12,6 @@
 #import "LINEActivity.h"
 #import "MagicalRecord/MagicalRecord.h"
 #import "M_Kakugen.h"
+#import "T_CharaBase.h"
 
 #endif /* NeeNeeApp_Bridging_Header_h */

@@ -371,16 +371,26 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
     func getCharaBaseExists() -> DarwinBoolean  {
         print(NSDate().description, __FUNCTION__, __LINE__)
         
-        // TODO:トランザクションテーブルにアクセス可能になれば実装可能
-        return false
+        // キャラクター基本情報にアクセスし存在しなければfalseを返却する.
+        let charaBaseList :[T_CharaBase] = T_CharaBase.MR_findAll() as! [T_CharaBase];
+        print(charaBaseList.count)
+        return  charaBaseList.count == 0 ? false : true
     }
     
     //キャラクター情報の書き込み
     func editCharaBase() -> DarwinBoolean  {
         print(NSDate().description, __FUNCTION__, __LINE__)
 
-        // TODO:トランザクションテーブルにアクセス可能になれば実装可能
-        return false
+        // キャラクター基本情報に基本情報を書き込む
+        let insetData = T_CharaBase.MR_createEntity()! as T_CharaBase
+        insetData.charaName = "ニート"
+        insetData.charaBirth = NSDate()
+        insetData.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+
+        print(insetData.charaName)
+        print(insetData.charaBirth)
+
+        return true
     }
 }
 
