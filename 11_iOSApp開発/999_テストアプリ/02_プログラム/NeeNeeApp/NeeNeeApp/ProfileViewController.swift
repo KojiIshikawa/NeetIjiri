@@ -63,11 +63,11 @@ class ProfileViewController: UIViewController {
 
         
         // ポップ上に表示するオブジェクトをViewに追加する.
-        detailImgSubView.addSubview(nameDataLabel)
-        detailImgSubView.addSubview(birthDataLabel)
-        detailImgSubView.addSubview(positionDataLabel)
-        detailImgSubView.addSubview(compDataLabel)
-        detailImgSubView.addSubview(kakugenDataLabel)
+        self.view.addSubview(nameDataLabel)
+        self.view.addSubview(birthDataLabel)
+        self.view.addSubview(positionDataLabel)
+        self.view.addSubview(compDataLabel)
+        self.view.addSubview(kakugenDataLabel)
 
     }
     

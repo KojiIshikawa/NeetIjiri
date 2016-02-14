@@ -19,9 +19,9 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     // MARK: - メンバ変数
     //****************************************
 
-    // BGM・SEの再生用オブジェクト
-    private var myAudioPlayer: AVAudioPlayer!
-    private var mySePlayer: AVAudioPlayer!
+//    // BGM・SEの再生用オブジェクト
+//    private var myAudioPlayer: AVAudioPlayer!
+//    private var mySePlayer: AVAudioPlayer!
     
     // バナー
     private var footerBaner: ADBannerView!
@@ -75,7 +75,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     
     //アニメーションタイマー
     private var animeTimer: NSTimer!
-    
+    private var isFirstLoad: Bool! = false
 
     //****************************************
     // MARK: - イベント
@@ -83,7 +83,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     
     
     
-    // view ロード完了時
+    // view 初回ロード時
     override func viewDidLoad() {
         print(NSDate().description, __FUNCTION__, __LINE__)
         super.viewDidLoad()
@@ -106,7 +106,32 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         //アニメーション開始
         self.animationStart()
         
+        self.isFirstLoad = true
+        
+        
     }
+    
+    //view 表示完了後 毎回呼ばれる
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(false)
+
+        if (self.isFirstLoad == true) {
+            //ログインボーナス
+            self.showLoginBonus()
+            self.isFirstLoad = false
+        }
+    }
+    
+    
+    //ログインボーナス
+    func showLoginBonus() {
+        //PopOverを表示
+        self.showPopoverView(self.manuBtn, identifier: "LoginBonusView")
+    }
+    
+    
+    
+    
     
     //メモリ消費が多くなった時に動くイベント
     override func didReceiveMemoryWarning() {
@@ -232,41 +257,47 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     }
     
     
-    // 画面にタッチで呼ばれる
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        print(NSDate().description, __FUNCTION__, __LINE__)
-        
-        // タッチイベントを取得
-        let touchEvent = touches.first!
-
-        //print(touchEvent.view?.tag.description)
-        
-        // キャラクター画像がタップされた場合かつ、メニューが非表示の場合
-        if touchEvent.view?.tag == 1
-        {
-            // ダイアログを表示
-            let alertController = UIAlertController(title: "ニートの格言入手", message: "チラシを表示して、今日のニートの格言を取得しますか？", preferredStyle: .Alert)
-            
-            let defaultActionYes = UIAlertAction(title: "表示する", style: .Default, handler:{
-                (action:UIAlertAction!) -> Void in
-                
-                // iAd(インタースティシャル)の表示
-                self.requestInterstitialAdPresentation()
-                
-                // TODO:吹き出しの表示
-//                self.myFukidasiImageView.hidden = false
-//                self.fukidasiLabel.text = self.getMeigen()
-                
-            })
-            
-            let defaultActionNo = UIAlertAction(title: "表示しない", style: .Default, handler: nil)
-            alertController.addAction(defaultActionYes)
-            alertController.addAction(defaultActionNo)
-            
-            presentViewController(alertController, animated: true, completion: nil)
-        }
-        
-        
+//    // 画面にタッチで呼ばれる
+//    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+//        print(NSDate().description, __FUNCTION__, __LINE__)
+//        
+//        // タッチイベントを取得
+//        let touchEvent = touches.first!
+//
+//        //print(touchEvent.view?.tag.description)
+//        
+//        // キャラクター画像がタップされた場合かつ、メニューが非表示の場合
+//        if touchEvent.view?.tag == 1
+//        {
+//            // ダイアログを表示
+//            let alertController = UIAlertController(title: "ニートの格言入手", message: "チラシを表示して、今日のニートの格言を取得しますか？", preferredStyle: .Alert)
+//            
+//            let defaultActionYes = UIAlertAction(title: "表示する", style: .Default, handler:{
+//                (action:UIAlertAction!) -> Void in
+//                
+//                // iAd(インタースティシャル)の表示
+//                self.requestInterstitialAdPresentation()
+//                
+//                // TODO:吹き出しの表示
+////                self.myFukidasiImageView.hidden = false
+////                self.fukidasiLabel.text = self.getMeigen()
+//                
+//            })
+//            
+//            let defaultActionNo = UIAlertAction(title: "表示しない", style: .Default, handler: nil)
+//            alertController.addAction(defaultActionYes)
+//            alertController.addAction(defaultActionNo)
+//            
+//            presentViewController(alertController, animated: true, completion: nil)
+//        }
+//        
+//        
+//    }
+    
+    
+    // ジェスチャーイベント処理
+    func tapChara(gestureRecognizer: UITapGestureRecognizer){
+        print("test")
     }
     
     //****************************************
@@ -287,6 +318,9 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         myCharImageView.center.y = self.view.center.y
         myCharImageView.tag = 1
         myCharImageView.userInteractionEnabled = true
+        
+        let singleTap = UITapGestureRecognizer(target: self, action:"tapChara:")
+        myCharImageView.addGestureRecognizer(singleTap)
         self.view.addSubview(myCharImageView)
         
         
@@ -337,15 +371,17 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         shareBtn.hidden = true
         configBtn.hidden = true
         
-        // テーマソングを再生する.
-        do {
-            myAudioPlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath:Const.mySongPath!))
-            myAudioPlayer.numberOfLoops = -1
-            myAudioPlayer.play()
-            
-        }catch{
-            // 例外発生
-        }
+//        // テーマソングを再生する.
+//        do {
+//            myAudioPlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath:Const.mySongPath!))
+//            myAudioPlayer.numberOfLoops = -1
+//            myAudioPlayer.play()
+//            
+//        }catch{
+//            // 例外発生
+//        }
+        
+        Utility.bgmSooundPlay(Const.mySongPath!)
     }
 
     /** バナーが読みこまれた時に呼ばれる **/
@@ -368,7 +404,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     
     //ランダムウォーク
     func randomWalk() {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        //print(NSDate().description, __FUNCTION__, __LINE__)
         //("x = \(self.myCharImageView.center.x) y = \(self.myCharImageView.center.y)")
 
         //初期値

@@ -14,7 +14,7 @@ import Social
 
 
 //SNS画面です。
-class SnsViewController: UIViewController {
+class SnsViewController: UIViewController,UIGestureRecognizerDelegate {
 
     private let shareViewImage = UIImage(named: "02_03_01.png")
     private let configViewImage = UIImage(named: "02_04_01.png")
@@ -33,13 +33,11 @@ class SnsViewController: UIViewController {
     override func viewDidLoad() {
         print(NSDate().description, __FUNCTION__, __LINE__)
         super.viewDidLoad()
-        
+
         //ポップ生成
         shareImgView = UIImageView(frame: self.view.frame)
         shareImgView.image = shareViewImage
         shareImgView.alpha = 0.9
-
-        // ViewをViewに追加する.
         self.view.addSubview(shareImgView)
         
         // FaceBookボタンを生成
@@ -47,25 +45,26 @@ class SnsViewController: UIViewController {
         let facebookImage = Utility.getUncachedImage( named: "01_07_01.png")! as UIImage
         facebookBtn.setImage(facebookImage, forState: .Normal)
         facebookBtn.addTarget(self, action: "tapFacebookBtn:", forControlEvents: .TouchUpInside)
+        self.view.addSubview(facebookBtn)
+        
+//        let singleTap = UITapGestureRecognizer(target: self, action:"tapFacebookBtn:")
+//        singleTap.numberOfTapsRequired = 1
+//        singleTap.delegate = self
+//        self.facebookBtn.addGestureRecognizer(singleTap)
         
         // Twitterボタンを生成
         twitterBtn = UIButton(frame: CGRectMake(100,120,50,50))
         let twitterImage = Utility.getUncachedImage( named: "01_08_01.png")! as UIImage
         twitterBtn.setImage(twitterImage, forState: .Normal)
         twitterBtn.addTarget(self, action: "tapTwitterBtn:", forControlEvents: .TouchUpInside)
+        self.view.addSubview(twitterBtn)
         
         // LINEボタンを生成
         lineBtn = UIButton(frame: CGRectMake(180,120,50,50))
         let lineImage = Utility.getUncachedImage( named: "01_09_01.png")! as UIImage
         lineBtn.setImage(lineImage, forState: .Normal)
         lineBtn.addTarget(self, action: "tapLineBtn:", forControlEvents: .TouchUpInside)
-        
-        // ポップ上に表示するオブジェクトをViewに追加する.
-        shareImgView.addSubview(facebookBtn)
-        shareImgView.addSubview(twitterBtn)
-        shareImgView.addSubview(lineBtn)
-        
-        
+        self.view.addSubview(lineBtn)
     }
     
     //メモリ消費が多くなった時に動くイベント
@@ -75,6 +74,11 @@ class SnsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
   
+    
+//    func tapFacebookBtn(recognizer: UITapGestureRecognizer) {
+//        print("test")
+//    }
+
     
     
     //facebookボタン押下時の処理

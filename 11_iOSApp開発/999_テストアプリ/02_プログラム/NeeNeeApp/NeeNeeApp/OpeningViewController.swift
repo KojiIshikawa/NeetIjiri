@@ -59,13 +59,13 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
         super.viewDidLoad()
         
         // キャラクター基本情報が存在する場合
-        if getCharaBaseExists() {
-            
-            // 画面遷移する.
-            let NextViewController = self.storyboard!.instantiateViewControllerWithIdentifier( "NeetMain" )
-            self.presentViewController( NextViewController, animated: true, completion: nil)
+//        if getCharaBaseExists() {
+        
+//            // TODO:画面遷移する.
+//            let NextViewController = self.storyboard!.instantiateViewControllerWithIdentifier( "NeetMain" )
+//            self.presentViewController( NextViewController, animated: true, completion: nil)
 
-        } else {
+//        } else {
 
             // オブジェクトの配置
             self.createObjInit()
@@ -73,7 +73,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
             // オブジェクトの制約設定
             self.objConstraints()
 
-        }
+//        }
 
         
     }
