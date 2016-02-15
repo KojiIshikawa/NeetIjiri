@@ -19,6 +19,7 @@
 		AE0D3F6A1C6CDA700015F479 /* KakugenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D3F691C6CDA700015F479 /* KakugenViewController.swift */; };
 		AE0D3F6C1C6CDAB30015F479 /* LoginBonusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D3F6B1C6CDAB30015F479 /* LoginBonusViewController.swift */; };
 		AE8E93961C5DE80D0031BF79 /* NeetMaster.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = AE8E93931C5DE80D0031BF79 /* NeetMaster.sqlite */; };
+		AEBFB8951C71F2DA006B3AEC /* Master.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = AEBFB8941C71F2DA006B3AEC /* Master.sqlite */; };
 		AECD1D9F1C706BE8000B7DCB /* k_Kakugen.png in Resources */ = {isa = PBXBuildFile; fileRef = AECD1D9D1C706BE8000B7DCB /* k_Kakugen.png */; };
 		AECD1DA01C706BE8000B7DCB /* k_Login.png in Resources */ = {isa = PBXBuildFile; fileRef = AECD1D9E1C706BE8000B7DCB /* k_Login.png */; };
 		AEDE9ACD1C66433700841902 /* 01_01_01.png in Resources */ = {isa = PBXBuildFile; fileRef = AEDE9A7B1C66433700841902 /* 01_01_01.png */; };
@@ -40,7 +41,6 @@
 		AEDE9ADD1C66433700841902 /* 02_02_01.png in Resources */ = {isa = PBXBuildFile; fileRef = AEDE9A8B1C66433700841902 /* 02_02_01.png */; };
 		AEDE9ADE1C66433700841902 /* 02_03_01.png in Resources */ = {isa = PBXBuildFile; fileRef = AEDE9A8C1C66433700841902 /* 02_03_01.png */; };
 		AEDE9ADF1C66433700841902 /* 02_04_01.png in Resources */ = {isa = PBXBuildFile; fileRef = AEDE9A8D1C66433700841902 /* 02_04_01.png */; };
-		AEDE9AE01C66433700841902 /* 02_05_01.png in Resources */ = {isa = PBXBuildFile; fileRef = AEDE9A8E1C66433700841902 /* 02_05_01.png */; };
 		AEDE9AE11C66433700841902 /* 02_06_01.png in Resources */ = {isa = PBXBuildFile; fileRef = AEDE9A8F1C66433700841902 /* 02_06_01.png */; };
 		AEDE9AE21C66433700841902 /* 03_01_01.png in Resources */ = {isa = PBXBuildFile; fileRef = AEDE9A901C66433700841902 /* 03_01_01.png */; };
 		AEDE9AE31C66433700841902 /* 03_02_01.png in Resources */ = {isa = PBXBuildFile; fileRef = AEDE9A911C66433700841902 /* 03_02_01.png */; };
@@ -240,6 +240,7 @@
 		AE0D3F691C6CDA700015F479 /* KakugenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KakugenViewController.swift; sourceTree = "<group>"; };
 		AE0D3F6B1C6CDAB30015F479 /* LoginBonusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginBonusViewController.swift; sourceTree = "<group>"; };
 		AE8E93931C5DE80D0031BF79 /* NeetMaster.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = NeetMaster.sqlite; sourceTree = "<group>"; };
+		AEBFB8941C71F2DA006B3AEC /* Master.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Master.sqlite; sourceTree = "<group>"; };
 		AECD1D9D1C706BE8000B7DCB /* k_Kakugen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = k_Kakugen.png; sourceTree = "<group>"; };
 		AECD1D9E1C706BE8000B7DCB /* k_Login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = k_Login.png; sourceTree = "<group>"; };
 		AEDE9A7B1C66433700841902 /* 01_01_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 01_01_01.png; sourceTree = "<group>"; };
@@ -503,6 +504,7 @@
 		AE8E93921C5DE2BE0031BF79 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AEBFB8941C71F2DA006B3AEC /* Master.sqlite */,
 				AE8E93931C5DE80D0031BF79 /* NeetMaster.sqlite */,
 			);
 			path = Resources;
@@ -994,7 +996,6 @@
 				F4F135481C68E39E00130069 /* 02_05_01.png in Resources */,
 				F483301B1C2F040D00234B18 /* LaunchScreen.storyboard in Resources */,
 				F4EE57421C6A28C40021E876 /* se1.mp3 in Resources */,
-				AEDE9AE01C66433700841902 /* 02_05_01.png in Resources */,
 				F4EE57541C6A28C40021E876 /* 暇で忙しい_PianoVer.mp3 in Resources */,
 				F4EE57551C6A28C40021E876 /* 暇で忙しい_少し遅めVer.mp3 in Resources */,
 				F4EE574C1C6A28C40021E876 /* se11.mp3 in Resources */,
@@ -1038,6 +1039,7 @@
 				AEDE9AD71C66433700841902 /* 01_06_02.png in Resources */,
 				AEDE9B151C66433700841902 /* 06_05_01.png in Resources */,
 				AECD1D9F1C706BE8000B7DCB /* k_Kakugen.png in Resources */,
+				AEBFB8951C71F2DA006B3AEC /* Master.sqlite in Resources */,
 				AEDE9B141C66433700841902 /* 06_04_01.png in Resources */,
 				AEDE9AD51C66433700841902 /* 01_05_02.png in Resources */,
 				AEDE9B1A1C66433700841902 /* 07_01_01.png in Resources */,
@@ -1258,6 +1260,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "-DSQLITE_HAS_CODEC";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1296,6 +1299,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_CFLAGS = "-DSQLITE_HAS_CODEC";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;

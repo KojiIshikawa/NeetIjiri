@@ -11,32 +11,40 @@ import Foundation
 
 
 class LoginBonusViewController: UIViewController {
-    private var bgmMuteBtn: UIButton!
-    private var bgmVolumeSBar: UISlider!
-    private var bgmLabel: UILabel!
-    private var seMuteBtn: UIButton!
-    private var seVolumeSBar: UISlider!
-    private var seLabel: UILabel!
     
     
-    private var loginImgView: UIImageView!
-    //TODO:ファイル名仮
-    private let loginViewImage = UIImage(named: "k_Login.png")
+    // 背景
+    private var imgViewLogin: UIImageView!
+
+    //画面オブジェクト
+    private var lblOkan: UILabel! //オカンラベル
+    private var btnOK: UIButton! //OKボタン
+
+    
     
     // view ロード完了時
     override func viewDidLoad() {
         print(NSDate().description, __FUNCTION__, __LINE__)
         super.viewDidLoad()
-        //ポップ生成
-        loginImgView = UIImageView(frame: self.view.frame)
-        loginImgView.image = loginViewImage
-        self.view.addSubview(loginImgView)
+
+        //背景
+        imgViewLogin = UIImageView(frame: self.view.frame)
+        imgViewLogin.image = Utility.getUncachedImage(named: "k_Login.png")
+        self.view.addSubview(imgViewLogin)
+
         
-//        // ポップ上に表示するオブジェクトを生成する.
-//        // BGMのラベルを生成
-//        bgmLabel = UILabel(frame: CGRectMake(20,60,100,120))
-//        bgmLabel.text = "BGM"
         
+        // ログインメッセージを表示
+        lblOkan = UILabel(frame: CGRectMake(20,60,self.view.bounds.width-30,120))
+        lblOkan.text = getOkan()
+        lblOkan.numberOfLines = 0
+        self.view.addSubview(lblOkan)
+        
+        //OKボタン
+        btnOK = UIButton(frame: CGRectMake(20,60,self.view.bounds.width-30,120))
+        btnOK.titleLabel!.text = "OK"
+        self.view.addSubview(btnOK)
+
     }
     
     //メモリ消費が多くなった時に動くイベント
@@ -45,6 +53,23 @@ class LoginBonusViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
+    //****************************************
+    // MARK: - DB Access
+    //****************************************
+    //オカンメッセージの取得
+    func getOkan() -> String {
+        
+        //ランダムで取得
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        
+        let okanList :[M_Okan] = M_Okan.MR_findAll() as! [M_Okan];
+        let randInt = arc4random_uniform(UInt32(okanList.count));
+        print(okanList.count)
+        return okanList[Int(randInt)].okanText
+        
+//        return "okan"
+    }
+
     
 }

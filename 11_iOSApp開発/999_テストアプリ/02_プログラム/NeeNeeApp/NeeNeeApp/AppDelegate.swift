@@ -18,58 +18,156 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
 
         print(NSDate().description, __FUNCTION__, __LINE__)
+        
+        //coredataでやりとりするsqliteを設定
+        MagicalRecord.setupCoreDataStackWithAutoMigratingSqliteStoreNamed("NeetMaster.sqlite")
+        
+        //全件削除
+        M_Kakugen.MR_truncateAll()
+        M_Okan.MR_truncateAll()
+        M_Job.MR_truncateAll()
 
-//
-//        print(NSPersistentStore.MR_urlForStoreName("NeetMaster.sqlite"))
-        // Override point for customization after application launch.
+
         
-        let fileManager = NSFileManager.defaultManager()
+        //バンドルのマスタをストアへ移行する
+        let preloadSQLiteURL = NSBundle.mainBundle().pathForResource("Master", ofType: "sqlite")
+        let db = FMDatabase(path: preloadSQLiteURL)
+        let sqlKakugen = "SELECT * FROM M_Kakugen;" //格言マスタ
+        let sqlOkan = "SELECT * FROM M_Okan;" //おかんマスタ
+        let sqlJob = "SELECT * FROM M_Job;" //役職マスタ
         
-        do {
-            //端末内にSQLiteファイルが存在するか確認
-            let storeSQLiteURL = NSPersistentStore.MR_urlForStoreName("NeetMaster.sqlite")
-//            let storeSQLshmURL = NSURL(fileURLWithPath: storeSQLiteURL!.URLByDeletingLastPathComponent!.path! + "/NeetMaster.sqlite-shm")
-//            let storeSQLwalURL = NSURL(fileURLWithPath: storeSQLiteURL!.URLByDeletingLastPathComponent!.path! + "/NeetMaster.sqlite-wal")
-            //let pathToStore = storeSQLiteURL?.URLByDeletingLastPathComponent
+        
+        //TODO:作成中
+//        let sqlItem = "SELECT * FROM M_Item;" //アイテムマスタ
+//        let sqlStage = "SELECT * FROM M_Stage;" //ステージマスタ
+//        let sqlAction = "SELECT * FROM M_Kakugen;"
+//        let quiz_sql = "SELECT * FROM M_Kakugen;"
+        
+        db.open()
+        
+        //格言マスタ
+        let res_Kakugen = db.executeQuery(sqlKakugen, withArgumentsInArray: nil)
+        while res_Kakugen.next() {
             
-            
-            if fileManager.fileExistsAtPath(storeSQLiteURL!.path!) {
-                
-                //端末内の自動生成ファイルを削除する
-                try fileManager.removeItemAtURL(storeSQLiteURL!)
-//                try fileManager.removeItemAtURL(storeSQLshmURL)
-//                try fileManager.removeItemAtURL(storeSQLwalURL)
-                
-            } else {
-                print("storeSQLiteFile not exist")
-            }
-            
-            
-            
-            // file URL to preload
-            let preloadSQLiteURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("NeetMaster", ofType: "sqlite")!)
-//            let preloadSQLshmURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("NeetMaster", ofType: "sqlite-shm")!)
-//            let preloadSQLwalURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("NeetMaster", ofType: "sqlite-wal")!)
-            
-            
-            print("storeSQLiteURL:  \(storeSQLiteURL)")
-//            print("storeSQLshmURL:  \(storeSQLshmURL)")
-//            print("storeSQLwalURL:  \(storeSQLwalURL)")
-            print("sql:  \(preloadSQLiteURL)")
-//            print("shm:  \(preloadSQLshmURL)")
-//            print("wal:  \(preloadSQLwalURL)")
-            
-            //コピーする
-            try fileManager.copyItemAtURL(preloadSQLiteURL, toURL: storeSQLiteURL!)
-//            try fileManager.copyItemAtURL(preloadSQLshmURL, toURL: storeSQLshmURL)
-//            try fileManager.copyItemAtURL(preloadSQLwalURL, toURL: storeSQLwalURL)
-            
-            
-        } catch let error {
-            print("Error...\(error)")
+            let newRecord: M_Kakugen = M_Kakugen.MR_createEntity()! as M_Kakugen
+            newRecord.kakugenID = NSNumber(int: res_Kakugen.intForColumn("kakugenID"))
+            newRecord.kakugenText = res_Kakugen.stringForColumn("kakugenText")
+            newRecord.viewNo = NSNumber(int: res_Kakugen.intForColumn("viewNo"))
+            newRecord.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+        }
+
+        
+        //おかんマスタ
+        let res_Okan = db.executeQuery(sqlOkan, withArgumentsInArray: nil)
+        while res_Okan.next() {
+            let newRecord: M_Okan = M_Okan.MR_createEntity()! as M_Okan
+            newRecord.okanID = NSNumber(int: res_Okan.intForColumn("okanID"))
+            newRecord.okanText = res_Okan.stringForColumn("okanText")
+            newRecord.loginDays = NSNumber(int: res_Okan.intForColumn("loginDays"))
+            newRecord.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+            //            print(res_Okan.stringForColumn("okanText"))
         }
         
-        MagicalRecord.setupCoreDataStackWithAutoMigratingSqliteStoreNamed("NeetMaster.sqlite")
+        
+        //役職マスタ
+        let res_Job = db.executeQuery(sqlJob, withArgumentsInArray: nil)
+        while res_Job.next() {
+            let newRecord: M_Job = M_Job.MR_createEntity()! as M_Job
+            newRecord.jobID = NSNumber(int: res_Job.intForColumn("jobID"))
+            newRecord.maxStageID = NSNumber(int: res_Job.intForColumn("maxStageID"))
+            newRecord.jobName = res_Job.stringForColumn("jobName")
+            newRecord.jobText = res_Job.stringForColumn("jobText")
+            newRecord.viewNo = NSNumber(int: res_Job.intForColumn("viewNo"))
+            newRecord.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+//            print(res_Job.stringForColumn("jobName"))
+        }
+        
+//        //TODO:アイテムマスタ
+//        let res_Okan = db.executeQuery(sqlOkan, withArgumentsInArray: nil)
+//        while res_Okan.next() {
+//            print(res_Okan.stringForColumn("kakugenText"))
+//        }
+//        //ステージマスタ
+//        let res_Okan = db.executeQuery(sqlOkan, withArgumentsInArray: nil)
+//        while res_Okan.next() {
+//            print(res_Okan.stringForColumn("kakugenText"))
+//        }
+//        //行動マスタ
+//        let res_Okan = db.executeQuery(sqlOkan, withArgumentsInArray: nil)
+//        while res_Okan.next() {
+//            print(res_Okan.stringForColumn("kakugenText"))
+//        }
+//        //おかんマスタ
+//        let res_Okan = db.executeQuery(sqlOkan, withArgumentsInArray: nil)
+//        while res_Okan.next() {
+//            print(res_Okan.stringForColumn("kakugenText"))
+//        }
+//        //おかんマスタ
+//        let res_Okan = db.executeQuery(sqlOkan, withArgumentsInArray: nil)
+//        while res_Okan.next() {
+//            print(res_Okan.stringForColumn("kakugenText"))
+//        }
+        
+        
+        
+        
+        
+        
+        db.close()
+
+        
+        
+        
+//        let fileManager = NSFileManager.defaultManager()
+//        print(NSPersistentStore.MR_urlForStoreName("NeetMaster.sqlite"))
+// Override point for customization after application launch.
+        
+//        do {
+//            //端末内にSQLiteファイルが存在するか確認
+//            let storeSQLiteURL = NSPersistentStore.MR_urlForStoreName("NeetMaster.sqlite")
+////            let storeSQLshmURL = NSURL(fileURLWithPath: storeSQLiteURL!.URLByDeletingLastPathComponent!.path! + "/NeetMaster.sqlite-shm")
+////            let storeSQLwalURL = NSURL(fileURLWithPath: storeSQLiteURL!.URLByDeletingLastPathComponent!.path! + "/NeetMaster.sqlite-wal")
+//            //let pathToStore = storeSQLiteURL?.URLByDeletingLastPathComponent
+//            
+//            
+//            if fileManager.fileExistsAtPath(storeSQLiteURL!.path!) {
+//                
+//                //端末内の自動生成ファイルを削除する
+//                try fileManager.removeItemAtURL(storeSQLiteURL!)
+////                try fileManager.removeItemAtURL(storeSQLshmURL)
+////                try fileManager.removeItemAtURL(storeSQLwalURL)
+//                
+//            } else {
+//                print("storeSQLiteFile not exist")
+//            }
+//            
+//            
+//            
+//            // file URL to preload
+//            let preloadSQLiteURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("NeetMaster", ofType: "sqlite")!)
+////            let preloadSQLshmURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("NeetMaster", ofType: "sqlite-shm")!)
+////            let preloadSQLwalURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("NeetMaster", ofType: "sqlite-wal")!)
+//            
+//            
+//            print("storeSQLiteURL:  \(storeSQLiteURL)")
+////            print("storeSQLshmURL:  \(storeSQLshmURL)")
+////            print("storeSQLwalURL:  \(storeSQLwalURL)")
+//            print("sql:  \(preloadSQLiteURL)")
+////            print("shm:  \(preloadSQLshmURL)")
+////            print("wal:  \(preloadSQLwalURL)")
+//            
+//            //コピーする
+//            try fileManager.copyItemAtURL(preloadSQLiteURL, toURL: storeSQLiteURL!)
+////            try fileManager.copyItemAtURL(preloadSQLshmURL, toURL: storeSQLshmURL)
+////            try fileManager.copyItemAtURL(preloadSQLwalURL, toURL: storeSQLwalURL)
+//            
+//            
+//        } catch let error {
+//            print("Error...\(error)")
+//        }
+
+        
+        
 
         
         

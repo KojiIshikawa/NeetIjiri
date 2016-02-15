@@ -4,8 +4,8 @@
 #import <CoreData/CoreData.h>
 
 extern const struct M_KakugenAttributes {
-	__unsafe_unretained NSString *meigenID;
-	__unsafe_unretained NSString *meigenText;
+	__unsafe_unretained NSString *kakugenID;
+	__unsafe_unretained NSString *kakugenText;
 	__unsafe_unretained NSString *viewNo;
 } M_KakugenAttributes;
 
@@ -18,17 +18,17 @@ extern const struct M_KakugenAttributes {
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 @property (nonatomic, readonly, strong) M_KakugenID* objectID;
 
-@property (nonatomic, strong) NSNumber* meigenID;
+@property (nonatomic, strong) NSNumber* kakugenID;
 
-@property (atomic) int32_t meigenIDValue;
-- (int32_t)meigenIDValue;
-- (void)setMeigenIDValue:(int32_t)value_;
+@property (atomic) int32_t kakugenIDValue;
+- (int32_t)kakugenIDValue;
+- (void)setKakugenIDValue:(int32_t)value_;
 
-//- (BOOL)validateMeigenID:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateKakugenID:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, strong) NSString* meigenText;
+@property (nonatomic, strong) NSString* kakugenText;
 
-//- (BOOL)validateMeigenText:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateKakugenText:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) NSNumber* viewNo;
 
@@ -42,14 +42,14 @@ extern const struct M_KakugenAttributes {
 
 @interface _M_Kakugen (CoreDataGeneratedPrimitiveAccessors)
 
-- (NSNumber*)primitiveMeigenID;
-- (void)setPrimitiveMeigenID:(NSNumber*)value;
+- (NSNumber*)primitiveKakugenID;
+- (void)setPrimitiveKakugenID:(NSNumber*)value;
 
-- (int32_t)primitiveMeigenIDValue;
-- (void)setPrimitiveMeigenIDValue:(int32_t)value_;
+- (int32_t)primitiveKakugenIDValue;
+- (void)setPrimitiveKakugenIDValue:(int32_t)value_;
 
-- (NSString*)primitiveMeigenText;
-- (void)setPrimitiveMeigenText:(NSString*)value;
+- (NSString*)primitiveKakugenText;
+- (void)setPrimitiveKakugenText:(NSString*)value;
 
 - (NSNumber*)primitiveViewNo;
 - (void)setPrimitiveViewNo:(NSNumber*)value;

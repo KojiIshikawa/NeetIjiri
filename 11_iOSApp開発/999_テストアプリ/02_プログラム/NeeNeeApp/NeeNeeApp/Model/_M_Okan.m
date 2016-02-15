@@ -4,6 +4,7 @@
 #import "_M_Okan.h"
 
 const struct M_OkanAttributes M_OkanAttributes = {
+	.loginDays = @"loginDays",
 	.okanID = @"okanID",
 	.okanText = @"okanText",
 };
@@ -34,6 +35,11 @@ const struct M_OkanAttributes M_OkanAttributes = {
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 
+	if ([key isEqualToString:@"loginDaysValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"loginDays"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
 	if ([key isEqualToString:@"okanIDValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"okanID"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -41,6 +47,26 @@ const struct M_OkanAttributes M_OkanAttributes = {
 	}
 
 	return keyPaths;
+}
+
+@dynamic loginDays;
+
+- (int32_t)loginDaysValue {
+	NSNumber *result = [self loginDays];
+	return [result intValue];
+}
+
+- (void)setLoginDaysValue:(int32_t)value_ {
+	[self setLoginDays:[NSNumber numberWithInt:value_]];
+}
+
+- (int32_t)primitiveLoginDaysValue {
+	NSNumber *result = [self primitiveLoginDays];
+	return [result intValue];
+}
+
+- (void)setPrimitiveLoginDaysValue:(int32_t)value_ {
+	[self setPrimitiveLoginDays:[NSNumber numberWithInt:value_]];
 }
 
 @dynamic okanID;

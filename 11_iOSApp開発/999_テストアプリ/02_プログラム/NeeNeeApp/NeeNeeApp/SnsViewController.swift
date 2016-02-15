@@ -14,19 +14,20 @@ import Social
 
 
 //SNS画面です。
-class SnsViewController: UIViewController,UIGestureRecognizerDelegate {
+class SnsViewController: UIViewController {
 
-    private let shareViewImage = UIImage(named: "02_03_01.png")
-    private let configViewImage = UIImage(named: "02_04_01.png")
     
     // シェアメニューのオブジェクト
     private var shareImgView: UIImageView!
-    
+
+    // 画像
+    private let shareViewImage = UIImage(named: "02_03_01.png")
+    private let configViewImage = UIImage(named: "02_04_01.png")
+
+    // オブジェクト
     private var facebookBtn: UIButton!
     private var lineBtn: UIButton!
     private var twitterBtn: UIButton!
-    
-
     
     
     // view ロード完了時
@@ -34,7 +35,7 @@ class SnsViewController: UIViewController,UIGestureRecognizerDelegate {
         print(NSDate().description, __FUNCTION__, __LINE__)
         super.viewDidLoad()
 
-        //ポップ生成
+        //背景生成
         shareImgView = UIImageView(frame: self.view.frame)
         shareImgView.image = shareViewImage
         shareImgView.alpha = 0.9
@@ -46,11 +47,6 @@ class SnsViewController: UIViewController,UIGestureRecognizerDelegate {
         facebookBtn.setImage(facebookImage, forState: .Normal)
         facebookBtn.addTarget(self, action: "tapFacebookBtn:", forControlEvents: .TouchUpInside)
         self.view.addSubview(facebookBtn)
-        
-//        let singleTap = UITapGestureRecognizer(target: self, action:"tapFacebookBtn:")
-//        singleTap.numberOfTapsRequired = 1
-//        singleTap.delegate = self
-//        self.facebookBtn.addGestureRecognizer(singleTap)
         
         // Twitterボタンを生成
         twitterBtn = UIButton(frame: CGRectMake(100,120,50,50))
@@ -74,12 +70,7 @@ class SnsViewController: UIViewController,UIGestureRecognizerDelegate {
         // Dispose of any resources that can be recreated.
     }
   
-    
-//    func tapFacebookBtn(recognizer: UITapGestureRecognizer) {
-//        print("test")
-//    }
 
-    
     
     //facebookボタン押下時の処理
     func tapFacebookBtn(sender: AnyObject) {
