@@ -19,9 +19,9 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     // MARK: - メンバ変数
     //****************************************
 
-    // BGM・SEの再生用オブジェクト
-    private var myAudioPlayer: AVAudioPlayer!
-    private var mySePlayer: AVAudioPlayer!
+//    // BGM・SEの再生用オブジェクト
+//    private var myAudioPlayer: AVAudioPlayer!
+//    private var mySePlayer: AVAudioPlayer!
     
     // バナー
     private var footerBaner: ADBannerView!
@@ -49,8 +49,6 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
 
     //TODO:メモリ使用量削減のため、極力必要な時に、宣言、解放すること
     private let myImage = UIImage(named: "03_01_01")
-//    private let fukidasiImage = UIImage( named: "05_01_01")!
-
     
     // メニュー画面の画像設定
     private let mainViewImage = UIImage(named: "02_01_01.png")
@@ -69,12 +67,15 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     private let configBtnActImage = UIImage(named: "01_06_01.png")
     private let configBtnInActImage = UIImage(named: "01_06_02.png")
 
+    //アニメーションタイマー
+    private var animeTimer: NSTimer!
+    
+    //初回表示判定フラグ
+    private var isFirstLoad: Bool! = false
+
     required init(coder aDecoder: NSCoder){
         super.init(coder: aDecoder)!
     }
-    
-    //アニメーションタイマー
-    private var animeTimer: NSTimer!
     
 
     //****************************************
@@ -83,7 +84,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     
     
     
-    // view ロード完了時
+    // view 初回ロード時
     override func viewDidLoad() {
         print(NSDate().description, __FUNCTION__, __LINE__)
         super.viewDidLoad()
@@ -91,22 +92,27 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         //オブジェクトの配置
         self.createObjInit()
         
-//        // 履歴書メニューの生成
-//        self.detailInit()
-        
-//        // シェアメニューの生成
-//        self.shareInit()
-        
-//        // 設定メニューの生成
-//        self.configInit()
-        
         // オブジェクトの制約の設定
         self.objConstraints()
         
         //アニメーション開始
         self.animationStart()
         
+        self.isFirstLoad = true
     }
+    
+
+    //view 表示完了後 毎回呼ばれる
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(false)
+
+        if (self.isFirstLoad == true) {
+            //ログインボーナス画面の表示
+            self.showLoginBonus()
+            self.isFirstLoad = false
+        }
+    }
+    
     
     //メモリ消費が多くなった時に動くイベント
     override func didReceiveMemoryWarning() {
@@ -232,40 +238,66 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     }
     
     
-    // 画面にタッチで呼ばれる
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+//    // 画面にタッチで呼ばれる
+//    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+//        print(NSDate().description, __FUNCTION__, __LINE__)
+//        
+//        // タッチイベントを取得
+//        let touchEvent = touches.first!
+//
+//        //print(touchEvent.view?.tag.description)
+//        
+//        // キャラクター画像がタップされた場合かつ、メニューが非表示の場合
+//        if touchEvent.view?.tag == 1
+//        {
+//            // ダイアログを表示
+//            let alertController = UIAlertController(title: "ニートの格言入手", message: "チラシを表示して、今日のニートの格言を取得しますか？", preferredStyle: .Alert)
+//            
+//            let defaultActionYes = UIAlertAction(title: "表示する", style: .Default, handler:{
+//                (action:UIAlertAction!) -> Void in
+//                
+//                // iAd(インタースティシャル)の表示
+//                self.requestInterstitialAdPresentation()
+//                
+//                // TODO:吹き出しの表示
+////                self.myFukidasiImageView.hidden = false
+////                self.fukidasiLabel.text = self.getMeigen()
+//                
+//            })
+//            
+//            let defaultActionNo = UIAlertAction(title: "表示しない", style: .Default, handler: nil)
+//            alertController.addAction(defaultActionYes)
+//            alertController.addAction(defaultActionNo)
+//            
+//            presentViewController(alertController, animated: true, completion: nil)
+//        }
+//    }
+    
+    
+    // ジェスチャーイベント処理
+    func tapChara(gestureRecognizer: UITapGestureRecognizer){
         
-        // タッチイベントを取得
-        let touchEvent = touches.first!
+//        // TODO:ダイアログを表示
+//        let alertController = UIAlertController(title: "ニートの格言入手", message: "チラシを表示して、今日のニートの格言を取得しますか？", preferredStyle: .Alert)
+//        
+//        let defaultActionYes = UIAlertAction(title: "表示する", style: .Default, handler:{
+//            (action:UIAlertAction!) -> Void in
+//
+//            // iAd(インタースティシャル)の表示
+//            self.requestInterstitialAdPresentation()
+//
+//            self.showPopoverView(self.manuBtn, identifier: "KakugenView")
+//            
+//        })
+//        
+//        let defaultActionNo = UIAlertAction(title: "表示しない", style: .Default, handler: nil)
+//        alertController.addAction(defaultActionYes)
+//        alertController.addAction(defaultActionNo)
+//
+//        presentViewController(alertController, animated: true, completion: nil)
 
-        //print(touchEvent.view?.tag.description)
-        
-        // キャラクター画像がタップされた場合かつ、メニューが非表示の場合
-        if touchEvent.view?.tag == 1
-        {
-            // ダイアログを表示
-            let alertController = UIAlertController(title: "ニートの格言入手", message: "チラシを表示して、今日のニートの格言を取得しますか？", preferredStyle: .Alert)
-            
-            let defaultActionYes = UIAlertAction(title: "表示する", style: .Default, handler:{
-                (action:UIAlertAction!) -> Void in
-                
-                // iAd(インタースティシャル)の表示
-                self.requestInterstitialAdPresentation()
-                
-                // TODO:吹き出しの表示
-//                self.myFukidasiImageView.hidden = false
-//                self.fukidasiLabel.text = self.getMeigen()
-                
-            })
-            
-            let defaultActionNo = UIAlertAction(title: "表示しない", style: .Default, handler: nil)
-            alertController.addAction(defaultActionYes)
-            alertController.addAction(defaultActionNo)
-            
-            presentViewController(alertController, animated: true, completion: nil)
-        }
-        
+        self.showPopoverView(self.manuBtn, identifier: "KakugenView")
+
         
     }
     
@@ -273,6 +305,12 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     // MARK: - その他メソッド
     //****************************************
 
+    //ログインボーナス
+    func showLoginBonus() {
+        //PopOverを表示
+        self.showPopoverView(self.manuBtn, identifier: "LoginBonusView")
+    }
+    
     //初期表示時のオブジェクトを作成し設置する
     func createObjInit() {
         
@@ -287,6 +325,11 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         myCharImageView.center.y = self.view.center.y
         myCharImageView.tag = 1
         myCharImageView.userInteractionEnabled = true
+        
+        let singleTap = UITapGestureRecognizer(target: self, action:"tapChara:")
+        myCharImageView.addGestureRecognizer(singleTap)
+        myCharImageView.layer.borderColor = UIColor.redColor().CGColor
+        myCharImageView.layer.borderWidth = 2.0
         self.view.addSubview(myCharImageView)
         
         
@@ -307,24 +350,28 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         manuBtn.sizeToFit()
         self.view.addSubview(manuBtn)
         
+        //暇つぶしボタン
         mainBtn = UIButton(frame: CGRectMake(180,self.view.bounds.height-footerBaner.frame.height-70,100,100))
         mainBtn.setImage(mainBtnActImage, forState: .Normal)
         mainBtn.addTarget(self, action: "tapMainBtn:", forControlEvents: .TouchUpInside)
         manuBtn.sizeToFit()
         self.view.addSubview(mainBtn)
         
+        //履歴書ボタン
         detailBtn = UIButton(frame: CGRectMake(120,self.view.bounds.height-footerBaner.frame.height-70,60,100))
         detailBtn.setImage(detailBtnActImage, forState: .Normal)
         detailBtn.addTarget(self, action: "tapDetailBtn:", forControlEvents: .TouchUpInside)
         detailBtn.sizeToFit()
         self.view.addSubview(detailBtn)
         
+        //共有ボタン
         shareBtn = UIButton(frame: CGRectMake(60,self.view.bounds.height-footerBaner.frame.height-70,60,100))
         shareBtn.setImage(shareBtnActImage, forState: .Normal)
         shareBtn.addTarget(self, action: "tapShareBtn:", forControlEvents: .TouchUpInside)
         shareBtn.sizeToFit()
         self.view.addSubview(shareBtn)
         
+        //設定ボタン
         configBtn = UIButton(frame: CGRectMake(0,self.view.bounds.height-footerBaner.frame.height-70,60,100))
         configBtn.setImage(configBtnActImage, forState: .Normal)
         configBtn.addTarget(self, action: "tapConfigBtn:", forControlEvents: .TouchUpInside)
@@ -338,14 +385,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         configBtn.hidden = true
         
         // テーマソングを再生する.
-        do {
-            myAudioPlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath:Const.mySongPath!))
-            myAudioPlayer.numberOfLoops = -1
-            myAudioPlayer.play()
-            
-        }catch{
-            // 例外発生
-        }
+        Utility.bgmSooundPlay(Const.mySongPath!)
     }
 
     /** バナーが読みこまれた時に呼ばれる **/
@@ -368,7 +408,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     
     //ランダムウォーク
     func randomWalk() {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        //print(NSDate().description, __FUNCTION__, __LINE__)
         //("x = \(self.myCharImageView.center.x) y = \(self.myCharImageView.center.y)")
 
         //初期値
@@ -731,20 +771,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         )
     }
     
-    //****************************************
-    // MARK: - DB Access
-    //****************************************
 
-    //迷言の取得
-    func getMeigen() -> String  {
-        print(NSDate().description, __FUNCTION__, __LINE__)
-        
-        let meigenList :[M_Kakugen] = M_Kakugen.MR_findAll() as! [M_Kakugen];
-        let randInt = arc4random_uniform(UInt32(meigenList.count));
-        print(meigenList.count)
-        return meigenList[Int(randInt)].meigenText
-        
-    }
 
     
 }

@@ -11,13 +11,15 @@ import AVFoundation
 
 class Utility {
     // BGM・SEの再生用オブジェクト
-    private var myAudioPlayer: AVAudioPlayer!
+    static private var myAudioPlayer: AVAudioPlayer!
     static private var mySePlayer: AVAudioPlayer!
 
+    
+    
     //画像をキャッシュせず読み込むメソッド
     class func getUncachedImage (named name : String) -> UIImage?
     {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+//        print(NSDate().description, __FUNCTION__, __LINE__)
         
         if let imgPath = NSBundle.mainBundle().pathForResource(name, ofType: nil)
         {
@@ -27,21 +29,66 @@ class Utility {
     }
     
     
+    class func bgmSooundPlay(bgmPath: String)
+    {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        
+        //userDefaultからボリューム値を取得
+        let ud = NSUserDefaults.standardUserDefaults()
+        var udBGM : Float! = ud.floatForKey("VOL_BGM")
+        if udBGM == nil {
+            udBGM = 0.5
+        }
+        
+        //再生
+        do {
+            myAudioPlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath:Const.mySongPath!))
+            myAudioPlayer.volume = udBGM
+            myAudioPlayer.numberOfLoops = -1
+            myAudioPlayer.play()
+            
+        }catch{
+            // 例外発生
+        }
+   }
+   
+    
+    class func bgmVolumeChange(volume: Float)
+    {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        myAudioPlayer.volume = volume
+    }
+    
+    
     
     /** SE再生 **/
+    //ファイルのパス
     class func seSoundPlay(sePath: String)
     {
         print(NSDate().description, __FUNCTION__, __LINE__)
         
+        //userDefaultからボリューム値を取得
+        let ud = NSUserDefaults.standardUserDefaults()
+        var udSE : Float! = ud.floatForKey("VOL_SE")
+        if udSE == nil {
+            udSE = 0.5
+        }
+
+        
         // SEを再生する.
         do {
             mySePlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath:sePath))
-            //            mySePlayer.volume = seVolumeSBar.value * 2
+            mySePlayer.volume = udSE * 2
             mySePlayer.play()
             
         }catch{
             // 例外発生
         }
+    }
+    class func seVolumeChange(volume: Float)
+    {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        mySePlayer.volume = volume * 2
     }
 
 }

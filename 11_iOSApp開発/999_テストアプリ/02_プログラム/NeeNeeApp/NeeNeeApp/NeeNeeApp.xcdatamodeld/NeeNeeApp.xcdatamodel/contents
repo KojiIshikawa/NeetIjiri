@@ -37,11 +37,12 @@
         <attribute name="viewNo" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="M_Kakugen" representedClassName="M_Kakugen" syncable="YES">
-        <attribute name="meigenID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="meigenText" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="kakugenID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="kakugenText" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="viewNo" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="M_Okan" representedClassName="M_Okan" syncable="YES">
+        <attribute name="loginDays" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="okanID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="okanText" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
@@ -102,7 +103,7 @@
         <element name="M_Item" positionX="-18" positionY="63" width="128" height="285"/>
         <element name="M_Job" positionX="-54" positionY="18" width="128" height="120"/>
         <element name="M_Kakugen" positionX="-63" positionY="-18" width="128" height="90"/>
-        <element name="M_Okan" positionX="-36" positionY="45" width="128" height="75"/>
+        <element name="M_Okan" positionX="-36" positionY="45" width="128" height="90"/>
         <element name="M_ResultAction" positionX="36" positionY="153" width="128" height="105"/>
         <element name="M_Stage" positionX="0" positionY="72" width="128" height="135"/>
         <element name="T_ActionResult" positionX="18" positionY="126" width="128" height="120"/>

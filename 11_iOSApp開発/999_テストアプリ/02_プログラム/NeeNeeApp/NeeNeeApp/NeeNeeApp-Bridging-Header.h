@@ -13,6 +13,8 @@
 #import "MagicalRecord/MagicalRecord.h"
 #import "M_Kakugen.h"
 #import "T_RefKakugen.h"
+#import "M_Okan.h"
+#import "M_Job.h"
 #import "T_CharaBase.h"
 #import "T_GetItem.h"
 #import "M_Item.h"
@@ -23,5 +25,12 @@
 #import "T_ActionResult.h"
 
 
+
+
+#import "FMDatabase.h"
+#import "FMResultSet.h"
+#import "FMDatabaseAdditions.h"
+#import "FMDatabaseQueue.h"
+#import "FMDatabasePool.h"
 
 #endif /* NeeNeeApp_Bridging_Header_h */

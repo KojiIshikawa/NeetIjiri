@@ -76,6 +76,9 @@ class ProfileViewController: UIViewController {
         self.view.addSubview(kakugenHistoryScrollView)
         self.view.addSubview(actionHistoryScrollView)
         self.view.addSubview(compHistoryScrollView)
+        self.view.addSubview(nameDataLabel)
+        self.view.addSubview(birthDataLabel)
+        self.view.addSubview(positionDataLabel)
 
     }
     
@@ -141,8 +144,8 @@ class ProfileViewController: UIViewController {
             
             for tKakugenItem in tRefKakugen {
             
-                if mKakugenItem.meigenID == tKakugenItem.kakugenID {
-                    kakugenList.append(mKakugenItem.meigenText)
+                if mKakugenItem.kakugenID == tKakugenItem.kakugenID {
+                    kakugenList.append(mKakugenItem.kakugenText)
                     
                 } else {
                     kakugenList.append(Const.QUESTION_TEXT)

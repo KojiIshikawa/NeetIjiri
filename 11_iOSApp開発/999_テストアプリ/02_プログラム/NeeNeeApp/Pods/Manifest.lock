@@ -1,12 +1,22 @@
 PODS:
+  - FMDB/SQLCipher (2.6):
+    - SQLCipher
   - MagicalRecord (2.3.2):
     - MagicalRecord/Core (= 2.3.2)
   - MagicalRecord/Core (2.3.2)
+  - SQLCipher (3.3.1):
+    - SQLCipher/standard (= 3.3.1)
+  - SQLCipher/common (3.3.1)
+  - SQLCipher/standard (3.3.1):
+    - SQLCipher/common
 
 DEPENDENCIES:
+  - FMDB/SQLCipher
   - MagicalRecord
 
 SPEC CHECKSUMS:
+  FMDB: c1968bab3ab0aed38f66cb778ae1e7fa9a652b6e
   MagicalRecord: 53bed74b4323b930992a725be713e53b37d19755
+  SQLCipher: d490d2effe735895d2204d25a154b1e722278421
 
 COCOAPODS: 0.39.0
