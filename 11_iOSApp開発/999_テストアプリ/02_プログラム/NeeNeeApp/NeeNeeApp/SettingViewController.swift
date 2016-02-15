@@ -8,12 +8,10 @@
 
 import Foundation
 import AVFoundation
+
+
 //設定画面です。
 class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
-    
-    // BGM・SEの再生用オブジェクト
-    private var myAudioPlayer: AVAudioPlayer!
-    private var mySePlayer: AVAudioPlayer!
 
     //背景
     private var settingImgView: UIImageView!
@@ -33,7 +31,6 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
         print(NSDate().description, __FUNCTION__, __LINE__)
         super.viewDidLoad()
         
-        
         //背景生成
         settingImgView = UIImageView(frame: self.view.frame)
         settingImgView.image = settingViewImage
@@ -44,10 +41,12 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
         // BGMのラベルを生成
         bgmLabel = UILabel(frame: CGRectMake(20,60,100,120))
         bgmLabel.text = "BGM"
+
         
         // BGMのスライドバーを生成
         bgmVolumeSBar = UISlider(frame: CGRectMake(100,60,100,120))
         bgmVolumeSBar.addTarget(self, action: "slideBgmVolume:", forControlEvents: .TouchUpInside)
+        
         
         // BGMのミュートボタンを生成
         bgmMuteBtn = UIButton(frame: CGRectMake(200,60,100,120))
@@ -56,14 +55,15 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
         bgmMuteBtn.addTarget(self, action: "tapBgmMuteBtn:", forControlEvents: .TouchUpInside)
         
         
-        
         // SEのラベルを生成
         seLabel = UILabel(frame: CGRectMake(20,120,100,120))
         seLabel.text = "SE"
+
         
         // SEのスライドバーを生成
         seVolumeSBar = UISlider(frame: CGRectMake(100,120,100,120))
         seVolumeSBar.addTarget(self, action: "slideSeVolume:", forControlEvents: .TouchUpInside)
+        
         
         // SEのミュートボタンを生成
         seMuteBtn = UIButton(frame: CGRectMake(200,120,100,120))
@@ -87,14 +87,14 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
         if udBGM != nil {
             bgmVolumeSBar.value = udBGM
         } else {
-            bgmVolumeSBar.value = 0.5
+            bgmVolumeSBar.value = 0.5 //音量　初期値
         }
 
         let udSE : Float! = ud.floatForKey("VOL_SE")
         if udSE != nil {
             seVolumeSBar.value = udSE
         } else {
-            seVolumeSBar.value = 0.5
+            seVolumeSBar.value = 0.5 //音量　初期値
         }
     }
     
@@ -145,28 +145,12 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
         
         Utility.bgmVolumeChange(bgmVolumeSBar.value)
         
-        
-        // ミュート切り替え
-//        if myAudioPlayer.volume == 0.0 {
-//            
-//            myAudioPlayer.volume = 0.5
-//            bgmVolumeSBar.value = 0.5
-//            
-//        } else {
-//            
-//            myAudioPlayer.volume = 0.0
-//            bgmVolumeSBar.value = 0.0
-//        }
-        
     }
     
     
     /** SEボリューム変更時の処理 **/
     func slideSeVolume(sender: AnyObject) {
         print(NSDate().description, __FUNCTION__, __LINE__)
-        
-        // スライド値をBGM音量にセットする
-//        mySePlayer.volume = seVolumeSBar.value * 2
         
         //NSUserDefaultに値を保存
         let ud = NSUserDefaults.standardUserDefaults()
@@ -177,7 +161,6 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
 
     }
 
-    
     /** SEミュートボタン押下時の処理 **/
     func tapSeMuteBtn(sender: AnyObject) {
         Utility.seSoundPlay(Const.mySeYesPath!)
@@ -196,20 +179,6 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
         
         // SEを再生する.
         Utility.seVolumeChange(seVolumeSBar.value)
-
-//        // ミュート切り替え
-//        if mySePlayer.volume == 0.0 {
-//            
-//            mySePlayer.volume = 1.0
-//            seVolumeSBar.value = 0.5
-//            
-//        } else {
-//            
-//            mySePlayer.volume = 0.0
-//            seVolumeSBar.value = 0.0
-//        }
-        
-        
 
     }
     

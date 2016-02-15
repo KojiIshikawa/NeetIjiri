@@ -77,10 +77,10 @@
             </objects>
             <point key="canvasLocation" x="1081" y="989"/>
         </scene>
-        <!--View Controller-->
+        <!--Kakugen View Controller-->
         <scene sceneID="Odx-NF-oiH">
             <objects>
-                <viewController id="PHD-mv-w0D" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="KakugenView" id="PHD-mv-w0D" customClass="KakugenViewController" customModule="NeeNeeApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6CC-4c-Gg3"/>
                         <viewControllerLayoutGuide type="bottom" id="nv4-fy-qgt"/>

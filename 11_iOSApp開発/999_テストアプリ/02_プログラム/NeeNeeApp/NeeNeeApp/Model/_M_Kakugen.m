@@ -4,8 +4,8 @@
 #import "_M_Kakugen.h"
 
 const struct M_KakugenAttributes M_KakugenAttributes = {
-	.meigenID = @"meigenID",
-	.meigenText = @"meigenText",
+	.kakugenID = @"kakugenID",
+	.kakugenText = @"kakugenText",
 	.viewNo = @"viewNo",
 };
 
@@ -35,8 +35,8 @@ const struct M_KakugenAttributes M_KakugenAttributes = {
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 
-	if ([key isEqualToString:@"meigenIDValue"]) {
-		NSSet *affectingKey = [NSSet setWithObject:@"meigenID"];
+	if ([key isEqualToString:@"kakugenIDValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"kakugenID"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
@@ -49,27 +49,27 @@ const struct M_KakugenAttributes M_KakugenAttributes = {
 	return keyPaths;
 }
 
-@dynamic meigenID;
+@dynamic kakugenID;
 
-- (int32_t)meigenIDValue {
-	NSNumber *result = [self meigenID];
+- (int32_t)kakugenIDValue {
+	NSNumber *result = [self kakugenID];
 	return [result intValue];
 }
 
-- (void)setMeigenIDValue:(int32_t)value_ {
-	[self setMeigenID:[NSNumber numberWithInt:value_]];
+- (void)setKakugenIDValue:(int32_t)value_ {
+	[self setKakugenID:[NSNumber numberWithInt:value_]];
 }
 
-- (int32_t)primitiveMeigenIDValue {
-	NSNumber *result = [self primitiveMeigenID];
+- (int32_t)primitiveKakugenIDValue {
+	NSNumber *result = [self primitiveKakugenID];
 	return [result intValue];
 }
 
-- (void)setPrimitiveMeigenIDValue:(int32_t)value_ {
-	[self setPrimitiveMeigenID:[NSNumber numberWithInt:value_]];
+- (void)setPrimitiveKakugenIDValue:(int32_t)value_ {
+	[self setPrimitiveKakugenID:[NSNumber numberWithInt:value_]];
 }
 
-@dynamic meigenText;
+@dynamic kakugenText;
 
 @dynamic viewNo;
 

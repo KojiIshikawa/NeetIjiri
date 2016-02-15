@@ -4,6 +4,7 @@
 
 target 'NeeNeeApp' do
   pod 'MagicalRecord'
+  pod 'FMDB/SQLCipher'
 end
 
 target 'NeeNeeAppTests' do

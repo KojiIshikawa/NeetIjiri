@@ -89,7 +89,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
         print(NSDate().description, __FUNCTION__, __LINE__)
         
         // SEを再生する.
-        seSoundPlay(mySeStartPath!)
+        Utility.seSoundPlay(mySeStartPath!)
         
         // BGMを止める
         myAudioPlayer.stop()
@@ -318,21 +318,6 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
         
       }
     
-    /** SE再生 **/
-    func seSoundPlay(sePath: String)
-    {
-        print(NSDate().description, __FUNCTION__, __LINE__)
-        
-        // SEを再生する.
-        do {
-            mySePlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath:sePath))
-            mySePlayer.volume = 5.0
-            mySePlayer.play()
-            
-        }catch{
-            // 例外発生
-        }
-    }
     
     //****************************************
     // MARK: - TextField Delegate
