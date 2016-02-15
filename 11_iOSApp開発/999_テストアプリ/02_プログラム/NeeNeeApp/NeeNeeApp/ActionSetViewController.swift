@@ -398,4 +398,93 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
             
         }
     }
+    
+    //****************************************
+    // MARK: - DB Access
+    //****************************************
+    
+    /** 未実行・実行中のアクティブなアイテムの取得 **/
+    func getT_ActionResultWithActive() -> [T_ActionResult]  {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        
+        // 返却するアイテム
+        var actionList :[T_ActionResult] = []
+        
+        // 取得済アイテムテーブルにアクセスし存在しなければfalseを返却する.
+        let tempList :[T_ActionResult] = T_ActionResult.MR_findByAttribute("charaID", withValue: Const.CHARACTER1_ID, andOrderBy: "actStartDate,actEndDate", ascending: true) as! [T_ActionResult];
+        print(actionList.count)
+        
+        for temp in tempList {
+            
+            // 実行中または未実行のデータをセットする.
+            if temp.actEndDate == nil {
+                
+                actionList.insert(temp, atIndex: actionList.count)
+            } else {
+                continue
+            }
+            
+        }
+        
+        return  actionList
+    }
+
+    /** 未実行・実行中のアクティブなアイテムの追加 **/
+    func insertT_ActionResultWithActive(itemId: Int) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        
+        // 指定されたアイテムをテーブルに行動実績テーブルに追加.
+        let insetData = T_ActionResult.MR_createEntity()! as T_ActionResult
+        insetData.itemID = itemId
+        insetData.actSetDate = NSDate()
+        insetData.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+        
+        // 取得済アイテムマスタの所持数をもとに戻す.
+        // TODO: 所持数を加算する（未実装）
+    }
+    
+    /** 未実行・実行中のアクティブなアイテムの削除 **/
+    func deleteT_ActionResultWithActive(deleteData: T_ActionResult) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        
+        // 指定されたアイテムをに行動実績テーブルから削除.
+        deleteData.MR_deleteEntity()
+        deleteData.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+        
+        // 取得済アイテムマスタの所持数をもとに戻す.
+        // TODO: 所持数を加算する（未実装）
+    }
+    
+    /** T_GetItemから取得済アイテムの取得 **/
+    func getT_GetItem() -> [T_GetItem]  {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+
+        // 取得済アイテムテーブルを取得.
+        let havingItemList :[T_GetItem] = T_GetItem.MR_findByAttribute("charaID", withValue: Const.CHARACTER1_ID, andOrderBy: "itemId", ascending: true) as! [T_GetItem];
+        print(havingItemList.count)
+        
+        return  havingItemList
+    }
+
+    /** M_Itemからアイテムマスタ情報の取得 **/
+    func getM_Item(_itemId: Int) -> M_Item  {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        
+        // アイテムマスタを取得.
+        let itemList :[M_Item] = M_Item.MR_findAllSortedBy("itemId", ascending: true) as! [M_Item];
+        
+        print(itemList.count)
+        
+        for item in itemList {
+            
+            // 一致する場合、アイテム情報を返却して終了.
+            if item.itemID == _itemId {
+                return item
+            }
+
+        }
+        // 存在しない場合、初期値を返却して終了.
+        return  M_Item()
+    }
+
 }

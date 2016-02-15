@@ -58,26 +58,35 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
         print(NSDate().description, __FUNCTION__, __LINE__)
         super.viewDidLoad()
         
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        super.viewDidAppear(animated)
+        
         // キャラクター基本情報が存在する場合
         if getCharaBaseExists() {
+            
+            print("基本情報あり")
             
             // 画面遷移する.
             let NextViewController = self.storyboard!.instantiateViewControllerWithIdentifier( "NeetMain" )
             self.presentViewController( NextViewController, animated: true, completion: nil)
-
+            
         } else {
-
+            
+            print("基本情報なし")
+            
             // オブジェクトの配置
             self.createObjInit()
             
             // オブジェクトの制約設定
             self.objConstraints()
-
+            
         }
-
         
     }
-    
+        
     override func didReceiveMemoryWarning() {
         print(NSDate().description, __FUNCTION__, __LINE__)
         super.didReceiveMemoryWarning()
@@ -96,6 +105,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
         
         // データベースに基本情報を書き込む.
         editCharaBase()
+        editInitRJob()
         
         // 画面遷移する.
         let NextViewController = self.storyboard!.instantiateViewControllerWithIdentifier( "NeetMain" )
@@ -144,6 +154,8 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
         
         // 生年月日の設定.
         birthDatePicker = UIDatePicker()
+        birthDatePicker.datePickerMode = UIDatePickerMode.Date
+        birthDatePicker.locale = NSLocale(localeIdentifier: "ja_JP")
         self.view.addSubview(birthDatePicker)
 
         // スタートボタンの設定.
@@ -203,7 +215,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
                 relatedBy: .Equal,
                 toItem: self.view,
                 attribute: .Width,
-                multiplier: 1.0 / 2,
+                multiplier: 1.0 / 2.0,
                 constant: 0
             ),
             
@@ -251,7 +263,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
                 relatedBy: .Equal,
                 toItem: self.view,
                 attribute: .Width,
-                multiplier: 1.0,
+                multiplier: 1.0/1.2,
                 constant: 0
             ),
             
@@ -383,13 +395,29 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
 
         // キャラクター基本情報に基本情報を書き込む
         let insetData = T_CharaBase.MR_createEntity()! as T_CharaBase
-        insetData.charaName = "ニート"
-        insetData.charaBirth = NSDate()
+        insetData.charaName = nameText.text
+        insetData.charaBirth = birthDatePicker.date
         insetData.managedObjectContext!.MR_saveToPersistentStoreAndWait()
 
         print(insetData.charaName)
         print(insetData.charaBirth)
 
+        return true
+    }
+    
+    //役職の初期設定
+    func editInitRJob() -> DarwinBoolean  {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        
+        // 現在の役職に最小値をセットする.
+        let insetData = T_RefJob.MR_createEntity()! as T_RefJob
+        insetData.charaID = Const.CHARACTER1_ID
+        insetData.jobID = 1
+        insetData.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+        
+        print(insetData.charaID)
+        print(insetData.jobID)
+        
         return true
     }
 }

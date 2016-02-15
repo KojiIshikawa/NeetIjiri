@@ -19,7 +19,8 @@ import Foundation
 class Const {
     static let TEST_NAME = ""
     
-    
+    static let CHARACTER1_ID = 1
+    static let QUESTION_TEXT = "？？？？？？？？？？"
     static let mySongPath = NSBundle.mainBundle().pathForResource("暇で忙しい", ofType:"mp3")
     static let mySeYesPath = NSBundle.mainBundle().pathForResource("se4", ofType:"mp3")
     static let mySeNoPath = NSBundle.mainBundle().pathForResource("se6", ofType:"mp3")
