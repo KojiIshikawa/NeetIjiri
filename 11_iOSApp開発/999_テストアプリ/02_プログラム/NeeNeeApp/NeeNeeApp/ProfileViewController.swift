@@ -73,12 +73,12 @@ class ProfileViewController: UIViewController {
         self.view.addSubview(nameDataLabel)
         self.view.addSubview(birthDataLabel)
         self.view.addSubview(positionDataLabel)
-        self.view.addSubview(kakugenHistoryScrollView)
-        self.view.addSubview(actionHistoryScrollView)
-        self.view.addSubview(compHistoryScrollView)
-        self.view.addSubview(nameDataLabel)
-        self.view.addSubview(birthDataLabel)
-        self.view.addSubview(positionDataLabel)
+        //self.view.addSubview(kakugenHistoryScrollView)
+        //self.view.addSubview(actionHistoryScrollView)
+        //self.view.addSubview(compHistoryScrollView)
+        
+        // 全オブジェクトの制約設定.
+        objConstraints()
 
     }
     
@@ -88,6 +88,160 @@ class ProfileViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    /** 全オブジェクトの制約設定 **/
+    func objConstraints() {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        
+        nameDataLabel.translatesAutoresizingMaskIntoConstraints = false
+        birthDataLabel.translatesAutoresizingMaskIntoConstraints = false
+        positionDataLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        // 名前の制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.nameDataLabel,
+                attribute:  NSLayoutAttribute.CenterX,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.CenterX,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.nameDataLabel,
+                attribute: NSLayoutAttribute.Top,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.Top,
+                multiplier: 1.0,
+                constant: 20
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.nameDataLabel,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Width,
+                multiplier: 1.0 / 2.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.nameDataLabel,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Height,
+                multiplier: 1.0,
+                constant: 20
+            )]
+        )
+
+        // 生年月日の制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.birthDataLabel,
+                attribute:  NSLayoutAttribute.CenterX,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.CenterX,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.birthDataLabel,
+                attribute: NSLayoutAttribute.Top,
+                relatedBy: .Equal,
+                toItem: self.nameDataLabel,
+                attribute:  NSLayoutAttribute.Top,
+                multiplier: 1.0,
+                constant: 20
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.birthDataLabel,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Width,
+                multiplier: 1.0 / 2.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.birthDataLabel,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Height,
+                multiplier: 1.0,
+                constant: 20
+            )]
+        )
+        
+        // 役職の制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.positionDataLabel,
+                attribute:  NSLayoutAttribute.CenterX,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.CenterX,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.positionDataLabel,
+                attribute: NSLayoutAttribute.Top,
+                relatedBy: .Equal,
+                toItem: self.birthDataLabel,
+                attribute:  NSLayoutAttribute.Top,
+                multiplier: 1.0,
+                constant: 20
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.positionDataLabel,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Width,
+                multiplier: 1.0 / 2.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.positionDataLabel,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Height,
+                multiplier: 1.0,
+                constant: 20
+            )]
+        )
+    }
+
     
     //基本情報の取得
     func getCharaBase() -> [T_CharaBase]  {
