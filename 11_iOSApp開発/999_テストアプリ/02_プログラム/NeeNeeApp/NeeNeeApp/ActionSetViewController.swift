@@ -22,9 +22,12 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
     // 背景画像用オブジェクト
     private let mainViewImage = UIImage(named: "02_01_01.png")
     private var touchesPosition = CGPoint!()
-    private var setItemCnt: Int8 = 0
-    
     private let mySeSetPath = NSBundle.mainBundle().pathForResource("se1", ofType:"mp3")
+    
+    
+    //コレクションビューにセットするアイテムリスト
+    private var itemList: [Dictionary <String,String>] = []
+    private var itemListIdx: Int = 0
     
     override func viewDidLoad() {
         
@@ -57,11 +60,13 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         **/
         // 横スクロール
         layout.scrollDirection = .Horizontal
-        
         itemCollectionView = UICollectionView(frame: CGRectMake(0,0,0,0), collectionViewLayout: layout)
         itemCollectionView.registerClass(itemCell.self, forCellWithReuseIdentifier: "cell")
         itemCollectionView.delegate = self
         itemCollectionView.dataSource = self
+        
+        // アイテムリストを取得し、メンバ変数にセット
+        itemList = getT_GetItem()
         
         // セル長押しイベント登録
         let longTapRecognizer = UILongPressGestureRecognizer(target: self, action: "cellLongTap:")
@@ -95,16 +100,6 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
 
         print(NSDate().description, __FUNCTION__, __LINE__)
-        //super.touchesBegan(touches, withEvent: event)
-        /**
-        // タッチイベントを取得
-        let touchEvent = touches.first!
-        touchesPosition.x = touchEvent.locationInView(self.view).x
-        touchesPosition.y = touchEvent.locationInView(self.view).y
-        
-        print(touchesPosition.x)
-        print(touchesPosition.y)
-        **/
         
     }
     
@@ -118,17 +113,6 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         
     }
     
-    /**
-    /** 暇つぶしアイテム長押し時の処理 **/
-    func handleTap(recognizer: UITapGestureRecognizer) {
-        print(NSDate().description, __FUNCTION__, __LINE__)
-        
-        print(recognizer.locationInView(self.view).x)
-        print(recognizer.locationInView(self.view).y)
-        
-    }
-**/
-    
     /** 暇つぶしアイテム長押し時の処理 **/
     func cellLongTap(recognizer: UILongPressGestureRecognizer) {
         print(NSDate().description, __FUNCTION__, __LINE__)
@@ -138,13 +122,6 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         let point = recognizer.locationInView(itemCollectionView)
         
         let indexPath = self.itemCollectionView.indexPathForItemAtPoint(point)
-        
-        /**
-        // パスが取得できない場合は処理終了
-        if indexPath == nil {
-            return
-        }
-        **/
 
         if recognizer.state == UIGestureRecognizerState.Began  {
             
@@ -176,18 +153,14 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
             && recognizer.locationInView(self.view).y <= setItemView.frame.maxY
             && recognizer.locationInView(self.view).y >= setItemView.frame.origin.y {
                 
-                // セット中アイテムをカウントアップ
-                setItemCnt += 1
-                
                 // 領域内の場合、セットアイテムをセットする.
                 setItemImageReLoad()
-                /**
-                let a : NeetMainViewController = NeetMainViewController()
-                UIApplication.
-                super.seSoundPlay(mySeSetPath!)
-                **/                
-
-                print("セットされたアイテムのアイテムコード：")
+                
+                // セットアイテムをデータベースに書き込む.
+                let idx : Int = (indexPath?.row)!
+                let stringNumber : String = String(UTF8String: itemList[idx]["itemName"]!)!
+                insertT_ActionResultWithActive(Int(stringNumber)!)
+                print("セットされたアイテムのアイテムコード：" + stringNumber)
             }
 
             // 選択中アイテムのイメージを破棄する.
@@ -229,7 +202,7 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
     /** 表示するセルの数 **/
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         print(NSDate().description, __FUNCTION__, __LINE__)
-        return 26
+        return itemList.count
     }
     
     /** セルが表示されるときに呼ばれる処理（1個のセルを描画する毎に呼び出されます） **/
@@ -239,9 +212,11 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! itemCell
         
         // セルの情報を設定する.
-        cell._name.text = "×"+"1"
-        cell._img.image = self.getUncachedImage( named: "06_01_01.png")
- //       cell.contentView.addGestureRecognizer(collectionView.panGestureRecognizer)
+        cell._name.text = itemList[itemListIdx]["itemName"]! + " ×" + itemList[itemListIdx]["itemCountValue"]!
+        cell._img.image = self.getUncachedImage( named: itemList[itemListIdx]["imageItem"]!)
+        
+        // アイテムリストのインデックスをカウントアップする.
+        itemListIdx += 1
         
         // セルを返却する.
         return cell
@@ -368,9 +343,8 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
     func setItemImageReLoad ()
     {
         
-        // 行動実績テーブルを読み込む
-        // TODO トランザクションが読み込めるようになってから実装
-        switch setItemCnt {
+        // 行動実績テーブルを読み込み、未実行または実行中のアクション数に合わせ、円グラフの画像を設定する.
+        switch getT_ActionResultWithActive().count {
             
         case 0:
             setItemView.image = self.getUncachedImage( named: "02_05_01.png")
@@ -386,14 +360,11 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
             break
         default:
             
-            // ダイアログを表示
+            // エラーダイアログを表示
             let alertController = UIAlertController(title: "忙しすぎて死んじゃう"
                 , message: "未実行のひまをキャンセルしてください。", preferredStyle: .Alert)
-            
             let defaultActionYes = UIAlertAction(title: "OK", style: .Default, handler:nil)
-            
             alertController.addAction(defaultActionYes)
-            
             presentViewController(alertController, animated: true, completion: nil)
             
         }
@@ -456,35 +427,39 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
     }
     
     /** T_GetItemから取得済アイテムの取得 **/
-    func getT_GetItem() -> [T_GetItem]  {
+    func getT_GetItem() -> [Dictionary<String, String>]  {
         print(NSDate().description, __FUNCTION__, __LINE__)
-
-        // 取得済アイテムテーブルを取得.
-        let havingItemList :[T_GetItem] = T_GetItem.MR_findByAttribute("charaID", withValue: Const.CHARACTER1_ID, andOrderBy: "itemId", ascending: true) as! [T_GetItem];
-        print(havingItemList.count)
         
-        return  havingItemList
-    }
-
-    /** M_Itemからアイテムマスタ情報の取得 **/
-    func getM_Item(_itemId: Int) -> M_Item  {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        // 取得済アイテムテーブルを取得.
+        let itemTList :[T_GetItem] = T_GetItem.MR_findByAttribute("charaID", withValue: Const.CHARACTER1_ID, andOrderBy: "itemId", ascending: true) as! [T_GetItem];
+        
+        //返却するアイテムリスト
+        var itemList : [Dictionary<String, String>] = []
         
         // アイテムマスタを取得.
-        let itemList :[M_Item] = M_Item.MR_findAllSortedBy("itemId", ascending: true) as! [M_Item];
+        let itemMList :[M_Item] = M_Item.MR_findAllSortedBy("itemId", ascending: true) as! [M_Item];
         
-        print(itemList.count)
-        
-        for item in itemList {
-            
-            // 一致する場合、アイテム情報を返却して終了.
-            if item.itemID == _itemId {
-                return item
+        for havingItem in itemTList {
+
+            for masterItem in itemMList {
+                
+                // 一致する場合、アイテム情報セットする.
+                if havingItem.itemID == masterItem.itemID {
+
+                    // アイテムをセット
+                    var itemDic : Dictionary<String, String> = Dictionary<String, String>()
+                    itemDic["itemID"] = String(havingItem.itemID)
+                    itemDic["itemCountValue"] = String(havingItem.itemCountValue)
+                    itemDic["itemName"] = String(masterItem.itemName)
+                    itemDic["itemText"] = String(masterItem.itemText)
+                    itemDic["imageItem"] = String(masterItem.imageItem)
+                    itemList.append(itemDic)
+                }
+
             }
-
         }
-        // 存在しない場合、初期値を返却して終了.
-        return  M_Item()
+        
+        //作成したアイテムリストを返却
+        return  itemList
     }
-
 }

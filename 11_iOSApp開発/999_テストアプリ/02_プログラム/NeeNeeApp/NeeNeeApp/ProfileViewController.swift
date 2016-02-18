@@ -8,10 +8,8 @@
 
 import Foundation
 
-
-
 // 履歴書画面です。
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController,UIScrollViewDelegate {
 
     // 履歴書メニューのオブジェクト
     private var detailImgView: UIImageView!
@@ -25,7 +23,6 @@ class ProfileViewController: UIViewController {
     private var actionHistoryScrollView: UIScrollView!
     private var compHistoryScrollView: UIScrollView!
 
-
     // view ロード完了時
     override func viewDidLoad() {
         print(NSDate().description, __FUNCTION__, __LINE__)
@@ -34,11 +31,11 @@ class ProfileViewController: UIViewController {
         //背景設定
         detailImgView = UIImageView(frame: self.view.frame)
         detailImgView.image = detailViewImage
-
-        // キャラクター基本情報を取得する.
-        let charaData = getCharaBase()
         
         // プロフィール設定
+        // キャラクター基本情報を取得する.
+        let charaData = getCharaBase()
+
         // 名前
         self.nameDataLabel = UILabel()
         self.nameDataLabel.textAlignment = .Left
@@ -52,30 +49,33 @@ class ProfileViewController: UIViewController {
         self.birthDataLabel.text = dateFormatter.stringFromDate(charaData[0].charaBirth)
 
         // 役職
-        self.positionDataLabel = UILabel(frame: CGRectMake(100,100,100,100))
+        self.positionDataLabel = UILabel()
         self.positionDataLabel.textAlignment = .Left
         self.positionDataLabel.text = getJobName()
 
         // 格言履歴（scrollview）
         self.kakugenHistoryScrollView = UIScrollView()
-        //self.kakugenHistoryScrollView
+        self.kakugenHistoryScrollView.delegate = self
+        self.kakugenHistoryScrollView.contentSize = CGSizeMake(100,100)
 
         // 行動履歴（scrollview）
         self.actionHistoryScrollView = UIScrollView()
-        //self.actionHistoryScrollView.
+        self.actionHistoryScrollView.delegate = self
+        self.actionHistoryScrollView.contentSize = CGSizeMake(100,100)
         
         // 行った場所の履歴（scrollview）
         self.compHistoryScrollView = UIScrollView()
-        //self.compHistoryScrollView
+        self.compHistoryScrollView.delegate = self
+        self.compHistoryScrollView.contentSize = CGSizeMake(100,100)
 
         // ポップ上に表示するオブジェクトをViewに追加する.
         self.view.addSubview(detailImgView)
         self.view.addSubview(nameDataLabel)
         self.view.addSubview(birthDataLabel)
         self.view.addSubview(positionDataLabel)
-        //self.view.addSubview(kakugenHistoryScrollView)
-        //self.view.addSubview(actionHistoryScrollView)
-        //self.view.addSubview(compHistoryScrollView)
+        self.view.addSubview(kakugenHistoryScrollView)
+        self.view.addSubview(actionHistoryScrollView)
+        self.view.addSubview(compHistoryScrollView)
         
         // 全オブジェクトの制約設定.
         objConstraints()
@@ -96,7 +96,10 @@ class ProfileViewController: UIViewController {
         nameDataLabel.translatesAutoresizingMaskIntoConstraints = false
         birthDataLabel.translatesAutoresizingMaskIntoConstraints = false
         positionDataLabel.translatesAutoresizingMaskIntoConstraints = false
-
+        kakugenHistoryScrollView.translatesAutoresizingMaskIntoConstraints = false
+        actionHistoryScrollView.translatesAutoresizingMaskIntoConstraints = false
+        compHistoryScrollView.translatesAutoresizingMaskIntoConstraints = false
+        
         // 名前の制約
         self.view.addConstraints([
             
@@ -240,8 +243,168 @@ class ProfileViewController: UIViewController {
                 constant: 20
             )]
         )
+        
+        // 格言履歴の制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.kakugenHistoryScrollView,
+                attribute:  NSLayoutAttribute.CenterX,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.CenterX,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.kakugenHistoryScrollView,
+                attribute: NSLayoutAttribute.Top,
+                relatedBy: .Equal,
+                toItem: self.positionDataLabel,
+                attribute:  NSLayoutAttribute.Top,
+                multiplier: 1.0,
+                constant: 20
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.kakugenHistoryScrollView,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Width,
+                multiplier: 1.0 / 2.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.kakugenHistoryScrollView,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Height,
+                multiplier: 1.0,
+                constant: 60
+            )]
+        )
+        
+        // 行動履歴の制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.actionHistoryScrollView,
+                attribute:  NSLayoutAttribute.CenterX,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.CenterX,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.actionHistoryScrollView,
+                attribute: NSLayoutAttribute.Top,
+                relatedBy: .Equal,
+                toItem: self.kakugenHistoryScrollView,
+                attribute:  NSLayoutAttribute.Top,
+                multiplier: 1.0,
+                constant: 20
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.actionHistoryScrollView,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Width,
+                multiplier: 1.0 / 2.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.actionHistoryScrollView,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Height,
+                multiplier: 1.0,
+                constant: 60
+            )]
+        )
+        
+        // 行った場所の制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.compHistoryScrollView,
+                attribute:  NSLayoutAttribute.CenterX,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.CenterX,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.compHistoryScrollView,
+                attribute: NSLayoutAttribute.Top,
+                relatedBy: .Equal,
+                toItem: self.actionHistoryScrollView,
+                attribute:  NSLayoutAttribute.Top,
+                multiplier: 1.0,
+                constant: 20
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.compHistoryScrollView,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Width,
+                multiplier: 1.0 / 2.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.compHistoryScrollView,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Height,
+                multiplier: 1.0,
+                constant: 60
+            )]
+        )
+    }
+    
+    //****************************************
+    // MARK: - Scroll View Delegate
+    //****************************************
+
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
     }
 
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+
+    }
+    
+    //****************************************
+    // MARK: - DB Access
+    //****************************************
     
     //基本情報の取得
     func getCharaBase() -> [T_CharaBase]  {
@@ -299,9 +462,13 @@ class ProfileViewController: UIViewController {
             for tKakugenItem in tRefKakugen {
             
                 if mKakugenItem.kakugenID == tKakugenItem.kakugenID {
+
+                    //取得済みデータはそのままセットする.
                     kakugenList.append(mKakugenItem.kakugenText)
                     
                 } else {
+                    
+                    //未取得データはマスキングしてセットする.
                     kakugenList.append(Const.QUESTION_TEXT)
                 }
             
@@ -334,9 +501,13 @@ class ProfileViewController: UIViewController {
             for tStageItem in tRefStage {
                 
                 if mStageItem.stageID == tStageItem.stageID {
+                    
+                    //取得済みデータはそのままセットする.
                     stageList.append(mStageItem.stageName)
                     
                 } else {
+                    
+                    //未取得データはマスキングしてセットする.
                     stageList.append(Const.QUESTION_TEXT)
                 }
                 
