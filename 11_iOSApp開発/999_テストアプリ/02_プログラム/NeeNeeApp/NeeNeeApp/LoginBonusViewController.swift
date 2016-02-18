@@ -35,10 +35,20 @@ class LoginBonusViewController: UIViewController {
         
         
         // ログインメッセージを表示
-        lblOkan = UILabel(frame: CGRectMake(20,60,self.view.bounds.width-30,120))
-        lblOkan.text = getOkan()
+        lblOkan = UILabel(frame: CGRectMake(45,100,self.view.bounds.width-30,160))
+        
+        
+        
+        lblOkan.text = "〇〇くんへ\n\nかあさん腕をふるって\n〇〇くんの大好きな\n\(getOkan())を\n作りました。\n無理しないで頑張ってね！"
+        
+        
+        
+        
+        
+        
         lblOkan.numberOfLines = 0
         self.view.addSubview(lblOkan)
+        
         
         //OKボタン
         btnOK = UIButton(frame: CGRectMake(20,60,self.view.bounds.width-30,120))
@@ -46,6 +56,7 @@ class LoginBonusViewController: UIViewController {
         self.view.addSubview(btnOK)
 
     }
+
     
     //メモリ消費が多くなった時に動くイベント
     override func didReceiveMemoryWarning() {
@@ -66,9 +77,9 @@ class LoginBonusViewController: UIViewController {
         let okanList :[M_Okan] = M_Okan.MR_findAll() as! [M_Okan];
         let randInt = arc4random_uniform(UInt32(okanList.count));
         print(okanList.count)
+        
         return okanList[Int(randInt)].okanText
         
-//        return "okan"
     }
 
     
