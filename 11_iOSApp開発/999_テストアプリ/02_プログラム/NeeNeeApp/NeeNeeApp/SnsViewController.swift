@@ -176,8 +176,8 @@ class SnsViewController: UIViewController {
                 item: self.twitterBtn,
                 attribute:  NSLayoutAttribute.Left,
                 relatedBy: .Equal,
-                toItem: self.view,
-                attribute:  NSLayoutAttribute.CenterX,
+                toItem: self.facebookBtn,
+                attribute:  NSLayoutAttribute.Right,
                 multiplier: 1.0,
                 constant: 20
             ),
@@ -234,12 +234,12 @@ class SnsViewController: UIViewController {
             // y座標
             NSLayoutConstraint(
                 item: self.lineBtn,
-                attribute: NSLayoutAttribute.Bottom,
+                attribute: NSLayoutAttribute.Top,
                 relatedBy: .Equal,
-                toItem: self.view,
+                toItem: self.facebookBtn,
                 attribute:  NSLayoutAttribute.Bottom,
                 multiplier: 1.0,
-                constant: -20
+                constant: 20
             ),
             
             // 横幅

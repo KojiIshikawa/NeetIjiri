@@ -39,38 +39,37 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
         
         
         // BGMのラベルを生成
-        bgmLabel = UILabel(frame: CGRectMake(20,60,100,120))
+        bgmLabel = UILabel()
         bgmLabel.text = "BGM"
 
         
         // BGMのスライドバーを生成
-        bgmVolumeSBar = UISlider(frame: CGRectMake(100,60,100,120))
+        bgmVolumeSBar = UISlider()
         bgmVolumeSBar.addTarget(self, action: "slideBgmVolume:", forControlEvents: .TouchUpInside)
         
         
         // BGMのミュートボタンを生成
-        bgmMuteBtn = UIButton(frame: CGRectMake(200,60,100,120))
+        bgmMuteBtn = UIButton()
         bgmMuteBtn.setTitle("ミュート",  forState: .Normal)
         bgmMuteBtn.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         bgmMuteBtn.addTarget(self, action: "tapBgmMuteBtn:", forControlEvents: .TouchUpInside)
         
         
         // SEのラベルを生成
-        seLabel = UILabel(frame: CGRectMake(20,120,100,120))
+        seLabel = UILabel()
         seLabel.text = "SE"
 
         
         // SEのスライドバーを生成
-        seVolumeSBar = UISlider(frame: CGRectMake(100,120,100,120))
+        seVolumeSBar = UISlider()
         seVolumeSBar.addTarget(self, action: "slideSeVolume:", forControlEvents: .TouchUpInside)
         
         
         // SEのミュートボタンを生成
-        seMuteBtn = UIButton(frame: CGRectMake(200,120,100,120))
+        seMuteBtn = UIButton()
         seMuteBtn.setTitle("ミュート",  forState: .Normal)
         seMuteBtn.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         seMuteBtn.addTarget(self, action: "tapSeMuteBtn:", forControlEvents: .TouchUpInside)
-        
         
         // Viewに追加する.
         self.view.addSubview(bgmLabel)
@@ -80,6 +79,8 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
         self.view.addSubview(seVolumeSBar)
         self.view.addSubview(seMuteBtn)
         
+        // オブジェクトの制約の設定
+        self.objConstraints()
         
         //UserDefaultから値を取得
         let ud = NSUserDefaults.standardUserDefaults()
@@ -106,7 +107,306 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
     }
   
     
-    
+    /** 全オブジェクトの制約設定 **/
+    func objConstraints() {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        
+        bgmLabel.translatesAutoresizingMaskIntoConstraints = false
+        bgmVolumeSBar.translatesAutoresizingMaskIntoConstraints = false
+        bgmMuteBtn.translatesAutoresizingMaskIntoConstraints = false
+        seLabel.translatesAutoresizingMaskIntoConstraints = false
+        seVolumeSBar.translatesAutoresizingMaskIntoConstraints = false
+        seMuteBtn.translatesAutoresizingMaskIntoConstraints = false
+        
+        // BGMラベルの制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.bgmLabel,
+                attribute:  NSLayoutAttribute.Left,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.Left,
+                multiplier: 1.0,
+                constant: 20
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.bgmLabel,
+                attribute: NSLayoutAttribute.Top,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.Top,
+                multiplier: 1.0,
+                constant: 100
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.bgmLabel,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Width,
+                multiplier: 1.0 / 6.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.bgmLabel,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Height,
+                multiplier: 1.0 / 24.0,
+                constant: 0
+            )]
+        )
+        
+        // BGMボリュームバーの制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.bgmVolumeSBar,
+                attribute:  NSLayoutAttribute.Left,
+                relatedBy: .Equal,
+                toItem: self.bgmLabel,
+                attribute:  NSLayoutAttribute.Right,
+                multiplier: 1.0,
+                constant: 20
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.bgmVolumeSBar,
+                attribute: NSLayoutAttribute.Top,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.Top,
+                multiplier: 1.0,
+                constant: 100
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.bgmVolumeSBar,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Width,
+                multiplier: 1.0 / 3.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.bgmVolumeSBar,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Height,
+                multiplier: 1.0 / 24.0,
+                constant: 0
+            )]
+        )
+        
+        // BGMミュートボタンの制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.bgmMuteBtn,
+                attribute:  NSLayoutAttribute.Left,
+                relatedBy: .Equal,
+                toItem: self.bgmVolumeSBar,
+                attribute:  NSLayoutAttribute.Right,
+                multiplier: 1.0,
+                constant: 20
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.bgmMuteBtn,
+                attribute: NSLayoutAttribute.Top,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.Top,
+                multiplier: 1.0,
+                constant: 100
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.bgmMuteBtn,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Width,
+                multiplier: 1.0 / 4.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.bgmMuteBtn,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Height,
+                multiplier: 1.0 / 24.0,
+                constant: 0
+            )]
+        )
+        
+        // SEラベルの制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.seLabel,
+                attribute:  NSLayoutAttribute.Left,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.Left,
+                multiplier: 1.0,
+                constant: 20
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.seLabel,
+                attribute: NSLayoutAttribute.Top,
+                relatedBy: .Equal,
+                toItem: self.bgmLabel,
+                attribute:  NSLayoutAttribute.Bottom,
+                multiplier: 1.0,
+                constant: 20
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.seLabel,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Width,
+                multiplier: 1.0 / 6.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.seLabel,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Height,
+                multiplier: 1.0 / 24.0,
+                constant: 0
+            )]
+        )
+        
+        // SEボリュームバーの制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.seVolumeSBar,
+                attribute:  NSLayoutAttribute.Left,
+                relatedBy: .Equal,
+                toItem: self.seLabel,
+                attribute:  NSLayoutAttribute.Right,
+                multiplier: 1.0,
+                constant: 20
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.seVolumeSBar,
+                attribute: NSLayoutAttribute.Top,
+                relatedBy: .Equal,
+                toItem: self.bgmVolumeSBar,
+                attribute:  NSLayoutAttribute.Bottom,
+                multiplier: 1.0,
+                constant: 20
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.seVolumeSBar,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Width,
+                multiplier: 1.0 / 3.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.seVolumeSBar,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Height,
+                multiplier: 1.0 / 24.0,
+                constant: 0
+            )]
+        )
+        
+        // SEミュートボタンの制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.seMuteBtn,
+                attribute:  NSLayoutAttribute.Left,
+                relatedBy: .Equal,
+                toItem: self.seVolumeSBar,
+                attribute:  NSLayoutAttribute.Right,
+                multiplier: 1.0,
+                constant: 20
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.seMuteBtn,
+                attribute: NSLayoutAttribute.Top,
+                relatedBy: .Equal,
+                toItem: self.bgmMuteBtn,
+                attribute:  NSLayoutAttribute.Bottom,
+                multiplier: 1.0,
+                constant: 20
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.seMuteBtn,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Width,
+                multiplier: 1.0 / 4.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.seMuteBtn,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Height,
+                multiplier: 1.0 / 24.0,
+                constant: 0
+            )]
+        )
+    }
+
     
     
     /** BGMボリューム変更時の処理 **/

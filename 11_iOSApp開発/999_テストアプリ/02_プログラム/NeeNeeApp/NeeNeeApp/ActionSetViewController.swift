@@ -123,13 +123,18 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         
         let indexPath = self.itemCollectionView.indexPathForItemAtPoint(point)
 
+        if indexPath == nil {
+            return
+        }
+        
         if recognizer.state == UIGestureRecognizerState.Began  {
             
             // 長押しされた場合の処理
             print("長押しされたcellのindexPath:\(indexPath?.row)")
 
             // タップされたアイテムの画像を半透明で表示する
-            let myImage = self.getUncachedImage( named: "06_01_01.png")
+            let idx : Int = (indexPath?.row)!
+            let myImage = self.getUncachedImage( named: String(UTF8String: itemList[idx]["imageItem"]!)!)
             
             // 選択中表示用アイテムが未作成なら作成する.
             if selItemView == nil {
@@ -382,7 +387,12 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         var actionList :[T_ActionResult] = []
         
         // 取得済アイテムテーブルにアクセスし存在しなければfalseを返却する.
+        let tempList :[T_ActionResult] = T_ActionResult.MR_findAllSortedBy("actStartDate,actEndDate", ascending: true) as! [T_ActionResult];
+        
+        /**
         let tempList :[T_ActionResult] = T_ActionResult.MR_findByAttribute("charaID", withValue: Const.CHARACTER1_ID, andOrderBy: "actStartDate,actEndDate", ascending: true) as! [T_ActionResult];
+        **/
+
         print(actionList.count)
         
         for temp in tempList {
