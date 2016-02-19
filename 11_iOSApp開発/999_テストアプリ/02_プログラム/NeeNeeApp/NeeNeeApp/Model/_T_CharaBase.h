@@ -5,6 +5,7 @@
 
 extern const struct T_CharaBaseAttributes {
 	__unsafe_unretained NSString *charaBirth;
+	__unsafe_unretained NSString *charaID;
 	__unsafe_unretained NSString *charaName;
 	__unsafe_unretained NSString *jobID;
 	__unsafe_unretained NSString *kakugenID;
@@ -25,6 +26,14 @@ extern const struct T_CharaBaseAttributes {
 @property (nonatomic, strong) NSDate* charaBirth;
 
 //- (BOOL)validateCharaBirth:(id*)value_ error:(NSError**)error_;
+
+@property (nonatomic, strong) NSNumber* charaID;
+
+@property (atomic) int32_t charaIDValue;
+- (int32_t)charaIDValue;
+- (void)setCharaIDValue:(int32_t)value_;
+
+//- (BOOL)validateCharaID:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) NSString* charaName;
 
@@ -76,6 +85,12 @@ extern const struct T_CharaBaseAttributes {
 
 - (NSDate*)primitiveCharaBirth;
 - (void)setPrimitiveCharaBirth:(NSDate*)value;
+
+- (NSNumber*)primitiveCharaID;
+- (void)setPrimitiveCharaID:(NSNumber*)value;
+
+- (int32_t)primitiveCharaIDValue;
+- (void)setPrimitiveCharaIDValue:(int32_t)value_;
 
 - (NSString*)primitiveCharaName;
 - (void)setPrimitiveCharaName:(NSString*)value;
