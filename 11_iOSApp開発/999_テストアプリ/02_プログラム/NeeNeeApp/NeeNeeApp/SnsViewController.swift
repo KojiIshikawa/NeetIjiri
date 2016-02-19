@@ -9,10 +9,6 @@
 import Foundation
 import Social
 
-
-
-
-
 //SNS画面です。
 class SnsViewController: UIViewController {
 
@@ -61,6 +57,9 @@ class SnsViewController: UIViewController {
         lineBtn.setImage(lineImage, forState: .Normal)
         lineBtn.addTarget(self, action: "tapLineBtn:", forControlEvents: .TouchUpInside)
         self.view.addSubview(lineBtn)
+        
+        // オブジェクトの制約の設定
+        self.objConstraints()
     }
     
     //メモリ消費が多くなった時に動くイベント
@@ -69,17 +68,17 @@ class SnsViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-  
 
-    
     //facebookボタン押下時の処理
     func tapFacebookBtn(sender: AnyObject) {
         print(NSDate().description, __FUNCTION__, __LINE__)
         
         // Facebookの投稿ダイアログを作って
         let cv = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+        
         // 画像を追加
         cv.addImage(UIImage(named: "01_07_01.png"))
+        
         // 投稿ダイアログを表示する
         self.presentViewController(cv, animated: true, completion: nil)
     }
@@ -113,4 +112,158 @@ class SnsViewController: UIViewController {
     }
 
     
+    /** 全オブジェクトの制約設定 **/
+    func objConstraints() {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        
+        facebookBtn.translatesAutoresizingMaskIntoConstraints = false
+        twitterBtn.translatesAutoresizingMaskIntoConstraints = false
+        lineBtn.translatesAutoresizingMaskIntoConstraints = false
+        
+        // facebookボタンの制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.facebookBtn,
+                attribute:  NSLayoutAttribute.Right,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.CenterX,
+                multiplier: 1.0,
+                constant: -20
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.facebookBtn,
+                attribute: NSLayoutAttribute.Top,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.Top,
+                multiplier: 1.0,
+                constant: 100
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.facebookBtn,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Width,
+                multiplier: 1.0 / 3.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.facebookBtn,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Height,
+                multiplier: 1.0 / 4.0,
+                constant: 0
+            )]
+        )
+        
+        // twitterボタンの制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.twitterBtn,
+                attribute:  NSLayoutAttribute.Left,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.CenterX,
+                multiplier: 1.0,
+                constant: 20
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.twitterBtn,
+                attribute: NSLayoutAttribute.Top,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.Top,
+                multiplier: 1.0,
+                constant: 100
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.twitterBtn,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Width,
+                multiplier: 1.0 / 3.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.twitterBtn,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Height,
+                multiplier: 1.0 / 4.0,
+                constant: 0
+            )]
+        )
+        
+        
+        // lineボタンの制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.lineBtn,
+                attribute:  NSLayoutAttribute.Left,
+                relatedBy: .Equal,
+                toItem: self.facebookBtn,
+                attribute:  NSLayoutAttribute.Left,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.lineBtn,
+                attribute: NSLayoutAttribute.Bottom,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.Bottom,
+                multiplier: 1.0,
+                constant: -20
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.lineBtn,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Width,
+                multiplier: 1.0 / 3.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.lineBtn,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Height,
+                multiplier: 1.0 / 4.0,
+                constant: 0
+            )]
+        )
+        
+    }
 }

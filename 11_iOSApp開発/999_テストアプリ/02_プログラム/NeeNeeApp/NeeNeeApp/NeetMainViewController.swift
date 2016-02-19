@@ -320,18 +320,16 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         self.view.addSubview(myImageView)
         
         //キャラクター設定
-        myCharImageView = UIImageView(frame: CGRectMake(150,300,300,350))
+        myCharImageView = UIImageView()
         myCharImageView.center.x = self.view.center.x
         myCharImageView.center.y = self.view.center.y
         myCharImageView.tag = 1
         myCharImageView.userInteractionEnabled = true
-        
         let singleTap = UITapGestureRecognizer(target: self, action:"tapChara:")
         myCharImageView.addGestureRecognizer(singleTap)
         myCharImageView.layer.borderColor = UIColor.redColor().CGColor
         myCharImageView.layer.borderWidth = 2.0
         self.view.addSubview(myCharImageView)
-        
         
         // フッタのバナーを生成する.
         self.footerBaner = ADBannerView()
@@ -343,7 +341,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         self.interstitialPresentationPolicy = ADInterstitialPresentationPolicy.Manual
         
         // メニューボタン及びサブメニューボタンの設定.
-        manuBtn = UIButton(frame: CGRectMake(self.view.bounds.width - 80,self.view.bounds.height-footerBaner.frame.height-70,60,100))
+        manuBtn = UIButton()
         manuBtn.setTitle("MENU",  forState: .Normal)
         manuBtn.setImage(manuBtnNextImage, forState: .Normal)
         manuBtn.addTarget(self, action: "tapManuBtn:", forControlEvents: .TouchUpInside)
@@ -351,28 +349,28 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         self.view.addSubview(manuBtn)
         
         //暇つぶしボタン
-        mainBtn = UIButton(frame: CGRectMake(180,self.view.bounds.height-footerBaner.frame.height-70,100,100))
+        mainBtn = UIButton()
         mainBtn.setImage(mainBtnActImage, forState: .Normal)
         mainBtn.addTarget(self, action: "tapMainBtn:", forControlEvents: .TouchUpInside)
         manuBtn.sizeToFit()
         self.view.addSubview(mainBtn)
         
         //履歴書ボタン
-        detailBtn = UIButton(frame: CGRectMake(120,self.view.bounds.height-footerBaner.frame.height-70,60,100))
+        detailBtn = UIButton()
         detailBtn.setImage(detailBtnActImage, forState: .Normal)
         detailBtn.addTarget(self, action: "tapDetailBtn:", forControlEvents: .TouchUpInside)
         detailBtn.sizeToFit()
         self.view.addSubview(detailBtn)
         
         //共有ボタン
-        shareBtn = UIButton(frame: CGRectMake(60,self.view.bounds.height-footerBaner.frame.height-70,60,100))
+        shareBtn = UIButton()
         shareBtn.setImage(shareBtnActImage, forState: .Normal)
         shareBtn.addTarget(self, action: "tapShareBtn:", forControlEvents: .TouchUpInside)
         shareBtn.sizeToFit()
         self.view.addSubview(shareBtn)
         
         //設定ボタン
-        configBtn = UIButton(frame: CGRectMake(0,self.view.bounds.height-footerBaner.frame.height-70,60,100))
+        configBtn = UIButton()
         configBtn.setImage(configBtnActImage, forState: .Normal)
         configBtn.addTarget(self, action: "tapConfigBtn:", forControlEvents: .TouchUpInside)
         configBtn.sizeToFit()
@@ -402,9 +400,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         print(NSDate().description, __FUNCTION__, __LINE__)
         animeTimer = NSTimer.scheduledTimerWithTimeInterval(0.0, target: self, selector: Selector("randomWalk"), userInfo: nil, repeats: true)
     }
-   
 
-    
     
     //ランダムウォーク
     func randomWalk() {
@@ -529,6 +525,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         detailBtn.translatesAutoresizingMaskIntoConstraints = false
         shareBtn.translatesAutoresizingMaskIntoConstraints = false
         configBtn.translatesAutoresizingMaskIntoConstraints = false
+        myCharImageView.translatesAutoresizingMaskIntoConstraints = false
         
         // メニューボタンの制約
         self.view.addConstraints([
@@ -769,6 +766,55 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
                 constant: 0
             )]
         )
+        
+        // キャラクターイメージの制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.myCharImageView,
+                attribute:  NSLayoutAttribute.CenterX,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.Left,
+                multiplier: 1.0,
+                constant: 150
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.myCharImageView,
+                attribute: NSLayoutAttribute.CenterY,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.Top,
+                multiplier: 1.0,
+                constant: 300
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.myCharImageView,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Width,
+                multiplier: 1.0 / 1.6,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.myCharImageView,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Height,
+                multiplier: 1.0 / 2.2,
+                constant: 0
+            )]
+        )
+
     }
     
 

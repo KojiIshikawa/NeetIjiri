@@ -30,6 +30,10 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
     private var itemListIdx: Int = 0
     
     override func viewDidLoad() {
+
+        // 長押し用レコグナイザー
+        let longTapRecognizer = UILongPressGestureRecognizer(target: self, action: "cellLongTap:")
+        longTapRecognizer.delegate = self
         
         mainImgView = UIImageView()
         mainImgView.frame.size = self.view.frame.size
@@ -40,7 +44,12 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
 
         // セット済みアイテムの初期設定.
         setItemView = UIImageView()
+        
+        // 初期表示画像の読み込み.
         setItemImageReLoad()
+        
+        // セル長押しイベント登録.
+        setItemView.addGestureRecognizer(longTapRecognizer)
         
         // 画像をUIImageViewに設定する.
         let myImage = self.getUncachedImage( named: "02_01_01.png")
@@ -49,7 +58,7 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         // CollectionViewのレイアウトを生成.
         let layout = UICollectionViewFlowLayout()
         
-        // Cell一つ一つの大きさ.
+        // Cell一つ一つの大きさを設定.
         layout.itemSize = CGSizeMake(100, 100)
         /**
         // Cellのマージン.
@@ -69,16 +78,7 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         itemList = getT_GetItem()
         
         // セル長押しイベント登録
-        let longTapRecognizer = UILongPressGestureRecognizer(target: self, action: "cellLongTap:")
-        longTapRecognizer.delegate = self
-        //itemCollectionView.userInteractionEnabled = false
         itemCollectionView.addGestureRecognizer(longTapRecognizer)
-    
-        /**
-        let tap = UITapGestureRecognizer(target: self, action : "handleTap:")
-        tap.numberOfTapsRequired = 1
-        itemCollectionView.addGestureRecognizer(tap)
-        **/
 
         // ポップ上に表示するオブジェクトをViewに追加する.
         view.addSubview(mainImgView)
@@ -405,39 +405,102 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         print(NSDate().description, __FUNCTION__, __LINE__)
         
         // 指定されたアイテムをテーブルに行動実績テーブルに追加.
-        let insetData = T_ActionResult.MR_createEntity()! as T_ActionResult
-        insetData.itemID = itemId
-        insetData.actSetDate = NSDate()
-        insetData.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+        let insertData = T_ActionResult.MR_createEntity()! as T_ActionResult
+        insertData.itemID = itemId
+        insertData.actSetDate = NSDate()
+        insertData.managedObjectContext!.MR_saveToPersistentStoreAndWait()
         
-        // 取得済アイテムマスタの所持数をもとに戻す.
-        // TODO: 所持数を加算する（未実装）
+        // 取得済アイテムマスタの所持数を減算する.
+        let deleteItem = getT_GetItemForKey(itemId)
+        
+        // 現在のアイテム数が1個の場合
+        if Int(deleteItem.itemCountValue) <= 1 {
+            
+            // 対象レコードを削除する.
+            deleteItem.MR_deleteEntity()
+            deleteItem.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+
+        } else {
+
+            // 対象レコードのアイテム数を減らす.
+            let updPredicate: NSPredicate = NSPredicate(format: "charaID = %@ AND itemID = %@", Const.CHARACTER1_ID,itemId);
+            let updateData = T_GetItem.MR_findFirstWithPredicate(updPredicate)! as T_GetItem
+            updateData.itemCountValue -= 1
+            deleteItem.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+        }
+        
     }
     
     /** 未実行・実行中のアクティブなアイテムの削除 **/
     func deleteT_ActionResultWithActive(deleteData: T_ActionResult) {
         print(NSDate().description, __FUNCTION__, __LINE__)
         
-        // 指定されたアイテムをに行動実績テーブルから削除.
+        // 指定されたアイテムを行動実績テーブルから削除.
         deleteData.MR_deleteEntity()
         deleteData.managedObjectContext!.MR_saveToPersistentStoreAndWait()
         
-        // 取得済アイテムマスタの所持数をもとに戻す.
-        // TODO: 所持数を加算する（未実装）
+        // 取得済アイテムマスタの所持数を元に戻す.
+        let deleteItem = getT_GetItemForKey(Int(deleteData.itemID))
+        
+        // 現在のアイテム数が1個の場合
+        if Int(deleteItem.itemCountValue) == 0 {
+            
+            // 対象レコードを挿入する.
+            let insertData = T_GetItem.MR_createEntity()! as T_GetItem
+            insertData.charaID = Const.CHARACTER1_ID
+            insertData.itemCount = 1
+            insertData.itemID = deleteItem.itemID
+            insertData.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+            
+        } else {
+            
+            // 対象レコードのアイテム数を加算する.
+            let updPredicate: NSPredicate = NSPredicate(format: "charaID = %@ AND itemID = %@", Const.CHARACTER1_ID,deleteItem.itemID);
+            let updateData = T_GetItem.MR_findFirstWithPredicate(updPredicate)! as T_GetItem
+            updateData.itemCountValue += 1
+            deleteItem.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+        }
+
     }
+    
+    /** T_GetItemからアイテムIDにひもづく取得済アイテム１件の取得 **/
+    func getT_GetItemForKey(itemId: Int) -> T_GetItem  {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+
+        // 取得済アイテムテーブルを取得.
+        let itemTList :[T_GetItem] = T_GetItem.MR_findByAttribute("charaID", withValue: Const.CHARACTER1_ID, andOrderBy: "itemID", ascending: true) as! [T_GetItem];
+        
+        for havingItem in itemTList {
+            
+            // 一致する場合、アイテム情報をセットする.
+            if havingItem.itemID == itemId {
+                    
+                // アイテムをセット
+                return havingItem
+            }
+                
+        }
+        
+        // 返却用アイテム
+        let resultItem: T_GetItem = T_GetItem();
+        
+        //作成したアイテムリストを返却
+        return resultItem
+    }
+    
     
     /** T_GetItemから取得済アイテムの取得 **/
     func getT_GetItem() -> [Dictionary<String, String>]  {
         print(NSDate().description, __FUNCTION__, __LINE__)
         
         // 取得済アイテムテーブルを取得.
-        let itemTList :[T_GetItem] = T_GetItem.MR_findByAttribute("charaID", withValue: Const.CHARACTER1_ID, andOrderBy: "itemId", ascending: true) as! [T_GetItem];
+        let itemTList :[T_GetItem] = T_GetItem.MR_findByAttribute("charaID", withValue: Const.CHARACTER1_ID, andOrderBy: "itemID", ascending: true) as! [T_GetItem];
         
         //返却するアイテムリスト
         var itemList : [Dictionary<String, String>] = []
         
         // アイテムマスタを取得.
-        let itemMList :[M_Item] = M_Item.MR_findAllSortedBy("itemId", ascending: true) as! [M_Item];
+        let itemMList :[M_Item] = M_Item.MR_findAllSortedBy("itemID", ascending: true) as! [M_Item];
         
         for havingItem in itemTList {
 
