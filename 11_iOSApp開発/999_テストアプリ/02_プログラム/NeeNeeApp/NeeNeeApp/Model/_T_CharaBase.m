@@ -5,6 +5,7 @@
 
 const struct T_CharaBaseAttributes T_CharaBaseAttributes = {
 	.charaBirth = @"charaBirth",
+	.charaID = @"charaID",
 	.charaName = @"charaName",
 	.jobID = @"jobID",
 	.kakugenID = @"kakugenID",
@@ -39,6 +40,11 @@ const struct T_CharaBaseAttributes T_CharaBaseAttributes = {
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 
+	if ([key isEqualToString:@"charaIDValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"charaID"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
 	if ([key isEqualToString:@"jobIDValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"jobID"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -69,6 +75,26 @@ const struct T_CharaBaseAttributes T_CharaBaseAttributes = {
 }
 
 @dynamic charaBirth;
+
+@dynamic charaID;
+
+- (int32_t)charaIDValue {
+	NSNumber *result = [self charaID];
+	return [result intValue];
+}
+
+- (void)setCharaIDValue:(int32_t)value_ {
+	[self setCharaID:[NSNumber numberWithInt:value_]];
+}
+
+- (int32_t)primitiveCharaIDValue {
+	NSNumber *result = [self primitiveCharaID];
+	return [result intValue];
+}
+
+- (void)setPrimitiveCharaIDValue:(int32_t)value_ {
+	[self setPrimitiveCharaID:[NSNumber numberWithInt:value_]];
+}
 
 @dynamic charaName;
 

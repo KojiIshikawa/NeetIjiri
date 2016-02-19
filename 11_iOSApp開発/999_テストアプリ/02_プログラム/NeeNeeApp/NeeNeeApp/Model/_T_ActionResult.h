@@ -7,6 +7,7 @@ extern const struct T_ActionResultAttributes {
 	__unsafe_unretained NSString *actEndDate;
 	__unsafe_unretained NSString *actSetDate;
 	__unsafe_unretained NSString *actStartDate;
+	__unsafe_unretained NSString *charaID;
 	__unsafe_unretained NSString *itemID;
 	__unsafe_unretained NSString *resultID;
 } T_ActionResultAttributes;
@@ -31,6 +32,14 @@ extern const struct T_ActionResultAttributes {
 @property (nonatomic, strong) NSDate* actStartDate;
 
 //- (BOOL)validateActStartDate:(id*)value_ error:(NSError**)error_;
+
+@property (nonatomic, strong) NSNumber* charaID;
+
+@property (atomic) int32_t charaIDValue;
+- (int32_t)charaIDValue;
+- (void)setCharaIDValue:(int32_t)value_;
+
+//- (BOOL)validateCharaID:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) NSNumber* itemID;
 
@@ -60,6 +69,12 @@ extern const struct T_ActionResultAttributes {
 
 - (NSDate*)primitiveActStartDate;
 - (void)setPrimitiveActStartDate:(NSDate*)value;
+
+- (NSNumber*)primitiveCharaID;
+- (void)setPrimitiveCharaID:(NSNumber*)value;
+
+- (int32_t)primitiveCharaIDValue;
+- (void)setPrimitiveCharaIDValue:(int32_t)value_;
 
 - (NSNumber*)primitiveItemID;
 - (void)setPrimitiveItemID:(NSNumber*)value;
