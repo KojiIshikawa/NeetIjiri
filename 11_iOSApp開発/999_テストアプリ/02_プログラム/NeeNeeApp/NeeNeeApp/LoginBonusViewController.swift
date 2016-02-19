@@ -36,9 +36,9 @@ class LoginBonusViewController: UIViewController {
         
         // ログインメッセージを表示
         lblOkan = UILabel(frame: CGRectMake(45,100,self.view.bounds.width-30,160))
-        let mes:String = "〇〇くんへ\n\nかあさん腕をふるって\n〇〇くんの大好きな\n\(getOkan())を\n作りました。\n無理しないで頑張ってね！"
-        lblOkan.text = mes.stringByReplacingOccurrencesOfString("〇〇", withString: getCharaBase()[0].charaName)
-        
+        let mes: String = "〇〇くんへ\n\nかあさん腕をふるって\n〇〇くんの大好きな\n\(getOkan())を\n作りました。\n無理しないで頑張ってね！"
+        let charaData : [T_CharaBase] = Utility.getCharaBase(Const.CHARACTER1_ID)
+        lblOkan.text = mes.stringByReplacingOccurrencesOfString("〇〇",withString: charaData[0].charaName)
         lblOkan.numberOfLines = 0
         self.view.addSubview(lblOkan)
         
@@ -74,13 +74,5 @@ class LoginBonusViewController: UIViewController {
         return okanList[Int(randInt)].okanText
         
     }
-    
-    //基本情報の取得
-    func getCharaBase() -> [T_CharaBase]  {
-        print(NSDate().description, __FUNCTION__, __LINE__)
-        
-        return T_CharaBase.MR_findAll() as! [T_CharaBase];
-    }
-
     
 }

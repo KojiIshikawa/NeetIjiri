@@ -85,10 +85,22 @@ class Utility {
             // 例外発生
         }
     }
+    
     class func seVolumeChange(volume: Float)
     {
         print(NSDate().description, __FUNCTION__, __LINE__)
         mySePlayer.volume = volume * 2
+    }
+    
+    //****************************************
+    // MARK: - DB Access
+    //****************************************
+    
+    /** 基本情報の取得 **/
+    class func getCharaBase(charaId: Int) -> [T_CharaBase]  {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        
+        return T_CharaBase.MR_findByAttribute("charaID", withValue: charaId) as! [T_CharaBase];
     }
 
 }

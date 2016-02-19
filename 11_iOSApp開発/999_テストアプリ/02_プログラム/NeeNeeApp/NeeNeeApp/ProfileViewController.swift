@@ -34,7 +34,7 @@ class ProfileViewController: UIViewController,UIScrollViewDelegate {
         
         // プロフィール設定
         // キャラクター基本情報を取得する.
-        let charaData = getCharaBase()
+        let charaData : [T_CharaBase] = Utility.getCharaBase(Const.CHARACTER1_ID)
 
         // 名前
         self.nameDataLabel = UILabel()
@@ -405,13 +405,6 @@ class ProfileViewController: UIViewController,UIScrollViewDelegate {
     //****************************************
     // MARK: - DB Access
     //****************************************
-    
-    //基本情報の取得
-    func getCharaBase() -> [T_CharaBase]  {
-        print(NSDate().description, __FUNCTION__, __LINE__)
-        
-        return T_CharaBase.MR_findAll() as! [T_CharaBase];
-    }
     
     //役職名の取得
     func getJobName() -> String  {

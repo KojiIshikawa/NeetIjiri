@@ -18,6 +18,11 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
     private var setItemView: UIImageView!
     private var selItemView: UIImageView!
     private var mainImgView: UIImageView!
+
+    // セット中のアイテム情報ラベル
+    private var selItemLabel1: UILabel!
+    private var selItemLabel2: UILabel!
+    private var selItemLabel3: UILabel!
     
     // 背景画像用オブジェクト
     private let mainViewImage = UIImage(named: "02_01_01.png")
@@ -42,6 +47,24 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         mainImgView.image = mainViewImage
         mainImgView.alpha = 0.9
 
+        // セット中アイテムラベルの生成.
+        selItemLabel1 = UILabel()
+        selItemLabel2 = UILabel()
+        selItemLabel3 = UILabel()
+        
+        // 仮で設定
+        selItemLabel1.sizeToFit()
+        selItemLabel2.sizeToFit()
+        selItemLabel3.sizeToFit()
+
+        selItemLabel1.numberOfLines = 2
+        selItemLabel2.numberOfLines = 2
+        selItemLabel3.numberOfLines = 2
+
+        selItemLabel1.text = "アイテム１\n（つぶし中...）"
+        selItemLabel2.text = "アイテム２"
+        selItemLabel3.text = "アイテム３"
+        
         // セット済みアイテムの初期設定.
         setItemView = UIImageView()
         
@@ -84,7 +107,10 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         view.addSubview(mainImgView)
         view.addSubview(setItemView)
         view.addSubview(itemCollectionView)
-
+        view.addSubview(selItemLabel1)
+        view.addSubview(selItemLabel2)
+        view.addSubview(selItemLabel3)
+        
         // 制約を設定する.
         objConstraints()
     }
@@ -245,6 +271,9 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
     func objConstraints() {
         print(NSDate().description, __FUNCTION__, __LINE__)
    
+        selItemLabel1.translatesAutoresizingMaskIntoConstraints = false
+        selItemLabel2.translatesAutoresizingMaskIntoConstraints = false
+        selItemLabel3.translatesAutoresizingMaskIntoConstraints = false
         itemCollectionView.translatesAutoresizingMaskIntoConstraints = false
         setItemView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -295,6 +324,85 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
                 constant: 0
             )]
         )
+        
+        // セットアイテムラベル３の制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.selItemLabel3,
+                attribute:  NSLayoutAttribute.Left,
+                relatedBy: .Equal,
+                toItem: self.setItemView,
+                attribute:  NSLayoutAttribute.Left,
+                multiplier: 1.0,
+                constant: -20
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.selItemLabel3,
+                attribute: NSLayoutAttribute.Top,
+                relatedBy: .Equal,
+                toItem: self.setItemView,
+                attribute:  NSLayoutAttribute.Top,
+                multiplier: 1.0,
+                constant: 20
+            )]
+        )
+
+        // セットアイテムラベル２の制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.selItemLabel2,
+                attribute:  NSLayoutAttribute.CenterX,
+                relatedBy: .Equal,
+                toItem: self.setItemView,
+                attribute:  NSLayoutAttribute.CenterX,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.selItemLabel2,
+                attribute: NSLayoutAttribute.Top,
+                relatedBy: .Equal,
+                toItem: self.setItemView,
+                attribute:  NSLayoutAttribute.Bottom,
+                multiplier: 1.0,
+                constant: -20
+            )]
+        )
+
+        // セットアイテムラベル１の制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.selItemLabel1,
+                attribute:  NSLayoutAttribute.Right,
+                relatedBy: .Equal,
+                toItem: self.setItemView,
+                attribute:  NSLayoutAttribute.Right,
+                multiplier: 1.0,
+                constant: 20
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.selItemLabel1,
+                attribute: NSLayoutAttribute.Top,
+                relatedBy: .Equal,
+                toItem: self.setItemView,
+                attribute:  NSLayoutAttribute.Top,
+                multiplier: 1.0,
+                constant: 20
+            )]
+        )
+        
         // コレクションビューの制約
         self.view.addConstraints([
             
@@ -387,11 +495,7 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         var actionList :[T_ActionResult] = []
         
         // 取得済アイテムテーブルにアクセスし存在しなければfalseを返却する.
-        let tempList :[T_ActionResult] = T_ActionResult.MR_findAllSortedBy("actStartDate,actEndDate", ascending: true) as! [T_ActionResult];
-        
-        /**
         let tempList :[T_ActionResult] = T_ActionResult.MR_findByAttribute("charaID", withValue: Const.CHARACTER1_ID, andOrderBy: "actStartDate,actEndDate", ascending: true) as! [T_ActionResult];
-        **/
 
         print(actionList.count)
         

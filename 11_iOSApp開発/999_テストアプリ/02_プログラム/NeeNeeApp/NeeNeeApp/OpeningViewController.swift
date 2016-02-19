@@ -378,6 +378,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
 
         // キャラクター基本情報に基本情報を書き込む
         let insetData = T_CharaBase.MR_createEntity()! as T_CharaBase
+        insetData.charaID = Const.CHARACTER1_ID
         insetData.charaName = nameText.text
         insetData.charaBirth = birthDatePicker.date
         insetData.managedObjectContext!.MR_saveToPersistentStoreAndWait()
