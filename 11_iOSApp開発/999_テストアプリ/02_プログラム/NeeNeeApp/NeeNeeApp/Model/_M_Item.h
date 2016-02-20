@@ -5,16 +5,10 @@
 
 extern const struct M_ItemAttributes {
 	__unsafe_unretained NSString *actID;
-	__unsafe_unretained NSString *firstX;
-	__unsafe_unretained NSString *firstY;
 	__unsafe_unretained NSString *imageItem;
 	__unsafe_unretained NSString *itemID;
 	__unsafe_unretained NSString *itemName;
 	__unsafe_unretained NSString *itemText;
-	__unsafe_unretained NSString *maxX;
-	__unsafe_unretained NSString *maxY;
-	__unsafe_unretained NSString *minX;
-	__unsafe_unretained NSString *minY;
 	__unsafe_unretained NSString *point;
 	__unsafe_unretained NSString *procTime;
 	__unsafe_unretained NSString *stageID;
@@ -39,22 +33,6 @@ extern const struct M_ItemAttributes {
 
 //- (BOOL)validateActID:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, strong) NSNumber* firstX;
-
-@property (atomic) int32_t firstXValue;
-- (int32_t)firstXValue;
-- (void)setFirstXValue:(int32_t)value_;
-
-//- (BOOL)validateFirstX:(id*)value_ error:(NSError**)error_;
-
-@property (nonatomic, strong) NSNumber* firstY;
-
-@property (atomic) int32_t firstYValue;
-- (int32_t)firstYValue;
-- (void)setFirstYValue:(int32_t)value_;
-
-//- (BOOL)validateFirstY:(id*)value_ error:(NSError**)error_;
-
 @property (nonatomic, strong) NSString* imageItem;
 
 //- (BOOL)validateImageItem:(id*)value_ error:(NSError**)error_;
@@ -74,38 +52,6 @@ extern const struct M_ItemAttributes {
 @property (nonatomic, strong) NSString* itemText;
 
 //- (BOOL)validateItemText:(id*)value_ error:(NSError**)error_;
-
-@property (nonatomic, strong) NSNumber* maxX;
-
-@property (atomic) int32_t maxXValue;
-- (int32_t)maxXValue;
-- (void)setMaxXValue:(int32_t)value_;
-
-//- (BOOL)validateMaxX:(id*)value_ error:(NSError**)error_;
-
-@property (nonatomic, strong) NSNumber* maxY;
-
-@property (atomic) int32_t maxYValue;
-- (int32_t)maxYValue;
-- (void)setMaxYValue:(int32_t)value_;
-
-//- (BOOL)validateMaxY:(id*)value_ error:(NSError**)error_;
-
-@property (nonatomic, strong) NSNumber* minX;
-
-@property (atomic) int32_t minXValue;
-- (int32_t)minXValue;
-- (void)setMinXValue:(int32_t)value_;
-
-//- (BOOL)validateMinX:(id*)value_ error:(NSError**)error_;
-
-@property (nonatomic, strong) NSNumber* minY;
-
-@property (atomic) int32_t minYValue;
-- (int32_t)minYValue;
-- (void)setMinYValue:(int32_t)value_;
-
-//- (BOOL)validateMinY:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) NSNumber* point;
 
@@ -157,18 +103,6 @@ extern const struct M_ItemAttributes {
 - (int32_t)primitiveActIDValue;
 - (void)setPrimitiveActIDValue:(int32_t)value_;
 
-- (NSNumber*)primitiveFirstX;
-- (void)setPrimitiveFirstX:(NSNumber*)value;
-
-- (int32_t)primitiveFirstXValue;
-- (void)setPrimitiveFirstXValue:(int32_t)value_;
-
-- (NSNumber*)primitiveFirstY;
-- (void)setPrimitiveFirstY:(NSNumber*)value;
-
-- (int32_t)primitiveFirstYValue;
-- (void)setPrimitiveFirstYValue:(int32_t)value_;
-
 - (NSString*)primitiveImageItem;
 - (void)setPrimitiveImageItem:(NSString*)value;
 
@@ -183,30 +117,6 @@ extern const struct M_ItemAttributes {
 
 - (NSString*)primitiveItemText;
 - (void)setPrimitiveItemText:(NSString*)value;
-
-- (NSNumber*)primitiveMaxX;
-- (void)setPrimitiveMaxX:(NSNumber*)value;
-
-- (int32_t)primitiveMaxXValue;
-- (void)setPrimitiveMaxXValue:(int32_t)value_;
-
-- (NSNumber*)primitiveMaxY;
-- (void)setPrimitiveMaxY:(NSNumber*)value;
-
-- (int32_t)primitiveMaxYValue;
-- (void)setPrimitiveMaxYValue:(int32_t)value_;
-
-- (NSNumber*)primitiveMinX;
-- (void)setPrimitiveMinX:(NSNumber*)value;
-
-- (int32_t)primitiveMinXValue;
-- (void)setPrimitiveMinXValue:(int32_t)value_;
-
-- (NSNumber*)primitiveMinY;
-- (void)setPrimitiveMinY:(NSNumber*)value;
-
-- (int32_t)primitiveMinYValue;
-- (void)setPrimitiveMinYValue:(int32_t)value_;
 
 - (NSNumber*)primitivePoint;
 - (void)setPrimitivePoint:(NSNumber*)value;

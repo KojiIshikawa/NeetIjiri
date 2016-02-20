@@ -1,19 +1,19 @@
 // DO NOT EDIT. This file is machine-generated and constantly overwritten.
-// Make changes to M_ResultAction.m instead.
+// Make changes to M_ActionResult.m instead.
 
-#import "_M_ResultAction.h"
+#import "_M_ActionResult.h"
 
-const struct M_ResultActionAttributes M_ResultActionAttributes = {
+const struct M_ActionResultAttributes M_ActionResultAttributes = {
 	.itemID = @"itemID",
 	.message = @"message",
 	.resPer = @"resPer",
 	.resultID = @"resultID",
 };
 
-@implementation M_ResultActionID
+@implementation M_ActionResultID
 @end
 
-@implementation _M_ResultAction
+@implementation _M_ActionResult
 
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_ {
 	NSParameterAssert(moc_);
@@ -29,8 +29,8 @@ const struct M_ResultActionAttributes M_ResultActionAttributes = {
 	return [NSEntityDescription entityForName:@"M_ActionResult" inManagedObjectContext:moc_];
 }
 
-- (M_ResultActionID*)objectID {
-	return (M_ResultActionID*)[super objectID];
+- (M_ActionResultID*)objectID {
+	return (M_ActionResultID*)[super objectID];
 }
 
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {

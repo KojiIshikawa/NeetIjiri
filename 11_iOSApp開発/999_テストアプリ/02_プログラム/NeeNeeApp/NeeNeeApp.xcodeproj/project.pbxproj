@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		564CDF907C4EC18FA819679E /* libPods-NeeNeeApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4EB1D06214EC164462ADCDD /* libPods-NeeNeeApp.a */; };
+		AE029E551C78522600BDD370 /* _M_ActionImage.h in Headers */ = {isa = PBXBuildFile; fileRef = AE029E4F1C78522600BDD370 /* _M_ActionImage.h */; };
+		AE029E561C78522600BDD370 /* _M_ActionImage.m in Sources */ = {isa = PBXBuildFile; fileRef = AE029E501C78522600BDD370 /* _M_ActionImage.m */; };
+		AE029E571C78522600BDD370 /* M_Action.h in Headers */ = {isa = PBXBuildFile; fileRef = AE029E511C78522600BDD370 /* M_Action.h */; };
+		AE029E581C78522600BDD370 /* M_Action.m in Sources */ = {isa = PBXBuildFile; fileRef = AE029E521C78522600BDD370 /* M_Action.m */; };
+		AE029E591C78522600BDD370 /* M_ActionImage.h in Headers */ = {isa = PBXBuildFile; fileRef = AE029E531C78522600BDD370 /* M_ActionImage.h */; };
+		AE029E5A1C78522600BDD370 /* M_ActionImage.m in Sources */ = {isa = PBXBuildFile; fileRef = AE029E541C78522600BDD370 /* M_ActionImage.m */; };
+		AE029E5F1C78546E00BDD370 /* _M_ActionResult.h in Headers */ = {isa = PBXBuildFile; fileRef = AE029E5B1C78546E00BDD370 /* _M_ActionResult.h */; };
+		AE029E601C78546E00BDD370 /* _M_ActionResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AE029E5C1C78546E00BDD370 /* _M_ActionResult.m */; };
+		AE029E611C78546E00BDD370 /* M_ActionResult.h in Headers */ = {isa = PBXBuildFile; fileRef = AE029E5D1C78546E00BDD370 /* M_ActionResult.h */; };
+		AE029E621C78546E00BDD370 /* M_ActionResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AE029E5E1C78546E00BDD370 /* M_ActionResult.m */; };
 		AE0D3F571C6C501A0015F479 /* PopoverBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D3F561C6C501A0015F479 /* PopoverBackgroundView.swift */; };
 		AE0D3F591C6C58170015F479 /* SnsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D3F581C6C58170015F479 /* SnsViewController.swift */; };
 		AE0D3F5B1C6C58270015F479 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D3F5A1C6C58270015F479 /* SettingViewController.swift */; };
@@ -229,6 +239,16 @@
 /* Begin PBXFileReference section */
 		061F3FC4E89134E46B5F4A8E /* Pods-NeeNeeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NeeNeeApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NeeNeeApp/Pods-NeeNeeApp.debug.xcconfig"; sourceTree = "<group>"; };
 		76D912C337F465574C4CC36B /* Pods-NeeNeeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NeeNeeApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-NeeNeeApp/Pods-NeeNeeApp.release.xcconfig"; sourceTree = "<group>"; };
+		AE029E4F1C78522600BDD370 /* _M_ActionImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _M_ActionImage.h; sourceTree = "<group>"; };
+		AE029E501C78522600BDD370 /* _M_ActionImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _M_ActionImage.m; sourceTree = "<group>"; };
+		AE029E511C78522600BDD370 /* M_Action.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M_Action.h; sourceTree = "<group>"; };
+		AE029E521C78522600BDD370 /* M_Action.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M_Action.m; sourceTree = "<group>"; };
+		AE029E531C78522600BDD370 /* M_ActionImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M_ActionImage.h; sourceTree = "<group>"; };
+		AE029E541C78522600BDD370 /* M_ActionImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M_ActionImage.m; sourceTree = "<group>"; };
+		AE029E5B1C78546E00BDD370 /* _M_ActionResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _M_ActionResult.h; sourceTree = "<group>"; };
+		AE029E5C1C78546E00BDD370 /* _M_ActionResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _M_ActionResult.m; sourceTree = "<group>"; };
+		AE029E5D1C78546E00BDD370 /* M_ActionResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M_ActionResult.h; sourceTree = "<group>"; };
+		AE029E5E1C78546E00BDD370 /* M_ActionResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M_ActionResult.m; sourceTree = "<group>"; };
 		AE0D3F561C6C501A0015F479 /* PopoverBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverBackgroundView.swift; sourceTree = "<group>"; };
 		AE0D3F581C6C58170015F479 /* SnsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnsViewController.swift; sourceTree = "<group>"; };
 		AE0D3F5A1C6C58270015F479 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -640,6 +660,16 @@
 		AEFCBC591C68DD4B000F5751 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				AE029E5B1C78546E00BDD370 /* _M_ActionResult.h */,
+				AE029E5C1C78546E00BDD370 /* _M_ActionResult.m */,
+				AE029E5D1C78546E00BDD370 /* M_ActionResult.h */,
+				AE029E5E1C78546E00BDD370 /* M_ActionResult.m */,
+				AE029E4F1C78522600BDD370 /* _M_ActionImage.h */,
+				AE029E501C78522600BDD370 /* _M_ActionImage.m */,
+				AE029E511C78522600BDD370 /* M_Action.h */,
+				AE029E521C78522600BDD370 /* M_Action.m */,
+				AE029E531C78522600BDD370 /* M_ActionImage.h */,
+				AE029E541C78522600BDD370 /* M_ActionImage.m */,
 				AE0D3F651C6CD80D0015F479 /* _M_Action.h */,
 				AE0D3F661C6CD80D0015F479 /* _M_Action.m */,
 				AEFCBC5A1C68DD4B000F5751 /* _M_DropItem.h */,
@@ -797,11 +827,14 @@
 				AEFCBC961C68DD4B000F5751 /* _M_Job.h in Headers */,
 				AEFCBCB01C68DD4B000F5751 /* M_Item.h in Headers */,
 				AEFCBCBA1C68DD4B000F5751 /* M_Stage.h in Headers */,
+				AE029E611C78546E00BDD370 /* M_ActionResult.h in Headers */,
 				AEFCBCB61C68DD4B000F5751 /* M_Okan.h in Headers */,
 				AE0D3F671C6CD80D0015F479 /* _M_Action.h in Headers */,
 				AEFCBCC61C68DD4B000F5751 /* T_RefKakugen.h in Headers */,
 				AEFCBCAE1C68DD4B000F5751 /* M_DropItem.h in Headers */,
 				AEFCBCC41C68DD4B000F5751 /* T_RefJob.h in Headers */,
+				AE029E571C78522600BDD370 /* M_Action.h in Headers */,
+				AE029E5F1C78546E00BDD370 /* _M_ActionResult.h in Headers */,
 				AEFCBC9C1C68DD4B000F5751 /* _M_ResultAction.h in Headers */,
 				AEFCBCC21C68DD4B000F5751 /* T_RefItem.h in Headers */,
 				AEFCBCA21C68DD4B000F5751 /* _T_CharaBase.h in Headers */,
@@ -812,6 +845,7 @@
 				AEFCBCBC1C68DD4B000F5751 /* T_ActionResult.h in Headers */,
 				AEFCBCB81C68DD4B000F5751 /* M_ResultAction.h in Headers */,
 				AEFCBC981C68DD4B000F5751 /* _M_Kakugen.h in Headers */,
+				AE029E551C78522600BDD370 /* _M_ActionImage.h in Headers */,
 				AEFCBC921C68DD4B000F5751 /* _M_DropItem.h in Headers */,
 				AEFCBC941C68DD4B000F5751 /* _M_Item.h in Headers */,
 				AEFCBCA81C68DD4B000F5751 /* _T_RefJob.h in Headers */,
@@ -821,6 +855,7 @@
 				AEFCBCAC1C68DD4B000F5751 /* _T_RefStage.h in Headers */,
 				AEFCBCA41C68DD4B000F5751 /* _T_GetItem.h in Headers */,
 				AEFCBC9E1C68DD4B000F5751 /* _M_Stage.h in Headers */,
+				AE029E591C78522600BDD370 /* M_ActionImage.h in Headers */,
 				AEFCBCA01C68DD4B000F5751 /* _T_ActionResult.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1137,10 +1172,13 @@
 				F48330101C2F040D00234B18 /* NeetMainViewController.swift in Sources */,
 				AEFCBCAD1C68DD4B000F5751 /* _T_RefStage.m in Sources */,
 				AEFCBCC31C68DD4B000F5751 /* T_RefItem.m in Sources */,
+				AE029E5A1C78522600BDD370 /* M_ActionImage.m in Sources */,
 				AE0D3F591C6C58170015F479 /* SnsViewController.swift in Sources */,
 				AEFCBCA71C68DD4B000F5751 /* _T_RefItem.m in Sources */,
 				AEFCBC9D1C68DD4B000F5751 /* _M_ResultAction.m in Sources */,
 				F43D9B641C5D24240080F75D /* itemCell.swift in Sources */,
+				AE029E601C78546E00BDD370 /* _M_ActionResult.m in Sources */,
+				AE029E581C78522600BDD370 /* M_Action.m in Sources */,
 				AEFCBCA51C68DD4B000F5751 /* _T_GetItem.m in Sources */,
 				AEFCBCC71C68DD4B000F5751 /* T_RefKakugen.m in Sources */,
 				AEDE9B201C66435700841902 /* Const.swift in Sources */,
@@ -1153,6 +1191,7 @@
 				AEFCBC9F1C68DD4B000F5751 /* _M_Stage.m in Sources */,
 				AEFCBC951C68DD4B000F5751 /* _M_Item.m in Sources */,
 				AEFCBCBB1C68DD4B000F5751 /* M_Stage.m in Sources */,
+				AE029E561C78522600BDD370 /* _M_ActionImage.m in Sources */,
 				AE0D3F641C6CB8EB0015F479 /* ResultViewController.swift in Sources */,
 				AE0D3F5D1C6C58550015F479 /* ProfileViewController.swift in Sources */,
 				AEFCBC971C68DD4B000F5751 /* _M_Job.m in Sources */,
@@ -1166,6 +1205,7 @@
 				AEFCBCBD1C68DD4B000F5751 /* T_ActionResult.m in Sources */,
 				AEFCBCAB1C68DD4B000F5751 /* _T_RefKakugen.m in Sources */,
 				AEFCBCA11C68DD4B000F5751 /* _T_ActionResult.m in Sources */,
+				AE029E621C78546E00BDD370 /* M_ActionResult.m in Sources */,
 				AE0D3F681C6CD80D0015F479 /* _M_Action.m in Sources */,
 				AE0D3F571C6C501A0015F479 /* PopoverBackgroundView.swift in Sources */,
 				F483300E1C2F040D00234B18 /* AppDelegate.swift in Sources */,

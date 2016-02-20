@@ -27,35 +27,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         M_Okan.MR_truncateAll()
         M_Job.MR_truncateAll()
 
+        M_Item.MR_truncateAll()
+        M_Stage.MR_truncateAll()
+        M_Action.MR_truncateAll()
+        M_ActionImage.MR_truncateAll()
+        M_ActionResult.MR_truncateAll()
+        M_DropItem.MR_truncateAll()
+        
+
 
         
         //バンドルのマスタをストアへ移行する
         let preloadSQLiteURL = NSBundle.mainBundle().pathForResource("Master", ofType: "sqlite")
         let db = FMDatabase(path: preloadSQLiteURL)
+
         let sqlKakugen = "SELECT * FROM M_Kakugen;" //格言マスタ
         let sqlOkan = "SELECT * FROM M_Okan;" //おかんマスタ
         let sqlJob = "SELECT * FROM M_Job;" //役職マスタ
+
+        let sqlItem = "SELECT * FROM M_Item;" //アイテムマスタ
+        let sqlStage = "SELECT * FROM M_Stage;" //ステージマスタ
+        let sqlAction = "SELECT * FROM M_Action;" //行動マスタ
+        let sqlActionImage = "SELECT * FROM M_ActionImage;" //行動画像マスタ
+        let sqlActionResult = "SELECT * FROM M_ActionResult;" //行動結果マスタ
+        let sqlDropItem = "SELECT * FROM M_DropItem;" //ドロップアイテムマスタ
         
-        
-        //TODO:作成中
-//        let sqlItem = "SELECT * FROM M_Item;" //アイテムマスタ
-//        let sqlStage = "SELECT * FROM M_Stage;" //ステージマスタ
-//        let sqlAction = "SELECT * FROM M_Kakugen;"
-//        let quiz_sql = "SELECT * FROM M_Kakugen;"
         
         db.open()
+        
+        var i = 0
         
         //格言マスタ
         let res_Kakugen = db.executeQuery(sqlKakugen, withArgumentsInArray: nil)
         while res_Kakugen.next() {
-            
             let newRecord: M_Kakugen = M_Kakugen.MR_createEntity()! as M_Kakugen
             newRecord.kakugenID = NSNumber(int: res_Kakugen.intForColumn("kakugenID"))
             newRecord.kakugenText = res_Kakugen.stringForColumn("kakugenText")
             newRecord.viewNo = NSNumber(int: res_Kakugen.intForColumn("viewNo"))
             newRecord.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+            i++
         }
-
+        print("件数\(i)")
+        i = 0
         
         //おかんマスタ
         let res_Okan = db.executeQuery(sqlOkan, withArgumentsInArray: nil)
@@ -65,9 +78,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             newRecord.okanText = res_Okan.stringForColumn("okanText")
             newRecord.loginDays = NSNumber(int: res_Okan.intForColumn("loginDays"))
             newRecord.managedObjectContext!.MR_saveToPersistentStoreAndWait()
-            //            print(res_Okan.stringForColumn("okanText"))
+            i++
+
         }
-        
+        print("件数\(i)")
+        i = 0
         
         //役職マスタ
         let res_Job = db.executeQuery(sqlJob, withArgumentsInArray: nil)
@@ -79,43 +94,112 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             newRecord.jobText = res_Job.stringForColumn("jobText")
             newRecord.viewNo = NSNumber(int: res_Job.intForColumn("viewNo"))
             newRecord.managedObjectContext!.MR_saveToPersistentStoreAndWait()
-//            print(res_Job.stringForColumn("jobName"))
+            i++
         }
+        print("件数\(i)")
+        i = 0
         
-//        //TODO:アイテムマスタ
-//        let res_Okan = db.executeQuery(sqlOkan, withArgumentsInArray: nil)
-//        while res_Okan.next() {
-//            print(res_Okan.stringForColumn("kakugenText"))
-//        }
-//        //ステージマスタ
-//        let res_Okan = db.executeQuery(sqlOkan, withArgumentsInArray: nil)
-//        while res_Okan.next() {
-//            print(res_Okan.stringForColumn("kakugenText"))
-//        }
-//        //行動マスタ
-//        let res_Okan = db.executeQuery(sqlOkan, withArgumentsInArray: nil)
-//        while res_Okan.next() {
-//            print(res_Okan.stringForColumn("kakugenText"))
-//        }
-//        //おかんマスタ
-//        let res_Okan = db.executeQuery(sqlOkan, withArgumentsInArray: nil)
-//        while res_Okan.next() {
-//            print(res_Okan.stringForColumn("kakugenText"))
-//        }
-//        //おかんマスタ
-//        let res_Okan = db.executeQuery(sqlOkan, withArgumentsInArray: nil)
-//        while res_Okan.next() {
-//            print(res_Okan.stringForColumn("kakugenText"))
-//        }
+        //アイテムマスタ
+        let res_Item = db.executeQuery(sqlItem, withArgumentsInArray: nil)
+        while res_Item.next() {
+            let newRecord: M_Item = M_Item.MR_createEntity()! as M_Item
+            newRecord.itemID = NSNumber(int: res_Item.intForColumn("itemID"))
+            newRecord.stageID = NSNumber(int: res_Item.intForColumn("stageID"))
+            newRecord.actID = NSNumber(int: res_Item.intForColumn("actID"))
+            newRecord.itemName = res_Item.stringForColumn("itemName")
+            newRecord.itemText = res_Item.stringForColumn("itemText")
+            newRecord.imageItem = res_Item.stringForColumn("imageItem")
+            newRecord.point = NSNumber(int: res_Item.intForColumn("point"))
+            newRecord.procTime = NSNumber(int: res_Item.intForColumn("procTime"))
+            newRecord.useArea = NSNumber(int: res_Item.intForColumn("useArea"))
+            newRecord.viewNo = NSNumber(int: res_Item.intForColumn("viewNo"))
+            newRecord.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+            i++
+        }
+        print("件数\(i)")
+        i = 0
+
+        //ステージマスタ
+        let res_Stage = db.executeQuery(sqlStage, withArgumentsInArray: nil)
+        while res_Stage.next() {
+            let newRecord: M_Stage = M_Stage.MR_createEntity()! as M_Stage
+            newRecord.stageID = NSNumber(int: res_Stage.intForColumn("stageID"))
+            newRecord.stageName = res_Stage.stringForColumn("stageName")
+            newRecord.stageText = res_Stage.stringForColumn("stageText")
+            newRecord.bgm = res_Stage.stringForColumn("bgm")
+            newRecord.imageBack = res_Stage.stringForColumn("imageBack")
+            newRecord.viewNo = NSNumber(int: res_Stage.intForColumn("viewNo"))
+            newRecord.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+            i++
+        }
+        print("件数\(i)")
+        i = 0
         
+        //行動マスタ
+        let res_Action = db.executeQuery(sqlAction, withArgumentsInArray: nil)
+        while res_Action.next() {
+            let newRecord: M_Action = M_Action.MR_createEntity()! as M_Action
+            newRecord.stageID = NSNumber(int: res_Action.intForColumn("stageID"))
+            newRecord.actID = NSNumber(int: res_Action.intForColumn("actID"))
+            newRecord.actName = res_Action.stringForColumn("actName")
+            newRecord.firstX = NSNumber(int: res_Action.intForColumn("firstX"))
+            newRecord.firstY = NSNumber(int: res_Action.intForColumn("firstY"))
+            newRecord.minX = NSNumber(int: res_Action.intForColumn("minX"))
+            newRecord.maxX = NSNumber(int: res_Action.intForColumn("maxX"))
+            newRecord.minY = NSNumber(int: res_Action.intForColumn("minY"))
+            newRecord.maxY = NSNumber(int: res_Action.intForColumn("maxY"))
+            newRecord.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+            i++
+        }
+        print("件数\(i)")
+        i = 0
         
+        //行動画像マスタ
+        let res_ActionImage = db.executeQuery(sqlActionImage, withArgumentsInArray: nil)
+        while res_ActionImage.next() {
+            let newRecord: M_ActionImage = M_ActionImage.MR_createEntity()! as M_ActionImage
+            newRecord.stageID = NSNumber(int: res_ActionImage.intForColumn("stageID"))
+            newRecord.actID = NSNumber(int: res_ActionImage.intForColumn("actID"))
+            newRecord.imageAct = res_ActionImage.stringForColumn("imageAct")
+            newRecord.way = NSNumber(int: res_ActionImage.intForColumn("way"))
+            newRecord.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+            i++
+        }
+        print("件数\(i)")
+        i = 0
         
+        //行動結果マスタ
+        let res_ActionResult = db.executeQuery(sqlActionResult, withArgumentsInArray: nil)
+        while res_ActionResult.next() {
+            let newRecord: M_ActionResult = M_ActionResult.MR_createEntity()! as M_ActionResult
+            newRecord.itemID = NSNumber(int: res_ActionResult.intForColumn("itemID"))
+            newRecord.resultID = NSNumber(int: res_ActionResult.intForColumn("resultID"))
+            newRecord.message = res_ActionResult.stringForColumn("message")
+            newRecord.resPer = NSNumber(int: res_ActionResult.intForColumn("resPer"))
+            newRecord.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+            i++
+        }
+        print("件数\(i)")
+        i = 0
         
-        
-        
-        db.close()
+        //ドロップアイテムマスタ
+        let res_DropItem = db.executeQuery(sqlDropItem, withArgumentsInArray: nil)
+        while res_DropItem.next() {
+            let newRecord: M_DropItem = M_DropItem.MR_createEntity()! as M_DropItem
+            newRecord.itemID = NSNumber(int: res_DropItem.intForColumn("itemID"))
+            newRecord.dropItemID = NSNumber(int: res_DropItem.intForColumn("dropItemID"))
+            newRecord.dropPer = NSNumber(int: res_DropItem.intForColumn("dropPer"))
+            newRecord.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+            i++
+        }
+        print("件数\(i)")
+        i = 0
 
         
+
+        db.close()
+
+
         
         
 //        let fileManager = NSFileManager.defaultManager()
@@ -165,12 +249,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        } catch let error {
 //            print("Error...\(error)")
 //        }
-
-        
-        
-
-        
-        
         return true
     }
 

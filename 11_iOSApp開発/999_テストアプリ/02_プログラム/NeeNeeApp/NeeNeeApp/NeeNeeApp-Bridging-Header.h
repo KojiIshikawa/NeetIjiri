@@ -11,16 +11,23 @@
 
 #import "LINEActivity.h"
 #import "MagicalRecord/MagicalRecord.h"
+
 #import "M_Kakugen.h"
-#import "T_RefKakugen.h"
 #import "M_Okan.h"
 #import "M_Job.h"
+#import "M_Stage.h"
+#import "M_Item.h"
+#import "M_Action.h"
+#import "M_ActionImage.h"
+#import "M_ActionResult.h"
+#import "M_DropItem.h"
+
+
+
+#import "T_RefKakugen.h"
 #import "T_CharaBase.h"
 #import "T_GetItem.h"
-#import "M_Item.h"
-#import "M_Job.h"
 #import "T_RefJob.h"
-#import "M_Stage.h"
 #import "T_RefStage.h"
 #import "T_ActionResult.h"
 
