@@ -20,8 +20,8 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
     //****************************************
     
     // BGM・SEの再生用オブジェクト
-    private var myAudioPlayer: AVAudioPlayer!
-    private var mySePlayer: AVAudioPlayer!
+//    private var myAudioPlayer: AVAudioPlayer!
+//    private var mySePlayer: AVAudioPlayer!
     
     // バナー
     private var footerBaner: ADBannerView!
@@ -99,7 +99,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
         Utility.seSoundPlay(mySeStartPath!)
         
         // BGMを止める
-        myAudioPlayer.stop()
+        Utility.bgmStop()
         
         // データベースに基本情報を書き込む.
         editCharaBase()
@@ -162,15 +162,9 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
         startBtn.addTarget(self, action: "tapStartBtn:", forControlEvents: .TouchUpInside)
         self.view.addSubview(startBtn)
         
-        // テーマソングを再生する.
-        do {
-            myAudioPlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath:mySongPath!))
-            myAudioPlayer.numberOfLoops = -1
-            myAudioPlayer.play()
-            
-        }catch{
-            // 例外発生
-        }
+        
+        
+        Utility.bgmSooundPlay(mySongPath!)
     }
     
     /** 全オブジェクトの制約設定 **/

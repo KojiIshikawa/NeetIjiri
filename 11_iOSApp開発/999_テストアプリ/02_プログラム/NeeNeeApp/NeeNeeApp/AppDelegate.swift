@@ -33,9 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         M_ActionImage.MR_truncateAll()
         M_ActionResult.MR_truncateAll()
         M_DropItem.MR_truncateAll()
-        
-
-
+ 
         
         //バンドルのマスタをストアへ移行する
         let preloadSQLiteURL = NSBundle.mainBundle().pathForResource("Master", ofType: "sqlite")

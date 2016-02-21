@@ -48,22 +48,27 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     private var mainImgSubView: UIImageView!
 
     //TODO:メモリ使用量削減のため、極力必要な時に、宣言、解放すること
-    private let myImage = UIImage(named: "03_01_01")
+//    private let myImage = UIImage(named: "03_01_01")
     
     // メニュー画面の画像設定
-    private let mainViewImage = UIImage(named: "02_01_01.png")
-    private let mainViewSubImage = UIImage(named: "02_05_01.png")
+//    private let mainViewImage = UIImage(named: "02_01_01.png")
+//    private let mainViewSubImage = UIImage(named: "02_05_01.png")
 
     // メニューボタンの画像設定
     private let manuBtnNextImage = UIImage(named: "01_01_01.png")
+    
     private let manuBtnBackActImage = UIImage(named: "01_02_01.png")
     private let manuBtnBackInActImage = UIImage(named: "01_02_02.png")
+    
     private let mainBtnActImage = UIImage(named: "01_03_01.png")
     private let mainBtnInActImage = UIImage(named: "01_03_02.png")
+    
     private let detailBtnActImage = UIImage(named: "01_04_01.png")
     private let detailBtnInActImage = UIImage(named: "01_04_02.png")
+    
     private let shareBtnActImage = UIImage(named: "01_05_01.png")
     private let shareBtnInActImage = UIImage(named: "01_05_02.png")
+    
     private let configBtnActImage = UIImage(named: "01_06_01.png")
     private let configBtnInActImage = UIImage(named: "01_06_02.png")
 
@@ -84,10 +89,14 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     
     
     
+    
     // view 初回ロード時
     override func viewDidLoad() {
         print(NSDate().description, __FUNCTION__, __LINE__)
         super.viewDidLoad()
+        
+        //行動中判定
+        
         
         //オブジェクトの配置
         self.createObjInit()
@@ -158,17 +167,11 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         }
     }
     
-    
-    //Popover実装時に必要になるイベント　おまじない
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController)
-        -> UIModalPresentationStyle {
-            return .None
-    }
 
-    
     //Popover表示
     func showPopoverView(sender: AnyObject, identifier:String) {
         let popoverView = self.storyboard!.instantiateViewControllerWithIdentifier(identifier) as UIViewController
+//        popoverView.title = title
         popoverView.modalPresentationStyle = .Popover
 
         //TODO:端末種類に依存しないサイズ指定を！
@@ -183,8 +186,35 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
             presentationController.delegate = self
             presentationController.popoverBackgroundViewClass = PopoverBackgroundView.classForCoder()
         }
+        
         self.presentViewController(popoverView, animated: true, completion: nil)
     
+    }
+    
+    func prepareForPopoverPresentation(popoverPresentationController: UIPopoverPresentationController) {
+        print("prepare for presentation")
+    }
+    
+    func popoverPresentationControllerShouldDismissPopover(popoverPresentationController: UIPopoverPresentationController) -> Bool {
+        print("should dismiss")
+        return true
+    }
+    
+    func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
+        print("did dismiss")
+    }
+    
+    
+//    //ポップオーバ閉じた際に呼ばれるメソッド
+//    func popoverPresentationControllerDidDismissPopover(popoverView: UIPopoverPresentationController){
+//        print()
+//    }
+    
+    
+    //Popover実装時に必要になるイベント　おまじない
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController)
+        -> UIModalPresentationStyle {
+            return .None
     }
     
     
@@ -311,12 +341,23 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         self.showPopoverView(self.manuBtn, identifier: "LoginBonusView")
     }
     
+    
+    
+    //背景を取得
+    func getBackGroundImage() ->UIImage {
+        
+        //TODO:現在行動中であれば、そのステージの背景を設定
+        let stage = M_Stage.MR_findFirstByAttribute("stageID", withValue: 1)! as M_Stage
+        return Utility.getUncachedImage(named: stage.imageBack)!
+    }
+    
+    
     //初期表示時のオブジェクトを作成し設置する
     func createObjInit() {
         
         // 背景設定
         myImageView = UIImageView(frame: CGRectMake(0,0,self.view.bounds.width,self.view.bounds.height))
-        myImageView.image = Utility.getUncachedImage(named: "03_01_01.png")
+        myImageView.image = self.getBackGroundImage()
         self.view.addSubview(myImageView)
         
         //キャラクター設定
@@ -327,9 +368,11 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         myCharImageView.userInteractionEnabled = true
         let singleTap = UITapGestureRecognizer(target: self, action:"tapChara:")
         myCharImageView.addGestureRecognizer(singleTap)
+        self.view.addSubview(myCharImageView)
+        
+        //TODO:オブジェクトの枠線表示
         myCharImageView.layer.borderColor = UIColor.redColor().CGColor
         myCharImageView.layer.borderWidth = 2.0
-        self.view.addSubview(myCharImageView)
         
         // フッタのバナーを生成する.
         self.footerBaner = ADBannerView()

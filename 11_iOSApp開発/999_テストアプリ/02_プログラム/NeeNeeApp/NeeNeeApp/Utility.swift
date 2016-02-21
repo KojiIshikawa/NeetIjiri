@@ -58,6 +58,12 @@ class Utility {
         print(NSDate().description, __FUNCTION__, __LINE__)
         myAudioPlayer.volume = volume
     }
+
+    class func bgmStop()
+    {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        myAudioPlayer.stop()
+    }
     
     
     
@@ -91,6 +97,13 @@ class Utility {
         print(NSDate().description, __FUNCTION__, __LINE__)
         mySePlayer.volume = volume * 2
     }
+    
+    class func seStop()
+    {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        mySePlayer.stop()
+    }
+
     
     //****************************************
     // MARK: - DB Access
