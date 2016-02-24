@@ -20,6 +20,8 @@ class itemCell: UICollectionViewCell {
         _img = UIImageView(frame: CGRectMake(0,0,100,100))
         _name = UILabel()
         _name.sizeToFit()
+        _name.font = UIFont(name: "HiraKakuProN-W3", size: 8)
+        
         self.addSubview(_img)
         self.addSubview(_name)
         

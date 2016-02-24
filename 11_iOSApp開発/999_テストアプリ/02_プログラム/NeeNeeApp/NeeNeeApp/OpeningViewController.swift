@@ -18,11 +18,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
     //****************************************
     // MARK: - メンバ変数
     //****************************************
-    
-    // BGM・SEの再生用オブジェクト
-//    private var myAudioPlayer: AVAudioPlayer!
-//    private var mySePlayer: AVAudioPlayer!
-    
+
     // バナー
     private var footerBaner: ADBannerView!
     
@@ -37,10 +33,6 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
     
     // スタートボタン
     private var startBtn: UIButton!
-    
-    // 定数宣言
-    private let mySongPath = NSBundle.mainBundle().pathForResource("start data config", ofType:"mp3")
-    private let mySeStartPath = NSBundle.mainBundle().pathForResource("se5", ofType:"mp3")
     
     // メニューボタンの画像設定
     private let startBtnImage = UIImage(named: "01_11_01.png")
@@ -82,6 +74,15 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
             
             // オブジェクトの制約設定
             self.objConstraints()
+            
+            //NSUserDefaultに音量を初期セット
+            let ud = NSUserDefaults.standardUserDefaults()
+            ud.setFloat(0.3, forKey: "VOL_SE")
+            ud.setFloat(0.3, forKey: "VOL_BGM")
+            ud.synchronize()
+            
+            // BGMを再生する.
+            Utility.bgmSoundPlay(Const.myOpeningPath!)
         }
     }
         
@@ -96,7 +97,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
         print(NSDate().description, __FUNCTION__, __LINE__)
         
         // SEを再生する.
-        Utility.seSoundPlay(mySeStartPath!)
+        Utility.seSoundPlay(Const.mySeStartPath!)
         
         // BGMを止める
         Utility.bgmStop()
@@ -104,6 +105,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
         // データベースに基本情報を書き込む.
         editCharaBase()
         editInitRJob()
+        editGetItem()
         
         // 画面遷移する.
         let NextViewController = self.storyboard!.instantiateViewControllerWithIdentifier( "NeetMain" )
@@ -162,9 +164,6 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
         startBtn.addTarget(self, action: "tapStartBtn:", forControlEvents: .TouchUpInside)
         self.view.addSubview(startBtn)
         
-        
-        
-        Utility.bgmSooundPlay(mySongPath!)
     }
     
     /** 全オブジェクトの制約設定 **/
@@ -398,5 +397,27 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
         
         return true
     }
+    
+    //初期所持アイテムの書き込み
+    func editGetItem() -> DarwinBoolean  {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        
+        // アイテム１を追加
+        let initItem1 = T_GetItem.MR_createEntity()! as T_GetItem
+        initItem1.charaID = Const.CHARACTER1_ID
+        initItem1.itemCount = 3
+        initItem1.itemID = 1
+        initItem1.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+
+        // アイテム２を追加
+        let initItem2 = T_GetItem.MR_createEntity()! as T_GetItem
+        initItem2.charaID = Const.CHARACTER1_ID
+        initItem2.itemCount = 3
+        initItem2.itemID = 2
+        initItem1.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+        
+        return true
+    }
+
 }
 

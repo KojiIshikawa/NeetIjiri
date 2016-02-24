@@ -29,16 +29,15 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
     private var touchesPosition = CGPoint!()
     private let mySeSetPath = NSBundle.mainBundle().pathForResource("se1", ofType:"mp3")
     
-    
     //コレクションビューにセットするアイテムリスト
     private var itemList: [Dictionary <String,String>] = []
     private var itemListIdx: Int = 0
+    private var itemListIdxPath: Int = -1
+    
+    //取得済みセットアクションリスト
+    private var listActiveAction:[T_ActionResult] = []
     
     override func viewDidLoad() {
-
-        // 長押し用レコグナイザー
-        let longTapRecognizer = UILongPressGestureRecognizer(target: self, action: "cellLongTap:")
-        longTapRecognizer.delegate = self
         
         mainImgView = UIImageView()
         mainImgView.frame.size = self.view.frame.size
@@ -60,19 +59,30 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         selItemLabel1.numberOfLines = 2
         selItemLabel2.numberOfLines = 2
         selItemLabel3.numberOfLines = 2
-
-        selItemLabel1.text = "アイテム１\n（つぶし中...）"
-        selItemLabel2.text = "アイテム２"
-        selItemLabel3.text = "アイテム３"
         
         // セット済みアイテムの初期設定.
         setItemView = UIImageView()
         
-        // 初期表示画像の読み込み.
-        setItemImageReLoad()
+        // 長押しイベント登録.
+        selItemLabel1.tag = 11
+        selItemLabel2.tag = 12
+        selItemLabel3.tag = 13
         
-        // セル長押しイベント登録.
-        setItemView.addGestureRecognizer(longTapRecognizer)
+        selItemLabel1.userInteractionEnabled = true
+        selItemLabel2.userInteractionEnabled = true
+        selItemLabel3.userInteractionEnabled = true
+        
+        let setItem1LongTouchRecognizer = UILongPressGestureRecognizer(target: self, action: "setItemLongTouch:")
+        setItem1LongTouchRecognizer.delegate = self
+        selItemLabel1.addGestureRecognizer(setItem1LongTouchRecognizer)
+        
+        let setItem2LongTouchRecognizer = UILongPressGestureRecognizer(target: self, action: "setItemLongTouch:")
+        setItem2LongTouchRecognizer.delegate = self
+        selItemLabel2.addGestureRecognizer(setItem2LongTouchRecognizer)
+        
+        let setItem3LongTouchRecognizer = UILongPressGestureRecognizer(target: self, action: "setItemLongTouch:")
+        setItem3LongTouchRecognizer.delegate = self
+        selItemLabel3.addGestureRecognizer(setItem3LongTouchRecognizer)
         
         // 画像をUIImageViewに設定する.
         let myImage = self.getUncachedImage( named: "02_01_01.png")
@@ -97,11 +107,14 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         itemCollectionView.delegate = self
         itemCollectionView.dataSource = self
         
-        // アイテムリストを取得し、メンバ変数にセット
-        itemList = getT_GetItem()
+        // セットアイテムの再描画.
+        setItemImageReLoad()
         
         // セル長押しイベント登録
-        itemCollectionView.addGestureRecognizer(longTapRecognizer)
+        // 長押し用レコグナイザー
+        let cellitemCellLongTouchRecognizer = UILongPressGestureRecognizer(target: self, action: "itemCellLongTouch:")
+        cellitemCellLongTouchRecognizer.delegate = self
+        itemCollectionView.addGestureRecognizer(cellitemCellLongTouchRecognizer)
 
         // ポップ上に表示するオブジェクトをViewに追加する.
         view.addSubview(mainImgView)
@@ -134,71 +147,205 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
         print(NSDate().description, __FUNCTION__, __LINE__)
-        print("外で離した")
+        
+    }
+
+    /** 暇つぶしアイテム長押し時の処理 **/
+    func setItemLongTouch(recognizer: UILongPressGestureRecognizer) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+
+        switch recognizer.state {
+            
+            //長押し-タッチ時の処理
+        case UIGestureRecognizerState.Began:
+            
+            // 画像に使用するアイテムID
+            var picItemID:Int = 0
+            
+            switch Int((recognizer.view?.tag)!) {
+            case 11:
+                
+                // セットアイテム１の場合
+                // セットアイテムが存在する場合、セット
+                picItemID = listActiveAction.count >= 1 ? Int(listActiveAction[0].itemID) : 0
+                
+            case 12:
+                
+                // セットアイテム２の場合
+                // セットアイテムが存在する場合、セット
+                picItemID = listActiveAction.count >= 2 ? Int(listActiveAction[1].itemID) : 0
+                
+                
+            default:
+                
+                // セットアイテム３の場合
+                // セットアイテムが存在する場合、セット
+                picItemID = listActiveAction.count >= 3 ? Int(listActiveAction[2].itemID) : 0
+                
+                break
+                
+            }
+            
+            // アイテムが取得できた場合
+            if picItemID > 0 {
+                
+                // タップされたアイテムの画像を半透明で表示する.
+                let myImage = self.getUncachedImage( named: String(UTF8String: getM_ItemForKey(Int(picItemID)).imageItem)!)!
+                
+                
+                // 選択中表示用アイテムが未作成なら作成する.
+                if selItemView == nil {
+                    
+                    selItemView = UIImageView()
+                    selItemView.image = myImage
+                    selItemView.alpha = 0.8
+                    selItemView.frame.size = CGSizeMake(100,100)
+                    self.view.addSubview(selItemView)
+                }
+            }
+            
+            //長押し-指を離した時の処理
+        case UIGestureRecognizerState.Ended:
+            
+            // セットアイテムの領域内の場合
+            if recognizer.locationInView(self.view).x <= itemCollectionView.frame.maxX
+                && recognizer.locationInView(self.view).x >= itemCollectionView.frame.origin.x
+                && recognizer.locationInView(self.view).y <= itemCollectionView.frame.maxY
+                && recognizer.locationInView(self.view).y >= itemCollectionView.frame.origin.y {
+                    
+                    // SEを再生する.
+                    Utility.seSoundPlay(Const.mySeItemCancelNoPath!)
+                    
+                    switch Int((recognizer.view?.tag)!) {
+                    case 11:
+                        
+                        // セットアイテム１の場合
+                        // セットアイテム１をアクションテーブルから削除する.
+                        deleteT_ActionResultWithActive(listActiveAction[0])
+                        
+                    case 12:
+                        
+                        // セットアイテム２の場合
+                        // セットアイテム２をアクションテーブルから削除する.
+                        deleteT_ActionResultWithActive(listActiveAction[1])
+                        
+                    default:
+                        
+                        // セットアイテム３の場合
+                        // セットアイテム３をアクションテーブルから削除する.
+                        deleteT_ActionResultWithActive(listActiveAction[2])
+                        break
+                        
+                    }
+                    
+            }
+            
+            // 選択中アイテムのイメージを破棄する.
+            selItemView.removeFromSuperview()
+            selItemView = nil
+            
+            // セットアイテムの再描画.
+            setItemImageReLoad()
+            
+        default: break
+            
+        }
+        
+        // 画像がある場合は画像位置を移動
+        if selItemView != nil {
+            
+            // 選択したアイテムの画像位置をタップ中の位置に常に合わせる.
+            selItemView.frame.origin.x = recognizer.locationInView(self.view).x
+            selItemView.frame.origin.y = recognizer.locationInView(self.view).y
+            selItemView.frame.origin.x -= 40.0
+            selItemView.frame.origin.y -= 40.0
+            
+        }
 
         
     }
     
     /** 暇つぶしアイテム長押し時の処理 **/
-    func cellLongTap(recognizer: UILongPressGestureRecognizer) {
+    func itemCellLongTouch(recognizer: UILongPressGestureRecognizer) {
         print(NSDate().description, __FUNCTION__, __LINE__)
-        print("長押し")
         
-        // 押された位置でcellのPathを取得
-        let point = recognizer.locationInView(itemCollectionView)
+        switch recognizer.state {
+            
+          //長押し-タッチ時の処理
+          case UIGestureRecognizerState.Began:
         
-        let indexPath = self.itemCollectionView.indexPathForItemAtPoint(point)
-
-        if indexPath == nil {
-            return
-        }
-        
-        if recognizer.state == UIGestureRecognizerState.Began  {
+            // 押された位置でcellのPathを取得する.
+            let point = recognizer.locationInView(itemCollectionView)
+            
+            // 選択されたアイテムをメンバ変数に保持しておく.
+            itemListIdxPath = self.itemCollectionView.indexPathForItemAtPoint(point) == nil
+                ? -1 : (self.itemCollectionView.indexPathForItemAtPoint(point)?.row)!
             
             // 長押しされた場合の処理
-            print("長押しされたcellのindexPath:\(indexPath?.row)")
-
-            // タップされたアイテムの画像を半透明で表示する
-            let idx : Int = (indexPath?.row)!
-            let myImage = self.getUncachedImage( named: String(UTF8String: itemList[idx]["imageItem"]!)!)
+            // アイテムが選択されている場合のみ処理する.
+            if itemListIdxPath > -1 {
             
-            // 選択中表示用アイテムが未作成なら作成する.
-            if selItemView == nil {
+                // タップされたアイテムの画像を半透明で表示する
+                let myImage = self.getUncachedImage( named: String(UTF8String: itemList[itemListIdxPath]["imageItem"]!)!)
+            
+                // 選択中表示用アイテムが未作成なら作成する.
+                if selItemView == nil {
                 
-                selItemView = UIImageView()
-                selItemView.image = myImage
-                selItemView.alpha = 0.8
-                selItemView.frame.size = CGSizeMake(100,100)
-                self.view.addSubview(selItemView)
+                    selItemView = UIImageView()
+                    selItemView.image = myImage
+                    selItemView.alpha = 0.8
+                    selItemView.frame.size = CGSizeMake(100,100)
+                    self.view.addSubview(selItemView)
+                }
+                
             }
             
-            print(recognizer.state)
-        
-        } else if recognizer.state == UIGestureRecognizerState.Ended  {
-            
-            print("離した")
+          //長押し-指を離した時の処理
+          case UIGestureRecognizerState.Ended:
             
             // セットアイテムの領域内の場合
             if recognizer.locationInView(self.view).x <= setItemView.frame.maxX
-            && recognizer.locationInView(self.view).x >= setItemView.frame.origin.x
-            && recognizer.locationInView(self.view).y <= setItemView.frame.maxY
-            && recognizer.locationInView(self.view).y >= setItemView.frame.origin.y {
-                
-                // 領域内の場合、セットアイテムをセットする.
-                setItemImageReLoad()
-                
-                // セットアイテムをデータベースに書き込む.
-                let idx : Int = (indexPath?.row)!
-                let stringNumber : String = String(UTF8String: itemList[idx]["itemName"]!)!
-                insertT_ActionResultWithActive(Int(stringNumber)!)
-                print("セットされたアイテムのアイテムコード：" + stringNumber)
-            }
+                && recognizer.locationInView(self.view).x >= setItemView.frame.origin.x
+                && recognizer.locationInView(self.view).y <= setItemView.frame.maxY
+                && recognizer.locationInView(self.view).y >= setItemView.frame.origin.y {
+                    
+                    // アイテムが選択されている場合のみ処理する.
+                    if itemListIdxPath > -1 {
+                        
+                        // セットアイテムの再描画.
+                        if setItemImageOverChk() {
+                            
+                            // SEを再生する.
+                            Utility.seSoundPlay(Const.mySeItemSetPath!)
 
-            // 選択中アイテムのイメージを破棄する.
-            selItemView.removeFromSuperview()
-            selItemView = nil
+                            // セットアイテムをデータベースに書き込む.
+                            insertT_ActionResultWithActive(Int(itemList[itemListIdxPath]["itemID"]!)!)
+                            
+                            // 画面を再描画する.
+                            setItemImageReLoad()
+                            
+                        } else {
+                            
+                            // SEを再生する.
+                            Utility.seSoundPlay(Const.mySeItemSetNGPath!)
+                        }
+                        
+                    }
+            }
+            
+            if (selItemView != nil) {
+
+                // 選択中アイテムのイメージを破棄する.
+                selItemView.removeFromSuperview()
+                selItemView = nil
+                
+            }
+            
+            
+        default: break
             
         }
+        
         
         // 画像がある場合は画像位置を移動
         if selItemView != nil {
@@ -219,8 +366,6 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
     // Cellが選択された際に呼び出される
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         print(NSDate().description, __FUNCTION__, __LINE__)
-        
-        print("Num: \(indexPath.row)")
         
     }
     
@@ -452,35 +597,99 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         )
     }
 
-    /** セット済みアイテムの円グラフを再描画する. **/
-    func setItemImageReLoad ()
+    /** セット済みアイテムの上限チェック. **/
+    func setItemImageOverChk() -> DarwinBoolean
     {
         
-        // 行動実績テーブルを読み込み、未実行または実行中のアクション数に合わせ、円グラフの画像を設定する.
-        switch getT_ActionResultWithActive().count {
-            
-        case 0:
-            setItemView.image = self.getUncachedImage( named: "02_05_01.png")
-            break
-        case 1:
-            setItemView.image = self.getUncachedImage( named: "02_05_02.png")
-            break
-        case 2:
-            setItemView.image = self.getUncachedImage( named: "02_05_03.png")
-            break
-        case 3:
-            setItemView.image = self.getUncachedImage( named: "02_05_04.png")
-            break
-        default:
-            
+        // 行動実績テーブルを読み込み、アクティブなアクションを取得する.
+        listActiveAction = []
+        listActiveAction = getT_ActionResultWithActive()
+        
+        // 未実行または実行中のアクション数に合わせ、円グラフの画像、テキストを設定する.
+        if (listActiveAction.count >= 3) {
+
             // エラーダイアログを表示
             let alertController = UIAlertController(title: "忙しすぎて死んじゃう"
                 , message: "未実行のひまをキャンセルしてください。", preferredStyle: .Alert)
             let defaultActionYes = UIAlertAction(title: "OK", style: .Default, handler:nil)
             alertController.addAction(defaultActionYes)
             presentViewController(alertController, animated: true, completion: nil)
+            return false
             
         }
+        
+        // エラーフラグを返却する.
+        return true
+    }
+
+    
+    /** セット済みアイテムの円グラフを再描画する. **/
+    func setItemImageReLoad() -> DarwinBoolean
+    {
+    
+        // アイテムリストを取得し、メンバ変数にセットする.
+        itemList = getT_GetItem()
+        itemListIdx = 0
+        
+        // コレクションビューをリロードする.
+        itemCollectionView.reloadData()
+        
+        // 行動実績テーブルを読み込み、アクティブなアクションを取得する.
+        listActiveAction = []
+        listActiveAction = getT_ActionResultWithActive()
+        
+        // 未実行または実行中のアクション数に合わせ、円グラフの画像、テキストを設定する.
+        switch listActiveAction.count {
+
+        case 0:
+            setItemView.image = self.getUncachedImage( named: "02_05_01.png")
+            selItemLabel1.text = ""
+            selItemLabel2.text = ""
+            selItemLabel3.text = ""
+            selItemLabel1.hidden = true
+            selItemLabel2.hidden = true
+            selItemLabel3.hidden = true
+            break
+        case 1:
+            setItemView.image = self.getUncachedImage( named: "02_05_02.png")
+            selItemLabel1.text = getM_ItemForKey(Int(listActiveAction[0].itemID)).itemName
+            selItemLabel2.text = ""
+            selItemLabel3.text = ""
+            selItemLabel1.hidden = false
+            selItemLabel2.hidden = true
+            selItemLabel3.hidden = true
+            break
+        case 2:
+            setItemView.image = self.getUncachedImage( named: "02_05_03.png")
+            selItemLabel1.text = getM_ItemForKey(Int(listActiveAction[0].itemID)).itemName
+            selItemLabel2.text = getM_ItemForKey(Int(listActiveAction[1].itemID)).itemName
+            selItemLabel3.text = ""
+            selItemLabel1.hidden = false
+            selItemLabel2.hidden = false
+            selItemLabel3.hidden = true
+            break
+        case 3:
+            setItemView.image = self.getUncachedImage( named: "02_05_04.png")
+            selItemLabel1.text = getM_ItemForKey(Int(listActiveAction[0].itemID)).itemName
+            selItemLabel2.text = getM_ItemForKey(Int(listActiveAction[1].itemID)).itemName
+            selItemLabel3.text = getM_ItemForKey(Int(listActiveAction[2].itemID)).itemName
+            selItemLabel1.hidden = false
+            selItemLabel2.hidden = false
+            selItemLabel3.hidden = false
+            break
+        default:
+            
+            return false
+        }
+        
+        // アイテム１が実行中の場合の文言を追加する.
+        if (listActiveAction.count >= 1 && listActiveAction[0].actStartDate != nil) {
+            selItemLabel1.text = selItemLabel1.text! + "\n（つぶし中...）"
+        }
+        
+        // エラーフラグを返却する.
+        return true
+        
     }
     
     //****************************************
@@ -508,7 +717,6 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
             } else {
                 continue
             }
-            
         }
         
         return  actionList
@@ -520,6 +728,7 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         
         // 指定されたアイテムをテーブルに行動実績テーブルに追加.
         let insertData = T_ActionResult.MR_createEntity()! as T_ActionResult
+        insertData.charaID = Const.CHARACTER1_ID
         insertData.itemID = itemId
         insertData.actSetDate = NSDate()
         insertData.managedObjectContext!.MR_saveToPersistentStoreAndWait()
@@ -537,10 +746,13 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         } else {
 
             // 対象レコードのアイテム数を減らす.
-            let updPredicate: NSPredicate = NSPredicate(format: "charaID = %@ AND itemID = %@", Const.CHARACTER1_ID,itemId);
+            let updPredicate: NSPredicate = NSPredicate(format: "charaID = %@ AND itemID = %@", argumentArray:[String(Const.CHARACTER1_ID),String(itemId)]);
+            
             let updateData = T_GetItem.MR_findFirstWithPredicate(updPredicate)! as T_GetItem
+            
+            // 所持アイテムを減算して更新する.
             updateData.itemCountValue -= 1
-            deleteItem.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+            updateData.managedObjectContext!.MR_saveToPersistentStoreAndWait()
         }
         
     }
@@ -549,30 +761,29 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
     func deleteT_ActionResultWithActive(deleteData: T_ActionResult) {
         print(NSDate().description, __FUNCTION__, __LINE__)
         
+        // 削除対象のアイテム情報を取得しておく.
+        let itemID: Int = Int(deleteData.itemID)
+        let insertData = getT_GetItemForKey(itemID)
+        
         // 指定されたアイテムを行動実績テーブルから削除.
         deleteData.MR_deleteEntity()
         deleteData.managedObjectContext!.MR_saveToPersistentStoreAndWait()
         
-        // 取得済アイテムマスタの所持数を元に戻す.
-        let deleteItem = getT_GetItemForKey(Int(deleteData.itemID))
-        
-        // 現在のアイテム数が1個の場合
-        if Int(deleteItem.itemCountValue) == 0 {
+        // 現在のアイテム数が0個（データなし）の場合
+        if (insertData.itemCountValue == 0) {
             
             // 対象レコードを挿入する.
-            let insertData = T_GetItem.MR_createEntity()! as T_GetItem
-            insertData.charaID = Const.CHARACTER1_ID
-            insertData.itemCount = 1
-            insertData.itemID = deleteItem.itemID
+            insertData.itemID = itemID
+            insertData.itemCountValue += 1
             insertData.managedObjectContext!.MR_saveToPersistentStoreAndWait()
             
         } else {
             
             // 対象レコードのアイテム数を加算する.
-            let updPredicate: NSPredicate = NSPredicate(format: "charaID = %@ AND itemID = %@", Const.CHARACTER1_ID,deleteItem.itemID);
+            let updPredicate: NSPredicate = NSPredicate(format: "charaID = %@ AND itemID = %@", argumentArray:[String(Const.CHARACTER1_ID),String(insertData.itemID)]);
             let updateData = T_GetItem.MR_findFirstWithPredicate(updPredicate)! as T_GetItem
             updateData.itemCountValue += 1
-            deleteItem.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+            updateData.managedObjectContext!.MR_saveToPersistentStoreAndWait()
         }
 
     }
@@ -595,13 +806,26 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
                 
         }
         
-        // 返却用アイテム
-        let resultItem: T_GetItem = T_GetItem();
-        
+        // アイテムが取得できなかった場合の返却用アイテム
+        let nothingItem = T_GetItem.MR_createEntity()! as T_GetItem
+        nothingItem.charaID = Const.CHARACTER1_ID
+        nothingItem.itemCountValue = 0
+
         //作成したアイテムリストを返却
-        return resultItem
+        return nothingItem
     }
     
+    /** M_ItemからアイテムIDにひもづく取得済アイテム１件の取得 **/
+    func getM_ItemForKey(itemId: Int) -> M_Item  {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        
+        // アイテムマスタを取得.
+        let itemMList :[M_Item] = M_Item.MR_findByAttribute("itemID", withValue: itemId) as! [M_Item];
+        
+        // アイテムを返却.
+        return itemMList[0]
+
+    }
     
     /** T_GetItemから取得済アイテムの取得 **/
     func getT_GetItem() -> [Dictionary<String, String>]  {
