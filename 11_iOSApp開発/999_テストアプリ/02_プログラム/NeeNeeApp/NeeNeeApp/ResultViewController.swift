@@ -18,12 +18,45 @@ class ResultViewController: UIViewController {
 //    private var lblResult: UILabel //結果
 //    private var lblComment: UILabel //詳細コメント
     
-    
+    // 背景
+    private var imgResultView: UIImageView!
 
+    //画面オブジェクト
+    private var lblOkan: UILabel! //オカンラベル
+    private var btnOK: UIButton! //OKボタン
+
+    
+    
     // view ロード完了時
     override func viewDidLoad() {
         print(NSDate().description, __FUNCTION__, __LINE__)
         super.viewDidLoad()
+        
+        //背景
+        imgResultView = UIImageView(frame: self.view.frame)
+        imgResultView.image = Utility.getUncachedImage(named: "k_Result.png")
+        self.view.addSubview(imgResultView)
+        
+        
+        
+//        // ログインメッセージを表示
+//        lblOkan = UILabel(frame: CGRectMake(45,100,self.view.bounds.width-30,160))
+//        let mes: String = "〇〇くんへ\n\nかあさん腕をふるって\n〇〇くんの大好きな\n\(getOkan())を\n作りました。\n無理しないで頑張ってね！"
+//        let charaData : [T_CharaBase] = Utility.getCharaBase(Const.CHARACTER1_ID)
+//        lblOkan.text = mes.stringByReplacingOccurrencesOfString("〇〇",withString: charaData[0].charaName)
+//        lblOkan.numberOfLines = 0
+//        self.view.addSubview(lblOkan)
+//        
+//        
+//        //OKボタン
+//        btnOK = UIButton(frame: CGRectMake(20,60,self.view.bounds.width-30,120))
+//        btnOK.titleLabel!.text = "OK"
+//        self.view.addSubview(btnOK)
+
+        
+        
+        
+        
         
         //アクションが完了しているかチェックする
         self.isActionFinished()

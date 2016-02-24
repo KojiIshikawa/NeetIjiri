@@ -88,15 +88,10 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     //****************************************
     
     
-    
-    
     // view 初回ロード時
     override func viewDidLoad() {
         print(NSDate().description, __FUNCTION__, __LINE__)
         super.viewDidLoad()
-        
-        //行動中判定
-        
         
         //オブジェクトの配置
         self.createObjInit()
@@ -120,6 +115,8 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
             self.showLoginBonus()
             self.isFirstLoad = false
         }
+        
+        
     }
     
     
@@ -186,12 +183,15 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
             presentationController.delegate = self
             presentationController.popoverBackgroundViewClass = PopoverBackgroundView.classForCoder()
         }
-        
+        popoverView.title = identifier
         self.presentViewController(popoverView, animated: true, completion: nil)
     
     }
     
     func prepareForPopoverPresentation(popoverPresentationController: UIPopoverPresentationController) {
+        
+        
+
         print("prepare for presentation")
     }
     
@@ -200,16 +200,16 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         return true
     }
     
+    //popOver表示終了後のイベント
     func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
-        print("did dismiss")
+        
+        let identifier = popoverPresentationController.presentedViewController.title
+        
+        if (identifier == "LoginBonusView") {
+            self.showPopoverView(self.manuBtn, identifier: "ResultView")
+        }
+        
     }
-    
-    
-//    //ポップオーバ閉じた際に呼ばれるメソッド
-//    func popoverPresentationControllerDidDismissPopover(popoverView: UIPopoverPresentationController){
-//        print()
-//    }
-    
     
     //Popover実装時に必要になるイベント　おまじない
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController)
