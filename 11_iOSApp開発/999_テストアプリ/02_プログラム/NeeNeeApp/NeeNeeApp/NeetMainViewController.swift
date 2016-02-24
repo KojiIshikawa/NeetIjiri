@@ -18,10 +18,6 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     //****************************************
     // MARK: - メンバ変数
     //****************************************
-
-//    // BGM・SEの再生用オブジェクト
-//    private var myAudioPlayer: AVAudioPlayer!
-//    private var mySePlayer: AVAudioPlayer!
     
     // バナー
     private var footerBaner: ADBannerView!
@@ -48,12 +44,6 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     private var mainImgSubView: UIImageView!
 
     //TODO:メモリ使用量削減のため、極力必要な時に、宣言、解放すること
-//    private let myImage = UIImage(named: "03_01_01")
-    
-    // メニュー画面の画像設定
-//    private let mainViewImage = UIImage(named: "02_01_01.png")
-//    private let mainViewSubImage = UIImage(named: "02_05_01.png")
-
     // メニューボタンの画像設定
     private let manuBtnNextImage = UIImage(named: "01_01_01.png")
     
@@ -356,12 +346,15 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     func createObjInit() {
         
         // 背景設定
-        myImageView = UIImageView(frame: CGRectMake(0,0,self.view.bounds.width,self.view.bounds.height))
+        myImageView = UIImageView()
+        myImageView.frame.size = CGSizeMake(self.view.bounds.width, self.view.bounds.height)
         myImageView.image = self.getBackGroundImage()
         self.view.addSubview(myImageView)
         
         //キャラクター設定
+        // UIImageViewをViewに追加する.
         myCharImageView = UIImageView()
+        myCharImageView.frame.size = CGSizeMake(self.view.bounds.width / 1.4, self.view.bounds.height / 1.8)
         myCharImageView.center.x = self.view.center.x
         myCharImageView.center.y = self.view.center.y
         myCharImageView.tag = 1
@@ -426,7 +419,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         configBtn.hidden = true
         
         // テーマソングを再生する.
-        Utility.bgmSooundPlay(Const.mySongPath!)
+        Utility.bgmSoundPlay(Const.mySongPath!)
     }
 
     /** バナーが読みこまれた時に呼ばれる **/
@@ -568,7 +561,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         detailBtn.translatesAutoresizingMaskIntoConstraints = false
         shareBtn.translatesAutoresizingMaskIntoConstraints = false
         configBtn.translatesAutoresizingMaskIntoConstraints = false
-        myCharImageView.translatesAutoresizingMaskIntoConstraints = false
+        //myCharImageView.translatesAutoresizingMaskIntoConstraints = false
         
         // メニューボタンの制約
         self.view.addConstraints([
@@ -810,9 +803,10 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
             )]
         )
         
+                    /**
         // キャラクターイメージの制約
         self.view.addConstraints([
-            
+
             // x座標
             NSLayoutConstraint(
                 item: self.myCharImageView,
@@ -857,6 +851,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
                 constant: 0
             )]
         )
+**/
 
     }
     

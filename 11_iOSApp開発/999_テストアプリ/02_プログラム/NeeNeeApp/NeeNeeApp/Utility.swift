@@ -29,20 +29,21 @@ class Utility {
     }
     
     
-    class func bgmSooundPlay(bgmPath: String)
+    class func bgmSoundPlay(bgmPath: String)
     {
         print(NSDate().description, __FUNCTION__, __LINE__)
         
         //userDefaultからボリューム値を取得
         let ud = NSUserDefaults.standardUserDefaults()
         var udBGM : Float! = ud.floatForKey("VOL_BGM")
-        if udBGM == nil {
+        
+        if udBGM < 0.0 {
             udBGM = 0.5
         }
         
         //再生
         do {
-            myAudioPlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath:Const.mySongPath!))
+            myAudioPlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath:bgmPath))
             myAudioPlayer.volume = udBGM
             myAudioPlayer.numberOfLoops = -1
             myAudioPlayer.play()
@@ -65,8 +66,6 @@ class Utility {
         myAudioPlayer.stop()
     }
     
-    
-    
     /** SE再生 **/
     //ファイルのパス
     class func seSoundPlay(sePath: String)
@@ -76,7 +75,8 @@ class Utility {
         //userDefaultからボリューム値を取得
         let ud = NSUserDefaults.standardUserDefaults()
         var udSE : Float! = ud.floatForKey("VOL_SE")
-        if udSE == nil {
+        
+        if udSE < 0.0 {
             udSE = 0.5
         }
 

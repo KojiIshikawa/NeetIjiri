@@ -474,7 +474,7 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
     
         //NSUserDefaultに値を保存
         let ud = NSUserDefaults.standardUserDefaults()
-        ud.setFloat(seVolumeSBar.value, forKey: "SE_SE")
+        ud.setFloat(seVolumeSBar.value, forKey: "VOL_SE")
         ud.synchronize()
         
         // SEを再生する.
