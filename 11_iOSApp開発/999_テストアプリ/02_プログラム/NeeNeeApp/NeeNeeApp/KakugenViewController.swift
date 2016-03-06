@@ -58,15 +58,42 @@ class KakugenViewController: UIViewController {
         //格言をランダムで取得
         let kakugenList :[M_Kakugen] = M_Kakugen.MR_findAll() as! [M_Kakugen];
         let randInt = arc4random_uniform(UInt32(kakugenList.count));
+        var updFlg = true
+
         print(kakugenList.count)
-        return kakugenList[Int(randInt)].kakugenText
         
+        // 取得済格言テーブルで存在チェックを行い、存在しない場合のみセットする.
+        let listT_RefKakugen :[T_RefKakugen] = T_RefKakugen.MR_findByAttribute("charaID", withValue: Const.CHARACTER1_ID, andOrderBy: "kakugenID", ascending: true) as! [T_RefKakugen];
         
+        // 件数分繰り返す
+        for refKakugen in listT_RefKakugen {
+            
+            // 実行中または未実行のデータをセットする.
+            if refKakugen.kakugenID == kakugenList[Int(randInt)].kakugenID {
+                
+                // データ更新不要
+                updFlg = false
+                
+                // 繰り返しを終了
+                continue
+
+            }
+        }
+
+        // 未取得の格言は取得済に更新する.
+        if updFlg {
+
+            //取得済み格言の更新
+            let insertItem = T_RefKakugen.MR_createEntity()! as T_RefKakugen
+            insertItem.charaID = Const.CHARACTER1_ID
+            insertItem.kakugenID = kakugenList[Int(randInt)].kakugenID
+            insertItem.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+        }
         
-        //取得済み格言の更新
-        
-    
         //格言の改行設定
+
+        // 格言の返却
+        return kakugenList[Int(randInt)].kakugenText
     }
     
 }

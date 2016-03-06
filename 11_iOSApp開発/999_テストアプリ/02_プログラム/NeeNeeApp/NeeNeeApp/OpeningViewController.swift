@@ -106,6 +106,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
         editCharaBase()
         editInitRJob()
         editGetItem()
+        editT_RefStage()
         
         // 画面遷移する.
         let NextViewController = self.storyboard!.instantiateViewControllerWithIdentifier( "NeetMain" )
@@ -415,6 +416,20 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
         initItem2.itemCount = 3
         initItem2.itemID = 2
         initItem1.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+        
+        return true
+    }
+    
+    
+    //初期所持ステージの書き込み
+    func editT_RefStage() -> DarwinBoolean  {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        
+        // 部屋を追加
+        let initItem = T_RefStage.MR_createEntity()! as T_RefStage
+        initItem.charaID = Const.CHARACTER1_ID
+        initItem.stageID = 1
+        initItem.managedObjectContext!.MR_saveToPersistentStoreAndWait()
         
         return true
     }
