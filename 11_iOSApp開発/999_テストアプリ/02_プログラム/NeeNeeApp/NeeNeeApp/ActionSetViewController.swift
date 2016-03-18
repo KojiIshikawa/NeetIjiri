@@ -213,27 +213,42 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
                 && recognizer.locationInView(self.view).y <= itemCollectionView.frame.maxY
                 && recognizer.locationInView(self.view).y >= itemCollectionView.frame.origin.y {
                     
-                    // SEを再生する.
-                    Utility.seSoundPlay(Const.mySeItemCancelNoPath!)
-                    
                     switch Int((recognizer.view?.tag)!) {
                     case 11:
                         
                         // セットアイテム１の場合
-                        // セットアイテム１をアクションテーブルから削除する.
-                        deleteT_ActionResultWithActive(listActiveAction[0])
+                        if cancelItemActiveChk() {
+
+                            // セットアイテム１をアクションテーブルから削除する.
+                            deleteT_ActionResultWithActive(listActiveAction[0])
+                            
+                            // SEを再生する.
+                            Utility.seSoundPlay(Const.mySeItemCancelNoPath!)
+                            
+                        } else {
+
+                            // SEを再生する.
+                            Utility.seSoundPlay(Const.mySeItemSetNGPath!)
+
+                        }
                         
                     case 12:
                         
                         // セットアイテム２の場合
                         // セットアイテム２をアクションテーブルから削除する.
                         deleteT_ActionResultWithActive(listActiveAction[1])
+
+                        // SEを再生する.
+                        Utility.seSoundPlay(Const.mySeItemCancelNoPath!)
                         
                     default:
                         
                         // セットアイテム３の場合
                         // セットアイテム３をアクションテーブルから削除する.
                         deleteT_ActionResultWithActive(listActiveAction[2])
+                        
+                        // SEを再生する.
+                        Utility.seSoundPlay(Const.mySeItemCancelNoPath!)
                         break
                         
                     }
@@ -313,7 +328,7 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
                     if itemListIdxPath > -1 {
                         
                         // セットアイテムの再描画.
-                        if setItemImageOverChk() {
+                        if setItemOverChk() {
                             
                             // SEを再生する.
                             Utility.seSoundPlay(Const.mySeItemSetPath!)
@@ -598,7 +613,7 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
     }
 
     /** セット済みアイテムの上限チェック. **/
-    func setItemImageOverChk() -> DarwinBoolean
+    func setItemOverChk() -> DarwinBoolean
     {
         
         // 行動実績テーブルを読み込み、アクティブなアクションを取得する.
@@ -609,7 +624,7 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         if (listActiveAction.count >= 3) {
 
             // エラーダイアログを表示
-            let alertController = UIAlertController(title: "忙しすぎて死んじゃう"
+            let alertController = UIAlertController(title: "忙しすぎて死んじゃうよ"
                 , message: "未実行のひまをキャンセルしてください。", preferredStyle: .Alert)
             let defaultActionYes = UIAlertAction(title: "OK", style: .Default, handler:nil)
             alertController.addAction(defaultActionYes)
@@ -621,7 +636,32 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         // エラーフラグを返却する.
         return true
     }
-
+    
+    /** 実行中アイテムのキャンセル可否チェック. **/
+    func cancelItemActiveChk() -> DarwinBoolean
+    {
+        
+        // 行動実績テーブルを読み込み、アクティブなアクションを取得する.
+        listActiveAction = []
+        listActiveAction = getT_ActionResultWithActive()
+        
+        // 未実行または実行中のアクション数に合わせ、円グラフの画像、テキストを設定する.
+        if (listActiveAction.count >= 1 &&
+            listActiveAction[0].actStartDate != nil) {
+                
+                // エラーダイアログを表示
+                let alertController = UIAlertController(title: "つぶしてるとちゅうだよ"
+                    , message: "ひまつぶし中のひまはキャンセルできません。", preferredStyle: .Alert)
+                let defaultActionYes = UIAlertAction(title: "OK", style: .Default, handler:nil)
+                alertController.addAction(defaultActionYes)
+                presentViewController(alertController, animated: true, completion: nil)
+                return false
+                
+        }
+        
+        // エラーフラグを返却する.
+        return true
+    }
     
     /** セット済みアイテムの円グラフを再描画する. **/
     func setItemImageReLoad() -> DarwinBoolean
@@ -704,7 +744,7 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         var actionList :[T_ActionResult] = []
         
         // 取得済アイテムテーブルにアクセスし存在しなければfalseを返却する.
-        let tempList :[T_ActionResult] = T_ActionResult.MR_findByAttribute("charaID", withValue: Const.CHARACTER1_ID, andOrderBy: "actStartDate,actEndDate", ascending: true) as! [T_ActionResult];
+        let tempList :[T_ActionResult] = T_ActionResult.MR_findByAttribute("charaID", withValue: Const.CHARACTER1_ID, andOrderBy: "actSetDate,actStartDate,actEndDate", ascending: true) as! [T_ActionResult];
 
         print(actionList.count)
         

@@ -441,6 +441,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             
         // 行動履歴
         case 12: cell.textLabel?.text = listAction[indexPath.row]
+                 cell.textLabel?.font = UIFont(name: "HiraKakuProN-W3", size: 6)
             
         // 行った場所履歴
         case 13: cell.textLabel?.text = listStage[indexPath.row]
@@ -495,7 +496,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         // 返却するリスト
         var listResult : [String] = []
         
-        // ステージマスタを未取得未取得データはマスキングして返却する.
+        // ステージマスタを未取得する.なお未取得データはマスキングして返却する.
         var refKakugenId = -1
         
         // 格言マスタとキーが一致する場合、名称を返却して終了
@@ -545,7 +546,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         // 返却するリスト
         var listResult : [String] = []
         
-        // ステージマスタを未取得未取得データはマスキングして返却する.
+        // ステージマスタを未取得データはマスキングして返却する.
         var refStageId = -1
         
         for mStage in listMStage {

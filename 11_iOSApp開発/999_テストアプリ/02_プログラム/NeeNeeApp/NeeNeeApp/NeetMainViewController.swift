@@ -83,9 +83,22 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         print(NSDate().description, __FUNCTION__, __LINE__)
         super.viewDidLoad()
         
-        //オブジェクトの配置
-        self.createObjInit()
+        // セットアクションによる壁紙とキャラクター動作の設定
+        let activeItemId = self.setStage()
+        let activeItem = Utility.getMItem(activeItemId)
+        var activeStage = [M_Stage]()
         
+        if activeItem.count >= 1 {
+            activeStage = Utility.getMStage(Int(activeItem[0].stageID))
+        }
+
+        //オブジェクトの配置
+        if activeStage.count >= 1 {
+            self.createObjInit(activeStage[0].imageBack)
+        } else {
+            self.createObjInit("")
+        }
+            
         // オブジェクトの制約の設定
         self.objConstraints()
         
@@ -331,30 +344,41 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         self.showPopoverView(self.manuBtn, identifier: "LoginBonusView")
     }
     
-    
-    
     //背景を取得
-    func getBackGroundImage() ->UIImage {
+    func getBackGroundImage(_strImageFileName:String) ->UIImage {
+        
+        var imageBack = ""
         
         //TODO:現在行動中であれば、そのステージの背景を設定
-        let stage = M_Stage.MR_findFirstByAttribute("stageID", withValue: 1)! as M_Stage
-        return Utility.getUncachedImage(named: stage.imageBack)!
+        if _strImageFileName > "" {
+
+            imageBack = _strImageFileName
+            
+        } else {
+
+            let stage = M_Stage.MR_findFirstByAttribute("stageID", withValue: 1)! as M_Stage
+            imageBack = stage.imageBack
+        }
+        
+        return Utility.getUncachedImage(named: imageBack)!
+            
     }
     
     
     //初期表示時のオブジェクトを作成し設置する
-    func createObjInit() {
+    func createObjInit(imageBack:String) {
         
         // 背景設定
         myImageView = UIImageView()
         myImageView.frame.size = CGSizeMake(self.view.bounds.width, self.view.bounds.height)
-        myImageView.image = self.getBackGroundImage()
+        myImageView.image = self.getBackGroundImage(imageBack)
         self.view.addSubview(myImageView)
         
         //キャラクター設定
         // UIImageViewをViewに追加する.
         myCharImageView = UIImageView()
-        myCharImageView.frame.size = CGSizeMake(self.view.bounds.width / 1.4, self.view.bounds.height / 1.8)
+        myCharImageView.frame.size = CGSizeMake(self.view.bounds.width / 2.6
+                                              , self.view.bounds.height / 3.0)
         myCharImageView.center.x = self.view.center.x
         myCharImageView.center.y = self.view.center.y
         myCharImageView.tag = 1
@@ -362,10 +386,6 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         let singleTap = UITapGestureRecognizer(target: self, action:"tapChara:")
         myCharImageView.addGestureRecognizer(singleTap)
         self.view.addSubview(myCharImageView)
-        
-        //TODO:オブジェクトの枠線表示
-        myCharImageView.layer.borderColor = UIColor.redColor().CGColor
-        myCharImageView.layer.borderWidth = 2.0
         
         // フッタのバナーを生成する.
         self.footerBaner = ADBannerView()
@@ -435,6 +455,88 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     func animationStart() {
         print(NSDate().description, __FUNCTION__, __LINE__)
         animeTimer = NSTimer.scheduledTimerWithTimeInterval(0.0, target: self, selector: Selector("randomWalk"), userInfo: nil, repeats: true)
+    }
+    
+    /** アクションセット **/
+    func setStage() -> Int {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        
+        // 行動実績テーブルを取得.
+        let actionList :[T_ActionResult] = T_ActionResult.MR_findByAttribute("charaID", withValue: Const.CHARACTER1_ID, andOrderBy: "actEndDate,actSetDate,actStartDate", ascending: true) as! [T_ActionResult];
+
+        var activeItemId = -1
+        var flgPrevFinish = false
+        var flgFirst = true
+        
+        for action in actionList {
+            
+            // 完了していないアクションのみ対象とする.
+            if action.actEndDate == nil {
+                
+                action.actSetDate != nil ? print("actSetDate" + String(action.actSetDate)) : print("")
+                action.actStartDate != nil ? print("actStartDate" + String(action.actStartDate)) : print("")
+                action.actEndDate != nil ? print("actEndDate" + String(action.actEndDate)) : print("")
+                print(Float(NSDate().timeIntervalSinceDate(action.actSetDate)))
+                print("aaaa")
+                
+                // スタート済のアクションが一定時間経過していたら、エンド時間をセットさせ終了させる.
+                if action.actStartDate != nil &&
+                    Float(NSDate().timeIntervalSinceDate(action.actStartDate))
+                    >= Const.ACTION_END_TIME_INTERVAL {
+
+                        //スタート済のアクションが一定時間経っていたら終了させる.
+                        //スタート時間 + 一定待機時間をエンド時間として算出する.
+                        let calendar = NSCalendar.currentCalendar()
+                        let comp = NSDateComponents()
+                        comp.second = Int(Const.ACTION_END_TIME_INTERVAL)
+                        let endDate = calendar.dateByAddingComponents(comp, toDate: action.actStartDate, options: NSCalendarOptions())
+
+                        //エンド時間を、算出した時間で更新する.
+                        let updPredicate: NSPredicate = NSPredicate(format: "charaID = %@ AND itemID = %@ AND actSetDate = %@", argumentArray:[action.charaID,String(action.itemID),action.actSetDate]);
+                        let updateData = T_ActionResult.MR_findFirstWithPredicate(updPredicate)! as T_ActionResult
+                        updateData.actEndDate = endDate
+                        updateData.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+                        
+                        //アクション終了のフラグを立てる.
+                        flgPrevFinish = true
+                }
+                
+                //（１件目がスタートしていない場合又は前回のアクションが完了済）かつ、
+                //アクションセットしてから一定時間経っているアクションをスタートさせる.
+                else if (flgFirst || flgPrevFinish) && action.actStartDate == nil &&
+                    Float(NSDate().timeIntervalSinceDate(action.actSetDate))
+                    >= Const.ACTION_START_TIME_INTERVAL {
+                        
+                        //セット時間 + 一定待機時間をスタート時間として算出する.
+                        let calendar = NSCalendar.currentCalendar()
+                        let comp = NSDateComponents()
+                        comp.second = Int(Const.ACTION_START_TIME_INTERVAL)
+                        let startDate = calendar.dateByAddingComponents(comp, toDate: action.actSetDate, options: NSCalendarOptions())
+                        
+                        //スタート時間を、算出した時間で更新する.
+                        let updPredicate: NSPredicate = NSPredicate(format: "charaID = %@ AND itemID = %@ AND actSetDate = %@", argumentArray:[action.charaID,String(action.itemID),action.actSetDate]);
+                        let updateData = T_ActionResult.MR_findFirstWithPredicate(updPredicate)! as T_ActionResult
+                        updateData.actStartDate = startDate
+                        updateData.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+
+                        // 実行中のアクションがあるということなので返却するアイテムIDをセットする.
+                        activeItemId = Int(action.itemID)
+
+                }
+                else if action.actStartDate != nil {
+
+                    // 実行中のアクションがあるということなので返却するアイテムIDをセットする.
+                    activeItemId = Int(action.itemID)
+                }
+            }
+            
+            //１件目フラグをおろす.
+            flgFirst = false
+        }
+        
+        // 実行中アクションのアイテムIDを返却する.
+        return activeItemId
+        
     }
 
     

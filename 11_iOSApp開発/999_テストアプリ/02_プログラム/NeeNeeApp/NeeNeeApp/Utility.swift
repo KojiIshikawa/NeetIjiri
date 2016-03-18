@@ -115,6 +115,20 @@ class Utility {
         
         return T_CharaBase.MR_findByAttribute("charaID", withValue: charaId) as! [T_CharaBase];
     }
+    
+    /** アイテム情報の取得 **/
+    class func getMItem(itemId: Int) -> [M_Item]  {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        
+        return M_Item.MR_findByAttribute("itemID", withValue: itemId) as! [M_Item];
+    }
+    
+    /** ステージ情報の取得 **/
+    class func getMStage(stageId: Int) -> [M_Stage]  {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        
+        return M_Stage.MR_findByAttribute("stageID", withValue: stageId) as! [M_Stage];
+    }
 
 }
 

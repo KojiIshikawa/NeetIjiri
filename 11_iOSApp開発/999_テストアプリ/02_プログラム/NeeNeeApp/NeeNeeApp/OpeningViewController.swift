@@ -414,8 +414,8 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
         let initItem2 = T_GetItem.MR_createEntity()! as T_GetItem
         initItem2.charaID = Const.CHARACTER1_ID
         initItem2.itemCount = 3
-        initItem2.itemID = 2
-        initItem1.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+        initItem2.itemID = 4
+        initItem2.managedObjectContext!.MR_saveToPersistentStoreAndWait()
         
         return true
     }

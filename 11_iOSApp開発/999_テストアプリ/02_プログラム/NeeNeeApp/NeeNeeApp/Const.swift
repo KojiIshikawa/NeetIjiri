@@ -28,5 +28,6 @@ class Const {
     static let mySeItemSetPath = NSBundle.mainBundle().pathForResource("se1", ofType:"mp3")
     static let mySeItemSetNGPath = NSBundle.mainBundle().pathForResource("se12", ofType:"mp3")
     static let mySeItemCancelNoPath = NSBundle.mainBundle().pathForResource("se13", ofType:"mp3")
-    
+    static let ACTION_START_TIME_INTERVAL:Float = 60 * 3
+    static let ACTION_END_TIME_INTERVAL:Float = 60 * 5
 }
