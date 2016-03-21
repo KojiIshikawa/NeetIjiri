@@ -48,19 +48,19 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     private let manuBtnNextImage = UIImage(named: "01_01_01.png")
     
     private let manuBtnBackActImage = UIImage(named: "01_02_01.png")
-    private let manuBtnBackInActImage = UIImage(named: "01_02_02.png")
+    //private let manuBtnBackInActImage = UIImage(named: "01_02_02.png")
     
     private let mainBtnActImage = UIImage(named: "01_03_01.png")
-    private let mainBtnInActImage = UIImage(named: "01_03_02.png")
+    //private let mainBtnInActImage = UIImage(named: "01_03_02.png")
     
     private let detailBtnActImage = UIImage(named: "01_04_01.png")
-    private let detailBtnInActImage = UIImage(named: "01_04_02.png")
+    //private let detailBtnInActImage = UIImage(named: "01_04_02.png")
     
     private let shareBtnActImage = UIImage(named: "01_05_01.png")
-    private let shareBtnInActImage = UIImage(named: "01_05_02.png")
+    //private let shareBtnInActImage = UIImage(named: "01_05_02.png")
     
     private let configBtnActImage = UIImage(named: "01_06_01.png")
-    private let configBtnInActImage = UIImage(named: "01_06_02.png")
+    //private let configBtnInActImage = UIImage(named: "01_06_02.png")
 
     //アニメーションタイマー
     private var animeTimer: NSTimer!
@@ -84,21 +84,19 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         super.viewDidLoad()
         
         // セットアクションによる壁紙とキャラクター動作の設定
-        let activeItemId = self.setStage()
+        let activeItemId = self.updateSetAction()
         let activeItem = Utility.getMItem(activeItemId)
         var activeStage = [M_Stage]()
+        var activeAction = [M_Action]()
         
         if activeItem.count >= 1 {
             activeStage = Utility.getMStage(Int(activeItem[0].stageID))
+            activeAction = Utility.getMAction(Int(activeItem[0].stageID),actionId: Int(activeItem[0].actID))
         }
 
         //オブジェクトの配置
-        if activeStage.count >= 1 {
-            self.createObjInit(activeStage[0].imageBack)
-        } else {
-            self.createObjInit("")
-        }
-            
+        self.createObjInit(activeStage, action: activeAction)
+        
         // オブジェクトの制約の設定
         self.objConstraints()
         
@@ -147,7 +145,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
             configBtn.hidden = false
 
             // SEを再生する.
-            Utility.seSoundPlay(Const.mySeYesPath!)
+            Utility.seSoundPlay(Const.mySeYesPath)
             
         } else {
             
@@ -162,7 +160,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
             configBtn.hidden = true
             
             // SEを再生する.
-            Utility.seSoundPlay(Const.mySeNoPath!)
+            Utility.seSoundPlay(Const.mySeNoPath)
         
         }
     }
@@ -171,13 +169,8 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     //Popover表示
     func showPopoverView(sender: AnyObject, identifier:String) {
         let popoverView = self.storyboard!.instantiateViewControllerWithIdentifier(identifier) as UIViewController
-//        popoverView.title = title
         popoverView.modalPresentationStyle = .Popover
-
-        //TODO:端末種類に依存しないサイズ指定を！
-        popoverView.preferredContentSize = CGSizeMake(self.view.bounds.width - 20, self.view.bounds.height - 20)
-        
-        //TODO:独自のpopoverBackGroundViewを作成し追加すれば、吹き出しのデザインも変えられる
+        popoverView.preferredContentSize = self.view.bounds.size
         popoverView.view.backgroundColor = UIColor.clearColor()
         if let presentationController = popoverView.popoverPresentationController {
             presentationController.permittedArrowDirections = .Down
@@ -192,9 +185,6 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     }
     
     func prepareForPopoverPresentation(popoverPresentationController: UIPopoverPresentationController) {
-        
-        
-
         print("prepare for presentation")
     }
     
@@ -227,7 +217,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         print(NSDate().description, __FUNCTION__, __LINE__)
         
         // SEを再生する.
-        Utility.seSoundPlay(Const.mySeYesPath!)
+        Utility.seSoundPlay(Const.mySeYesPath)
         
         //PopOverを表示
         self.showPopoverView(sender, identifier: "ActionSetView")
@@ -239,7 +229,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         print(NSDate().description, __FUNCTION__, __LINE__)
 
         // SEを再生する.
-        Utility.seSoundPlay(Const.mySeYesPath!)
+        Utility.seSoundPlay(Const.mySeYesPath)
         
         //PopOverを表示
         self.showPopoverView(sender, identifier: "ProfileView")
@@ -251,7 +241,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         print(NSDate().description, __FUNCTION__, __LINE__)
         
         // SEを再生する.
-        Utility.seSoundPlay(Const.mySeYesPath!)
+        Utility.seSoundPlay(Const.mySeYesPath)
         
         //PopOverを表示
         self.showPopoverView(sender, identifier: "SnsView")
@@ -263,7 +253,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         print(NSDate().description, __FUNCTION__, __LINE__)
         
         // SEを再生する.
-        Utility.seSoundPlay(Const.mySeYesPath!)
+        Utility.seSoundPlay(Const.mySeYesPath)
         
         //PopOverを表示
         self.showPopoverView(sender, identifier: "SettingView")
@@ -349,7 +339,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         
         var imageBack = ""
         
-        //TODO:現在行動中であれば、そのステージの背景を設定
+        //現在行動中であれば、そのステージの背景を設定
         if _strImageFileName > "" {
 
             imageBack = _strImageFileName
@@ -366,12 +356,12 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     
     
     //初期表示時のオブジェクトを作成し設置する
-    func createObjInit(imageBack:String) {
+    func createObjInit(stage: [M_Stage], action: [M_Action]) {
         
         // 背景設定
         myImageView = UIImageView()
         myImageView.frame.size = CGSizeMake(self.view.bounds.width, self.view.bounds.height)
-        myImageView.image = self.getBackGroundImage(imageBack)
+        myImageView.image = self.getBackGroundImage(stage.count >= 1 ? stage[0].imageBack : "")
         self.view.addSubview(myImageView)
         
         //キャラクター設定
@@ -379,8 +369,12 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         myCharImageView = UIImageView()
         myCharImageView.frame.size = CGSizeMake(self.view.bounds.width / 2.6
                                               , self.view.bounds.height / 3.0)
-        myCharImageView.center.x = self.view.center.x
-        myCharImageView.center.y = self.view.center.y
+        
+        myCharImageView.center.x = CGFloat(Float(self.view.bounds.width)
+                                 * (Float(action.count >= 1 ? action[0].firstX : Const.CHARACTER_DEFAULT_FIRST_X) / 10))
+
+        myCharImageView.center.y = CGFloat(Float(self.view.bounds.height)
+                                 * (Float(action.count >= 1 ? action[0].firstY : Const.CHARACTER_DEFAULT_FIRST_Y) / 10))
         myCharImageView.tag = 1
         myCharImageView.userInteractionEnabled = true
         let singleTap = UITapGestureRecognizer(target: self, action:"tapChara:")
@@ -439,7 +433,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         configBtn.hidden = true
         
         // テーマソングを再生する.
-        Utility.bgmSoundPlay(Const.mySongPath!)
+        Utility.bgmSoundPlay(stage.count >= 1 ? stage[0].bgm : "")
     }
 
     /** バナーが読みこまれた時に呼ばれる **/
@@ -457,8 +451,8 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         animeTimer = NSTimer.scheduledTimerWithTimeInterval(0.0, target: self, selector: Selector("randomWalk"), userInfo: nil, repeats: true)
     }
     
-    /** アクションセット **/
-    func setStage() -> Int {
+    /** セットアクション情報の更新 **/
+    func updateSetAction() -> Int {
         print(NSDate().description, __FUNCTION__, __LINE__)
         
         // 行動実績テーブルを取得.
@@ -904,57 +898,6 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
                 constant: 0
             )]
         )
-        
-                    /**
-        // キャラクターイメージの制約
-        self.view.addConstraints([
-
-            // x座標
-            NSLayoutConstraint(
-                item: self.myCharImageView,
-                attribute:  NSLayoutAttribute.CenterX,
-                relatedBy: .Equal,
-                toItem: self.view,
-                attribute:  NSLayoutAttribute.Left,
-                multiplier: 1.0,
-                constant: 150
-            ),
-            
-            // y座標
-            NSLayoutConstraint(
-                item: self.myCharImageView,
-                attribute: NSLayoutAttribute.CenterY,
-                relatedBy: .Equal,
-                toItem: self.view,
-                attribute:  NSLayoutAttribute.Top,
-                multiplier: 1.0,
-                constant: 300
-            ),
-            
-            // 横幅
-            NSLayoutConstraint(
-                item: self.myCharImageView,
-                attribute: .Width,
-                relatedBy: .Equal,
-                toItem: self.view,
-                attribute: .Width,
-                multiplier: 1.0 / 1.6,
-                constant: 0
-            ),
-            
-            // 縦幅
-            NSLayoutConstraint(
-                item: self.myCharImageView,
-                attribute: .Height,
-                relatedBy: .Equal,
-                toItem: self.view,
-                attribute: .Height,
-                multiplier: 1.0 / 2.2,
-                constant: 0
-            )]
-        )
-**/
-
     }
     
 

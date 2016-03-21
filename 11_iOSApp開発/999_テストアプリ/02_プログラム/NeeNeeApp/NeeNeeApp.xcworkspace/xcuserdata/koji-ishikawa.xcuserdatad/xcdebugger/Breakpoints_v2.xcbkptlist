@@ -58,12 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NeeNeeApp/NeetMainViewController.swift"
-            timestampString = "480008270.296422"
+            timestampString = "480087007.883184"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "480"
-            endingLineNumber = "480"
-            landmarkName = "setStage()"
+            startingLineNumber = "363"
+            endingLineNumber = "363"
+            landmarkName = "createObjInit(_:action:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

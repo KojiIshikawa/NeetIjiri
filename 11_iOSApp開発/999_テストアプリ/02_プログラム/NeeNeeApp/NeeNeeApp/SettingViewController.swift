@@ -429,7 +429,7 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
         print(NSDate().description, __FUNCTION__, __LINE__)
 
         // SEを再生する.
-        Utility.seSoundPlay(Const.mySeYesPath!)
+        Utility.seSoundPlay(Const.mySeYesPath)
 
         // ミュート切り替え
         if bgmVolumeSBar.value == 0.0 {
@@ -463,7 +463,7 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
 
     /** SEミュートボタン押下時の処理 **/
     func tapSeMuteBtn(sender: AnyObject) {
-        Utility.seSoundPlay(Const.mySeYesPath!)
+        Utility.seSoundPlay(Const.mySeYesPath)
         
         if seVolumeSBar.value == 0.0 {
             seVolumeSBar.value = 0.5

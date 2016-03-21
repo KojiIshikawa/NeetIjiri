@@ -10,17 +10,14 @@ import Foundation
 import AVFoundation
 
 class Utility {
+    
     // BGM・SEの再生用オブジェクト
     static private var myAudioPlayer: AVAudioPlayer!
     static private var mySePlayer: AVAudioPlayer!
-
-    
     
     //画像をキャッシュせず読み込むメソッド
     class func getUncachedImage (named name : String) -> UIImage?
     {
-//        print(NSDate().description, __FUNCTION__, __LINE__)
-        
         if let imgPath = NSBundle.mainBundle().pathForResource(name, ofType: nil)
         {
             return UIImage(contentsOfFile: imgPath)
@@ -43,7 +40,13 @@ class Utility {
         
         //再生
         do {
-            myAudioPlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath:bgmPath))
+            //再生中ならストップする.
+            if myAudioPlayer != nil {
+                myAudioPlayer.stop()
+            }
+            
+            myAudioPlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath:NSBundle.mainBundle().pathForResource(bgmPath == "" ? Const.DEFAULT_BGM_PATH : bgmPath, ofType:"mp3")!
+))
             myAudioPlayer.volume = udBGM
             myAudioPlayer.numberOfLoops = -1
             myAudioPlayer.play()
@@ -83,7 +86,7 @@ class Utility {
         
         // SEを再生する.
         do {
-            mySePlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath:sePath))
+            mySePlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath:NSBundle.mainBundle().pathForResource(sePath == "" ? Const.DEFAULT_SE_PATH : sePath, ofType:"mp3")!))
             mySePlayer.volume = udSE * 2
             mySePlayer.play()
             
@@ -130,6 +133,29 @@ class Utility {
         return M_Stage.MR_findByAttribute("stageID", withValue: stageId) as! [M_Stage];
     }
 
+    /** アクション情報の取得 **/
+    class func getMAction(stageId: Int, actionId: Int) -> [M_Action] {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        
+        let actionList = M_Action.MR_findByAttribute("stageID", withValue: stageId) as! [M_Action];
+
+        var resultActionList:[M_Action] = []
+        
+        for action in actionList {
+            
+            // 一致する場合、アイテム情報をセットする.
+            if action.actID == actionId {
+                
+                // アクションを返却する.
+                resultActionList.append(action)
+                return resultActionList
+            }
+            
+        }
+        
+    return resultActionList
+    }
+    
 }
 
 
