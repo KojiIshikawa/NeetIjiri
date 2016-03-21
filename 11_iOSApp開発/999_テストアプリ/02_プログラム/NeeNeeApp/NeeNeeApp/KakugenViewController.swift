@@ -88,6 +88,7 @@ class KakugenViewController: UIViewController {
             insertItem.charaID = Const.CHARACTER1_ID
             insertItem.kakugenID = kakugenList[Int(randInt)].kakugenID
             insertItem.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+            
         }
         
         //格言の改行設定
