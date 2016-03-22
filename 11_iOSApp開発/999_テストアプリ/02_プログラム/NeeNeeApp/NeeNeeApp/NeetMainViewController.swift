@@ -104,6 +104,14 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         self.animationStart()
         
         self.isFirstLoad = true
+        
+        
+        //TODO:複数条件で実行
+        let profileFilter: NSPredicate = NSPredicate(format: "stageID = 1 and actID = 5")
+        let mAction :[M_ActionImage] = M_ActionImage.MR_findAllSortedBy("actID", ascending: true, withPredicate: profileFilter) as! [M_ActionImage];
+        print(mAction[1].imageAct)
+
+        
     }
     
 
