@@ -29,7 +29,7 @@ class LoginBonusViewController: UIViewController {
 
         //背景
         imgViewLogin = UIImageView(frame: self.view.frame)
-        imgViewLogin.image = Utility.getUncachedImage(named: "k_Login.png")
+        imgViewLogin.image = Utility.getUncachedImage(named: "02_07_01.png")
         self.view.addSubview(imgViewLogin)
 
         

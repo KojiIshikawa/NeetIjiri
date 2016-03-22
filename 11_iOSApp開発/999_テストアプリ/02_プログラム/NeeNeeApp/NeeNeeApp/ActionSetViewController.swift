@@ -431,12 +431,62 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
     func objConstraints() {
         print(NSDate().description, __FUNCTION__, __LINE__)
    
+        mainImgView.translatesAutoresizingMaskIntoConstraints = false
         selItemLabel1.translatesAutoresizingMaskIntoConstraints = false
         selItemLabel2.translatesAutoresizingMaskIntoConstraints = false
         selItemLabel3.translatesAutoresizingMaskIntoConstraints = false
         itemCollectionView.translatesAutoresizingMaskIntoConstraints = false
         setItemView.translatesAutoresizingMaskIntoConstraints = false
 
+        
+        // 壁紙の制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.mainImgView,
+                attribute:  NSLayoutAttribute.Right,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.Right,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.mainImgView,
+                attribute: NSLayoutAttribute.Bottom,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.Bottom,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.mainImgView,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Width,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.mainImgView,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Height,
+                multiplier: 1.0,
+                constant: 0
+            )]
+        )
+        
         // セットアイテムメニューの制約
         self.view.addConstraints([
 

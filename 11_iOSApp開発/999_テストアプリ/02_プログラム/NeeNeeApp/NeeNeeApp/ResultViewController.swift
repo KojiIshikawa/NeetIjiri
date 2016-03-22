@@ -34,7 +34,7 @@ class ResultViewController: UIViewController {
         
         //背景
         imgResultView = UIImageView(frame: self.view.frame)
-        imgResultView.image = Utility.getUncachedImage(named: "k_Result.png")
+        imgResultView.image = Utility.getUncachedImage(named: "02_08_01.png")
         self.view.addSubview(imgResultView)
         
         

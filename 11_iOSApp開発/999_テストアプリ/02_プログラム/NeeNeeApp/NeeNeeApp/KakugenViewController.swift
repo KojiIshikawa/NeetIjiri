@@ -25,7 +25,7 @@ class KakugenViewController: UIViewController {
 
         //背景設定
         imgViewKakugen = UIImageView(frame: self.view.frame)
-        imgViewKakugen.image = Utility.getUncachedImage(named: "k_Kakugen.png")
+        imgViewKakugen.image = Utility.getUncachedImage(named: "02_09_01.png")
         self.view.addSubview(imgViewKakugen)
         
         // 格言を表示

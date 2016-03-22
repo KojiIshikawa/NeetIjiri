@@ -17,14 +17,13 @@ class SnsViewController: UIViewController {
     private var shareImgView: UIImageView!
 
     // 画像
-    private let shareViewImage = UIImage(named: "02_03_01.png")
-    private let configViewImage = UIImage(named: "02_04_01.png")
+    private let shareViewImage = UIImage(named: "02_02_01.png")
 
     // オブジェクト
     private var facebookBtn: UIButton!
     private var lineBtn: UIButton!
     private var twitterBtn: UIButton!
-    
+    private var questionBtn: UIButton!
     
     // view ロード完了時
     override func viewDidLoad() {
@@ -38,25 +37,32 @@ class SnsViewController: UIViewController {
         self.view.addSubview(shareImgView)
         
         // FaceBookボタンを生成
-        facebookBtn = UIButton(frame: CGRectMake(20,120,50,50))
+        facebookBtn = UIButton()
         let facebookImage = Utility.getUncachedImage( named: "01_07_01.png")! as UIImage
         facebookBtn.setImage(facebookImage, forState: .Normal)
         facebookBtn.addTarget(self, action: "tapFacebookBtn:", forControlEvents: .TouchUpInside)
         self.view.addSubview(facebookBtn)
         
         // Twitterボタンを生成
-        twitterBtn = UIButton(frame: CGRectMake(100,120,50,50))
+        twitterBtn = UIButton()
         let twitterImage = Utility.getUncachedImage( named: "01_08_01.png")! as UIImage
         twitterBtn.setImage(twitterImage, forState: .Normal)
         twitterBtn.addTarget(self, action: "tapTwitterBtn:", forControlEvents: .TouchUpInside)
         self.view.addSubview(twitterBtn)
         
         // LINEボタンを生成
-        lineBtn = UIButton(frame: CGRectMake(180,120,50,50))
+        lineBtn = UIButton()
         let lineImage = Utility.getUncachedImage( named: "01_09_01.png")! as UIImage
         lineBtn.setImage(lineImage, forState: .Normal)
         lineBtn.addTarget(self, action: "tapLineBtn:", forControlEvents: .TouchUpInside)
         self.view.addSubview(lineBtn)
+
+        // ？ボタンを生成
+        questionBtn = UIButton()
+        let questionImage = Utility.getUncachedImage( named: "01_12_01.png")! as UIImage
+        questionBtn.setImage(questionImage, forState: .Normal)
+        questionBtn.addTarget(self, action: "tapQuestionBtn:", forControlEvents: .TouchUpInside)
+        self.view.addSubview(questionBtn)
         
         // オブジェクトの制約の設定
         self.objConstraints()
@@ -111,14 +117,68 @@ class SnsViewController: UIViewController {
         self.presentViewController(cv, animated: true, completion:nil )
     }
 
+    //？ボタン押下時の処理
+    func tapQuestionBtn(sender: AnyObject) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+    }
     
     /** 全オブジェクトの制約設定 **/
     func objConstraints() {
         print(NSDate().description, __FUNCTION__, __LINE__)
         
+        shareImgView.translatesAutoresizingMaskIntoConstraints = false
         facebookBtn.translatesAutoresizingMaskIntoConstraints = false
         twitterBtn.translatesAutoresizingMaskIntoConstraints = false
         lineBtn.translatesAutoresizingMaskIntoConstraints = false
+        questionBtn.translatesAutoresizingMaskIntoConstraints = false
+        
+        // 壁紙の制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.shareImgView,
+                attribute:  NSLayoutAttribute.Right,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.Right,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.shareImgView,
+                attribute: NSLayoutAttribute.Bottom,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.Bottom,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.shareImgView,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Width,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.shareImgView,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Height,
+                multiplier: 1.0,
+                constant: 0
+            )]
+        )
         
         // facebookボタンの制約
         self.view.addConstraints([
@@ -216,7 +276,6 @@ class SnsViewController: UIViewController {
             )]
         )
         
-        
         // lineボタンの制約
         self.view.addConstraints([
             
@@ -256,6 +315,54 @@ class SnsViewController: UIViewController {
             // 縦幅
             NSLayoutConstraint(
                 item: self.lineBtn,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Height,
+                multiplier: 1.0 / 4.0,
+                constant: 0
+            )]
+        )
+        
+        // ？ボタンの制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.questionBtn,
+                attribute:  NSLayoutAttribute.Left,
+                relatedBy: .Equal,
+                toItem: self.twitterBtn,
+                attribute:  NSLayoutAttribute.Left,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.questionBtn,
+                attribute: NSLayoutAttribute.Top,
+                relatedBy: .Equal,
+                toItem: self.twitterBtn,
+                attribute:  NSLayoutAttribute.Bottom,
+                multiplier: 1.0,
+                constant: 20
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.questionBtn,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Width,
+                multiplier: 1.0 / 3.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.questionBtn,
                 attribute: .Height,
                 relatedBy: .Equal,
                 toItem: self.view,

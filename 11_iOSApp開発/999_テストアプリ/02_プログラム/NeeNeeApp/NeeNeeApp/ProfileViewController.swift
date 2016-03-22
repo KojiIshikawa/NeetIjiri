@@ -13,7 +13,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
 
     // 履歴書メニューのオブジェクト
     private var detailImgView: UIImageView!
-    private let detailViewImage = UIImage(named: "02_02_01.png")
+    private let detailViewImage = UIImage(named: "02_06_01.png")
 
     // 履歴書に表示する項目のオブジェクト
     private var nameDataLabel: UILabel!
@@ -110,12 +110,61 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     func objConstraints() {
         print(NSDate().description, __FUNCTION__, __LINE__)
         
+        detailImgView.translatesAutoresizingMaskIntoConstraints = false
         nameDataLabel.translatesAutoresizingMaskIntoConstraints = false
         birthDataLabel.translatesAutoresizingMaskIntoConstraints = false
         positionDataLabel.translatesAutoresizingMaskIntoConstraints = false
         tableViewKakugenHistory.translatesAutoresizingMaskIntoConstraints = false
         tableViewActionHistory.translatesAutoresizingMaskIntoConstraints = false
         tableViewCompHistory.translatesAutoresizingMaskIntoConstraints = false
+        
+        // 壁紙の制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.detailImgView,
+                attribute:  NSLayoutAttribute.Right,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.Right,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.detailImgView,
+                attribute: NSLayoutAttribute.Bottom,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.Bottom,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.detailImgView,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Width,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.detailImgView,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Height,
+                multiplier: 1.0,
+                constant: 0
+            )]
+        )
         
         // 名前の制約
         self.view.addConstraints([
