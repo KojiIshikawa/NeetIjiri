@@ -319,16 +319,15 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
 //            self.requestInterstitialAdPresentation()
 //
 //            self.showPopoverView(self.manuBtn, identifier: "KakugenView")
-//            
 //        })
-//        
+//
 //        let defaultActionNo = UIAlertAction(title: "表示しない", style: .Default, handler: nil)
 //        alertController.addAction(defaultActionYes)
 //        alertController.addAction(defaultActionNo)
 //
 //        presentViewController(alertController, animated: true, completion: nil)
 
-        self.showPopoverView(self.manuBtn, identifier: "KakugenView")
+//        self.showPopoverView(self.manuBtn, identifier: "KakugenView")
 
         
     }
