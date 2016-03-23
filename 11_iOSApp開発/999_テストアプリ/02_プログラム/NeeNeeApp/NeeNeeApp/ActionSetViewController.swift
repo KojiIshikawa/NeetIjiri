@@ -31,7 +31,6 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
     
     //コレクションビューにセットするアイテムリスト
     private var itemList: [Dictionary <String,String>] = []
-    private var itemListIdx: Int = 0
     private var itemListIdxPath: Int = -1
     
     //取得済みセットアクションリスト
@@ -403,11 +402,8 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! itemCell
         
         // セルの情報を設定する.
-        cell._name.text = itemList[itemListIdx]["itemName"]! + " ×" + itemList[itemListIdx]["itemCountValue"]!
-        cell._img.image = self.getUncachedImage( named: itemList[itemListIdx]["imageItem"]!)
-        
-        // アイテムリストのインデックスをカウントアップする.
-        itemListIdx += 1
+        cell._name.text = itemList[indexPath.row]["itemName"]! + " ×" + itemList[indexPath.row]["itemCountValue"]!
+        cell._img.image = self.getUncachedImage( named: itemList[indexPath.row]["imageItem"]!)
         
         // セルを返却する.
         return cell
@@ -719,7 +715,6 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
     
         // アイテムリストを取得し、メンバ変数にセットする.
         itemList = getT_GetItem()
-        itemListIdx = 0
         
         // コレクションビューをリロードする.
         itemCollectionView.reloadData()

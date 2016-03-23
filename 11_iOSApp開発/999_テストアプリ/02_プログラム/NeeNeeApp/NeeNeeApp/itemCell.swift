@@ -20,7 +20,8 @@ class itemCell: UICollectionViewCell {
         _img = UIImageView(frame: CGRectMake(0,0,100,100))
         _name = UILabel()
         _name.sizeToFit()
-        _name.font = UIFont(name: "HiraKakuProN-W3", size: 8)
+        _name.font = UIFont(name: "HiraMinProN-W6", size: 8)
+        //_name.textColor = UIColor.redColor()
         
         self.addSubview(_img)
         self.addSubview(_name)
@@ -33,23 +34,23 @@ class itemCell: UICollectionViewCell {
             // x座標
             NSLayoutConstraint(
                 item: self._name,
-                attribute:  NSLayoutAttribute.Right,
+                attribute:  NSLayoutAttribute.CenterX,
                 relatedBy: .Equal,
                 toItem: self,
-                attribute:  NSLayoutAttribute.Right,
+                attribute:  NSLayoutAttribute.CenterX,
                 multiplier: 1.0,
-                constant: -10
+                constant: 0
             ),
             
             // y座標
             NSLayoutConstraint(
                 item: self._name,
-                attribute: NSLayoutAttribute.Bottom,
+                attribute: NSLayoutAttribute.CenterY,
                 relatedBy: .Equal,
                 toItem: self,
-                attribute:  NSLayoutAttribute.Bottom,
+                attribute:  NSLayoutAttribute.CenterY,
                 multiplier: 1.0,
-                constant: -10
+                constant: 20
             )
             
         ])

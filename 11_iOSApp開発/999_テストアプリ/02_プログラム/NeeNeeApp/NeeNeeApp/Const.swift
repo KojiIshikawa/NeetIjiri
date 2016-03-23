@@ -20,7 +20,7 @@ class Const {
     static let TEST_NAME = ""
     static let CHARACTER1_ID = 1
     static let QUESTION_TEXT = "？？？？？？？？？？"
-    static let DEFAULT_BGM_PATH = "暇で忙しい"
+    static let DEFAULT_BGM_PATH = "落ち着くところ"
     static let DEFAULT_SE_PATH = "se1"
     static let myOpeningPath = "start data config"
     static let mySeStartPath = "se5"

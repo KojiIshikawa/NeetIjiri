@@ -19,6 +19,9 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
     private let bgmViewImage = UIImage(named: "08_01_01.png")
     private let seViewImage = UIImage(named: "08_02_01.png")
     private let muteViewImage = UIImage(named: "01_10_01.png")
+    private let tumbViewImage = UIImage(named: "07_01_01.png")
+    private let minBarViewImage = UIImage(named: "07_02_01.png")
+    private let maxBarViewImage = UIImage(named: "07_02_02.png")
     
     // 設定メニューのオブジェクト
     private var bgmMuteBtn: UIButton!
@@ -45,8 +48,10 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
         
         // BGMのスライドバーを生成
         bgmVolumeSBar = UISlider()
+        bgmVolumeSBar.setThumbImage(tumbViewImage, forState: .Normal)
+        bgmVolumeSBar.setMinimumTrackImage(minBarViewImage, forState: .Normal)
+        bgmVolumeSBar.setMaximumTrackImage(maxBarViewImage, forState: .Normal)
         bgmVolumeSBar.addTarget(self, action: "slideBgmVolume:", forControlEvents: .TouchUpInside)
-        
         
         // BGMのミュートボタンを生成
         bgmMuteBtn = UIButton()
@@ -61,6 +66,9 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
         
         // SEのスライドバーを生成
         seVolumeSBar = UISlider()
+        seVolumeSBar.setThumbImage(tumbViewImage, forState: .Normal)
+        seVolumeSBar.setMinimumTrackImage(minBarViewImage, forState: .Normal)
+        seVolumeSBar.setMaximumTrackImage(maxBarViewImage, forState: .Normal)
         seVolumeSBar.addTarget(self, action: "slideSeVolume:", forControlEvents: .TouchUpInside)
         
         

@@ -24,7 +24,12 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
     
     // 壁紙オブジェクト
     private var myImageView: UIImageView!
+    private var titleImageView: UIImageView!
 
+    // ラベルオブジェクト
+    private var nameLabel: UILabel!
+    private var birthLabel: UILabel!
+    
     // 名前入力テキスト
     private var nameText: UITextField!
     
@@ -34,7 +39,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
     // スタートボタン
     private var startBtn: UIButton!
     
-    // メニューボタンの画像設定
+    // 画像設定
     private let startBtnImage = UIImage(named: "01_11_01.png")
     
     required init(coder aDecoder: NSCoder){
@@ -136,6 +141,24 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
         myImageView = UIImageView(frame: CGRectMake(0,0,self.view.bounds.width,self.view.bounds.height))
         myImageView.image = self.getUncachedImage(named:"03_27_01.png")
         self.view.addSubview(myImageView)
+
+        // ラベル設定
+        nameLabel = UILabel()
+        nameLabel.text = "　　　なまえ"
+        nameLabel.textColor = UIColor.whiteColor()
+        nameLabel.font = UIFont(name: "HiraKakuProN-W3", size: 12)
+        self.view.addSubview(nameLabel)
+        
+        birthLabel = UILabel()
+        birthLabel.text = "たんじょうび"
+        birthLabel.textColor = UIColor.whiteColor()
+        birthLabel.font = UIFont(name: "HiraKakuProN-W3", size: 12)
+        self.view.addSubview(birthLabel)
+        
+        // タイトル設定
+        titleImageView = UIImageView(frame: CGRectMake(0,0,self.view.bounds.width,self.view.bounds.height))
+        titleImageView.image = self.getUncachedImage(named:"08_03_01.png")
+        self.view.addSubview(titleImageView)
         
         // フッタのバナーを生成する.
         self.footerBaner = ADBannerView()
@@ -171,16 +194,19 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
     func objConstraints() {
         print(NSDate().description, __FUNCTION__, __LINE__)
         
+        titleImageView.translatesAutoresizingMaskIntoConstraints = false
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
         nameText.translatesAutoresizingMaskIntoConstraints = false
+        birthLabel.translatesAutoresizingMaskIntoConstraints = false
         birthDatePicker.translatesAutoresizingMaskIntoConstraints = false
         startBtn.translatesAutoresizingMaskIntoConstraints = false
         
-        // 名前テキストボックスの制約
+        // タイトルイメージの制約
         self.view.addConstraints([
             
             // x座標
             NSLayoutConstraint(
-                item: self.nameText,
+                item: self.titleImageView,
                 attribute:  NSLayoutAttribute.CenterX,
                 relatedBy: .Equal,
                 toItem: self.view,
@@ -191,13 +217,108 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
             
             // y座標
             NSLayoutConstraint(
-                item: self.nameText,
+                item: self.titleImageView,
                 attribute: NSLayoutAttribute.CenterY,
                 relatedBy: .Equal,
                 toItem: self.view,
                 attribute:  NSLayoutAttribute.CenterY,
                 multiplier: 1.0,
-                constant: 60
+                constant: -60
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.titleImageView,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Width,
+                multiplier: 1.0 / 1.6,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.titleImageView,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Height,
+                multiplier: 1.0 / 6.0,
+                constant: 0
+            )]
+        )
+        
+        // 名前ラベルの制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.nameLabel,
+                attribute:  NSLayoutAttribute.Left,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.Left,
+                multiplier: 1.0,
+                constant: 20
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.nameLabel,
+                attribute: NSLayoutAttribute.Top,
+                relatedBy: .Equal,
+                toItem: self.titleImageView,
+                attribute:  NSLayoutAttribute.Bottom,
+                multiplier: 1.0,
+                constant: 20
+            ),
+            // 横幅
+            NSLayoutConstraint(
+                item: self.nameLabel,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Width,
+                multiplier: 1.0 / 5.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.nameLabel,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Height,
+                multiplier: 1.0 / 10.0,
+                constant: 0
+            )]
+        )
+        
+        // 名前テキストボックスの制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.nameText,
+                attribute:  NSLayoutAttribute.Left,
+                relatedBy: .Equal,
+                toItem: self.nameLabel,
+                attribute:  NSLayoutAttribute.Right,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.nameText,
+                attribute: NSLayoutAttribute.CenterY,
+                relatedBy: .Equal,
+                toItem: self.nameLabel,
+                attribute:  NSLayoutAttribute.CenterY,
+                multiplier: 1.0,
+                constant: 0
             ),
             
             // 横幅
@@ -222,17 +343,64 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
                 constant: 0
             )]
         )
+     
+        // 誕生日ラベルの制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.birthLabel,
+                attribute:  NSLayoutAttribute.Left,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.Left,
+                multiplier: 1.0,
+                constant: 20
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.birthLabel,
+                attribute: NSLayoutAttribute.Top,
+                relatedBy: .Equal,
+                toItem: self.nameLabel,
+                attribute:  NSLayoutAttribute.Bottom,
+                multiplier: 1.0,
+                constant: 20
+            ),
+            // 横幅
+            NSLayoutConstraint(
+                item: self.birthLabel,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Width,
+                multiplier: 1.0 / 5.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.birthLabel,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Height,
+                multiplier: 1.0 / 10.0,
+                constant: 0
+            )]
+        )
         
-        // 生年月日の制約
+        // 誕生日デートピッカーの制約
         self.view.addConstraints([
             
             // x座標
             NSLayoutConstraint(
                 item: self.birthDatePicker,
-                attribute:  NSLayoutAttribute.CenterX,
+                attribute:  NSLayoutAttribute.Left,
                 relatedBy: .Equal,
-                toItem: self.nameText,
-                attribute:  NSLayoutAttribute.CenterX,
+                toItem: self.nameLabel,
+                attribute:  NSLayoutAttribute.Right,
                 multiplier: 1.0,
                 constant: 0
             ),
@@ -242,10 +410,10 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
                 item: self.birthDatePicker,
                 attribute: NSLayoutAttribute.CenterY,
                 relatedBy: .Equal,
-                toItem: self.nameText,
-                attribute:  NSLayoutAttribute.Bottom,
+                toItem: self.birthLabel,
+                attribute:  NSLayoutAttribute.CenterY,
                 multiplier: 1.0,
-                constant: 20
+                constant: 0
             ),
             
             // 横幅
@@ -255,7 +423,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
                 relatedBy: .Equal,
                 toItem: self.view,
                 attribute: .Width,
-                multiplier: 1.0/1.2,
+                multiplier: 1.0/1.6,
                 constant: 0
             ),
             
