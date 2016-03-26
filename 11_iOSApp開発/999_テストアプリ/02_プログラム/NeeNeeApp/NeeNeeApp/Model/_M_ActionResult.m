@@ -6,6 +6,7 @@
 const struct M_ActionResultAttributes M_ActionResultAttributes = {
 	.itemID = @"itemID",
 	.message = @"message",
+	.rankKBN = @"rankKBN",
 	.resPer = @"resPer",
 	.resultID = @"resultID",
 };
@@ -76,6 +77,8 @@ const struct M_ActionResultAttributes M_ActionResultAttributes = {
 }
 
 @dynamic message;
+
+@dynamic rankKBN;
 
 @dynamic resPer;
 

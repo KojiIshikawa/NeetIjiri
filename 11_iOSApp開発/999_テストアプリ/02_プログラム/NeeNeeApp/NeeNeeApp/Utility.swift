@@ -133,28 +133,66 @@ class Utility {
         return M_Stage.MR_findByAttribute("stageID", withValue: stageId) as! [M_Stage];
     }
 
-    /** アクション情報の取得 **/
-    class func getMAction(stageId: Int, actionId: Int) -> [M_Action] {
+    
+    class func getRankName(rankKBN: String) -> String  {
         print(NSDate().description, __FUNCTION__, __LINE__)
-        
-        let actionList = M_Action.MR_findByAttribute("stageID", withValue: stageId) as! [M_Action];
 
-        var resultActionList:[M_Action] = []
+        var ret = ""
         
-        for action in actionList {
+        switch rankKBN {
+        case "S":
+            ret = "大成功！\nひまゲット率２倍！"
             
-            // 一致する場合、アイテム情報をセットする.
-            if action.actID == actionId {
-                
-                // アクションを返却する.
-                resultActionList.append(action)
-                return resultActionList
-            }
+        case "A":
+            ret = "大成功！\nひまゲット率１．５倍！"
             
+        case "B":
+            ret = "成功"
+            
+        case "C":
+            ret = "普通"
+            
+        case "D":
+            ret = "失敗"
+            
+        case "E":
+            ret = "大失敗"
+            
+        default:
+            ret = "失敗"
         }
         
-    return resultActionList
+        return ret
     }
+    
+    
+    
+    
+    
+    
+    /** アクション情報の取得 **/
+    //TODO:Actionマスタ統合対応　ロジックを確認し不要なら削除してください。
+//    class func getMAction(stageId: Int, actionId: Int) -> [M_Action] {
+//        print(NSDate().description, __FUNCTION__, __LINE__)
+//        
+//        let actionList = M_Action.MR_findByAttribute("stageID", withValue: stageId) as! [M_Action];
+//
+//        var resultActionList:[M_Action] = []
+//        
+//        for action in actionList {
+//            
+//            // 一致する場合、アイテム情報をセットする.
+//            if action.actID == actionId {
+//                
+//                // アクションを返却する.
+//                resultActionList.append(action)
+//                return resultActionList
+//            }
+//            
+//        }
+//        
+//    return resultActionList
+//    }
     
 }
 

@@ -10,8 +10,6 @@
 		564CDF907C4EC18FA819679E /* libPods-NeeNeeApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4EB1D06214EC164462ADCDD /* libPods-NeeNeeApp.a */; };
 		AE029E551C78522600BDD370 /* _M_ActionImage.h in Headers */ = {isa = PBXBuildFile; fileRef = AE029E4F1C78522600BDD370 /* _M_ActionImage.h */; };
 		AE029E561C78522600BDD370 /* _M_ActionImage.m in Sources */ = {isa = PBXBuildFile; fileRef = AE029E501C78522600BDD370 /* _M_ActionImage.m */; };
-		AE029E571C78522600BDD370 /* M_Action.h in Headers */ = {isa = PBXBuildFile; fileRef = AE029E511C78522600BDD370 /* M_Action.h */; };
-		AE029E581C78522600BDD370 /* M_Action.m in Sources */ = {isa = PBXBuildFile; fileRef = AE029E521C78522600BDD370 /* M_Action.m */; };
 		AE029E591C78522600BDD370 /* M_ActionImage.h in Headers */ = {isa = PBXBuildFile; fileRef = AE029E531C78522600BDD370 /* M_ActionImage.h */; };
 		AE029E5A1C78522600BDD370 /* M_ActionImage.m in Sources */ = {isa = PBXBuildFile; fileRef = AE029E541C78522600BDD370 /* M_ActionImage.m */; };
 		AE029E5F1C78546E00BDD370 /* _M_ActionResult.h in Headers */ = {isa = PBXBuildFile; fileRef = AE029E5B1C78546E00BDD370 /* _M_ActionResult.h */; };
@@ -24,8 +22,6 @@
 		AE0D3F5D1C6C58550015F479 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D3F5C1C6C58550015F479 /* ProfileViewController.swift */; };
 		AE0D3F601C6C6DB40015F479 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D3F5F1C6C6DB40015F479 /* Utility.swift */; };
 		AE0D3F641C6CB8EB0015F479 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D3F631C6CB8EB0015F479 /* ResultViewController.swift */; };
-		AE0D3F671C6CD80D0015F479 /* _M_Action.h in Headers */ = {isa = PBXBuildFile; fileRef = AE0D3F651C6CD80D0015F479 /* _M_Action.h */; };
-		AE0D3F681C6CD80D0015F479 /* _M_Action.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0D3F661C6CD80D0015F479 /* _M_Action.m */; };
 		AE0D3F6A1C6CDA700015F479 /* KakugenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D3F691C6CDA700015F479 /* KakugenViewController.swift */; };
 		AE0D3F6C1C6CDAB30015F479 /* LoginBonusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D3F6B1C6CDAB30015F479 /* LoginBonusViewController.swift */; };
 		AE8E93961C5DE80D0031BF79 /* NeetMaster.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = AE8E93931C5DE80D0031BF79 /* NeetMaster.sqlite */; };
@@ -94,8 +90,6 @@
 		AEFCBC991C68DD4B000F5751 /* _M_Kakugen.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCBC611C68DD4B000F5751 /* _M_Kakugen.m */; };
 		AEFCBC9A1C68DD4B000F5751 /* _M_Okan.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFCBC621C68DD4B000F5751 /* _M_Okan.h */; };
 		AEFCBC9B1C68DD4B000F5751 /* _M_Okan.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCBC631C68DD4B000F5751 /* _M_Okan.m */; };
-		AEFCBC9C1C68DD4B000F5751 /* _M_ResultAction.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFCBC641C68DD4B000F5751 /* _M_ResultAction.h */; };
-		AEFCBC9D1C68DD4B000F5751 /* _M_ResultAction.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCBC651C68DD4B000F5751 /* _M_ResultAction.m */; };
 		AEFCBC9E1C68DD4B000F5751 /* _M_Stage.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFCBC661C68DD4B000F5751 /* _M_Stage.h */; };
 		AEFCBC9F1C68DD4B000F5751 /* _M_Stage.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCBC671C68DD4B000F5751 /* _M_Stage.m */; };
 		AEFCBCA01C68DD4B000F5751 /* _T_ActionResult.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFCBC681C68DD4B000F5751 /* _T_ActionResult.h */; };
@@ -122,8 +116,6 @@
 		AEFCBCB51C68DD4B000F5751 /* M_Kakugen.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCBC7D1C68DD4B000F5751 /* M_Kakugen.m */; };
 		AEFCBCB61C68DD4B000F5751 /* M_Okan.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFCBC7E1C68DD4B000F5751 /* M_Okan.h */; };
 		AEFCBCB71C68DD4B000F5751 /* M_Okan.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCBC7F1C68DD4B000F5751 /* M_Okan.m */; };
-		AEFCBCB81C68DD4B000F5751 /* M_ResultAction.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFCBC801C68DD4B000F5751 /* M_ResultAction.h */; };
-		AEFCBCB91C68DD4B000F5751 /* M_ResultAction.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCBC811C68DD4B000F5751 /* M_ResultAction.m */; };
 		AEFCBCBA1C68DD4B000F5751 /* M_Stage.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFCBC821C68DD4B000F5751 /* M_Stage.h */; };
 		AEFCBCBB1C68DD4B000F5751 /* M_Stage.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFCBC831C68DD4B000F5751 /* M_Stage.m */; };
 		AEFCBCBC1C68DD4B000F5751 /* T_ActionResult.h in Headers */ = {isa = PBXBuildFile; fileRef = AEFCBC841C68DD4B000F5751 /* T_ActionResult.h */; };
@@ -224,8 +216,6 @@
 		76D912C337F465574C4CC36B /* Pods-NeeNeeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NeeNeeApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-NeeNeeApp/Pods-NeeNeeApp.release.xcconfig"; sourceTree = "<group>"; };
 		AE029E4F1C78522600BDD370 /* _M_ActionImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _M_ActionImage.h; sourceTree = "<group>"; };
 		AE029E501C78522600BDD370 /* _M_ActionImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _M_ActionImage.m; sourceTree = "<group>"; };
-		AE029E511C78522600BDD370 /* M_Action.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M_Action.h; sourceTree = "<group>"; };
-		AE029E521C78522600BDD370 /* M_Action.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M_Action.m; sourceTree = "<group>"; };
 		AE029E531C78522600BDD370 /* M_ActionImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M_ActionImage.h; sourceTree = "<group>"; };
 		AE029E541C78522600BDD370 /* M_ActionImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M_ActionImage.m; sourceTree = "<group>"; };
 		AE029E5B1C78546E00BDD370 /* _M_ActionResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _M_ActionResult.h; sourceTree = "<group>"; };
@@ -238,8 +228,6 @@
 		AE0D3F5C1C6C58550015F479 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		AE0D3F5F1C6C6DB40015F479 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		AE0D3F631C6CB8EB0015F479 /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
-		AE0D3F651C6CD80D0015F479 /* _M_Action.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _M_Action.h; sourceTree = "<group>"; };
-		AE0D3F661C6CD80D0015F479 /* _M_Action.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _M_Action.m; sourceTree = "<group>"; };
 		AE0D3F691C6CDA700015F479 /* KakugenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KakugenViewController.swift; sourceTree = "<group>"; };
 		AE0D3F6B1C6CDAB30015F479 /* LoginBonusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginBonusViewController.swift; sourceTree = "<group>"; };
 		AE8E93931C5DE80D0031BF79 /* NeetMaster.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = NeetMaster.sqlite; sourceTree = "<group>"; };
@@ -309,8 +297,6 @@
 		AEFCBC611C68DD4B000F5751 /* _M_Kakugen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _M_Kakugen.m; sourceTree = "<group>"; };
 		AEFCBC621C68DD4B000F5751 /* _M_Okan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _M_Okan.h; sourceTree = "<group>"; };
 		AEFCBC631C68DD4B000F5751 /* _M_Okan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _M_Okan.m; sourceTree = "<group>"; };
-		AEFCBC641C68DD4B000F5751 /* _M_ResultAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _M_ResultAction.h; sourceTree = "<group>"; };
-		AEFCBC651C68DD4B000F5751 /* _M_ResultAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _M_ResultAction.m; sourceTree = "<group>"; };
 		AEFCBC661C68DD4B000F5751 /* _M_Stage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _M_Stage.h; sourceTree = "<group>"; };
 		AEFCBC671C68DD4B000F5751 /* _M_Stage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _M_Stage.m; sourceTree = "<group>"; };
 		AEFCBC681C68DD4B000F5751 /* _T_ActionResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _T_ActionResult.h; sourceTree = "<group>"; };
@@ -337,8 +323,6 @@
 		AEFCBC7D1C68DD4B000F5751 /* M_Kakugen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M_Kakugen.m; sourceTree = "<group>"; };
 		AEFCBC7E1C68DD4B000F5751 /* M_Okan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M_Okan.h; sourceTree = "<group>"; };
 		AEFCBC7F1C68DD4B000F5751 /* M_Okan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M_Okan.m; sourceTree = "<group>"; };
-		AEFCBC801C68DD4B000F5751 /* M_ResultAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M_ResultAction.h; sourceTree = "<group>"; };
-		AEFCBC811C68DD4B000F5751 /* M_ResultAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M_ResultAction.m; sourceTree = "<group>"; };
 		AEFCBC821C68DD4B000F5751 /* M_Stage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M_Stage.h; sourceTree = "<group>"; };
 		AEFCBC831C68DD4B000F5751 /* M_Stage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M_Stage.m; sourceTree = "<group>"; };
 		AEFCBC841C68DD4B000F5751 /* T_ActionResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = T_ActionResult.h; sourceTree = "<group>"; };
@@ -615,12 +599,8 @@
 				AE029E5E1C78546E00BDD370 /* M_ActionResult.m */,
 				AE029E4F1C78522600BDD370 /* _M_ActionImage.h */,
 				AE029E501C78522600BDD370 /* _M_ActionImage.m */,
-				AE029E511C78522600BDD370 /* M_Action.h */,
-				AE029E521C78522600BDD370 /* M_Action.m */,
 				AE029E531C78522600BDD370 /* M_ActionImage.h */,
 				AE029E541C78522600BDD370 /* M_ActionImage.m */,
-				AE0D3F651C6CD80D0015F479 /* _M_Action.h */,
-				AE0D3F661C6CD80D0015F479 /* _M_Action.m */,
 				AEFCBC5A1C68DD4B000F5751 /* _M_DropItem.h */,
 				AEFCBC5B1C68DD4B000F5751 /* _M_DropItem.m */,
 				AEFCBC5C1C68DD4B000F5751 /* _M_Item.h */,
@@ -631,8 +611,6 @@
 				AEFCBC611C68DD4B000F5751 /* _M_Kakugen.m */,
 				AEFCBC621C68DD4B000F5751 /* _M_Okan.h */,
 				AEFCBC631C68DD4B000F5751 /* _M_Okan.m */,
-				AEFCBC641C68DD4B000F5751 /* _M_ResultAction.h */,
-				AEFCBC651C68DD4B000F5751 /* _M_ResultAction.m */,
 				AEFCBC661C68DD4B000F5751 /* _M_Stage.h */,
 				AEFCBC671C68DD4B000F5751 /* _M_Stage.m */,
 				AEFCBC681C68DD4B000F5751 /* _T_ActionResult.h */,
@@ -659,8 +637,6 @@
 				AEFCBC7D1C68DD4B000F5751 /* M_Kakugen.m */,
 				AEFCBC7E1C68DD4B000F5751 /* M_Okan.h */,
 				AEFCBC7F1C68DD4B000F5751 /* M_Okan.m */,
-				AEFCBC801C68DD4B000F5751 /* M_ResultAction.h */,
-				AEFCBC811C68DD4B000F5751 /* M_ResultAction.m */,
 				AEFCBC821C68DD4B000F5751 /* M_Stage.h */,
 				AEFCBC831C68DD4B000F5751 /* M_Stage.m */,
 				AEFCBC841C68DD4B000F5751 /* T_ActionResult.h */,
@@ -778,13 +754,10 @@
 				AEFCBCBA1C68DD4B000F5751 /* M_Stage.h in Headers */,
 				AE029E611C78546E00BDD370 /* M_ActionResult.h in Headers */,
 				AEFCBCB61C68DD4B000F5751 /* M_Okan.h in Headers */,
-				AE0D3F671C6CD80D0015F479 /* _M_Action.h in Headers */,
 				AEFCBCC61C68DD4B000F5751 /* T_RefKakugen.h in Headers */,
 				AEFCBCAE1C68DD4B000F5751 /* M_DropItem.h in Headers */,
 				AEFCBCC41C68DD4B000F5751 /* T_RefJob.h in Headers */,
-				AE029E571C78522600BDD370 /* M_Action.h in Headers */,
 				AE029E5F1C78546E00BDD370 /* _M_ActionResult.h in Headers */,
-				AEFCBC9C1C68DD4B000F5751 /* _M_ResultAction.h in Headers */,
 				AEFCBCC21C68DD4B000F5751 /* T_RefItem.h in Headers */,
 				AEFCBCA21C68DD4B000F5751 /* _T_CharaBase.h in Headers */,
 				AEFCBCB21C68DD4B000F5751 /* M_Job.h in Headers */,
@@ -792,7 +765,6 @@
 				AEFCBCC81C68DD4B000F5751 /* T_RefStage.h in Headers */,
 				AEFCBC9A1C68DD4B000F5751 /* _M_Okan.h in Headers */,
 				AEFCBCBC1C68DD4B000F5751 /* T_ActionResult.h in Headers */,
-				AEFCBCB81C68DD4B000F5751 /* M_ResultAction.h in Headers */,
 				AEFCBC981C68DD4B000F5751 /* _M_Kakugen.h in Headers */,
 				AE029E551C78522600BDD370 /* _M_ActionImage.h in Headers */,
 				AEFCBC921C68DD4B000F5751 /* _M_DropItem.h in Headers */,
@@ -1107,10 +1079,8 @@
 				AE029E5A1C78522600BDD370 /* M_ActionImage.m in Sources */,
 				AE0D3F591C6C58170015F479 /* SnsViewController.swift in Sources */,
 				AEFCBCA71C68DD4B000F5751 /* _T_RefItem.m in Sources */,
-				AEFCBC9D1C68DD4B000F5751 /* _M_ResultAction.m in Sources */,
 				F43D9B641C5D24240080F75D /* itemCell.swift in Sources */,
 				AE029E601C78546E00BDD370 /* _M_ActionResult.m in Sources */,
-				AE029E581C78522600BDD370 /* M_Action.m in Sources */,
 				AEFCBCA51C68DD4B000F5751 /* _T_GetItem.m in Sources */,
 				AEFCBCC71C68DD4B000F5751 /* T_RefKakugen.m in Sources */,
 				AEDE9B201C66435700841902 /* Const.swift in Sources */,
@@ -1127,7 +1097,6 @@
 				AE0D3F641C6CB8EB0015F479 /* ResultViewController.swift in Sources */,
 				AE0D3F5D1C6C58550015F479 /* ProfileViewController.swift in Sources */,
 				AEFCBC971C68DD4B000F5751 /* _M_Job.m in Sources */,
-				AEFCBCB91C68DD4B000F5751 /* M_ResultAction.m in Sources */,
 				F48330161C2F040D00234B18 /* NeeNeeApp.xcdatamodeld in Sources */,
 				AEFCBC991C68DD4B000F5751 /* _M_Kakugen.m in Sources */,
 				F4EE57261C6A249A0021E876 /* OpeningViewController.swift in Sources */,
@@ -1138,7 +1107,6 @@
 				AEFCBCAB1C68DD4B000F5751 /* _T_RefKakugen.m in Sources */,
 				AEFCBCA11C68DD4B000F5751 /* _T_ActionResult.m in Sources */,
 				AE029E621C78546E00BDD370 /* M_ActionResult.m in Sources */,
-				AE0D3F681C6CD80D0015F479 /* _M_Action.m in Sources */,
 				AE0D3F571C6C501A0015F479 /* PopoverBackgroundView.swift in Sources */,
 				F483300E1C2F040D00234B18 /* AppDelegate.swift in Sources */,
 				AE0D3F6A1C6CDA700015F479 /* KakugenViewController.swift in Sources */,

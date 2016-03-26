@@ -6,6 +6,7 @@
 extern const struct M_ActionResultAttributes {
 	__unsafe_unretained NSString *itemID;
 	__unsafe_unretained NSString *message;
+	__unsafe_unretained NSString *rankKBN;
 	__unsafe_unretained NSString *resPer;
 	__unsafe_unretained NSString *resultID;
 } M_ActionResultAttributes;
@@ -30,6 +31,10 @@ extern const struct M_ActionResultAttributes {
 @property (nonatomic, strong) NSString* message;
 
 //- (BOOL)validateMessage:(id*)value_ error:(NSError**)error_;
+
+@property (nonatomic, strong) NSString* rankKBN;
+
+//- (BOOL)validateRankKBN:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) NSNumber* resPer;
 
@@ -59,6 +64,9 @@ extern const struct M_ActionResultAttributes {
 
 - (NSString*)primitiveMessage;
 - (void)setPrimitiveMessage:(NSString*)value;
+
+- (NSString*)primitiveRankKBN;
+- (void)setPrimitiveRankKBN:(NSString*)value;
 
 - (NSNumber*)primitiveResPer;
 - (void)setPrimitiveResPer:(NSNumber*)value;

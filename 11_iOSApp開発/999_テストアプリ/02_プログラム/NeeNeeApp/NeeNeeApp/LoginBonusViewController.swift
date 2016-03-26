@@ -38,15 +38,18 @@ class LoginBonusViewController: UIViewController {
         lblOkan = UILabel(frame: CGRectMake(45,100,self.view.bounds.width-30,160))
         let mes: String = "〇〇くんへ\n\nかあさん腕をふるって\n〇〇くんの大好きな\n\(getOkan())を\n作りました。\n無理しないで頑張ってね！"
         let charaData : [T_CharaBase] = Utility.getCharaBase(Const.CHARACTER1_ID)
+        if charaData.count == 0 {
+            print("a")
+        }
         lblOkan.text = mes.stringByReplacingOccurrencesOfString("〇〇",withString: charaData[0].charaName)
         lblOkan.numberOfLines = 0
         self.view.addSubview(lblOkan)
         
-        
-        //OKボタン
-        btnOK = UIButton(frame: CGRectMake(20,60,self.view.bounds.width-30,120))
-        btnOK.titleLabel!.text = "OK"
-        self.view.addSubview(btnOK)
+//        
+//        //OKボタン
+//        btnOK = UIButton(frame: CGRectMake(20,60,self.view.bounds.width-30,120))
+//        btnOK.titleLabel!.text = "OK"
+//        self.view.addSubview(btnOK)
 
     }
 

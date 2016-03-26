@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         M_Item.MR_truncateAll()
         M_Stage.MR_truncateAll()
-        M_Action.MR_truncateAll()
+//        M_Action.MR_truncateAll()
         M_ActionImage.MR_truncateAll()
         M_ActionResult.MR_truncateAll()
         M_DropItem.MR_truncateAll()
@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let sqlItem = "SELECT * FROM M_Item;" //アイテムマスタ
         let sqlStage = "SELECT * FROM M_Stage;" //ステージマスタ
-        let sqlAction = "SELECT * FROM M_Action;" //行動マスタ
+//        let sqlAction = "SELECT * FROM M_Action;" //行動マスタ
         let sqlActionImage = "SELECT * FROM M_ActionImage;" //行動画像マスタ
         let sqlActionResult = "SELECT * FROM M_ActionResult;" //行動結果マスタ
         let sqlDropItem = "SELECT * FROM M_DropItem;" //ドロップアイテムマスタ
@@ -103,7 +103,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let newRecord: M_Item = M_Item.MR_createEntity()! as M_Item
             newRecord.itemID = NSNumber(int: res_Item.intForColumn("itemID"))
             newRecord.stageID = NSNumber(int: res_Item.intForColumn("stageID"))
-            newRecord.actID = NSNumber(int: res_Item.intForColumn("actID"))
+            newRecord.animation = NSNumber(int: res_Item.intForColumn("animation"))
             newRecord.itemName = res_Item.stringForColumn("itemName")
             newRecord.itemText = res_Item.stringForColumn("itemText")
             newRecord.imageItem = res_Item.stringForColumn("imageItem")
@@ -111,6 +111,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             newRecord.procTime = NSNumber(int: res_Item.intForColumn("procTime"))
             newRecord.useArea = NSNumber(int: res_Item.intForColumn("useArea"))
             newRecord.viewNo = NSNumber(int: res_Item.intForColumn("viewNo"))
+            newRecord.firstX = NSNumber(int: res_Item.intForColumn("firstX"))
+            newRecord.firstY = NSNumber(int: res_Item.intForColumn("firstY"))
+            newRecord.minX = NSNumber(int: res_Item.intForColumn("minX"))
+            newRecord.maxX = NSNumber(int: res_Item.intForColumn("maxX"))
+            newRecord.minY = NSNumber(int: res_Item.intForColumn("minY"))
+            newRecord.maxY = NSNumber(int: res_Item.intForColumn("maxY"))
+            
             newRecord.managedObjectContext!.MR_saveToPersistentStoreAndWait()
             i++
         }
@@ -133,31 +140,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("件数\(i)")
         i = 0
         
-        //行動マスタ
-        let res_Action = db.executeQuery(sqlAction, withArgumentsInArray: nil)
-        while res_Action.next() {
-            let newRecord: M_Action = M_Action.MR_createEntity()! as M_Action
-            newRecord.stageID = NSNumber(int: res_Action.intForColumn("stageID"))
-            newRecord.actID = NSNumber(int: res_Action.intForColumn("actID"))
-            newRecord.actName = res_Action.stringForColumn("actName")
-            newRecord.firstX = NSNumber(int: res_Action.intForColumn("firstX"))
-            newRecord.firstY = NSNumber(int: res_Action.intForColumn("firstY"))
-            newRecord.minX = NSNumber(int: res_Action.intForColumn("minX"))
-            newRecord.maxX = NSNumber(int: res_Action.intForColumn("maxX"))
-            newRecord.minY = NSNumber(int: res_Action.intForColumn("minY"))
-            newRecord.maxY = NSNumber(int: res_Action.intForColumn("maxY"))
-            newRecord.managedObjectContext!.MR_saveToPersistentStoreAndWait()
-            i++
-        }
-        print("件数\(i)")
-        i = 0
+//        //行動マスタ
+//        let res_Action = db.executeQuery(sqlAction, withArgumentsInArray: nil)
+//        while res_Action.next() {
+//            let newRecord: M_Action = M_Action.MR_createEntity()! as M_Action
+//            newRecord.stageID = NSNumber(int: res_Action.intForColumn("stageID"))
+//            newRecord.actID = NSNumber(int: res_Action.intForColumn("actID"))
+//            newRecord.actName = res_Action.stringForColumn("actName")
+//            newRecord.firstX = NSNumber(int: res_Action.intForColumn("firstX"))
+//            newRecord.firstY = NSNumber(int: res_Action.intForColumn("firstY"))
+//            newRecord.minX = NSNumber(int: res_Action.intForColumn("minX"))
+//            newRecord.maxX = NSNumber(int: res_Action.intForColumn("maxX"))
+//            newRecord.minY = NSNumber(int: res_Action.intForColumn("minY"))
+//            newRecord.maxY = NSNumber(int: res_Action.intForColumn("maxY"))
+//            newRecord.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+//            i++
+//        }
+//        print("件数\(i)")
+//        i = 0
         
         //行動画像マスタ
         let res_ActionImage = db.executeQuery(sqlActionImage, withArgumentsInArray: nil)
         while res_ActionImage.next() {
             let newRecord: M_ActionImage = M_ActionImage.MR_createEntity()! as M_ActionImage
-            newRecord.stageID = NSNumber(int: res_ActionImage.intForColumn("stageID"))
-            newRecord.actID = NSNumber(int: res_ActionImage.intForColumn("actID"))
+            newRecord.itemID = NSNumber(int: res_Item.intForColumn("itemID"))
+//            newRecord.stageID = NSNumber(int: res_ActionImage.intForColumn("stageID"))
+//            newRecord.actID = NSNumber(int: res_ActionImage.intForColumn("actID"))
             newRecord.imageAct = res_ActionImage.stringForColumn("imageAct")
             newRecord.way = NSNumber(int: res_ActionImage.intForColumn("way"))
             newRecord.managedObjectContext!.MR_saveToPersistentStoreAndWait()
@@ -174,6 +182,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             newRecord.resultID = NSNumber(int: res_ActionResult.intForColumn("resultID"))
             newRecord.message = res_ActionResult.stringForColumn("message")
             newRecord.resPer = NSNumber(int: res_ActionResult.intForColumn("resPer"))
+            newRecord.rankKBN = res_ActionResult.stringForColumn("rankKBN")
+//            newRecord.itemCount = NSNumber(int: res_ActionResult.intForColumn("itemCount"))
+            
+            
             newRecord.managedObjectContext!.MR_saveToPersistentStoreAndWait()
             i++
         }

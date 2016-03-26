@@ -87,15 +87,15 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         let activeItemId = self.updateSetAction()
         let activeItem = Utility.getMItem(activeItemId)
         var activeStage = [M_Stage]()
-        var activeAction = [M_Action]()
-        
+//TODO:        var activeAction = [M_Action]()
         if activeItem.count >= 1 {
             activeStage = Utility.getMStage(Int(activeItem[0].stageID))
-            activeAction = Utility.getMAction(Int(activeItem[0].stageID),actionId: Int(activeItem[0].actID))
+//TODO:            activeAction = Utility.getMAction(Int(activeItem[0].stageID),actionId: Int(activeItem[0].actID))
         }
 
         //オブジェクトの配置
-        self.createObjInit(activeStage, action: activeAction)
+//TODO:        self.createObjInit(activeStage, action: activeItem)
+        self.createObjInit(activeStage)
         
         // オブジェクトの制約の設定
         self.objConstraints()
@@ -118,6 +118,8 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
 
     //view 表示完了後 毎回呼ばれる
     override func viewDidAppear(animated: Bool) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+
         super.viewDidAppear(false)
 
         if (self.isFirstLoad == true) {
@@ -364,7 +366,10 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     
     
     //初期表示時のオブジェクトを作成し設置する
-    func createObjInit(stage: [M_Stage], action: [M_Action]) {
+    //TODO:Actionマスタ統合対応　ロジックを確認し不要なら削除してください。
+
+//    func createObjInit(stage: [M_Stage], action: [M_Action]) {
+    func createObjInit(stage: [M_Stage]) {
         
         // 背景設定
         myImageView = UIImageView()
@@ -378,11 +383,17 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         myCharImageView.frame.size = CGSizeMake(self.view.bounds.width / 2.6
                                               , self.view.bounds.height / 3.0)
         
-        myCharImageView.center.x = CGFloat(Float(self.view.bounds.width)
-                                 * (Float(action.count >= 1 ? action[0].firstX : Const.CHARACTER_DEFAULT_FIRST_X) / 10))
-
-        myCharImageView.center.y = CGFloat(Float(self.view.bounds.height)
-                                 * (Float(action.count >= 1 ? action[0].firstY : Const.CHARACTER_DEFAULT_FIRST_Y) / 10))
+//TODO:        myCharImageView.center.x = CGFloat(Float(self.view.bounds.width)
+//                                 * (Float(action.count >= 1 ? action[0].firstX : Const.CHARACTER_DEFAULT_FIRST_X) / 10))
+//
+//TODO:        myCharImageView.center.y = CGFloat(Float(self.view.bounds.height)
+//                                 * (Float(action.count >= 1 ? action[0].firstY : Const.CHARACTER_DEFAULT_FIRST_Y) / 10))
+        
+          myCharImageView.center.x = self.view.center.x
+        
+          myCharImageView.center.y = self.view.center.y
+        
+        
         myCharImageView.tag = 1
         myCharImageView.userInteractionEnabled = true
         let singleTap = UITapGestureRecognizer(target: self, action:"tapChara:")
