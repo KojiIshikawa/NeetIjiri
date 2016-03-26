@@ -4,9 +4,9 @@
 #import "_M_ActionImage.h"
 
 const struct M_ActionImageAttributes M_ActionImageAttributes = {
-	.actID = @"actID",
 	.imageAct = @"imageAct",
-	.stageID = @"stageID",
+	.itemID = @"itemID",
+	.serialNo = @"serialNo",
 	.way = @"way",
 };
 
@@ -36,13 +36,13 @@ const struct M_ActionImageAttributes M_ActionImageAttributes = {
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 
-	if ([key isEqualToString:@"actIDValue"]) {
-		NSSet *affectingKey = [NSSet setWithObject:@"actID"];
+	if ([key isEqualToString:@"itemIDValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"itemID"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
-	if ([key isEqualToString:@"stageIDValue"]) {
-		NSSet *affectingKey = [NSSet setWithObject:@"stageID"];
+	if ([key isEqualToString:@"serialNoValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"serialNo"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
@@ -55,46 +55,46 @@ const struct M_ActionImageAttributes M_ActionImageAttributes = {
 	return keyPaths;
 }
 
-@dynamic actID;
-
-- (int32_t)actIDValue {
-	NSNumber *result = [self actID];
-	return [result intValue];
-}
-
-- (void)setActIDValue:(int32_t)value_ {
-	[self setActID:[NSNumber numberWithInt:value_]];
-}
-
-- (int32_t)primitiveActIDValue {
-	NSNumber *result = [self primitiveActID];
-	return [result intValue];
-}
-
-- (void)setPrimitiveActIDValue:(int32_t)value_ {
-	[self setPrimitiveActID:[NSNumber numberWithInt:value_]];
-}
-
 @dynamic imageAct;
 
-@dynamic stageID;
+@dynamic itemID;
 
-- (int32_t)stageIDValue {
-	NSNumber *result = [self stageID];
+- (int32_t)itemIDValue {
+	NSNumber *result = [self itemID];
 	return [result intValue];
 }
 
-- (void)setStageIDValue:(int32_t)value_ {
-	[self setStageID:[NSNumber numberWithInt:value_]];
+- (void)setItemIDValue:(int32_t)value_ {
+	[self setItemID:[NSNumber numberWithInt:value_]];
 }
 
-- (int32_t)primitiveStageIDValue {
-	NSNumber *result = [self primitiveStageID];
+- (int32_t)primitiveItemIDValue {
+	NSNumber *result = [self primitiveItemID];
 	return [result intValue];
 }
 
-- (void)setPrimitiveStageIDValue:(int32_t)value_ {
-	[self setPrimitiveStageID:[NSNumber numberWithInt:value_]];
+- (void)setPrimitiveItemIDValue:(int32_t)value_ {
+	[self setPrimitiveItemID:[NSNumber numberWithInt:value_]];
+}
+
+@dynamic serialNo;
+
+- (int32_t)serialNoValue {
+	NSNumber *result = [self serialNo];
+	return [result intValue];
+}
+
+- (void)setSerialNoValue:(int32_t)value_ {
+	[self setSerialNo:[NSNumber numberWithInt:value_]];
+}
+
+- (int32_t)primitiveSerialNoValue {
+	NSNumber *result = [self primitiveSerialNo];
+	return [result intValue];
+}
+
+- (void)setPrimitiveSerialNoValue:(int32_t)value_ {
+	[self setPrimitiveSerialNo:[NSNumber numberWithInt:value_]];
 }
 
 @dynamic way;
