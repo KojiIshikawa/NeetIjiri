@@ -4,9 +4,9 @@
 #import <CoreData/CoreData.h>
 
 extern const struct M_ActionImageAttributes {
-	__unsafe_unretained NSString *actID;
 	__unsafe_unretained NSString *imageAct;
-	__unsafe_unretained NSString *stageID;
+	__unsafe_unretained NSString *itemID;
+	__unsafe_unretained NSString *serialNo;
 	__unsafe_unretained NSString *way;
 } M_ActionImageAttributes;
 
@@ -19,25 +19,25 @@ extern const struct M_ActionImageAttributes {
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 @property (nonatomic, readonly, strong) M_ActionImageID* objectID;
 
-@property (nonatomic, strong) NSNumber* actID;
-
-@property (atomic) int32_t actIDValue;
-- (int32_t)actIDValue;
-- (void)setActIDValue:(int32_t)value_;
-
-//- (BOOL)validateActID:(id*)value_ error:(NSError**)error_;
-
 @property (nonatomic, strong) NSString* imageAct;
 
 //- (BOOL)validateImageAct:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, strong) NSNumber* stageID;
+@property (nonatomic, strong) NSNumber* itemID;
 
-@property (atomic) int32_t stageIDValue;
-- (int32_t)stageIDValue;
-- (void)setStageIDValue:(int32_t)value_;
+@property (atomic) int32_t itemIDValue;
+- (int32_t)itemIDValue;
+- (void)setItemIDValue:(int32_t)value_;
 
-//- (BOOL)validateStageID:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateItemID:(id*)value_ error:(NSError**)error_;
+
+@property (nonatomic, strong) NSNumber* serialNo;
+
+@property (atomic) int32_t serialNoValue;
+- (int32_t)serialNoValue;
+- (void)setSerialNoValue:(int32_t)value_;
+
+//- (BOOL)validateSerialNo:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) NSNumber* way;
 
@@ -51,20 +51,20 @@ extern const struct M_ActionImageAttributes {
 
 @interface _M_ActionImage (CoreDataGeneratedPrimitiveAccessors)
 
-- (NSNumber*)primitiveActID;
-- (void)setPrimitiveActID:(NSNumber*)value;
-
-- (int32_t)primitiveActIDValue;
-- (void)setPrimitiveActIDValue:(int32_t)value_;
-
 - (NSString*)primitiveImageAct;
 - (void)setPrimitiveImageAct:(NSString*)value;
 
-- (NSNumber*)primitiveStageID;
-- (void)setPrimitiveStageID:(NSNumber*)value;
+- (NSNumber*)primitiveItemID;
+- (void)setPrimitiveItemID:(NSNumber*)value;
 
-- (int32_t)primitiveStageIDValue;
-- (void)setPrimitiveStageIDValue:(int32_t)value_;
+- (int32_t)primitiveItemIDValue;
+- (void)setPrimitiveItemIDValue:(int32_t)value_;
+
+- (NSNumber*)primitiveSerialNo;
+- (void)setPrimitiveSerialNo:(NSNumber*)value;
+
+- (int32_t)primitiveSerialNoValue;
+- (void)setPrimitiveSerialNoValue:(int32_t)value_;
 
 - (NSNumber*)primitiveWay;
 - (void)setPrimitiveWay:(NSNumber*)value;
