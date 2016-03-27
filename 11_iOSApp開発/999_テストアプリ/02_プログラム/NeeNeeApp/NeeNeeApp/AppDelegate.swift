@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
 
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         
         //coredataでやりとりするsqliteを設定
         MagicalRecord.setupCoreDataStackWithAutoMigratingSqliteStoreNamed("NeetMaster.sqlite")
@@ -103,7 +103,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let newRecord: M_Item = M_Item.MR_createEntity()! as M_Item
             newRecord.itemID = NSNumber(int: res_Item.intForColumn("itemID"))
             newRecord.stageID = NSNumber(int: res_Item.intForColumn("stageID"))
-            newRecord.animation = NSNumber(int: res_Item.intForColumn("animation"))
+            newRecord.animeKBN = NSNumber(int: res_Item.intForColumn("animeKBN"))
             newRecord.itemName = res_Item.stringForColumn("itemName")
             newRecord.itemText = res_Item.stringForColumn("itemText")
             newRecord.imageItem = res_Item.stringForColumn("imageItem")

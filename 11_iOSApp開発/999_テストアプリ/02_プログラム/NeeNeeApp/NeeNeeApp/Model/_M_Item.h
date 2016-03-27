@@ -4,7 +4,7 @@
 #import <CoreData/CoreData.h>
 
 extern const struct M_ItemAttributes {
-	__unsafe_unretained NSString *animation;
+	__unsafe_unretained NSString *animeKBN;
 	__unsafe_unretained NSString *firstX;
 	__unsafe_unretained NSString *firstY;
 	__unsafe_unretained NSString *imageItem;
@@ -31,13 +31,13 @@ extern const struct M_ItemAttributes {
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 @property (nonatomic, readonly, strong) M_ItemID* objectID;
 
-@property (nonatomic, strong) NSNumber* animation;
+@property (nonatomic, strong) NSNumber* animeKBN;
 
-@property (atomic) int32_t animationValue;
-- (int32_t)animationValue;
-- (void)setAnimationValue:(int32_t)value_;
+@property (atomic) int32_t animeKBNValue;
+- (int32_t)animeKBNValue;
+- (void)setAnimeKBNValue:(int32_t)value_;
 
-//- (BOOL)validateAnimation:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateAnimeKBN:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) NSNumber* firstX;
 
@@ -151,11 +151,11 @@ extern const struct M_ItemAttributes {
 
 @interface _M_Item (CoreDataGeneratedPrimitiveAccessors)
 
-- (NSNumber*)primitiveAnimation;
-- (void)setPrimitiveAnimation:(NSNumber*)value;
+- (NSNumber*)primitiveAnimeKBN;
+- (void)setPrimitiveAnimeKBN:(NSNumber*)value;
 
-- (int32_t)primitiveAnimationValue;
-- (void)setPrimitiveAnimationValue:(int32_t)value_;
+- (int32_t)primitiveAnimeKBNValue;
+- (void)setPrimitiveAnimeKBNValue:(int32_t)value_;
 
 - (NSNumber*)primitiveFirstX;
 - (void)setPrimitiveFirstX:(NSNumber*)value;
