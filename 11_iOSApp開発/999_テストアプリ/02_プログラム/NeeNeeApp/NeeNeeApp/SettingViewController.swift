@@ -34,7 +34,7 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
     
     // view ロード完了時
     override func viewDidLoad() {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         super.viewDidLoad()
         
         //背景生成
@@ -107,7 +107,7 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
     
     //メモリ消費が多くなった時に動くイベント
     override func didReceiveMemoryWarning() {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -115,7 +115,7 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
     
     /** 全オブジェクトの制約設定 **/
     func objConstraints() {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         
         settingImgView.translatesAutoresizingMaskIntoConstraints = false
         bgmImage.translatesAutoresizingMaskIntoConstraints = false
@@ -466,7 +466,7 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
     
     /** BGMボリューム変更時の処理 **/
     func slideBgmVolume(sender: AnyObject) {
-        
+        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         // スライド値をBGM音量にセットする
 //        myAudioPlayer.volume = bgmVolumeSBar.value
         
@@ -481,7 +481,7 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
 
     /** BGMミュートボタン押下時の処理 **/
     func tapBgmMuteBtn(sender: AnyObject) {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
 
         // SEを再生する.
         Utility.seSoundPlay(Const.mySeYesPath)
@@ -505,7 +505,7 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
     
     /** SEボリューム変更時の処理 **/
     func slideSeVolume(sender: AnyObject) {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         
         //NSUserDefaultに値を保存
         let ud = NSUserDefaults.standardUserDefaults()
@@ -518,6 +518,7 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
 
     /** SEミュートボタン押下時の処理 **/
     func tapSeMuteBtn(sender: AnyObject) {
+        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         Utility.seSoundPlay(Const.mySeYesPath)
         
         if seVolumeSBar.value == 0.0 {

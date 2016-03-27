@@ -52,13 +52,13 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
     
     // view ロード完了時
     override func viewDidLoad() {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         super.viewDidLoad()
         
     }
     
     override func viewDidAppear(animated: Bool) {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         super.viewDidAppear(animated)
         
         // キャラクター基本情報が存在する場合
@@ -92,14 +92,14 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
     }
         
     override func didReceiveMemoryWarning() {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     /** メニューボタン押下時の処理 **/
     func tapStartBtn(sender: AnyObject) {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         
         // SEを再生する.
         Utility.seSoundPlay(Const.mySeStartPath)
@@ -125,7 +125,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
     
     func getUncachedImage (named name : String) -> UIImage?
     {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         
         if let imgPath = NSBundle.mainBundle().pathForResource(name, ofType: nil)
         {
@@ -136,7 +136,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
     
     //初期表示時のオブジェクトを作成し設置する
     func createObjInit() {
-        
+        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         // 背景設定
         myImageView = UIImageView(frame: CGRectMake(0,0,self.view.bounds.width,self.view.bounds.height))
         myImageView.image = self.getUncachedImage(named:"03_27_01.png")
@@ -192,7 +192,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
     
     /** 全オブジェクトの制約設定 **/
     func objConstraints() {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         
         titleImageView.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -526,7 +526,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
     
     //キャラクター情報の取得
     func getCharaBaseExists() -> DarwinBoolean  {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         
         // キャラクター基本情報にアクセスし存在しなければfalseを返却する.
         let charaBaseList :[T_CharaBase] = T_CharaBase.MR_findAll() as! [T_CharaBase];
@@ -536,7 +536,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
     
     //キャラクター情報の書き込み
     func editCharaBase() -> DarwinBoolean  {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
 
         // キャラクター基本情報に基本情報を書き込む
         let insetData = T_CharaBase.MR_createEntity()! as T_CharaBase
@@ -553,7 +553,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
     
     //役職の初期設定
     func editInitRJob() -> DarwinBoolean  {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         
         // 現在の役職に最小値をセットする.
         let insetData = T_RefJob.MR_createEntity()! as T_RefJob
@@ -569,7 +569,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
     
     //初期所持アイテムの書き込み
     func editGetItem() -> DarwinBoolean  {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         
         // アイテム１を追加
         let initItem1 = T_GetItem.MR_createEntity()! as T_GetItem
@@ -612,7 +612,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
     
     //初期所持ステージの書き込み
     func editT_RefStage() -> DarwinBoolean  {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         
         // 部屋を追加
         let initItem = T_RefStage.MR_createEntity()! as T_RefStage

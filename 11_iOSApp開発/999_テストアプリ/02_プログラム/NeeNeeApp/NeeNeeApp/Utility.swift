@@ -141,10 +141,10 @@ class Utility {
         
         switch rankKBN {
         case "S":
-            ret = "大成功！\nひまゲット率２倍！"
+            ret = "大成功！\nひまゲット率３倍！"
             
         case "A":
-            ret = "大成功！\nひまゲット率１．５倍！"
+            ret = "大成功！\nひまゲット率２倍！"
             
         case "B":
             ret = "成功"
@@ -166,14 +166,44 @@ class Utility {
     }
     
     
-    
+    class func getRankDrop(rankKBN: String) -> Int32  {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        
+        var ret :Int32 = 1
+        
+        switch rankKBN {
+        case "S":
+            ret = 3
+            
+        case "A":
+            ret = 2
+            
+        case "B":
+            ret = 1
+            
+        case "C":
+            ret = 1
+            
+        case "D":
+            ret = 1
+            
+        case "E":
+            ret = 1
+            
+        default:
+            ret = 1
+        }
+        
+        return ret
+    }
+
     
     
     
     /** アクション情報の取得 **/
     //TODO:Actionマスタ統合対応　ロジックを確認し不要なら削除してください。
 //    class func getMAction(stageId: Int, actionId: Int) -> [M_Action] {
-//        print(NSDate().description, __FUNCTION__, __LINE__)
+//        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
 //        
 //        let actionList = M_Action.MR_findByAttribute("stageID", withValue: stageId) as! [M_Action];
 //

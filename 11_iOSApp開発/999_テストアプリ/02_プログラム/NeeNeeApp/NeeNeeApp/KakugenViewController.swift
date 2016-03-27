@@ -20,7 +20,7 @@ class KakugenViewController: UIViewController {
     
     // view ロード完了時
     override func viewDidLoad() {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         super.viewDidLoad()
 
         //背景設定
@@ -43,7 +43,7 @@ class KakugenViewController: UIViewController {
     
     //メモリ消費が多くなった時に動くイベント
     override func didReceiveMemoryWarning() {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -54,7 +54,7 @@ class KakugenViewController: UIViewController {
     
     //格言の取得
     func getKakugen() -> String {
-
+        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         //格言をランダムで取得
         let kakugenList :[M_Kakugen] = M_Kakugen.MR_findAll() as! [M_Kakugen];
         let randInt = arc4random_uniform(UInt32(kakugenList.count));

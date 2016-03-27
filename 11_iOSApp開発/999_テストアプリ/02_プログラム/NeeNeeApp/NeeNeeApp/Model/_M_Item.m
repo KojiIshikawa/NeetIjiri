@@ -4,7 +4,7 @@
 #import "_M_Item.h"
 
 const struct M_ItemAttributes M_ItemAttributes = {
-	.animation = @"animation",
+	.animeKBN = @"animeKBN",
 	.firstX = @"firstX",
 	.firstY = @"firstY",
 	.imageItem = @"imageItem",
@@ -48,8 +48,8 @@ const struct M_ItemAttributes M_ItemAttributes = {
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 
-	if ([key isEqualToString:@"animationValue"]) {
-		NSSet *affectingKey = [NSSet setWithObject:@"animation"];
+	if ([key isEqualToString:@"animeKBNValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"animeKBN"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
@@ -117,24 +117,24 @@ const struct M_ItemAttributes M_ItemAttributes = {
 	return keyPaths;
 }
 
-@dynamic animation;
+@dynamic animeKBN;
 
-- (int32_t)animationValue {
-	NSNumber *result = [self animation];
+- (int32_t)animeKBNValue {
+	NSNumber *result = [self animeKBN];
 	return [result intValue];
 }
 
-- (void)setAnimationValue:(int32_t)value_ {
-	[self setAnimation:[NSNumber numberWithInt:value_]];
+- (void)setAnimeKBNValue:(int32_t)value_ {
+	[self setAnimeKBN:[NSNumber numberWithInt:value_]];
 }
 
-- (int32_t)primitiveAnimationValue {
-	NSNumber *result = [self primitiveAnimation];
+- (int32_t)primitiveAnimeKBNValue {
+	NSNumber *result = [self primitiveAnimeKBN];
 	return [result intValue];
 }
 
-- (void)setPrimitiveAnimationValue:(int32_t)value_ {
-	[self setPrimitiveAnimation:[NSNumber numberWithInt:value_]];
+- (void)setPrimitiveAnimeKBNValue:(int32_t)value_ {
+	[self setPrimitiveAnimeKBN:[NSNumber numberWithInt:value_]];
 }
 
 @dynamic firstX;
