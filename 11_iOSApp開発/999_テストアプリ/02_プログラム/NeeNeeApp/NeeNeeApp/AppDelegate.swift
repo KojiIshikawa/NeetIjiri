@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
 
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         //coredataでやりとりするsqliteを設定
         MagicalRecord.setupCoreDataStackWithAutoMigratingSqliteStoreNamed("NeetMaster.sqlite")
@@ -63,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             newRecord.kakugenText = res_Kakugen.stringForColumn("kakugenText")
             newRecord.viewNo = NSNumber(int: res_Kakugen.intForColumn("viewNo"))
             newRecord.managedObjectContext!.MR_saveToPersistentStoreAndWait()
-            i++
+            i += 1
         }
         print("件数\(i)")
         i = 0
@@ -76,7 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             newRecord.okanText = res_Okan.stringForColumn("okanText")
             newRecord.loginDays = NSNumber(int: res_Okan.intForColumn("loginDays"))
             newRecord.managedObjectContext!.MR_saveToPersistentStoreAndWait()
-            i++
+            i += 1
 
         }
         print("件数\(i)")
@@ -92,7 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             newRecord.jobText = res_Job.stringForColumn("jobText")
             newRecord.viewNo = NSNumber(int: res_Job.intForColumn("viewNo"))
             newRecord.managedObjectContext!.MR_saveToPersistentStoreAndWait()
-            i++
+            i += 1
         }
         print("件数\(i)")
         i = 0
@@ -119,7 +119,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             newRecord.maxY = NSNumber(int: res_Item.intForColumn("maxY"))
             
             newRecord.managedObjectContext!.MR_saveToPersistentStoreAndWait()
-            i++
+            i += 1
         }
         print("件数\(i)")
         i = 0
@@ -135,7 +135,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             newRecord.imageBack = res_Stage.stringForColumn("imageBack")
             newRecord.viewNo = NSNumber(int: res_Stage.intForColumn("viewNo"))
             newRecord.managedObjectContext!.MR_saveToPersistentStoreAndWait()
-            i++
+            i += 1
         }
         print("件数\(i)")
         i = 0
@@ -169,7 +169,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             newRecord.imageAct = res_ActionImage.stringForColumn("imageAct")
             newRecord.way = NSNumber(int: res_ActionImage.intForColumn("way"))
             newRecord.managedObjectContext!.MR_saveToPersistentStoreAndWait()
-            i++
+            i += 1
         }
         print("件数\(i)")
         i = 0
@@ -187,7 +187,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             
             newRecord.managedObjectContext!.MR_saveToPersistentStoreAndWait()
-            i++
+            i += 1
         }
         print("件数\(i)")
         i = 0
@@ -200,7 +200,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             newRecord.dropItemID = NSNumber(int: res_DropItem.intForColumn("dropItemID"))
             newRecord.dropPer = NSNumber(int: res_DropItem.intForColumn("dropPer"))
             newRecord.managedObjectContext!.MR_saveToPersistentStoreAndWait()
-            i++
+            i += 1
         }
         print("件数\(i)")
         i = 0

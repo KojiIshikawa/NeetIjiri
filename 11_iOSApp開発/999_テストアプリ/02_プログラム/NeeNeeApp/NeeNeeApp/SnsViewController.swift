@@ -16,9 +16,6 @@ class SnsViewController: UIViewController {
     // シェアメニューのオブジェクト
     private var shareImgView: UIImageView!
 
-    // 画像
-    private let shareViewImage = UIImage(named: "02_02_01.png")
-
     // オブジェクト
     private var facebookBtn: UIButton!
     private var lineBtn: UIButton!
@@ -27,41 +24,42 @@ class SnsViewController: UIViewController {
     
     // view ロード完了時
     override func viewDidLoad() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         super.viewDidLoad()
 
         //背景生成
         shareImgView = UIImageView(frame: self.view.frame)
-        shareImgView.image = shareViewImage
-        shareImgView.alpha = 0.9
-        self.view.addSubview(shareImgView)
+        shareImgView.image = Utility.getUncachedImage(named: "02_02_01.png")
         
         // FaceBookボタンを生成
         facebookBtn = UIButton()
         let facebookImage = Utility.getUncachedImage( named: "01_07_01.png")! as UIImage
         facebookBtn.setImage(facebookImage, forState: .Normal)
-        facebookBtn.addTarget(self, action: "tapFacebookBtn:", forControlEvents: .TouchUpInside)
-        self.view.addSubview(facebookBtn)
+        facebookBtn.addTarget(self, action: #selector(SnsViewController.tapFacebookBtn(_:)), forControlEvents: .TouchUpInside)
         
         // Twitterボタンを生成
         twitterBtn = UIButton()
         let twitterImage = Utility.getUncachedImage( named: "01_08_01.png")! as UIImage
         twitterBtn.setImage(twitterImage, forState: .Normal)
-        twitterBtn.addTarget(self, action: "tapTwitterBtn:", forControlEvents: .TouchUpInside)
-        self.view.addSubview(twitterBtn)
+        twitterBtn.addTarget(self, action: #selector(SnsViewController.tapTwitterBtn(_:)), forControlEvents: .TouchUpInside)
         
         // LINEボタンを生成
         lineBtn = UIButton()
         let lineImage = Utility.getUncachedImage( named: "01_09_01.png")! as UIImage
         lineBtn.setImage(lineImage, forState: .Normal)
-        lineBtn.addTarget(self, action: "tapLineBtn:", forControlEvents: .TouchUpInside)
-        self.view.addSubview(lineBtn)
+        lineBtn.addTarget(self, action: #selector(SnsViewController.tapLineBtn(_:)), forControlEvents: .TouchUpInside)
 
         // ？ボタンを生成
         questionBtn = UIButton()
         let questionImage = Utility.getUncachedImage( named: "01_12_01.png")! as UIImage
         questionBtn.setImage(questionImage, forState: .Normal)
-        questionBtn.addTarget(self, action: "tapQuestionBtn:", forControlEvents: .TouchUpInside)
+        questionBtn.addTarget(self, action: #selector(SnsViewController.tapQuestionBtn(_:)), forControlEvents: .TouchUpInside)
+        
+        // ポップ上に表示するオブジェクトをViewに追加する.
+        self.view.addSubview(shareImgView)
+        self.view.addSubview(facebookBtn)
+        self.view.addSubview(twitterBtn)
+        self.view.addSubview(lineBtn)
         self.view.addSubview(questionBtn)
         
         // オブジェクトの制約の設定
@@ -70,14 +68,14 @@ class SnsViewController: UIViewController {
     
     //メモリ消費が多くなった時に動くイベント
     override func didReceiveMemoryWarning() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
     //facebookボタン押下時の処理
     func tapFacebookBtn(sender: AnyObject) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         // Facebookの投稿ダイアログを作って
         let cv = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
@@ -91,7 +89,7 @@ class SnsViewController: UIViewController {
     
     //ラインボタン押下時の処理
     func tapLineBtn(sender: AnyObject) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         //　共有する項目
         let shareImage = UIImage(named: "01_09_01.png")!
@@ -106,7 +104,7 @@ class SnsViewController: UIViewController {
     
     //Twitterボタン押下時の処理
     func tapTwitterBtn(sender: AnyObject) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         // 共有する項目
         // Twitterの投稿ダイアログを作って
@@ -119,12 +117,12 @@ class SnsViewController: UIViewController {
 
     //？ボタン押下時の処理
     func tapQuestionBtn(sender: AnyObject) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
     }
     
     /** 全オブジェクトの制約設定 **/
     func objConstraints() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         shareImgView.translatesAutoresizingMaskIntoConstraints = false
         facebookBtn.translatesAutoresizingMaskIntoConstraints = false

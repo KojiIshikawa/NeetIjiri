@@ -28,7 +28,7 @@ class Utility {
     
     class func bgmSoundPlay(bgmPath: String)
     {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, #function, #line)
         
         //userDefaultからボリューム値を取得
         let ud = NSUserDefaults.standardUserDefaults()
@@ -59,13 +59,13 @@ class Utility {
     
     class func bgmVolumeChange(volume: Float)
     {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, #function, #line)
         myAudioPlayer.volume = volume
     }
 
     class func bgmStop()
     {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, #function, #line)
         myAudioPlayer.stop()
     }
     
@@ -73,7 +73,7 @@ class Utility {
     //ファイルのパス
     class func seSoundPlay(sePath: String)
     {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, #function, #line)
         
         //userDefaultからボリューム値を取得
         let ud = NSUserDefaults.standardUserDefaults()
@@ -97,13 +97,13 @@ class Utility {
     
     class func seVolumeChange(volume: Float)
     {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, #function, #line)
         mySePlayer.volume = volume * 2
     }
     
     class func seStop()
     {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, #function, #line)
         mySePlayer.stop()
     }
 
@@ -114,28 +114,28 @@ class Utility {
     
     /** 基本情報の取得 **/
     class func getCharaBase(charaId: Int) -> [T_CharaBase]  {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, #function, #line)
         
         return T_CharaBase.MR_findByAttribute("charaID", withValue: charaId) as! [T_CharaBase];
     }
     
     /** アイテム情報の取得 **/
     class func getMItem(itemId: Int) -> [M_Item]  {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, #function, #line)
         
         return M_Item.MR_findByAttribute("itemID", withValue: itemId) as! [M_Item];
     }
     
     /** ステージ情報の取得 **/
     class func getMStage(stageId: Int) -> [M_Stage]  {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, #function, #line)
         
         return M_Stage.MR_findByAttribute("stageID", withValue: stageId) as! [M_Stage];
     }
 
     
     class func getRankName(rankKBN: String) -> String  {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, #function, #line)
 
         var ret = ""
         
@@ -167,7 +167,7 @@ class Utility {
     
     
     class func getRankDrop(rankKBN: String) -> Int32  {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, #function, #line)
         
         var ret :Int32 = 1
         
@@ -203,7 +203,7 @@ class Utility {
     /** アクション情報の取得 **/
     //TODO:Actionマスタ統合対応　ロジックを確認し不要なら削除してください。
 //    class func getMAction(stageId: Int, actionId: Int) -> [M_Action] {
-//        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+//        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
 //        
 //        let actionList = M_Action.MR_findByAttribute("stageID", withValue: stageId) as! [M_Action];
 //

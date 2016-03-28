@@ -20,7 +20,7 @@ class KakugenViewController: UIViewController {
     
     // view ロード完了時
     override func viewDidLoad() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         super.viewDidLoad()
 
         //背景設定
@@ -39,11 +39,14 @@ class KakugenViewController: UIViewController {
         btnOK.titleLabel!.text = "OK"
         self.view.addSubview(btnOK)
         
+        // 制約を設定する.
+        objConstraints()
+        
     }
     
     //メモリ消費が多くなった時に動くイベント
     override func didReceiveMemoryWarning() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -54,7 +57,7 @@ class KakugenViewController: UIViewController {
     
     //格言の取得
     func getKakugen() -> String {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         //格言をランダムで取得
         let kakugenList :[M_Kakugen] = M_Kakugen.MR_findAll() as! [M_Kakugen];
         let randInt = arc4random_uniform(UInt32(kakugenList.count));
@@ -97,4 +100,58 @@ class KakugenViewController: UIViewController {
         return kakugenList[Int(randInt)].kakugenText
     }
     
+    /** 全オブジェクトの制約設定 **/
+    func objConstraints() {
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
+        
+        imgViewKakugen.translatesAutoresizingMaskIntoConstraints = false
+        
+        // 壁紙の制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.imgViewKakugen,
+                attribute:  NSLayoutAttribute.Right,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.Right,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.imgViewKakugen,
+                attribute: NSLayoutAttribute.Bottom,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.Bottom,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.imgViewKakugen,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Width,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.imgViewKakugen,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Height,
+                multiplier: 1.0,
+                constant: 0
+            )]
+        )
+    }
 }

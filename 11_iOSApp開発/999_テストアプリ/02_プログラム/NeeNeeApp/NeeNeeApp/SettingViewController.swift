@@ -13,17 +13,8 @@ import AVFoundation
 //設定画面です。
 class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
 
-    //背景
-    private var settingImgView: UIImageView!
-    private let settingViewImage = UIImage(named: "02_03_01.png")
-    private let bgmViewImage = UIImage(named: "08_01_01.png")
-    private let seViewImage = UIImage(named: "08_02_01.png")
-    private let muteViewImage = UIImage(named: "01_10_01.png")
-    private let tumbViewImage = UIImage(named: "07_01_01.png")
-    private let minBarViewImage = UIImage(named: "07_02_01.png")
-    private let maxBarViewImage = UIImage(named: "07_02_02.png")
-    
     // 設定メニューのオブジェクト
+    private var settingImgView: UIImageView!
     private var bgmMuteBtn: UIButton!
     private var bgmVolumeSBar: UISlider!
     private var bgmImage: UIImageView!
@@ -31,11 +22,18 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
     private var seVolumeSBar: UISlider!
     private var seImage: UIImageView!
     
-    
     // view ロード完了時
     override func viewDidLoad() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         super.viewDidLoad()
+        
+        let settingViewImage = Utility.getUncachedImage(named: "02_03_01.png")
+        let bgmViewImage     = Utility.getUncachedImage(named: "08_01_01.png")
+        let seViewImage      = Utility.getUncachedImage(named: "08_02_01.png")
+        let muteViewImage    = Utility.getUncachedImage(named: "01_10_01.png")
+        let tumbViewImage    = Utility.getUncachedImage(named: "07_01_01.png")
+        let minBarViewImage  = Utility.getUncachedImage(named: "07_02_01.png")
+        let maxBarViewImage  = Utility.getUncachedImage(named: "02_02_02.png")
         
         //背景生成
         settingImgView = UIImageView(frame: self.view.frame)
@@ -51,31 +49,28 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
         bgmVolumeSBar.setThumbImage(tumbViewImage, forState: .Normal)
         bgmVolumeSBar.setMinimumTrackImage(minBarViewImage, forState: .Normal)
         bgmVolumeSBar.setMaximumTrackImage(maxBarViewImage, forState: .Normal)
-        bgmVolumeSBar.addTarget(self, action: "slideBgmVolume:", forControlEvents: .TouchUpInside)
+        bgmVolumeSBar.addTarget(self, action: #selector(SettingViewController.slideBgmVolume(_:)), forControlEvents: .TouchUpInside)
         
         // BGMのミュートボタンを生成
         bgmMuteBtn = UIButton()
         bgmMuteBtn.setImage(muteViewImage, forState: .Normal)
-        bgmMuteBtn.addTarget(self, action: "tapBgmMuteBtn:", forControlEvents: .TouchUpInside)
-        
+        bgmMuteBtn.addTarget(self, action: #selector(SettingViewController.tapBgmMuteBtn(_:)), forControlEvents: .TouchUpInside)
         
         // SEのラベルを生成
         seImage = UIImageView()
         seImage.image = seViewImage
-
         
         // SEのスライドバーを生成
         seVolumeSBar = UISlider()
         seVolumeSBar.setThumbImage(tumbViewImage, forState: .Normal)
         seVolumeSBar.setMinimumTrackImage(minBarViewImage, forState: .Normal)
         seVolumeSBar.setMaximumTrackImage(maxBarViewImage, forState: .Normal)
-        seVolumeSBar.addTarget(self, action: "slideSeVolume:", forControlEvents: .TouchUpInside)
-        
+        seVolumeSBar.addTarget(self, action: #selector(SettingViewController.slideSeVolume(_:)), forControlEvents: .TouchUpInside)
         
         // SEのミュートボタンを生成
         seMuteBtn = UIButton()
         seMuteBtn.setImage(muteViewImage, forState: .Normal)
-        seMuteBtn.addTarget(self, action: "tapSeMuteBtn:", forControlEvents: .TouchUpInside)
+        seMuteBtn.addTarget(self, action: #selector(SettingViewController.tapSeMuteBtn(_:)), forControlEvents: .TouchUpInside)
         
         // Viewに追加する.
         self.view.addSubview(bgmImage)
@@ -107,7 +102,7 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
     
     //メモリ消費が多くなった時に動くイベント
     override func didReceiveMemoryWarning() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -115,7 +110,7 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
     
     /** 全オブジェクトの制約設定 **/
     func objConstraints() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         settingImgView.translatesAutoresizingMaskIntoConstraints = false
         bgmImage.translatesAutoresizingMaskIntoConstraints = false
@@ -466,7 +461,7 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
     
     /** BGMボリューム変更時の処理 **/
     func slideBgmVolume(sender: AnyObject) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         // スライド値をBGM音量にセットする
 //        myAudioPlayer.volume = bgmVolumeSBar.value
         
@@ -481,7 +476,7 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
 
     /** BGMミュートボタン押下時の処理 **/
     func tapBgmMuteBtn(sender: AnyObject) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
 
         // SEを再生する.
         Utility.seSoundPlay(Const.mySeYesPath)
@@ -505,7 +500,7 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
     
     /** SEボリューム変更時の処理 **/
     func slideSeVolume(sender: AnyObject) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         //NSUserDefaultに値を保存
         let ud = NSUserDefaults.standardUserDefaults()
@@ -518,7 +513,7 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
 
     /** SEミュートボタン押下時の処理 **/
     func tapSeMuteBtn(sender: AnyObject) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         Utility.seSoundPlay(Const.mySeYesPath)
         
         if seVolumeSBar.value == 0.0 {

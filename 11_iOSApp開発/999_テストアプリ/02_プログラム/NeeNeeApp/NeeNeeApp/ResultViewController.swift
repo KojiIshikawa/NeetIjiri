@@ -20,10 +20,9 @@ class ResultViewController: UIViewController {
     private var lblResult: UILabel! //ラベル
     private var btnOK: UIButton! //OKボタン
 
-    
     // view ロード完了時
     override func viewDidLoad() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         super.viewDidLoad()
         
@@ -32,6 +31,8 @@ class ResultViewController: UIViewController {
         imgResultView.image = Utility.getUncachedImage(named: "02_08_01.png")
         self.view.addSubview(imgResultView)
         
+        // 全オブジェクトの制約設定.
+        objConstraints()
         
         //行動結果を計算する
         self.getActionResult()
@@ -40,7 +41,7 @@ class ResultViewController: UIViewController {
     
     //メモリ消費が多くなった時に動くイベント
     override func didReceiveMemoryWarning() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -49,7 +50,7 @@ class ResultViewController: UIViewController {
     //行動結果を計算する
     //結果をテーブルへ反映する
     func getActionResult() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
 
         //*****************************
         //テストデータを作成
@@ -97,7 +98,7 @@ class ResultViewController: UIViewController {
         var resultNo = 0
         
         //行動結果のパターン分ループ処理
-        for ( var i = 0; i < mActionR.count-1 ; i++ ) {
+        for ( var i = 0; i < mActionR.count-1 ; i += 1 ) {
             
             maxPer = minPer + mActionR[0].resPer.intValue
             
@@ -185,9 +186,64 @@ class ResultViewController: UIViewController {
 
     //結果を画面に表示する
     func showResult() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
     }
-
+    
+    
+    /** 全オブジェクトの制約設定 **/
+    func objConstraints() {
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
+        
+        imgResultView.translatesAutoresizingMaskIntoConstraints = false
+        
+        // 壁紙の制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.imgResultView,
+                attribute:  NSLayoutAttribute.Right,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.Right,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.imgResultView,
+                attribute: NSLayoutAttribute.Bottom,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.Bottom,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.imgResultView,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Width,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.imgResultView,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Height,
+                multiplier: 1.0,
+                constant: 0
+            )]
+        )
+    }
 }
 
 

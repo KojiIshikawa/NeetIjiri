@@ -19,44 +19,37 @@ class LoginBonusViewController: UIViewController {
     //画面オブジェクト
     private var lblOkan: UILabel! //オカンラベル
     private var btnOK: UIButton! //OKボタン
-
-    
     
     // view ロード完了時
     override func viewDidLoad() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         super.viewDidLoad()
 
         //背景
         imgViewLogin = UIImageView(frame: self.view.frame)
         imgViewLogin.image = Utility.getUncachedImage(named: "02_07_01.png")
         self.view.addSubview(imgViewLogin)
-
-        
         
         // ログインメッセージを表示
         lblOkan = UILabel(frame: CGRectMake(45,100,self.view.bounds.width-30,160))
         let mes: String = "〇〇くんへ\n\nかあさん腕をふるって\n〇〇くんの大好きな\n\(getOkan())を\n作りました。\n無理しないで頑張ってね！"
         let charaData : [T_CharaBase] = Utility.getCharaBase(Const.CHARACTER1_ID)
         if charaData.count == 0 {
-            print("a")
+            print("キャラクターデータなし")
         }
         lblOkan.text = mes.stringByReplacingOccurrencesOfString("〇〇",withString: charaData[0].charaName)
         lblOkan.numberOfLines = 0
         self.view.addSubview(lblOkan)
         
-//        
-//        //OKボタン
-//        btnOK = UIButton(frame: CGRectMake(20,60,self.view.bounds.width-30,120))
-//        btnOK.titleLabel!.text = "OK"
-//        self.view.addSubview(btnOK)
+        // 制約を設定する.
+        objConstraints()
 
     }
 
     
     //メモリ消費が多くなった時に動くイベント
     override func didReceiveMemoryWarning() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -68,7 +61,7 @@ class LoginBonusViewController: UIViewController {
     func getOkan() -> String {
         
         //ランダムで取得
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         let okanList :[M_Okan] = M_Okan.MR_findAll() as! [M_Okan];
         let randInt = arc4random_uniform(UInt32(okanList.count));
@@ -78,4 +71,58 @@ class LoginBonusViewController: UIViewController {
         
     }
     
+    /** 全オブジェクトの制約設定 **/
+    func objConstraints() {
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
+        
+        imgViewLogin.translatesAutoresizingMaskIntoConstraints = false
+        
+        // 壁紙の制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.imgViewLogin,
+                attribute:  NSLayoutAttribute.Right,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.Right,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.imgViewLogin,
+                attribute: NSLayoutAttribute.Bottom,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.Bottom,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.imgViewLogin,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Width,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.imgViewLogin,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Height,
+                multiplier: 1.0,
+                constant: 0
+            )]
+        )
+    }
 }

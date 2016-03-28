@@ -13,7 +13,6 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
 
     // 履歴書メニューのオブジェクト
     private var detailImgView: UIImageView!
-    private let detailViewImage = UIImage(named: "02_06_01.png")
 
     // 履歴書に表示する項目のオブジェクト
     private var nameDataLabel: UILabel!
@@ -31,12 +30,12 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     // view ロード完了時
     override func viewDidLoad() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         super.viewDidLoad()
 
         //背景設定
         detailImgView = UIImageView(frame: self.view.frame)
-        detailImgView.image = detailViewImage
+        detailImgView.image =  Utility.getUncachedImage(named: "02_06_01.png")
         
         // プロフィール設定
         // キャラクター基本情報を取得する.
@@ -68,21 +67,21 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         self.tableViewKakugenHistory = UITableView()
         self.tableViewKakugenHistory.delegate = self
         self.tableViewKakugenHistory.dataSource = self
-        //self.tableViewKakugenHistory.contentSize = CGSizeMake(100,100)
+        self.tableViewKakugenHistory.allowsSelection = false
         self.tableViewKakugenHistory.tag = 11
 
         // 行動履歴（tableview）
         self.tableViewActionHistory = UITableView()
         self.tableViewActionHistory.delegate = self
         self.tableViewActionHistory.dataSource = self
-        //self.tableViewActionHistory.contentSize = CGSizeMake(100,100)
+        self.tableViewActionHistory.allowsSelection = false
         self.tableViewActionHistory.tag = 12
         
         // 行った場所の履歴（tableview）
         self.tableViewCompHistory = UITableView()
         self.tableViewCompHistory.delegate = self
         self.tableViewCompHistory.dataSource = self
-        //self.tableViewCompHistory.contentSize = CGSizeMake(100,100)
+        self.tableViewCompHistory.allowsSelection = false
         self.tableViewCompHistory.tag = 13
         
         // ポップ上に表示するオブジェクトをViewに追加する.
@@ -101,14 +100,14 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     //メモリ消費が多くなった時に動くイベント
     override func didReceiveMemoryWarning() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     /** 全オブジェクトの制約設定 **/
     func objConstraints() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         detailImgView.translatesAutoresizingMaskIntoConstraints = false
         nameDataLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -222,7 +221,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 item: self.birthDataLabel,
                 attribute:  .Left,
                 relatedBy: .Equal,
-                toItem: self.nameDataLabel,
+                toItem: self.positionDataLabel,
                 attribute:  .Left,
                 multiplier: 1.0,
                 constant: 0
@@ -233,7 +232,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 item: self.birthDataLabel,
                 attribute: .Top,
                 relatedBy: .Equal,
-                toItem: self.nameDataLabel,
+                toItem: self.positionDataLabel,
                 attribute:  .Bottom,
                 multiplier: 1.0,
                 constant: 14
@@ -281,7 +280,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 item: self.positionDataLabel,
                 attribute: .Top,
                 relatedBy: .Equal,
-                toItem: self.birthDataLabel,
+                toItem: self.nameDataLabel,
                 attribute:  .Bottom,
                 multiplier: 1.0,
                 constant: 14
@@ -321,7 +320,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 toItem: self.nameDataLabel,
                 attribute:  .Left,
                 multiplier: 1.0,
-                constant: 0
+                constant: -30
             ),
             
             // y座標
@@ -329,7 +328,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 item: self.tableViewKakugenHistory,
                 attribute: .Top,
                 relatedBy: .Equal,
-                toItem: self.positionDataLabel,
+                toItem: self.birthDataLabel,
                 attribute:  .Bottom,
                 multiplier: 1.0,
                 constant: 10
@@ -342,7 +341,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 relatedBy: .Equal,
                 toItem: self.view,
                 attribute: .Width,
-                multiplier: 1.0 / 1.4,
+                multiplier: 1.0 / 1.3,
                 constant: 0
             ),
             
@@ -366,7 +365,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 item: self.tableViewActionHistory,
                 attribute:  .Left,
                 relatedBy: .Equal,
-                toItem: self.nameDataLabel,
+                toItem: self.tableViewKakugenHistory,
                 attribute:  .Left,
                 multiplier: 1.0,
                 constant: 0
@@ -380,7 +379,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 toItem: self.tableViewKakugenHistory,
                 attribute:  .Bottom,
                 multiplier: 1.0,
-                constant: 10
+                constant: 16
             ),
             
             // 横幅
@@ -390,7 +389,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 relatedBy: .Equal,
                 toItem: self.view,
                 attribute: .Width,
-                multiplier: 1.0 / 1.4,
+                multiplier: 1.0 / 1.3,
                 constant: 0
             ),
             
@@ -414,7 +413,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 item: self.tableViewCompHistory,
                 attribute:  .Left,
                 relatedBy: .Equal,
-                toItem: self.nameDataLabel,
+                toItem: self.tableViewKakugenHistory,
                 attribute:  .Left,
                 multiplier: 1.0,
                 constant: 0
@@ -428,7 +427,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 toItem: self.tableViewActionHistory,
                 attribute:  .Bottom,
                 multiplier: 1.0,
-                constant: 10
+                constant: 16
             ),
             
             // 横幅
@@ -438,7 +437,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 relatedBy: .Equal,
                 toItem: self.view,
                 attribute: .Width,
-                multiplier: 1.0 / 1.4,
+                multiplier: 1.0 / 1.3,
                 constant: 0
             ),
             
@@ -460,7 +459,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     //****************************************    
     // セルの行数
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         switch tableView.tag {
             
@@ -480,7 +479,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     // セルの内容を変更
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "Cell")
         
         switch tableView.tag {
@@ -507,7 +506,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     //役職名の取得
     func getJobName() -> String  {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         // キャラクターIDが一致する最大のジョブIDを取得する.
         let tRefJob:[T_RefJob] = T_RefJob.MR_findByAttribute("charaID", withValue: Const.CHARACTER1_ID, andOrderBy: "jobID", ascending: false) as! [T_RefJob];
@@ -534,7 +533,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
 
     //格言履歴の取得
     func getKakugenHistory() -> [String]  {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         // キャラクターが保有する格言IDを取得する.（格言IDの昇順）
         let listTRefKakugen:[T_RefKakugen] = T_RefKakugen.MR_findByAttribute("charaID", withValue: Const.CHARACTER1_ID, andOrderBy: "kakugenID", ascending: true) as! [T_RefKakugen];
@@ -584,7 +583,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
  
     //行った場所の履歴の取得
     func getStageHistory() -> [String]  {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         // キャラクターが保有するステージIDを取得する.（ステージIDの昇順）
         let listTRefStage:[T_RefStage] = T_RefStage.MR_findByAttribute("charaID", withValue: Const.CHARACTER1_ID, andOrderBy: "stageID", ascending: true) as! [T_RefStage];
@@ -634,7 +633,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
 
     //行動履歴の取得
     func getActionHistory() -> [String]  {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         // 返却するアイテム
         var listResult :[String] = []
@@ -657,7 +656,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     /** M_ItemからアイテムIDにひもづく取得済アイテム１件の取得 **/
     func getM_ItemForKey(itemId: Int) -> M_Item  {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         // 取得済アイテムテーブルを取得.
         return (M_Item.MR_findByAttribute("itemID", withValue: itemId) as! [M_Item])[0];
