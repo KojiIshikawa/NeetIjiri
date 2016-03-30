@@ -163,7 +163,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let res_ActionImage = db.executeQuery(sqlActionImage, withArgumentsInArray: nil)
         while res_ActionImage.next() {
             let newRecord: M_ActionImage = M_ActionImage.MR_createEntity()! as M_ActionImage
-            newRecord.itemID = NSNumber(int: res_Item.intForColumn("itemID"))
+            newRecord.itemID = NSNumber(int: res_ActionImage.intForColumn("itemID"))
 //            newRecord.stageID = NSNumber(int: res_ActionImage.intForColumn("stageID"))
 //            newRecord.actID = NSNumber(int: res_ActionImage.intForColumn("actID"))
             newRecord.imageAct = res_ActionImage.stringForColumn("imageAct")

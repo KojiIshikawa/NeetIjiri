@@ -133,6 +133,12 @@ class Utility {
         return M_Stage.MR_findByAttribute("stageID", withValue: stageId) as! [M_Stage];
     }
 
+    /** アクションイメージ情報の取得 **/
+    class func getMActionImage(itemId: Int) -> [M_ActionImage] {
+        print(NSDate().description, #function, #line)
+        
+        return M_ActionImage.MR_findByAttribute("itemID", withValue: itemId, andOrderBy: "way,serialNo", ascending: true) as! [M_ActionImage];
+    }
     
     class func getRankName(rankKBN: String) -> String  {
         print(NSDate().description, #function, #line)

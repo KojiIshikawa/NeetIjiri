@@ -44,10 +44,15 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
 
     //アニメーションタイマー
     private var animeTimer: NSTimer!
+
+    //キャラクターイメージ
+    private var actionImages:[M_ActionImage]!
     
     //初回表示判定フラグ
     private var isFirstLoad: Bool! = false
 
+
+    
     required init(coder aDecoder: NSCoder){
         super.init(coder: aDecoder)!
     }
@@ -68,9 +73,6 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         
         // オブジェクトの制約の設定
         self.objConstraints()
-        
-        //アニメーション開始
-        self.animationStart()
         
         self.isFirstLoad = true
     }
@@ -338,6 +340,11 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         
         if activeItem.count >= 1 {
             activeStage = Utility.getMStage(Int(activeItem[0].stageID))
+            actionImages = Utility.getMActionImage(Int(activeItem[0].itemID))
+        } else {
+            // ない場合は先頭のデータを取得する.
+            activeStage = Utility.getMStage(1)
+            actionImages = Utility.getMActionImage(1)
         }
         
         // 背景設定
@@ -358,9 +365,9 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         myCharImageView.center.y = CGFloat(Float(self.view.bounds.height)
                                  * (Float(activeItem.count >= 1 ? activeItem[0].firstY : Const.CHARACTER_DEFAULT_FIRST_Y) / 10))
         
-          myCharImageView.center.x = self.view.center.x
+        myCharImageView.center.x = self.view.center.x
         
-          myCharImageView.center.y = self.view.center.y
+        myCharImageView.center.y = self.view.center.y
         
         
         myCharImageView.tag = 1
@@ -369,6 +376,25 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         myCharImageView.addGestureRecognizer(singleTap)
         self.view.addSubview(myCharImageView)
         
+        
+        //アニメーション開始
+        //ただし、未設定時はランダムウォーク
+        if activeItem.count >= 1 {
+            
+            switch activeItem[0].animeKBN {
+                
+                case Const.ANIME_KBN_TEITEN:
+                    self.teitenKyoroKyoro()
+                    break
+                
+                default:
+                    self.animationStart()
+                    break
+            }
+        } else {
+            self.animationStart()
+        }
+
         // フッタのバナーを生成する.
         self.footerBaner = ADBannerView()
         self.footerBaner.frame.offsetInPlace(dx: 0, dy: self.view.bounds.height-footerBaner.frame.height)
@@ -422,6 +448,8 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         
         // テーマソングを再生する.
         Utility.bgmSoundPlay(activeStage.count >= 1 ? activeStage[0].bgm : "")
+        
+        
     }
 
     /** バナーが読みこまれた時に呼ばれる **/
@@ -518,14 +546,11 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         
         // 実行中アクションのアイテムIDを返却する.
         return activeItemId
-        
     }
 
     
     //ランダムウォーク
     func randomWalk() {
-        //print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
-        //("x = \(self.myCharImageView.center.x) y = \(self.myCharImageView.center.y)")
 
         //初期値
         var x: CGFloat = 0.0
@@ -534,7 +559,6 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         var wkY: CGFloat
         let curX = self.myCharImageView.frame.origin.x
         let curY = self.myCharImageView.frame.origin.y
-        
         
         //動く方向を決める(8方向)
         repeat {
@@ -568,44 +592,54 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
                     y = wkY
             }
         } while (x == 0.0 && y == 0.0)
-    
-
-        //print("x = \(x) y = \(y)")
 
         // キャラクターアニメーションを設定する.
-        var charaImages :[UIImage]?
+        var charaImages :[UIImage]? = []
 
         if curX == curX+x && curY <= curY+y {
-            charaImages = [
-                Utility.getUncachedImage( named: "04_01_01_01_04.PNG")!,
-                Utility.getUncachedImage( named: "04_01_01_01_05.PNG")!,
-                Utility.getUncachedImage( named: "04_01_01_01_04.PNG")!,
-                Utility.getUncachedImage( named: "04_01_01_01_06.PNG")!
-        ]
-        
+
+            // 正面向き
+            for actionImage in actionImages {
+                
+                print(actionImage.imageAct)
+                
+                if actionImage.way == 1 {
+                    charaImages?.insert(Utility.getUncachedImage( named: String(actionImage.imageAct))!,atIndex: (charaImages?.count)!)
+                }
+            }            
         } else if curX == curX+x && curY > curY+y {
-            charaImages = [
-                Utility.getUncachedImage( named: "04_01_01_01_01.PNG")!,
-                Utility.getUncachedImage( named: "04_01_01_01_02.PNG")!,
-                Utility.getUncachedImage( named: "04_01_01_01_01.PNG")!,
-                Utility.getUncachedImage( named: "04_01_01_01_03.PNG")!
-        ]
-        
+
+            // 後向き
+            for actionImage in actionImages {
+                
+                print(actionImage.imageAct)
+                
+                if actionImage.way == 2 {
+                    charaImages?.insert(Utility.getUncachedImage( named: String(actionImage.imageAct))!,atIndex: (charaImages?.count)!)
+                }
+            }
         } else if curX <= curX+x  {
-            charaImages = [
-                Utility.getUncachedImage( named: "04_01_01_01_07.PNG")!,
-                Utility.getUncachedImage( named: "04_01_01_01_08.PNG")!,
-                Utility.getUncachedImage( named: "04_01_01_01_07.PNG")!,
-                Utility.getUncachedImage( named: "04_01_01_01_09.PNG")!
-            ]
-        }else if curX > curX+x {
-            charaImages = [
-                Utility.getUncachedImage( named: "04_01_01_01_10.PNG")!,
-                Utility.getUncachedImage( named: "04_01_01_01_11.PNG")!,
-                Utility.getUncachedImage( named: "04_01_01_01_10.PNG")!,
-                Utility.getUncachedImage( named: "04_01_01_01_12.PNG")!
-            ]
             
+            // 右向き
+            for actionImage in actionImages {
+                
+                print(actionImage.imageAct)
+                
+                if actionImage.way == 3 {
+                    charaImages?.insert(Utility.getUncachedImage( named: String(actionImage.imageAct))!,atIndex: (charaImages?.count)!)
+                }
+            }
+        }else if curX > curX+x {
+            
+            // 左向き
+            for actionImage in actionImages {
+                
+                print(actionImage.imageAct)
+                
+                if actionImage.way == 4 {
+                    charaImages?.insert(Utility.getUncachedImage( named: String(actionImage.imageAct))!,atIndex: (charaImages?.count)!)
+                }
+            }
         }
         
         self.myCharImageView.animationImages = charaImages
@@ -634,6 +668,20 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         animeTimer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(NeetMainViewController.randomWalk), userInfo: nil, repeats: true)
     }
 
+    //定点キョロキョロ
+    func teitenKyoroKyoro() {
+
+        // キャラクターアニメーションを設定する.
+        var charaImages :[UIImage]? = []
+
+        for actionImage in actionImages {
+           charaImages?.append(Utility.getUncachedImage( named: String(actionImage.imageAct))!)
+        }
+
+        self.myCharImageView.animationImages = charaImages
+        self.myCharImageView.animationDuration = 3
+        self.myCharImageView.startAnimating()
+    }
 
     /** 全オブジェクトの制約設定 **/
     func objConstraints() {
@@ -885,9 +933,5 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
             )]
         )
     }
-    
-
-
-    
 }
 
