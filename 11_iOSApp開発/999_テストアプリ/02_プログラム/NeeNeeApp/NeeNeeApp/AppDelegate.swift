@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
 
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
+        print(NSDate().description, __FUNCTION__, __LINE__)
         
         //coredataでやりとりするsqliteを設定
         MagicalRecord.setupCoreDataStackWithAutoMigratingSqliteStoreNamed("NeetMaster.sqlite")
@@ -26,10 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         M_Kakugen.MR_truncateAll()
         M_Okan.MR_truncateAll()
         M_Job.MR_truncateAll()
-
         M_Item.MR_truncateAll()
         M_Stage.MR_truncateAll()
-//        M_Action.MR_truncateAll()
         M_ActionImage.MR_truncateAll()
         M_ActionResult.MR_truncateAll()
         M_DropItem.MR_truncateAll()
@@ -42,10 +40,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let sqlKakugen = "SELECT * FROM M_Kakugen;" //格言マスタ
         let sqlOkan = "SELECT * FROM M_Okan;" //おかんマスタ
         let sqlJob = "SELECT * FROM M_Job;" //役職マスタ
-
         let sqlItem = "SELECT * FROM M_Item;" //アイテムマスタ
         let sqlStage = "SELECT * FROM M_Stage;" //ステージマスタ
-//        let sqlAction = "SELECT * FROM M_Action;" //行動マスタ
         let sqlActionImage = "SELECT * FROM M_ActionImage;" //行動画像マスタ
         let sqlActionResult = "SELECT * FROM M_ActionResult;" //行動結果マスタ
         let sqlDropItem = "SELECT * FROM M_DropItem;" //ドロップアイテムマスタ
@@ -139,25 +135,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         print("件数\(i)")
         i = 0
-        
-//        //行動マスタ
-//        let res_Action = db.executeQuery(sqlAction, withArgumentsInArray: nil)
-//        while res_Action.next() {
-//            let newRecord: M_Action = M_Action.MR_createEntity()! as M_Action
-//            newRecord.stageID = NSNumber(int: res_Action.intForColumn("stageID"))
-//            newRecord.actID = NSNumber(int: res_Action.intForColumn("actID"))
-//            newRecord.actName = res_Action.stringForColumn("actName")
-//            newRecord.firstX = NSNumber(int: res_Action.intForColumn("firstX"))
-//            newRecord.firstY = NSNumber(int: res_Action.intForColumn("firstY"))
-//            newRecord.minX = NSNumber(int: res_Action.intForColumn("minX"))
-//            newRecord.maxX = NSNumber(int: res_Action.intForColumn("maxX"))
-//            newRecord.minY = NSNumber(int: res_Action.intForColumn("minY"))
-//            newRecord.maxY = NSNumber(int: res_Action.intForColumn("maxY"))
-//            newRecord.managedObjectContext!.MR_saveToPersistentStoreAndWait()
-//            i++
-//        }
-//        print("件数\(i)")
-//        i = 0
         
         //行動画像マスタ
         let res_ActionImage = db.executeQuery(sqlActionImage, withArgumentsInArray: nil)
@@ -270,10 +247,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        NSNotificationCenter.defaultCenter().postNotificationName(
+            "applicationDidEnterBackground", object: nil)
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+        NSNotificationCenter.defaultCenter().postNotificationName(
+            "applicationWillEnterForeground", object: nil)
     }
 
     func applicationDidBecomeActive(application: UIApplication) {

@@ -22,7 +22,7 @@ class ResultViewController: UIViewController {
 
     // view ロード完了時
     override func viewDidLoad() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
+        print(NSDate().description, __FUNCTION__, __LINE__)
         
         super.viewDidLoad()
         
@@ -41,7 +41,7 @@ class ResultViewController: UIViewController {
     
     //メモリ消費が多くなった時に動くイベント
     override func didReceiveMemoryWarning() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
+        print(NSDate().description, __FUNCTION__, __LINE__)
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -50,7 +50,7 @@ class ResultViewController: UIViewController {
     //行動結果を計算する
     //結果をテーブルへ反映する
     func getActionResult() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
+        print(NSDate().description, __FUNCTION__, __LINE__)
 
         //*****************************
         //テストデータを作成
@@ -186,13 +186,13 @@ class ResultViewController: UIViewController {
 
     //結果を画面に表示する
     func showResult() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
+        print(NSDate().description, __FUNCTION__, __LINE__)
     }
     
     
     /** 全オブジェクトの制約設定 **/
     func objConstraints() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
+        print(NSDate().description, __FUNCTION__, __LINE__)
         
         imgResultView.translatesAutoresizingMaskIntoConstraints = false
         

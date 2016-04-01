@@ -30,7 +30,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     // view ロード完了時
     override func viewDidLoad() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
+        print(NSDate().description, __FUNCTION__, __LINE__)
         super.viewDidLoad()
 
         //背景設定
@@ -100,14 +100,14 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     //メモリ消費が多くなった時に動くイベント
     override func didReceiveMemoryWarning() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
+        print(NSDate().description, __FUNCTION__, __LINE__)
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     /** 全オブジェクトの制約設定 **/
     func objConstraints() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
+        print(NSDate().description, __FUNCTION__, __LINE__)
         
         detailImgView.translatesAutoresizingMaskIntoConstraints = false
         nameDataLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -459,7 +459,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     //****************************************    
     // セルの行数
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
+        print(NSDate().description, __FUNCTION__, __LINE__)
         
         switch tableView.tag {
             
@@ -479,7 +479,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     // セルの内容を変更
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
+        print(NSDate().description, __FUNCTION__, __LINE__)
         let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "Cell")
         
         switch tableView.tag {
@@ -489,7 +489,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             
         // 行動履歴
         case 12: cell.textLabel?.text = listAction[indexPath.row]
-                 cell.textLabel?.font = UIFont(name: "HiraKakuProN-W3", size: 6)
+                 cell.textLabel?.font = UIFont(name: "HiraKakuProN-W3", size: 7)
             
         // 行った場所履歴
         case 13: cell.textLabel?.text = listStage[indexPath.row]
@@ -506,7 +506,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     //役職名の取得
     func getJobName() -> String  {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
+        print(NSDate().description, __FUNCTION__, __LINE__)
         
         // キャラクターIDが一致する最大のジョブIDを取得する.
         let tRefJob:[T_RefJob] = T_RefJob.MR_findByAttribute("charaID", withValue: Const.CHARACTER1_ID, andOrderBy: "jobID", ascending: false) as! [T_RefJob];
@@ -533,7 +533,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
 
     //格言履歴の取得
     func getKakugenHistory() -> [String]  {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
+        print(NSDate().description, __FUNCTION__, __LINE__)
         
         // キャラクターが保有する格言IDを取得する.（格言IDの昇順）
         let listTRefKakugen:[T_RefKakugen] = T_RefKakugen.MR_findByAttribute("charaID", withValue: Const.CHARACTER1_ID, andOrderBy: "kakugenID", ascending: true) as! [T_RefKakugen];
@@ -583,7 +583,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
  
     //行った場所の履歴の取得
     func getStageHistory() -> [String]  {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
+        print(NSDate().description, __FUNCTION__, __LINE__)
         
         // キャラクターが保有するステージIDを取得する.（ステージIDの昇順）
         let listTRefStage:[T_RefStage] = T_RefStage.MR_findByAttribute("charaID", withValue: Const.CHARACTER1_ID, andOrderBy: "stageID", ascending: true) as! [T_RefStage];
@@ -633,7 +633,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
 
     //行動履歴の取得
     func getActionHistory() -> [String]  {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
+        print(NSDate().description, __FUNCTION__, __LINE__)
         
         // 返却するアイテム
         var listResult :[String] = []
@@ -643,11 +643,13 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         
         for action in actionList {
             
-            let actStartDate: String = String(action.actStartDate == nil ? "-": action.actStartDate);
-            let actEndDate: String = String(action.actEndDate == nil ? "-": action.actEndDate);
+            let actStartDate: String
+              = action.actStartDate == nil ? "-": Utility.jpDate(action.actStartDate);
+            let actEndDate: String
+              = action.actEndDate == nil ? "-": Utility.jpDate(action.actEndDate);
             
                listResult.append(
-                  String(getM_ItemForKey(Int(action.itemID)).itemName) +  " " + actStartDate +  " " + actEndDate
+                  String(getM_ItemForKey(Int(action.itemID)).itemName) +  " " + actStartDate +  " 〜 " + actEndDate
                )
         }
         
@@ -656,7 +658,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     /** M_ItemからアイテムIDにひもづく取得済アイテム１件の取得 **/
     func getM_ItemForKey(itemId: Int) -> M_Item  {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
+        print(NSDate().description, __FUNCTION__, __LINE__)
         
         // 取得済アイテムテーブルを取得.
         return (M_Item.MR_findByAttribute("itemID", withValue: itemId) as! [M_Item])[0];

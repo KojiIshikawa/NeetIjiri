@@ -28,7 +28,7 @@ class Utility {
     
     class func bgmSoundPlay(bgmPath: String)
     {
-        print(NSDate().description, #function, #line)
+        print(NSDate().description, __FUNCTION__, __LINE__)
         
         //userDefaultからボリューム値を取得
         let ud = NSUserDefaults.standardUserDefaults()
@@ -59,13 +59,13 @@ class Utility {
     
     class func bgmVolumeChange(volume: Float)
     {
-        print(NSDate().description, #function, #line)
+        print(NSDate().description, __FUNCTION__, __LINE__)
         myAudioPlayer.volume = volume
     }
 
     class func bgmStop()
     {
-        print(NSDate().description, #function, #line)
+        print(NSDate().description, __FUNCTION__, __LINE__)
         myAudioPlayer.stop()
     }
     
@@ -73,7 +73,7 @@ class Utility {
     //ファイルのパス
     class func seSoundPlay(sePath: String)
     {
-        print(NSDate().description, #function, #line)
+        print(NSDate().description, __FUNCTION__, __LINE__)
         
         //userDefaultからボリューム値を取得
         let ud = NSUserDefaults.standardUserDefaults()
@@ -97,13 +97,13 @@ class Utility {
     
     class func seVolumeChange(volume: Float)
     {
-        print(NSDate().description, #function, #line)
+        print(NSDate().description, __FUNCTION__, __LINE__)
         mySePlayer.volume = volume * 2
     }
     
     class func seStop()
     {
-        print(NSDate().description, #function, #line)
+        print(NSDate().description, __FUNCTION__, __LINE__)
         mySePlayer.stop()
     }
 
@@ -114,34 +114,54 @@ class Utility {
     
     /** 基本情報の取得 **/
     class func getCharaBase(charaId: Int) -> [T_CharaBase]  {
-        print(NSDate().description, #function, #line)
+        print(NSDate().description, __FUNCTION__, __LINE__)
         
         return T_CharaBase.MR_findByAttribute("charaID", withValue: charaId) as! [T_CharaBase];
     }
     
     /** アイテム情報の取得 **/
     class func getMItem(itemId: Int) -> [M_Item]  {
-        print(NSDate().description, #function, #line)
+        print(NSDate().description, __FUNCTION__, __LINE__)
         
         return M_Item.MR_findByAttribute("itemID", withValue: itemId) as! [M_Item];
     }
     
     /** ステージ情報の取得 **/
     class func getMStage(stageId: Int) -> [M_Stage]  {
-        print(NSDate().description, #function, #line)
+        print(NSDate().description, __FUNCTION__, __LINE__)
         
         return M_Stage.MR_findByAttribute("stageID", withValue: stageId) as! [M_Stage];
     }
 
     /** アクションイメージ情報の取得 **/
     class func getMActionImage(itemId: Int) -> [M_ActionImage] {
-        print(NSDate().description, #function, #line)
+        print(NSDate().description, __FUNCTION__, __LINE__)
         
         return M_ActionImage.MR_findByAttribute("itemID", withValue: itemId, andOrderBy: "way,serialNo", ascending: true) as! [M_ActionImage];
     }
     
+    /** 所持ステージの書き込み **/
+     class func editT_RefStage(stageId:Int) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+
+        let filter: NSPredicate =
+            NSPredicate(format: "charaID = " + String(Const.CHARACTER1_ID) + " and stageID = " + String(stageId))
+    
+        let refStage :[T_RefStage] = T_RefStage.MR_findAllSortedBy("charaID,stageID", ascending: true, withPredicate: filter) as! [T_RefStage];
+        
+        // ステージを所持していない場合
+        if (refStage.count == 0) {
+
+            // 所持ステージを追加する.
+            let initItem = T_RefStage.MR_createEntity()! as T_RefStage
+            initItem.charaID = Const.CHARACTER1_ID
+            initItem.stageID = stageId
+            initItem.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+        }
+    }
+    
     class func getRankName(rankKBN: String) -> String  {
-        print(NSDate().description, #function, #line)
+        print(NSDate().description, __FUNCTION__, __LINE__)
 
         var ret = ""
         
@@ -173,7 +193,7 @@ class Utility {
     
     
     class func getRankDrop(rankKBN: String) -> Int32  {
-        print(NSDate().description, #function, #line)
+        print(NSDate().description, __FUNCTION__, __LINE__)
         
         var ret :Int32 = 1
         
@@ -202,34 +222,16 @@ class Utility {
         
         return ret
     }
-
     
-    
-    
-    /** アクション情報の取得 **/
-    //TODO:Actionマスタ統合対応　ロジックを確認し不要なら削除してください。
-//    class func getMAction(stageId: Int, actionId: Int) -> [M_Action] {
-//        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
-//        
-//        let actionList = M_Action.MR_findByAttribute("stageID", withValue: stageId) as! [M_Action];
-//
-//        var resultActionList:[M_Action] = []
-//        
-//        for action in actionList {
-//            
-//            // 一致する場合、アイテム情報をセットする.
-//            if action.actID == actionId {
-//                
-//                // アクションを返却する.
-//                resultActionList.append(action)
-//                return resultActionList
-//            }
-//            
-//        }
-//        
-//    return resultActionList
-//    }
-    
+    /** 渡された日付を日本時間に変換して返却する. **/
+    class func jpDate (date: NSDate) -> String {
+        
+        let dateFormatter1 = NSDateFormatter()
+        dateFormatter1.locale = NSLocale(localeIdentifier: "ja_JP") // 日本時間
+        dateFormatter1.dateFormat = "yyyy/MM/dd HH:mm:ss"
+        
+        return dateFormatter1.stringFromDate(date)
+    }
 }
 
 
