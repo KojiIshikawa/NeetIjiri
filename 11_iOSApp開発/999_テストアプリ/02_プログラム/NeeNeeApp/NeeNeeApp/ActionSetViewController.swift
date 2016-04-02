@@ -64,14 +64,17 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         selItemLabel3.userInteractionEnabled = true
         
         let setItem1LongTouchRecognizer = UILongPressGestureRecognizer(target: self, action: "setItemLongTouch:")
+        setItem1LongTouchRecognizer.minimumPressDuration = 0.2
         setItem1LongTouchRecognizer.delegate = self
         selItemLabel1.addGestureRecognizer(setItem1LongTouchRecognizer)
         
         let setItem2LongTouchRecognizer = UILongPressGestureRecognizer(target: self, action: "setItemLongTouch:")
+        setItem2LongTouchRecognizer.minimumPressDuration = 0.2
         setItem2LongTouchRecognizer.delegate = self
         selItemLabel2.addGestureRecognizer(setItem2LongTouchRecognizer)
         
         let setItem3LongTouchRecognizer = UILongPressGestureRecognizer(target: self, action: "setItemLongTouch:")
+        setItem3LongTouchRecognizer.minimumPressDuration = 0.2
         setItem3LongTouchRecognizer.delegate = self
         selItemLabel3.addGestureRecognizer(setItem3LongTouchRecognizer)
         
@@ -100,6 +103,7 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         // セル長押しイベント登録
         // 長押し用レコグナイザー
         let cellitemCellLongTouchRecognizer = UILongPressGestureRecognizer(target: self, action: "itemCellLongTouch:")
+        cellitemCellLongTouchRecognizer.minimumPressDuration = 0.2
         cellitemCellLongTouchRecognizer.delegate = self
         itemCollectionView.addGestureRecognizer(cellitemCellLongTouchRecognizer)
 

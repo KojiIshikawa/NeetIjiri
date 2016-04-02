@@ -8,7 +8,7 @@
 
 import Foundation
 import AVFoundation
-
+import UIKit
 
 //設定画面です。
 class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
@@ -22,18 +22,25 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
     private var seVolumeSBar: UISlider!
     private var seImage: UIImageView!
     
+    private var tumbViewImageView: UIImageView!
+    
     // view ロード完了時
     override func viewDidLoad() {
         print(NSDate().description, __FUNCTION__, __LINE__)
         super.viewDidLoad()
         
-        let settingViewImage = Utility.getUncachedImage(named: "02_03_01.png")
-        let bgmViewImage     = Utility.getUncachedImage(named: "08_01_01.png")
-        let seViewImage      = Utility.getUncachedImage(named: "08_02_01.png")
-        let muteViewImage    = Utility.getUncachedImage(named: "01_10_01.png")
-        let tumbViewImage    = Utility.getUncachedImage(named: "07_01_01.png")
-        let minBarViewImage  = Utility.getUncachedImage(named: "07_02_01.png")
-        let maxBarViewImage  = Utility.getUncachedImage(named: "02_02_02.png")
+        // ラベル等の画像
+        let settingViewImage: UIImage = Utility.getUncachedImage(named: "02_03_01.png")!
+        let bgmViewImage: UIImage     = Utility.getUncachedImage(named: "08_01_01.png")!
+        let seViewImage: UIImage      = Utility.getUncachedImage(named: "08_02_01.png")!
+        let muteViewImage: UIImage    = Utility.getUncachedImage(named: "01_10_01.png")!
+        
+        // スライドバーの画像
+        let tumbViewImage: UIImage    = Utility.getUncachedImage(named: "07_01_01.png")!
+        let minBarViewImage: UIImage  = Utility.getUncachedImage(named: "07_02_02.png")!
+        let maxBarViewImage: UIImage  = Utility.getUncachedImage(named: "07_02_01.png")!
+        
+        // 画像のリサイズ
         
         //背景生成
         settingImgView = UIImageView(frame: self.view.frame)
@@ -106,7 +113,6 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-  
     
     /** 全オブジェクトの制約設定 **/
     func objConstraints() {

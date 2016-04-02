@@ -52,24 +52,22 @@ class ResultViewController: UIViewController {
     func getActionResult() {
         print(NSDate().description, __FUNCTION__, __LINE__)
 
+        
         //*****************************
         //テストデータを作成
         //*****************************
         let charaData : [T_CharaBase] = Utility.getCharaBase(Const.CHARACTER1_ID)
+
+        /**
         let insetData = T_ActionResult.MR_createEntity()! as T_ActionResult
         insetData.charaID = charaData[0].charaID
-//        let now = NSDate()
-//        let dateFormatter = NSDateFormatter()
-//        dateFormatter.locale = NSLocale(localeIdentifier: "ja_JP") // 日本時間
-//        dateFormatter.timeStyle = .MediumStyle
-//        dateFormatter.dateStyle = .MediumStyle
         insetData.actSetDate = NSDate()
         insetData.actStartDate = NSDate()
         insetData.actEndDate = NSDate()
         insetData.itemID = 1
         insetData.resultID = 0
         insetData.managedObjectContext!.MR_saveToPersistentStoreAndWait()
-        
+         **/
         
         //最新の行動履歴を取得
         let profileFilter: NSPredicate = NSPredicate(format: "charaID = %@", charaData[0].charaID)
@@ -80,7 +78,7 @@ class ResultViewController: UIViewController {
             return
         }
         
-        //行動がしていない場合
+        //行動が完了していない場合
         if ((tActionR[0].actEndDate) == nil) {
             return
         }
@@ -119,69 +117,74 @@ class ResultViewController: UIViewController {
             return
         }
         
-        //使用したアイテムを取得
-        let usedItem = Utility.getMItem(Int(mActionR[0].itemID))
-        
         // メッセージを表示
         lblResult = UILabel(frame: CGRectMake(60,80,self.view.bounds.width-100,270))
-        lblResult.text = usedItem[0].itemName  + " " + Utility.getRankName(mActionR[resultNo].rankKBN) + "\n\n"
-        lblResult.text! += mActionR[resultNo].message + "\n\n"
 
-        //取得アイテムを表示
-        lblResult.text! += "取得アイテム一覧" + "\n"
+        //使用したアイテムを取得
+        if mActionR.count > 0 {
 
-        
-        //取得アイテム計算
-        var randDrop : Int32 = 0 //0〜100までのランダム数値
-        var dropPer : Int32 = 0 //補正込みのドロップ確率
-//        var getItems : [Int] = []
-        var mItem : [M_Item]
-        var getItemFilter: NSPredicate
-        var tGetItem :[T_GetItem]
-        //ドロップアイテム数分ループ処理
-        for ( var j = 0; j < mDropItem.count-1; j++ ) {
-            //低確率のものから抽選する
-            randDrop = Int32(arc4random_uniform(UInt32(100)));
+            let usedItem = Utility.getMItem(Int(mActionR[0].itemID == nil ? 1 : mActionR[0].itemID))
+            lblResult.text = usedItem[0].itemName
+                + " " + Utility.getRankName(mActionR[resultNo].rankKBN) + "\n\n"
+            lblResult.text! += mActionR[resultNo].message + "\n\n"
             
-            dropPer = mDropItem[j].dropPer.intValue * Utility.getRankDrop(mActionR[0].rankKBN)
+            //取得アイテムを表示
+            lblResult.text! += "取得アイテム一覧" + "\n"
             
-            //取得判定
-            if (0 <= randDrop && randDrop <= dropPer) {
-                print("アイテムを獲得しました＝%@", mDropItem[j].dropItemID)
-//                //配列に格納する
-//                getItems.append(Int(mDropItem[j].dropItemID))
-
-                //所持アイテムを加算
-                getItemFilter = NSPredicate(format: "charaID = %@ and itemID = %@", charaData[0].charaID,mDropItem[j].dropItemID)
-                tGetItem = T_GetItem.MR_findAllSortedBy("itemID", ascending: false, withPredicate: getItemFilter) as! [T_GetItem];
+            //取得アイテム計算
+            var randDrop : Int32 = 0 //0〜100までのランダム数値
+            var dropPer : Int32 = 0 //補正込みのドロップ確率
+            //        var getItems : [Int] = []
+            var mItem : [M_Item]
+            var getItemFilter: NSPredicate
+            var tGetItem :[T_GetItem]
+            //ドロップアイテム数分ループ処理
+            for ( var j = 0; j < mDropItem.count-1; j++ ) {
+                //低確率のものから抽選する
+                randDrop = Int32(arc4random_uniform(UInt32(100)));
                 
-                if tGetItem.count == 0 {
-                    //INSERT
-                    let insertData = T_GetItem.MR_createEntity()! as T_GetItem
-                    insertData.charaID = Const.CHARACTER1_ID
-                    insertData.itemID = mDropItem[j].dropItemID
-                    insertData.itemCount = 1
-                    insertData.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+                dropPer = mDropItem[j].dropPer.intValue * Utility.getRankDrop(mActionR[0].rankKBN)
+                
+                //取得判定
+                if (0 <= randDrop && randDrop <= dropPer) {
+                    print("アイテムを獲得しました＝%@", mDropItem[j].dropItemID)
+                    //                //配列に格納する
+                    //                getItems.append(Int(mDropItem[j].dropItemID))
                     
-                } else {
-                    //UPDATE
-                    tGetItem[0].itemCount = Int(tGetItem[0].itemCount) + 1
-                    tGetItem[0].managedObjectContext!.MR_saveToPersistentStoreAndWait()
+                    //所持アイテムを加算
+                    getItemFilter = NSPredicate(format: "charaID = %@ and itemID = %@", charaData[0].charaID,mDropItem[j].dropItemID)
+                    tGetItem = T_GetItem.MR_findAllSortedBy("itemID", ascending: false, withPredicate: getItemFilter) as! [T_GetItem];
+                    
+                    if tGetItem.count == 0 {
+                        //INSERT
+                        let insertData = T_GetItem.MR_createEntity()! as T_GetItem
+                        insertData.charaID = Const.CHARACTER1_ID
+                        insertData.itemID = mDropItem[j].dropItemID
+                        insertData.itemCount = 1
+                        insertData.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+                        
+                    } else {
+                        //UPDATE
+                        tGetItem[0].itemCount = Int(tGetItem[0].itemCount) + 1
+                        tGetItem[0].managedObjectContext!.MR_saveToPersistentStoreAndWait()
+                    }
+                    
+                    
+                    
+                    //取得アイテムをラベルへ設定
+                    mItem = Utility.getMItem(Int(mDropItem[j].dropItemID))
+                    lblResult.text! += mItem[0].itemName + "\n"
+                    
                 }
-            
-
-                
-                //取得アイテムをラベルへ設定
-                mItem = Utility.getMItem(Int(mDropItem[j].dropItemID))
-                lblResult.text! += mItem[0].itemName + "\n"
-
             }
+        } else {
+            
+            // マスタ不整合の場合
+            lblResult.text = "マスタが取得できませんでした。"
         }
-        
         
         lblResult.numberOfLines = 0
         self.view.addSubview(lblResult)
-        
     }
 
     //結果を画面に表示する

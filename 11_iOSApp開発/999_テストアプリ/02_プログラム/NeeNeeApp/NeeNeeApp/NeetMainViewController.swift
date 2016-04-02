@@ -110,6 +110,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         
         // アクション進捗の最新化＆再描画する.
         self.isFirstLoad = false
+        self.manuBtnFlg = true
         
         //オブジェクトの配置
         self.createObjInit()
@@ -117,7 +118,8 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         // オブジェクトの制約の設定
         self.objConstraints()
         
-        self.isFirstLoad = true    }
+        self.isFirstLoad = true
+    }
 
     //非アクティブ時に動くイベント
     func enterBackground(notification: NSNotification){
@@ -392,12 +394,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
 
         myCharImageView.center.y = CGFloat(Float(self.view.bounds.height)
                                  * (Float(activeItem.count >= 1 ? activeItem[0].firstY : Const.CHARACTER_DEFAULT_FIRST_Y) / 10))
-        
-        myCharImageView.center.x = self.view.center.x
-        
-        myCharImageView.center.y = self.view.center.y
-        
-        
+
         myCharImageView.tag = 1
         myCharImageView.userInteractionEnabled = true
         let singleTap = UITapGestureRecognizer(target: self, action:"tapChara:")
@@ -499,9 +496,16 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     func updateSetAction() -> Int {
         print(NSDate().description, __FUNCTION__, __LINE__)
  
-        let filter: NSPredicate =
-            NSPredicate(format: "charaID = " + String(Const.CHARACTER1_ID) + " and actEndDate = null")
-        let actionList :[T_ActionResult] = T_ActionResult.MR_findAllSortedBy("actSetDate,actStartDate", ascending: true, withPredicate: filter) as! [T_ActionResult];
+        // 更新対象のアクションを取得する.
+        let actionFilter: NSPredicate =
+        NSPredicate(format: "charaID = " + String(Const.CHARACTER1_ID) + " and actEndDate = null");
+        let actionList :[T_ActionResult] = T_ActionResult.MR_findAllSortedBy("actSetDate,actStartDate", ascending: true, withPredicate: actionFilter) as! [T_ActionResult];
+
+        // 完了済のアクションを終了時間の降順で取得する.
+        let oldActionFilter: NSPredicate =
+        NSPredicate(format: "charaID = " + String(Const.CHARACTER1_ID) + " and actEndDate <> null");
+        let oldActionList :[T_ActionResult] = T_ActionResult.MR_findAllSortedBy("actEndDate", ascending: false, withPredicate: oldActionFilter) as! [T_ActionResult];
+        
         var activeItemId = -1
         var flgFirst = true
         var willStartDate: NSDate = NSDate()
@@ -518,61 +522,83 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
             
             // １件目の場合、スタート時間にセット時間＋開始までのインターバル時間(3分)を設定しておく.
             if flgFirst {
-                
+
                 let calendar = NSCalendar.currentCalendar()
                 let comp = NSDateComponents()
-                comp.second = Int(Const.ACTION_END_TIME_INTERVAL)
-                willStartDate = calendar.dateByAddingComponents(comp, toDate: action.actSetDate, options: NSCalendarOptions())!
-            }
+                comp.second = Int(Const.ACTION_START_TIME_INTERVAL)
+                
+                // 前回のアクションが存在する場合は、１件目アクションのセット時間と
+                // 前回アクションの終了時間を比較し、新しい方をスタート時間として採用する.
+                if oldActionList.count > 0 &&
+                    Float(oldActionList[0].actEndDate.timeIntervalSinceDate(action.actSetDate))
+                    >= Float(0.0) {
 
-            /**
-            // 完了していないアクションのみ対象とする.
-            action.actSetDate != nil ? print("actSetDate" + String(action.actSetDate)) : print("")
-            action.actStartDate != nil ? print("actStartDate" + String(action.actStartDate)) : print("")
-            action.actEndDate != nil ? print("actEndDate" + String(action.actEndDate)) : print("")
-            print(Float(NSDate().timeIntervalSinceDate(action.actSetDate)))
-            print("aaaa")
-            **/
+                    willStartDate = calendar.dateByAddingComponents(
+                        comp
+                      , toDate:oldActionList[0].actEndDate
+                      , options: NSCalendarOptions())!
+                        
+                } else {
+
+                    willStartDate = calendar.dateByAddingComponents(
+                        comp
+                      , toDate: action.actSetDate
+                      , options: NSCalendarOptions())!
+                }
+                
+            }
             
             // スタート時間の更新
-            // スタート時間が未設定の場合
-            if action.actStartDate == nil {
-                
-                //スタート時間を、算出した時間で更新する.
-                let updPredicate: NSPredicate = NSPredicate(format: "charaID = %@ AND itemID = %@ AND actSetDate = %@", argumentArray:[action.charaID,String(action.itemID),action.actSetDate]);
-                let updateData = T_ActionResult.MR_findFirstWithPredicate(updPredicate)! as T_ActionResult
-                updateData.actStartDate = willStartDate
-                updateData.managedObjectContext!.MR_saveToPersistentStoreAndWait()
-                action.actStartDate = willStartDate
+            // スタート時間が未設定かつ、インターバル時間を経過している場合
+            if action.actStartDate == nil
+                && Float(NSDate().timeIntervalSinceDate(willStartDate)) >= Float(0.0) {
+                    
+                    //スタート時間を、算出した時間で更新する.
+                    let updPredicate: NSPredicate = NSPredicate(
+                        format: "charaID = %@ AND itemID = %@ AND actSetDate = %@"
+                        , argumentArray:[action.charaID,String(action.itemID), action.actSetDate]);
+                    
+                    let updateData = T_ActionResult.MR_findFirstWithPredicate(updPredicate)! as T_ActionResult
+                    updateData.actStartDate = willStartDate
+                    updateData.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+                    action.actStartDate = willStartDate
+                    
             }
             
-            // スタート済のアクションが一定時間経過していたら、エンド時間をセットさせ終了させる.
-            if Float(NSDate().timeIntervalSinceDate(action.actStartDate))
+            // スタート済のアクションが一定時間経過していたら、さらにエンド時間をセットさせ終了させる.
+            if action.actStartDate != nil &&
+                Float(NSDate().timeIntervalSinceDate(action.actStartDate))
                 >= Float(Int(nowItem[0].procTime) * 60) {
-
-                //スタート済のアクションが一定時間経っていたら終了させる.
-                //スタート時間 + 一定待機時間をエンド時間として算出する.
-                let calendar = NSCalendar.currentCalendar()
-                let comp = NSDateComponents()
-                comp.second = Int(Const.ACTION_END_TIME_INTERVAL)
-                let willEndDate = calendar.dateByAddingComponents(comp, toDate: action.actStartDate, options: NSCalendarOptions())
-
-                //エンド時間を、算出した時間で更新する.
-                let updPredicate: NSPredicate = NSPredicate(format: "charaID = %@ AND itemID = %@ AND actSetDate = %@", argumentArray:[action.charaID,String(action.itemID),action.actSetDate]);
-                let updateData = T_ActionResult.MR_findFirstWithPredicate(updPredicate)! as T_ActionResult
-                updateData.actEndDate = willEndDate
-                updateData.managedObjectContext!.MR_saveToPersistentStoreAndWait()
                     
-            } else {
-
-                // スタート済のアクションが時間経過していない場合
+                    //スタート済のアクションが一定時間経っていたら終了させる.
+                    //スタート時間 + 一定待機時間をエンド時間として算出する.
+                    let calendar = NSCalendar.currentCalendar()
+                    let comp = NSDateComponents()
+                    comp.second = Int(nowItem[0].procTime)
+                    let willEndDate = calendar.dateByAddingComponents(comp, toDate: action.actStartDate, options: NSCalendarOptions())
+                    
+                    //エンド時間を、算出した時間で更新する.
+                    let updPredicate: NSPredicate = NSPredicate(
+                        format: "charaID = %@ AND itemID = %@ AND actSetDate = %@"
+                        , argumentArray:[action.charaID,String(action.itemID), action.actSetDate]);
+                    
+                    let updateData = T_ActionResult.MR_findFirstWithPredicate(updPredicate)! as T_ActionResult
+                    updateData.actEndDate = willEndDate
+                    updateData.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+                    action.actEndDate = willEndDate
+                    
+            }
+            
+            // アクションが実行中であった場合
+            if action.actStartDate != nil && action.actEndDate == nil{
+                
                 // 実行中のアクションがあるということなので返却するアイテムIDをセットする.
                 activeItemId = Int(action.itemID)
             }
             
             //１件目フラグをおろす.
             flgFirst = false
-
+            
             //次のアクションのスタート時間設定用にエンド時間＋開始までのインターバル時間を退避しておく.
             if (action.actEndDate != nil) {
                 let calendar = NSCalendar.currentCalendar()

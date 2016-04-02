@@ -649,20 +649,10 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
               = action.actEndDate == nil ? "-": Utility.jpDate(action.actEndDate);
             
                listResult.append(
-                  String(getM_ItemForKey(Int(action.itemID)).itemName) +  " " + actStartDate +  " 〜 " + actEndDate
+                  String(Utility.getMItem(Int(action.itemID))[0].itemName) +  " " + actStartDate +  " 〜 " + actEndDate
                )
         }
         
         return  listResult
     }
-    
-    /** M_ItemからアイテムIDにひもづく取得済アイテム１件の取得 **/
-    func getM_ItemForKey(itemId: Int) -> M_Item  {
-        print(NSDate().description, __FUNCTION__, __LINE__)
-        
-        // 取得済アイテムテーブルを取得.
-        return (M_Item.MR_findByAttribute("itemID", withValue: itemId) as! [M_Item])[0];
-        
-    }
-    
 }
