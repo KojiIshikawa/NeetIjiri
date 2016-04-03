@@ -218,8 +218,8 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
                 relatedBy: .Equal,
                 toItem: self.view,
                 attribute:  NSLayoutAttribute.CenterY,
-                multiplier: 1.0,
-                constant: -60
+                multiplier: 1.0 / 1.2,
+                constant: 0
             ),
             
             // 横幅
@@ -255,8 +255,8 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
                 relatedBy: .Equal,
                 toItem: self.view,
                 attribute:  NSLayoutAttribute.Left,
-                multiplier: 1.0,
-                constant: 20
+                multiplier: 1.0 / 1.2,
+                constant: 0
             ),
             
             // y座標
@@ -266,8 +266,8 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
                 relatedBy: .Equal,
                 toItem: self.titleImageView,
                 attribute:  NSLayoutAttribute.Bottom,
-                multiplier: 1.0,
-                constant: 20
+                multiplier: 1.04 / 1.0,
+                constant: 0
             ),
             // 横幅
             NSLayoutConstraint(
@@ -276,7 +276,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
                 relatedBy: .Equal,
                 toItem: self.view,
                 attribute: .Width,
-                multiplier: 1.0 / 5.0,
+                multiplier: 1.0 / 4.0,
                 constant: 0
             ),
             
@@ -351,7 +351,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
                 toItem: self.view,
                 attribute:  NSLayoutAttribute.Left,
                 multiplier: 1.0,
-                constant: 20
+                constant: 0
             ),
             
             // y座標
@@ -361,8 +361,8 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
                 relatedBy: .Equal,
                 toItem: self.nameLabel,
                 attribute:  NSLayoutAttribute.Bottom,
-                multiplier: 1.0,
-                constant: 20
+                multiplier: 1.02 / 1.0,
+                constant: 0
             ),
             // 横幅
             NSLayoutConstraint(
@@ -371,7 +371,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
                 relatedBy: .Equal,
                 toItem: self.view,
                 attribute: .Width,
-                multiplier: 1.0 / 5.0,
+                multiplier: 1.0 / 4.4,
                 constant: 0
             ),
             
@@ -419,7 +419,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
                 relatedBy: .Equal,
                 toItem: self.view,
                 attribute: .Width,
-                multiplier: 1.0/1.6,
+                multiplier: 1.0 / 1.4,
                 constant: 0
             ),
             
@@ -434,7 +434,6 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
                 constant: 0
             )]
         )
-
         
         // スタートボタンの制約
         self.view.addConstraints([
@@ -446,8 +445,8 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
                 relatedBy: .Equal,
                 toItem: self.view,
                 attribute:  NSLayoutAttribute.Right,
-                multiplier: 1.0,
-                constant: -20
+                multiplier: 1.0 / 1.05,
+                constant: 0
             ),
             
             // y座標
@@ -457,8 +456,8 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
                 relatedBy: .Equal,
                 toItem: self.footerBaner,
                 attribute:  NSLayoutAttribute.Top,
-                multiplier: 1.0,
-                constant: -20
+                multiplier: 1.0 / 1.02,
+                constant: 0
             ),
             
             // 横幅

@@ -32,7 +32,7 @@ class Const {
     static let ACTION_START_TIME_INTERVAL:Float = 60 * 3
     static let ACTION_END_TIME_INTERVAL:Float = 60 * 5
     static let CHARACTER_DEFAULT_FIRST_X = 5
-    static let CHARACTER_DEFAULT_FIRST_Y = 5
+    static let CHARACTER_DEFAULT_FIRST_Y = 6
     static let ANIME_KBN_RANDOM = 1
     static let ANIME_KBN_TEITEN = 2
 

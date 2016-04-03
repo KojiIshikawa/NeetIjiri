@@ -174,9 +174,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 attribute:  .Left,
                 relatedBy: .Equal,
                 toItem: self.view,
-                attribute:  .CenterX,
-                multiplier: 1.0,
-                constant: -90
+                attribute:  .Right,
+                multiplier: 1.0 / 4.2,
+                constant: 0
             ),
             
             // y座標
@@ -185,9 +185,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 attribute: .Top,
                 relatedBy: .Equal,
                 toItem: self.view,
-                attribute:  .Top,
-                multiplier: 1.0,
-                constant: 80
+                attribute:  .Bottom,
+                multiplier: 1.0 / 6.4,
+                constant: 0
             ),
             
             // 横幅
@@ -234,8 +234,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 relatedBy: .Equal,
                 toItem: self.positionDataLabel,
                 attribute:  .Bottom,
-                multiplier: 1.0,
-                constant: 14
+                multiplier: 1.1 / 1.0,
+                constant: 0
             ),
             
             // 横幅
@@ -282,8 +282,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 relatedBy: .Equal,
                 toItem: self.nameDataLabel,
                 attribute:  .Bottom,
-                multiplier: 1.0,
-                constant: 14
+                multiplier: 1.15 / 1.0,
+                constant: 0
             ),
             
             // 横幅
@@ -319,8 +319,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 relatedBy: .Equal,
                 toItem: self.nameDataLabel,
                 attribute:  .Left,
-                multiplier: 1.0,
-                constant: -30
+                multiplier: 1.0 / 1.4,
+                constant: 0
             ),
             
             // y座標
@@ -378,8 +378,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 relatedBy: .Equal,
                 toItem: self.tableViewKakugenHistory,
                 attribute:  .Bottom,
-                multiplier: 1.0,
-                constant: 16
+                multiplier: 1.06 / 1.0,
+                constant: 0
             ),
             
             // 横幅
@@ -426,8 +426,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 relatedBy: .Equal,
                 toItem: self.tableViewActionHistory,
                 attribute:  .Bottom,
-                multiplier: 1.0,
-                constant: 16
+                multiplier: 1.08 / 1.0,
+                constant: 0
             ),
             
             // 横幅
@@ -448,7 +448,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 relatedBy: .Equal,
                 toItem: self.view,
                 attribute: .Height,
-                multiplier: 1.0 / 6.0,
+                multiplier: 1.0 / 7.0,
                 constant: 0
             )]
         )

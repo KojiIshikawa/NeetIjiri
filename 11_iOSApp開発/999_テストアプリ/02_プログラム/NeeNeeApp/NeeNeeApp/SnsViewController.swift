@@ -184,12 +184,12 @@ class SnsViewController: UIViewController {
             // x座標
             NSLayoutConstraint(
                 item: self.facebookBtn,
-                attribute:  NSLayoutAttribute.Right,
+                attribute:  NSLayoutAttribute.Left,
                 relatedBy: .Equal,
                 toItem: self.view,
-                attribute:  NSLayoutAttribute.CenterX,
-                multiplier: 1.0,
-                constant: -20
+                attribute:  NSLayoutAttribute.Right,
+                multiplier: 1.0 / 8.0,
+                constant: 0
             ),
             
             // y座標
@@ -236,8 +236,8 @@ class SnsViewController: UIViewController {
                 relatedBy: .Equal,
                 toItem: self.facebookBtn,
                 attribute:  NSLayoutAttribute.Right,
-                multiplier: 1.0,
-                constant: 20
+                multiplier: 1.2 / 1.0,
+                constant: 0
             ),
             
             // y座標
@@ -245,10 +245,10 @@ class SnsViewController: UIViewController {
                 item: self.twitterBtn,
                 attribute: NSLayoutAttribute.Top,
                 relatedBy: .Equal,
-                toItem: self.view,
+                toItem: self.facebookBtn,
                 attribute:  NSLayoutAttribute.Top,
                 multiplier: 1.0,
-                constant: 100
+                constant: 0
             ),
             
             // 横幅
@@ -295,8 +295,8 @@ class SnsViewController: UIViewController {
                 relatedBy: .Equal,
                 toItem: self.facebookBtn,
                 attribute:  NSLayoutAttribute.Bottom,
-                multiplier: 1.0,
-                constant: 20
+                multiplier: 1.2 / 1.0,
+                constant: 0
             ),
             
             // 横幅
@@ -341,10 +341,10 @@ class SnsViewController: UIViewController {
                 item: self.questionBtn,
                 attribute: NSLayoutAttribute.Top,
                 relatedBy: .Equal,
-                toItem: self.twitterBtn,
-                attribute:  NSLayoutAttribute.Bottom,
+                toItem: self.lineBtn,
+                attribute:  NSLayoutAttribute.Top,
                 multiplier: 1.0,
-                constant: 20
+                constant: 0
             ),
             
             // 横幅

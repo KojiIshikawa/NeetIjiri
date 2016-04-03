@@ -45,6 +45,9 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     //アニメーションタイマー
     private var animeTimer: NSTimer!
 
+    //アクティブアイテム
+    private var activeItem: [M_Item]!
+    
     //キャラクターイメージ
     private var actionImages:[M_ActionImage]!
     
@@ -360,7 +363,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         print(NSDate().description, __FUNCTION__, __LINE__)
 
         let activeItemId = self.updateSetAction()
-        let activeItem = Utility.getMItem(activeItemId)
+        activeItem = Utility.getMItem(activeItemId)
         var activeStage = [M_Stage]()
         
         if activeItem.count >= 1 {
@@ -389,10 +392,10 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         myCharImageView.frame.size = CGSizeMake(self.view.bounds.width / 2.6
                                               , self.view.bounds.height / 3.0)
         
-        myCharImageView.center.x = CGFloat(Float(self.view.bounds.width)
+        myCharImageView.frame.origin.x = CGFloat(Float(self.view.bounds.width)
                                  * (Float(activeItem.count >= 1 ? activeItem[0].firstX : Const.CHARACTER_DEFAULT_FIRST_X) / 10))
 
-        myCharImageView.center.y = CGFloat(Float(self.view.bounds.height)
+        myCharImageView.frame.origin.y = CGFloat(Float(self.view.bounds.height)
                                  * (Float(activeItem.count >= 1 ? activeItem[0].firstY : Const.CHARACTER_DEFAULT_FIRST_Y) / 10))
 
         myCharImageView.tag = 1
@@ -574,7 +577,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
                     //スタート時間 + 一定待機時間をエンド時間として算出する.
                     let calendar = NSCalendar.currentCalendar()
                     let comp = NSDateComponents()
-                    comp.second = Int(nowItem[0].procTime)
+                    comp.second = Int(nowItem[0].procTime) * 60
                     let willEndDate = calendar.dateByAddingComponents(comp, toDate: action.actStartDate, options: NSCalendarOptions())
                     
                     //エンド時間を、算出した時間で更新する.
@@ -623,7 +626,11 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         var wkY: CGFloat
         let curX = self.myCharImageView.frame.origin.x
         let curY = self.myCharImageView.frame.origin.y
-        
+        var minX:CGFloat = CGFloat((Float(3)  / 10.0) * Float(self.view.bounds.width))
+        var maxX:CGFloat = CGFloat((Float(8)  / 10.0) * Float(self.view.bounds.width))
+        var minY:CGFloat = CGFloat((Float(6)  / 10.0) * Float(self.view.bounds.height))
+        var maxY:CGFloat = CGFloat((Float(8)  / 10.0) * Float(self.view.bounds.height))
+
         //動く方向を決める(8方向)
         repeat {
             wkX = 0.0
@@ -648,13 +655,24 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
             default:
                 wkY = 0.0
             }
-            if 30 <= (curX+wkX) &&
-                (curX+wkX) <= self.view.bounds.width - 30 &&
-               30 <= (curY+wkY) &&
-                (curY+wkY) <= self.view.bounds.height - 30 {
+            
+            // アクティブアイテムが存在する場合
+            if activeItem.count > 0 {
+
+                // 設定された可動範囲内のみでの動きとする.
+                minX = CGFloat((Float(activeItem[0].minX) / 10.0) * Float(self.view.bounds.width))
+                maxX = CGFloat((Float(activeItem[0].maxX) / 10.0) * Float(self.view.bounds.width))
+                minY = CGFloat((Float(activeItem[0].minY) / 10.0) * Float(self.view.bounds.height))
+                maxY = CGFloat((Float(activeItem[0].maxY) / 10.0) * Float(self.view.bounds.height))
+            }
+        
+            //可動域の設定
+            if CGFloat(minX) <= CGFloat(curX+wkX) && CGFloat(curX+wkX) <= CGFloat(maxX) &&
+               CGFloat(minY) <= CGFloat(curY+wkY) && CGFloat(curY+wkY) <= CGFloat(maxY) {
                     x = wkX
                     y = wkY
             }
+
         } while (x == 0.0 && y == 0.0)
 
         // キャラクターアニメーションを設定する.
@@ -767,8 +785,8 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
                 relatedBy: .Equal,
                 toItem: self.view,
                 attribute:  NSLayoutAttribute.Right,
-                multiplier: 1.0,
-                constant: -10
+                multiplier: 1.0 / 1.04,
+                constant: 0
             ),
 
             // y座標
@@ -778,8 +796,8 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
                 relatedBy: .Equal,
                 toItem: self.footerBaner,
                 attribute:  NSLayoutAttribute.Top,
-                multiplier: 1.0,
-                constant: -10
+                multiplier: 1.0 / 1.02,
+                constant: 0
             ),
             
             // 横幅
@@ -815,8 +833,8 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
                 relatedBy: .Equal,
                 toItem: self.manuBtn,
                 attribute:  NSLayoutAttribute.Left,
-                multiplier: 1.0,
-                constant: -10
+                multiplier: 1.0 / 1.04,
+                constant: 0
             ),
             
             // y座標
@@ -863,8 +881,8 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
                 relatedBy: .Equal,
                 toItem: self.mainBtn,
                 attribute:  NSLayoutAttribute.Left,
-                multiplier: 1.0,
-                constant: -10
+                multiplier: 1.0 / 1.04,
+                constant: 0
             ),
             
             // y座標
@@ -911,8 +929,8 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
                 relatedBy: .Equal,
                 toItem: self.detailBtn,
                 attribute:  NSLayoutAttribute.Left,
-                multiplier: 1.0,
-                constant: -10
+                multiplier: 1.0 / 1.04,
+                constant: 0
             ),
             
             // y座標
@@ -959,8 +977,8 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
                 relatedBy: .Equal,
                 toItem: self.shareBtn,
                 attribute:  NSLayoutAttribute.Left,
-                multiplier: 1.0,
-                constant: -10
+                multiplier: 1.0 / 1.1,
+                constant: 0
             ),
             
             // y座標

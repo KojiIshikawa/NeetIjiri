@@ -495,9 +495,9 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
                 attribute: NSLayoutAttribute.Top,
                 relatedBy: .Equal,
                 toItem: self.view,
-                attribute:  NSLayoutAttribute.Top,
-                multiplier: 1.0,
-                constant: 100
+                attribute:  NSLayoutAttribute.Bottom,
+                multiplier: 1.0 / 8.0,
+                constant: 0
             ),
 
             // 横幅
@@ -533,8 +533,8 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
                 relatedBy: .Equal,
                 toItem: self.setItemView,
                 attribute:  NSLayoutAttribute.Left,
-                multiplier: 1.0,
-                constant: -20
+                multiplier: 1.0 / 1.6,
+                constant: 0
             ),
             
             // y座標
@@ -544,8 +544,8 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
                 relatedBy: .Equal,
                 toItem: self.setItemView,
                 attribute:  NSLayoutAttribute.Top,
-                multiplier: 1.0,
-                constant: 20
+                multiplier: 1.5 / 1.0,
+                constant: 0
             )]
         )
 
@@ -570,8 +570,8 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
                 relatedBy: .Equal,
                 toItem: self.setItemView,
                 attribute:  NSLayoutAttribute.Bottom,
-                multiplier: 1.0,
-                constant: -20
+                multiplier: 1.0 / 1.05,
+                constant: 0
             )]
         )
 
@@ -585,8 +585,8 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
                 relatedBy: .Equal,
                 toItem: self.setItemView,
                 attribute:  NSLayoutAttribute.Right,
-                multiplier: 1.0,
-                constant: 20
+                multiplier: 1.2 / 1.0,
+                constant: 0
             ),
             
             // y座標
@@ -596,8 +596,8 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
                 relatedBy: .Equal,
                 toItem: self.setItemView,
                 attribute:  NSLayoutAttribute.Top,
-                multiplier: 1.0,
-                constant: 20
+                multiplier: 1.5 / 1.0,
+                constant: 0
             )]
         )
         
@@ -622,8 +622,8 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
                 relatedBy: .Equal,
                 toItem: self.setItemView,
                 attribute:  NSLayoutAttribute.Bottom,
-                multiplier: 1.0,
-                constant: 60
+                multiplier: 1.2 / 1.0,
+                constant: 0
             ),
             
             // 横幅
