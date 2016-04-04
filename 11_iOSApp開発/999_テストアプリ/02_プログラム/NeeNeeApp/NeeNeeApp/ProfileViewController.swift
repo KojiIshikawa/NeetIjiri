@@ -378,7 +378,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 relatedBy: .Equal,
                 toItem: self.tableViewKakugenHistory,
                 attribute:  .Bottom,
-                multiplier: 1.06 / 1.0,
+                multiplier: 1.05 / 1.0,
                 constant: 0
             ),
             
@@ -426,7 +426,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 relatedBy: .Equal,
                 toItem: self.tableViewActionHistory,
                 attribute:  .Bottom,
-                multiplier: 1.08 / 1.0,
+                multiplier: 1.06 / 1.0,
                 constant: 0
             ),
             

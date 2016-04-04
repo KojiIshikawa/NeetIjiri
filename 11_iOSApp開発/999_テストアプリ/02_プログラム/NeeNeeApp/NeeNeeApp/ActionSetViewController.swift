@@ -80,16 +80,17 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         
         // CollectionViewのレイアウトを生成.
         let layout = UICollectionViewFlowLayout()
-        
+
         // Cell一つ一つの大きさを設定.
-        layout.itemSize = CGSizeMake(100, 100)
-        /**
-        // Cellのマージン.
-        layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        layout.itemSize = CGSizeMake(
+            CGFloat(self.view.frame.height / 6.8)
+            , CGFloat(self.view.frame.height / 6.8))
         
-        // セクション毎のヘッダーサイズ.
-        layout.headerReferenceSize = CGSizeMake(0,0)
-        **/
+        //NSUserDefaultにアクションセット画面のサイズを保存
+        let ud1 = NSUserDefaults.standardUserDefaults()
+        ud1.setFloat(Float(CGFloat(self.view.frame.height / 6.8)), forKey: "ACTIONSET_SIZE")
+        ud1.synchronize()
+        
         // 横スクロール
         layout.scrollDirection = .Horizontal
         itemCollectionView = UICollectionView(frame: CGRectMake(0,0,0,0), collectionViewLayout: layout)

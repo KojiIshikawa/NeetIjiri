@@ -17,7 +17,15 @@ class itemCell: UICollectionViewCell {
     override init(frame: CGRect){
         super.init(frame: frame)
         
-        _img = UIImageView(frame: CGRectMake(0,0,100,100))
+        // セッションからアクションセット画面のサイズを取得
+        let ud1 = NSUserDefaults.standardUserDefaults()
+        let udActionSize : CGFloat! = CGFloat(ud1.floatForKey("ACTIONSET_SIZE"))
+
+        _img = UIImageView(frame: CGRectMake(
+            0,0
+           ,udActionSize
+           ,udActionSize))
+        
         _name = UILabel()
         _name.sizeToFit()
         _name.font = UIFont(name: "HiraMinProN-W6", size: 8)
