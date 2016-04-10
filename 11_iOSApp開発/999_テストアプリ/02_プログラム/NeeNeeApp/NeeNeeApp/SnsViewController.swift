@@ -24,7 +24,7 @@ class SnsViewController: UIViewController {
     
     // view ロード完了時
     override func viewDidLoad() {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         super.viewDidLoad()
 
         //背景生成
@@ -68,14 +68,14 @@ class SnsViewController: UIViewController {
     
     //メモリ消費が多くなった時に動くイベント
     override func didReceiveMemoryWarning() {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
     //facebookボタン押下時の処理
     func tapFacebookBtn(sender: AnyObject) {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         
         // Facebookの投稿ダイアログを作って
         let cv = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
@@ -89,7 +89,7 @@ class SnsViewController: UIViewController {
     
     //ラインボタン押下時の処理
     func tapLineBtn(sender: AnyObject) {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         
         //　共有する項目
         let shareImage = UIImage(named: "01_09_01.png")!
@@ -104,7 +104,7 @@ class SnsViewController: UIViewController {
     
     //Twitterボタン押下時の処理
     func tapTwitterBtn(sender: AnyObject) {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         
         // 共有する項目
         // Twitterの投稿ダイアログを作って
@@ -117,12 +117,12 @@ class SnsViewController: UIViewController {
 
     //？ボタン押下時の処理
     func tapQuestionBtn(sender: AnyObject) {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
     }
     
     /** 全オブジェクトの制約設定 **/
     func objConstraints() {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         
         shareImgView.translatesAutoresizingMaskIntoConstraints = false
         facebookBtn.translatesAutoresizingMaskIntoConstraints = false

@@ -18,6 +18,7 @@ class Utility {
     //画像をキャッシュせず読み込むメソッド
     class func getUncachedImage (named name : String) -> UIImage?
     {
+        print(name)
         if let imgPath = NSBundle.mainBundle().pathForResource(name, ofType: nil)
         {
             return UIImage(contentsOfFile: imgPath)
