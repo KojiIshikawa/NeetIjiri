@@ -31,16 +31,26 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
         
         // ラベル等の画像
         let settingViewImage: UIImage = Utility.getUncachedImage(named: "02_03_01.png")!
-        let bgmViewImage: UIImage     = Utility.getUncachedImage(named: "08_01_01.png")!
-        let seViewImage: UIImage      = Utility.getUncachedImage(named: "08_02_01.png")!
-        let muteViewImage: UIImage    = Utility.getUncachedImage(named: "01_10_01.png")!
+        let bgmViewImage:     UIImage = Utility.getUncachedImage(named: "08_01_01.png")!
+        let seViewImage:      UIImage = Utility.getUncachedImage(named: "08_02_01.png")!
+        let muteViewImage:    UIImage = Utility.getUncachedImage(named: "01_10_01.png")!
         
         // スライドバーの画像
-        let tumbViewImage: UIImage    = Utility.getUncachedImage(named: "07_01_01.png")!
-        let minBarViewImage: UIImage  = Utility.getUncachedImage(named: "07_02_02.png")!
-        let maxBarViewImage: UIImage  = Utility.getUncachedImage(named: "07_02_01.png")!
-        
-        // 画像のリサイズ
+        // 画像のリサイズをする.
+        let tumbViewImage: UIImage = Utility.resizeImage(
+             "07_01_01.png"
+            ,resizewWidth: CGFloat(view.frame.width / 10)
+            ,resizeHeight: CGFloat(view.frame.height / 20))
+
+        let minBarViewImage: UIImage = Utility.resizeImage(
+             "07_02_01.png"
+            ,resizewWidth: CGFloat(view.frame.width / 10)
+            ,resizeHeight: CGFloat(view.frame.height / 20))
+
+        let maxBarViewImage: UIImage = Utility.resizeImage(
+             "07_02_02.png"
+            ,resizewWidth: CGFloat(view.frame.width / 10)
+            ,resizeHeight: CGFloat(view.frame.height / 20))
         
         //背景生成
         settingImgView = UIImageView(frame: self.view.frame)

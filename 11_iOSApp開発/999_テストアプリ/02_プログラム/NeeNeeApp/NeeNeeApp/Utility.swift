@@ -232,6 +232,19 @@ class Utility {
         
         return dateFormatter1.stringFromDate(date)
     }
+    
+    // 比率だけ指定する場合
+    class func resizeImage(imageFile: String,resizewWidth: CGFloat,resizeHeight: CGFloat) -> UIImage {
+        
+        let imageWk: UIImage = Utility.getUncachedImage(named: imageFile)!
+        
+        let resizedSize = CGSize(width: Int(resizewWidth), height: Int(resizeHeight))
+        UIGraphicsBeginImageContext(resizedSize)
+        imageWk.drawInRect(CGRect(x: 0, y: 0, width: resizedSize.width, height: resizedSize.height))
+        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return resizedImage
+    }
 }
 
 

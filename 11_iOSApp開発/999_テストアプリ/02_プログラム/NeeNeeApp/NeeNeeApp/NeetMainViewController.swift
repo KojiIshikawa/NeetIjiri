@@ -499,12 +499,12 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     func updateSetAction() -> Int {
         print(NSDate().description, __FUNCTION__, __LINE__)
  
-        // 更新対象のアクションを取得する.
+        // 更新対象のアクション（最大３件）を取得する.
         let actionFilter: NSPredicate =
         NSPredicate(format: "charaID = " + String(Const.CHARACTER1_ID) + " and actEndDate = null");
         let actionList :[T_ActionResult] = T_ActionResult.MR_findAllSortedBy("actSetDate,actStartDate", ascending: true, withPredicate: actionFilter) as! [T_ActionResult];
 
-        // 完了済のアクションを終了時間の降順で取得する.
+        // 完了済のアクションの最新１件を取得する.
         let oldActionFilter: NSPredicate =
         NSPredicate(format: "charaID = " + String(Const.CHARACTER1_ID) + " and actEndDate <> null");
         let oldActionList :[T_ActionResult] = T_ActionResult.MR_findAllSortedBy("actEndDate", ascending: false, withPredicate: oldActionFilter) as! [T_ActionResult];
@@ -515,12 +515,12 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         
         for action in actionList {
             
-            // アクティブなアイテムが探知済の場合、処理しない.
+            // アクティブなアイテムが探知済の場合、それ以降のアイテムは処理しない.
             if activeItemId != -1 {
                 break;
             }
             
-            // アイテム情報を取得する.
+            // 処理対象アクションのアイテム情報を取得する.
             let nowItem = Utility.getMItem(Int(action.itemID))
             
             // １件目の場合、スタート時間にセット時間＋開始までのインターバル時間(3分)を設定しておく.
@@ -550,22 +550,24 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
                 }
                 
             }
+
+            
+            //スタート時間を、算出した時間で更新する.
+            let updPredicate: NSPredicate = NSPredicate(
+                format: "charaID = %@ AND itemID = %@ AND actSetDate = %@"
+                , argumentArray:[action.charaID,String(action.itemID), action.actSetDate]);
+            
+            let updateData = T_ActionResult.MR_findFirstWithPredicate(updPredicate)! as T_ActionResult
+
             
             // スタート時間の更新
             // スタート時間が未設定かつ、インターバル時間を経過している場合
             if action.actStartDate == nil
                 && Float(NSDate().timeIntervalSinceDate(willStartDate)) >= Float(0.0) {
                     
-                    //スタート時間を、算出した時間で更新する.
-                    let updPredicate: NSPredicate = NSPredicate(
-                        format: "charaID = %@ AND itemID = %@ AND actSetDate = %@"
-                        , argumentArray:[action.charaID,String(action.itemID), action.actSetDate]);
-                    
-                    let updateData = T_ActionResult.MR_findFirstWithPredicate(updPredicate)! as T_ActionResult
+                    // 開始時間を更新する.
                     updateData.actStartDate = willStartDate
-                    updateData.managedObjectContext!.MR_saveToPersistentStoreAndWait()
                     action.actStartDate = willStartDate
-                    
             }
             
             // スタート済のアクションが一定時間経過していたら、さらにエンド時間をセットさせ終了させる.
@@ -580,17 +582,14 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
                     comp.second = Int(nowItem[0].procTime) * 60
                     let willEndDate = calendar.dateByAddingComponents(comp, toDate: action.actStartDate, options: NSCalendarOptions())
                     
-                    //エンド時間を、算出した時間で更新する.
-                    let updPredicate: NSPredicate = NSPredicate(
-                        format: "charaID = %@ AND itemID = %@ AND actSetDate = %@"
-                        , argumentArray:[action.charaID,String(action.itemID), action.actSetDate]);
-                    
-                    let updateData = T_ActionResult.MR_findFirstWithPredicate(updPredicate)! as T_ActionResult
+                    // 終了時間を更新する.
                     updateData.actEndDate = willEndDate
-                    updateData.managedObjectContext!.MR_saveToPersistentStoreAndWait()
                     action.actEndDate = willEndDate
-                    
+
             }
+            
+            // データを更新する.
+            updateData.managedObjectContext!.MR_saveToPersistentStoreAndWait()
             
             // アクションが実行中であった場合
             if action.actStartDate != nil && action.actEndDate == nil{
