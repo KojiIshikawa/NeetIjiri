@@ -8,6 +8,7 @@ const struct T_ActionResultAttributes T_ActionResultAttributes = {
 	.actSetDate = @"actSetDate",
 	.actStartDate = @"actStartDate",
 	.charaID = @"charaID",
+	.finishFlg = @"finishFlg",
 	.itemID = @"itemID",
 	.resultID = @"resultID",
 };
@@ -40,6 +41,11 @@ const struct T_ActionResultAttributes T_ActionResultAttributes = {
 
 	if ([key isEqualToString:@"charaIDValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"charaID"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
+	if ([key isEqualToString:@"finishFlgValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"finishFlg"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
@@ -81,6 +87,26 @@ const struct T_ActionResultAttributes T_ActionResultAttributes = {
 
 - (void)setPrimitiveCharaIDValue:(int32_t)value_ {
 	[self setPrimitiveCharaID:[NSNumber numberWithInt:value_]];
+}
+
+@dynamic finishFlg;
+
+- (BOOL)finishFlgValue {
+	NSNumber *result = [self finishFlg];
+	return [result boolValue];
+}
+
+- (void)setFinishFlgValue:(BOOL)value_ {
+	[self setFinishFlg:[NSNumber numberWithBool:value_]];
+}
+
+- (BOOL)primitiveFinishFlgValue {
+	NSNumber *result = [self primitiveFinishFlg];
+	return [result boolValue];
+}
+
+- (void)setPrimitiveFinishFlgValue:(BOOL)value_ {
+	[self setPrimitiveFinishFlg:[NSNumber numberWithBool:value_]];
 }
 
 @dynamic itemID;

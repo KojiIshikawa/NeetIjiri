@@ -8,6 +8,7 @@ extern const struct T_ActionResultAttributes {
 	__unsafe_unretained NSString *actSetDate;
 	__unsafe_unretained NSString *actStartDate;
 	__unsafe_unretained NSString *charaID;
+	__unsafe_unretained NSString *finishFlg;
 	__unsafe_unretained NSString *itemID;
 	__unsafe_unretained NSString *resultID;
 } T_ActionResultAttributes;
@@ -40,6 +41,14 @@ extern const struct T_ActionResultAttributes {
 - (void)setCharaIDValue:(int32_t)value_;
 
 //- (BOOL)validateCharaID:(id*)value_ error:(NSError**)error_;
+
+@property (nonatomic, strong) NSNumber* finishFlg;
+
+@property (atomic) BOOL finishFlgValue;
+- (BOOL)finishFlgValue;
+- (void)setFinishFlgValue:(BOOL)value_;
+
+//- (BOOL)validateFinishFlg:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) NSNumber* itemID;
 
@@ -75,6 +84,12 @@ extern const struct T_ActionResultAttributes {
 
 - (int32_t)primitiveCharaIDValue;
 - (void)setPrimitiveCharaIDValue:(int32_t)value_;
+
+- (NSNumber*)primitiveFinishFlg;
+- (void)setPrimitiveFinishFlg:(NSNumber*)value;
+
+- (BOOL)primitiveFinishFlgValue;
+- (void)setPrimitiveFinishFlgValue:(BOOL)value_;
 
 - (NSNumber*)primitiveItemID;
 - (void)setPrimitiveItemID:(NSNumber*)value;

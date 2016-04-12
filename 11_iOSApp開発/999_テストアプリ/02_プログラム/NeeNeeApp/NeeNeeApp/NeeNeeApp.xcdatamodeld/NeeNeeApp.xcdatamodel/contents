@@ -66,6 +66,7 @@
         <attribute name="actSetDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="actStartDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="charaID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="finishFlg" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="itemID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="resultID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
@@ -109,7 +110,7 @@
         <element name="M_Kakugen" positionX="-63" positionY="-18" width="128" height="90"/>
         <element name="M_Okan" positionX="-36" positionY="45" width="128" height="90"/>
         <element name="M_Stage" positionX="0" positionY="72" width="128" height="135"/>
-        <element name="T_ActionResult" positionX="18" positionY="126" width="128" height="135"/>
+        <element name="T_ActionResult" positionX="18" positionY="126" width="128" height="150"/>
         <element name="T_CharaBase" positionX="-9" positionY="99" width="128" height="165"/>
         <element name="T_GetItem" positionX="0" positionY="108" width="128" height="90"/>
         <element name="T_RefItem" positionX="9" positionY="117" width="128" height="75"/>
