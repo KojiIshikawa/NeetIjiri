@@ -556,7 +556,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
         print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         
         
-        for (var i:Int = 1 ; i <= 17 ; i++) {
+        for (var i:Int = 1 ; i <= 51 ; i++) {
 
             // アイテム１を追加
             let initItem1 = T_GetItem.MR_createEntity()! as T_GetItem
