@@ -370,9 +370,6 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
             activeStage = Utility.getMStage(Int(activeItem[0].stageID))
             actionImages = Utility.getMActionImage(Int(activeItem[0].itemID))
             
-            // 所持ステージに書き込む.
-            Utility.editT_RefStage(Int(activeItem[0].stageID))
-            
         } else {
             
             // ない場合は先頭のデータを取得する.
@@ -585,6 +582,12 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
                     // 終了時間を更新する.
                     updateData.actEndDate = willEndDate
                     action.actEndDate = willEndDate
+                    
+                    // 所持ステージに書き込む.
+                    Utility.editT_RefStage(Int(nowItem[0].stageID))
+                    
+                    // 所持役職に書き込む.
+                    Utility.editT_RefJob(Int(nowItem[0].stageID))
 
             }
             

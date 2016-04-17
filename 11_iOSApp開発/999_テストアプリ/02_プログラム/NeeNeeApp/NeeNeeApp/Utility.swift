@@ -161,6 +161,33 @@ class Utility {
         }
     }
     
+    
+    /** 所持ステージの書き込み **/
+    class func editT_RefJob(stageId:Int) {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+
+        // 該当ステージに一致するジョブを取得する.
+        let filter1: NSPredicate = NSPredicate(format: "maxStageID = " + String(stageId))
+        
+        let mJob :[M_Job] = M_Job.MR_findAllSortedBy("maxStageID", ascending: true, withPredicate: filter1) as! [M_Job];
+
+        // 所持済のジョブの存在チェックをする.
+        let filter2: NSPredicate =
+        NSPredicate(format: "charaID = " + String(Const.CHARACTER1_ID) + " and jobID = " + String(mJob[0].jobID))
+        
+        let refJob :[T_RefJob] = T_RefJob.MR_findAllSortedBy("charaID,jobID", ascending: true, withPredicate: filter2) as! [T_RefJob];
+        
+        // ステージに該当するジョブを所持していない場合
+        if (refJob.count == 0) {
+            
+            // 所持ステージを追加する.
+            let addJob = T_RefJob.MR_createEntity()! as T_RefJob
+            addJob.charaID = Const.CHARACTER1_ID
+            addJob.jobID = mJob[0].jobID
+            addJob.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+        }
+    }
+    
     class func getRankName(rankKBN: String) -> String  {
         print(NSDate().description, __FUNCTION__, __LINE__)
 
