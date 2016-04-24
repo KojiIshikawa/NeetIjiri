@@ -81,7 +81,7 @@ class SnsViewController: UIViewController {
         let cv = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
         
         // 画像を追加
-        cv.addImage(UIImage(named: "01_07_01.png"))
+        cv.addImage(UIImage(named: "01_13_01.png"))
         
         // 投稿ダイアログを表示する
         self.presentViewController(cv, animated: true, completion: nil)
@@ -92,7 +92,7 @@ class SnsViewController: UIViewController {
         print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         
         //　共有する項目
-        let shareImage = UIImage(named: "01_09_01.png")!
+        let shareImage = UIImage(named: "01_13_01.png")!
         let shareItems = [shareImage]
         
         // LINEで送るボタンを追加
@@ -109,8 +109,10 @@ class SnsViewController: UIViewController {
         // 共有する項目
         // Twitterの投稿ダイアログを作って
         let cv = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+        
         // 文字を追加
         cv.setInitialText("メッセージを入力してください。")
+        
         // 投稿ダイアログを表示する
         self.presentViewController(cv, animated: true, completion:nil )
     }
