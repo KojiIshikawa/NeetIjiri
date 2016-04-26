@@ -37,10 +37,6 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     private var shareBtn: UIButton!
     private var detailBtn: UIButton!
     private var configBtn: UIButton!
-    
-    // メインの背景画像用オブジェクト
-    private var mainImgView: UIImageView!
-    private var mainImgSubView: UIImageView!
 
     //アニメーションタイマー
     private var animeTimer: NSTimer!
@@ -53,18 +49,14 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     
     //初回表示判定フラグ
     private var isFirstLoad: Bool! = false
-
-
     
     required init(coder aDecoder: NSCoder){
         super.init(coder: aDecoder)!
     }
     
-
     //****************************************
     // MARK: - イベント
     //****************************************
-    
     
     // view 初回ロード時
     override func viewDidLoad() {
@@ -83,6 +75,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         // オブジェクトの制約の設定
         self.objConstraints()
         
+        // ログインボーナス表示可能
         self.isFirstLoad = true
     }
     
@@ -93,8 +86,8 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
 
         super.viewDidAppear(false)
 
+        //ログインボーナス画面の表示
         if (self.isFirstLoad == true) {
-            //ログインボーナス画面の表示
             self.showLoginBonus()
             self.isFirstLoad = false
         }
@@ -112,7 +105,6 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         
         // アクション進捗の最新化＆再描画する.
-        self.isFirstLoad = false
         self.manuBtnFlg = true
         
         //オブジェクトの配置
@@ -121,12 +113,25 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         // オブジェクトの制約の設定
         self.objConstraints()
         
-        self.isFirstLoad = true
+        //ログインボーナス画面の表示
+        NSTimer.scheduledTimerWithTimeInterval(0.8, target: self, selector: "showLoginBonus", userInfo: nil, repeats: false)
     }
 
     //非アクティブ時に動くイベント
     func enterBackground(notification: NSNotification){
         print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        
+        // オブジェクト変数を初期化する.
+        self.activeItem.removeAll()
+        self.actionImages.removeAll()
+        self.footerBaner.removeFromSuperview()
+        self.myCharImageView.removeFromSuperview()
+        self.manuBtn.removeFromSuperview()
+        self.mainBtn.removeFromSuperview()
+        self.shareBtn.removeFromSuperview()
+        self.detailBtn.removeFromSuperview()
+        self.configBtn.removeFromSuperview()
+        self.myImageView.removeFromSuperview()
     }
     
     /** メニューボタン押下時の処理 **/
@@ -196,6 +201,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     }
     
     //popOver表示終了後のイベント
+    //TODO: 未通知の結果の件数分表示されるように処理を実装する必要あり
     func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
         print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         let identifier = popoverPresentationController.presentedViewController.title
