@@ -205,11 +205,15 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
         print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         let identifier = popoverPresentationController.presentedViewController.title
-        
-        if (identifier == "LoginBonusView") {
-            self.showPopoverView(self.manuBtn, identifier: "ResultView")
+
+        //ログイン画面または結果表示画面からの戻りの場合
+        if (identifier == "LoginBonusView" || identifier == "ResultView") {
+
+            //未完了の行動済行動履歴を取得し、存在する場合は結果画面を表示する.
+            if (Utility.getFinishedTActionResult(Const.CHARACTER1_ID).count > 0) {
+                self.showPopoverView(self.manuBtn, identifier: "ResultView")
+            }
         }
-        
     }
     
     //Popover実装時に必要になるイベント　おまじない
@@ -304,31 +308,59 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
 //        }
 //    }
     
-    
     // ジェスチャーイベント処理
     func tapChara(gestureRecognizer: UITapGestureRecognizer){
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
-//        // TODO:ダイアログを表示
-//        let alertController = UIAlertController(title: "ニートの格言入手", message: "チラシを表示して、今日のニートの格言を取得しますか？", preferredStyle: .Alert)
-//        
-//        let defaultActionYes = UIAlertAction(title: "表示する", style: .Default, handler:{
-//            (action:UIAlertAction!) -> Void in
-//
-//            // iAd(インタースティシャル)の表示
-//            self.requestInterstitialAdPresentation()
-//
-//            self.showPopoverView(self.manuBtn, identifier: "KakugenView")
-//        })
-//
-//        let defaultActionNo = UIAlertAction(title: "表示しない", style: .Default, handler: nil)
-//        alertController.addAction(defaultActionYes)
-//        alertController.addAction(defaultActionNo)
-//
-//        presentViewController(alertController, animated: true, completion: nil)
-
-//        self.showPopoverView(self.manuBtn, identifier: "KakugenView")
-
         
+        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        
+        //年月日を取得する.
+        //NSCalendarインスタンス
+        let cal = NSCalendar(identifier: NSCalendarIdentifierGregorian)!
+        let now = NSDate()
+        let year = cal.component(NSCalendarUnit.Year , fromDate: now) * 10000
+        let Month = cal.component(NSCalendarUnit.Month , fromDate: now) * 100
+        let day = cal.component(NSCalendarUnit.Day , fromDate: now)
+        
+        
+        let ud = NSUserDefaults.standardUserDefaults()
+        let udDateKkgnLst: Int! = ud.integerForKey("KAKUGEN_LAST_DATE")
+        
+        
+        // 前回表示時と同じ年月日の場合
+        if udDateKkgnLst == year + Month + day {
+            
+            // 保持済の格言を表示
+            self.showPopoverView(self.manuBtn, identifier: "KakugenView")
+            
+        } else {
+            
+            let alertController = UIAlertController(title: "ニートの格言入手", message: "チラシを表示して、今日のニートの格言を取得しますか？", preferredStyle: .Alert)
+            
+            let defaultActionYes = UIAlertAction(title: "表示する", style: .Default, handler:{
+                (action:UIAlertAction!) -> Void in
+                
+                // 格言表示
+                self.showPopoverView(self.manuBtn, identifier: "KakugenView")
+                
+                //NSUserDefaultに格言表示日付をセット
+                let ud = NSUserDefaults.standardUserDefaults()
+                
+                //年月日を取得し、センションに格納
+                ud.setInteger(year + Month + day, forKey: "KAKUGEN_LAST_DATE")
+                ud.synchronize()
+                
+                // iAd(インタースティシャル)の表示
+                self.requestInterstitialAdPresentation()
+            })
+            
+            let defaultActionNo = UIAlertAction(title: "表示しない", style: .Default, handler: nil)
+            alertController.addAction(defaultActionYes)
+            alertController.addAction(defaultActionNo)
+            presentViewController(alertController, animated: true, completion: nil)
+            
+            self.showPopoverView(self.manuBtn, identifier: "KakugenView")
+            
+        }
     }
     
     //****************************************
@@ -338,8 +370,39 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     //ログインボーナス
     func showLoginBonus() {
         print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
-        //PopOverを表示
-        self.showPopoverView(self.manuBtn, identifier: "LoginBonusView")
+        
+        //セッション情報.
+        let ud = NSUserDefaults.standardUserDefaults()
+        let udDateLoginLst: Int! = ud.integerForKey("LOGIN_LAST_DATE")
+        
+        //NSCalendarインスタンス
+        let cal = NSCalendar(identifier: NSCalendarIdentifierGregorian)!
+        let now = NSDate()
+        let year = cal.component(NSCalendarUnit.Year , fromDate: now) * 10000
+        let Month = cal.component(NSCalendarUnit.Month , fromDate: now) * 100
+        let day = cal.component(NSCalendarUnit.Day , fromDate: now)
+        
+        print(year + Month + day)
+        
+        //前回表示時と同じ年月日の場合
+        if udDateLoginLst == year + Month + day {
+
+            //行動結果PopOverを表示（表示すべきものがある場合のみ）
+            //未完了の行動済行動履歴を取得し、存在する場合は結果画面を表示する.
+            if (Utility.getFinishedTActionResult(Const.CHARACTER1_ID).count > 0) {
+                self.showPopoverView(self.manuBtn, identifier: "ResultView")
+            }
+
+        } else {
+
+            //前回のログイン時と日付が異なる場合
+            //ログインボーナスPopOverを表示
+            self.showPopoverView(self.manuBtn, identifier: "LoginBonusView")
+            
+            //ログイン年月日をセッションに格納
+            //ud.setInteger(year + Month + day, forKey: "LOGIN_LAST_DATE")
+            //ud.synchronize()
+        }
     }
     
     //背景を取得

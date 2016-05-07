@@ -25,22 +25,55 @@ class LoginBonusViewController: UIViewController {
         print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         super.viewDidLoad()
 
+        //メッセージ
+        var mes1: String = ""
+        var mes2: String = ""
+        var mes3: String = ""
+        
         //背景
         imgViewLogin = UIImageView(frame: self.view.frame)
         imgViewLogin.image = Utility.getUncachedImage(named: "02_07_01.png")
-        self.view.addSubview(imgViewLogin)
         
-        // ログインメッセージを表示
-        // TODO:1日1回のみの表示とする処理の実装
-        // TODO:入手済アイテムをランダムで１つ入手する処理の実装
-        lblOkan = UILabel(frame: CGRectMake(45,100,self.view.bounds.width-30,160))
-        let mes: String = "〇〇くんへ\n\nかあさん腕をふるって\n〇〇くんの大好きな\n\(getOkan())を\n作りました。\n無理しないで頑張ってね！"
-        let charaData : [T_CharaBase] = Utility.getCharaBase(Const.CHARACTER1_ID)
-        if charaData.count == 0 {
-            print("キャラクターデータなし")
-        }
-        lblOkan.text = mes.stringByReplacingOccurrencesOfString("〇〇",withString: charaData[0].charaName)
+        //メッセージラベル
+        lblOkan = UILabel()
         lblOkan.numberOfLines = 0
+        
+        //キャラクター基本情報マスタを取得する.
+        let charaData : [T_CharaBase] = Utility.getCharaBase(Const.CHARACTER1_ID)
+        var tempItemId:Int = 1
+        
+        if charaData.count == 0 {
+            mes1 = "キャラクターマスタが\n取得できませんでした。"
+        } else {
+
+            //アイテムドロップマスタを取得する.
+            //所持アイテムをセットして、妥当なアイテムを一つドロップさせる.
+            let getItemList : [T_GetItem] = Utility.getTGetItem(Const.CHARACTER1_ID)
+            
+            //取得済アイテムが存在する場合はランダムで取得する.
+            if (getItemList.count > 0) {
+                tempItemId = Int(getItemList[Int(arc4random_uniform(UInt32(getItemList.count)))].itemID)
+            }
+            
+            //アイテムをドロップさせる.
+            let mDropItem:[M_DropItem] = Utility.getDropItem(tempItemId,rankKbn: "B",loginUseFlg: true)
+
+            //エラーがなければログインメッセージを表示
+            mes1 = "〇〇くんへ\n\nかあさん腕をふるって\n〇〇くんの大好きな\n\(getOkan())を\n作りました。"
+            mes1 = mes1.stringByReplacingOccurrencesOfString("〇〇",withString: charaData[0].charaName)
+            mes3 = "\n\n無理しないで頑張ってね！"
+            
+            //ドロップアイテムが取得できた場合は文言を追加する.
+            if (mDropItem.count > 0) {
+                mes2 = "\nそれと、「" + Utility.getMItem(Int(mDropItem[0].dropItemID))[0].itemName + "」を\nおいておくので\n足しにしてください。"
+            }
+        }
+        
+        //ラベルにセットする.
+        lblOkan.text = mes1 + mes2 + mes3
+        
+        // オブジェクトを追加する.
+        self.view.addSubview(imgViewLogin)
         self.view.addSubview(lblOkan)
         
         // 制約を設定する.
@@ -78,6 +111,7 @@ class LoginBonusViewController: UIViewController {
         print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         
         imgViewLogin.translatesAutoresizingMaskIntoConstraints = false
+        lblOkan.translatesAutoresizingMaskIntoConstraints = false
         
         // 壁紙の制約
         self.view.addConstraints([
@@ -107,10 +141,10 @@ class LoginBonusViewController: UIViewController {
             // 横幅
             NSLayoutConstraint(
                 item: self.imgViewLogin,
-                attribute: .Width,
+                attribute: NSLayoutAttribute.Width,
                 relatedBy: .Equal,
                 toItem: self.view,
-                attribute: .Width,
+                attribute: NSLayoutAttribute.Width,
                 multiplier: 1.0,
                 constant: 0
             ),
@@ -118,13 +152,39 @@ class LoginBonusViewController: UIViewController {
             // 縦幅
             NSLayoutConstraint(
                 item: self.imgViewLogin,
-                attribute: .Height,
+                attribute: NSLayoutAttribute.Height,
                 relatedBy: .Equal,
                 toItem: self.view,
-                attribute: .Height,
+                attribute: NSLayoutAttribute.Height,
                 multiplier: 1.0,
                 constant: 0
             )]
         )
+        
+        // オカンメッセージラベルの制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.lblOkan,
+                attribute:  NSLayoutAttribute.Right,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.Right,
+                multiplier: 1.0 / 1.5,
+                constant: 0
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.lblOkan,
+                attribute: NSLayoutAttribute.Bottom,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: NSLayoutAttribute.Bottom,
+                multiplier: 1.0 / 1.6,
+                constant: 0
+            )]
+    )
     }
 }

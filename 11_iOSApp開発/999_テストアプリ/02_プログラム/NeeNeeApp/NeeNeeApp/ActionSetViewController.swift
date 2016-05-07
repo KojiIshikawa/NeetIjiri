@@ -799,6 +799,7 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         insertData.charaID = Const.CHARACTER1_ID
         insertData.itemID = itemId
         insertData.actSetDate = NSDate()
+        insertData.finishFlg = 0
         insertData.managedObjectContext!.MR_saveToPersistentStoreAndWait()
         
         // 取得済アイテムマスタの所持数を減算する.

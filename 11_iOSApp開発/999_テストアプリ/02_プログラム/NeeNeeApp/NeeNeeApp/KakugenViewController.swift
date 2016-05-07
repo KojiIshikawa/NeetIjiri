@@ -58,12 +58,38 @@ class KakugenViewController: UIViewController {
     //格言の取得
     func getKakugen() -> String {
         print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
-        //格言をランダムで取得
-        let kakugenList :[M_Kakugen] = M_Kakugen.MR_findAll() as! [M_Kakugen];
-        let randInt = arc4random_uniform(UInt32(kakugenList.count));
-        var updFlg = true
+        
+        //セッション情報.
+        let ud = NSUserDefaults.standardUserDefaults()
+        let udDateKkgnLst: Int! = ud.integerForKey("KAKUGEN_LAST_DATE")
+        let udKakugenId: Int! = ud.integerForKey("KAKUGEN_ID")
+        
+        //NSCalendarインスタンス
+        let cal = NSCalendar(identifier: NSCalendarIdentifierGregorian)!
+        let now = NSDate()
+        let year = cal.component(NSCalendarUnit.Year , fromDate: now) * 10000
+        let Month = cal.component(NSCalendarUnit.Month , fromDate: now) * 100
+        let day = cal.component(NSCalendarUnit.Day , fromDate: now)
+        var kakugenList :[M_Kakugen]
+        var randInt: UInt32 = 0
+        var updFlg = false
+        
+        //前回表示時と同じ年月日の場合
+        if udDateKkgnLst == year + Month + day {
+            
+            //格言をセッションから取得
+            kakugenList = M_Kakugen.MR_findByAttribute("kakugenID", withValue:udKakugenId , andOrderBy: "kakugenID", ascending: true) as! [M_Kakugen];
+            updFlg = false
+            
+            
+        } else {
 
-        print(kakugenList.count)
+            //格言をランダムで取得
+            kakugenList = M_Kakugen.MR_findAll() as! [M_Kakugen];
+            randInt = arc4random_uniform(UInt32(kakugenList.count));
+            updFlg = true
+            
+        }
         
         // 取得済格言テーブルで存在チェックを行い、存在しない場合のみセットする.
         let listT_RefKakugen :[T_RefKakugen] = T_RefKakugen.MR_findByAttribute("charaID", withValue: Const.CHARACTER1_ID, andOrderBy: "kakugenID", ascending: true) as! [T_RefKakugen];
@@ -94,7 +120,9 @@ class KakugenViewController: UIViewController {
             
         }
         
-        //格言の改行設定
+        //取得した格言コードをセッションに格納
+        ud.setInteger(Int(kakugenList[Int(randInt)].kakugenID), forKey: "KAKUGEN_ID")
+        ud.synchronize()
 
         // 格言の返却
         return kakugenList[Int(randInt)].kakugenText

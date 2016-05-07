@@ -31,11 +31,14 @@ class ResultViewController: UIViewController {
         imgResultView.image = Utility.getUncachedImage(named: "02_08_01.png")
         self.view.addSubview(imgResultView)
         
-        // 全オブジェクトの制約設定.
-        objConstraints()
+        //メッセージを表示.
+        lblResult = UILabel()
+        lblResult.numberOfLines = 0
+        lblResult.text = self.getActionResult()
+        self.view.addSubview(lblResult)
         
-        //行動結果を計算する
-        self.getActionResult()
+        //全オブジェクトの制約設定.
+        self.objConstraints()
     }
     
     
@@ -49,48 +52,26 @@ class ResultViewController: UIViewController {
     
     //行動結果を計算する
     //結果をテーブルへ反映する
-    func getActionResult() {
+    func getActionResult() -> String {
         print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
-
         
-        //*****************************
-        //テストデータを作成
-        //*****************************
-        let charaData : [T_CharaBase] = Utility.getCharaBase(Const.CHARACTER1_ID)
-
-        /**
-        let insetData = T_ActionResult.MR_createEntity()! as T_ActionResult
-        insetData.charaID = charaData[0].charaID
-        insetData.actSetDate = NSDate()
-        insetData.actStartDate = NSDate()
-        insetData.actEndDate = NSDate()
-        insetData.itemID = 1
-        insetData.resultID = 0
-        insetData.managedObjectContext!.MR_saveToPersistentStoreAndWait()
-         **/
+        //返却データ
+        var strResult = ""
         
-        //最新の行動履歴を取得
-        let profileFilter: NSPredicate = NSPredicate(format: "charaID = %@", charaData[0].charaID)
-        let tActionR :[T_ActionResult] = T_ActionResult.MR_findAllSortedBy("actSetDate", ascending: false, withPredicate: profileFilter) as! [T_ActionResult];
+        //未完了の行動済行動履歴を取得
+        let tActionR = Utility.getFinishedTActionResult(Const.CHARACTER1_ID)
         
-        //件数確認
-        if tActionR.count == 0 {
-            return
-        }
-        
-        //行動が完了していない場合
-        if ((tActionR[0].actEndDate) == nil) {
-            return
+        //未処理の行動履歴件数確認、０件なら処理終了
+        if (tActionR.count == 0) {
+            return "行動済の行動履歴が\nありません。"
         }
         
         //行動結果マスタ取得
         let resFilter: NSPredicate = NSPredicate(format: "itemID = %@", tActionR[0].itemID)
         let mActionR :[M_ActionResult] = M_ActionResult.MR_findAllSortedBy("resultID", ascending: true, withPredicate: resFilter) as! [M_ActionResult];
         
-        
         //0~100の値をランダムで取得
         let randInt = Int32(arc4random_uniform(UInt32(100)));
-        
         var minPer : Int32 = 0
         var maxPer : Int32 = 0
         var resultNo = 0
@@ -107,84 +88,44 @@ class ResultViewController: UIViewController {
             
             minPer = minPer + mActionR[0].resPer.intValue
         }
-        
-        //ドロップアイテムの判定
-        let dropFilter: NSPredicate = NSPredicate(format: "itemID = %@", tActionR[0].itemID)
-        let mDropItem :[M_DropItem] = M_DropItem.MR_findAllSortedBy("dropPer", ascending: true, withPredicate: dropFilter) as! [M_DropItem];
-        
-        //件数確認
-        if (mDropItem.count == 0) {
-            return
-        }
-        
-        // メッセージを表示
-        lblResult = UILabel(frame: CGRectMake(60,80,self.view.bounds.width-100,270))
 
         //使用したアイテムを取得
         if mActionR.count > 0 {
-
+            
+            //ラベルへの文言設定
             let usedItem = Utility.getMItem(Int(mActionR[0].itemID == nil ? 1 : mActionR[0].itemID))
-            lblResult.text = usedItem[0].itemName
+            strResult = usedItem[0].itemName
                 + " " + Utility.getRankName(mActionR[resultNo].rankKBN) + "\n\n"
-            lblResult.text! += mActionR[resultNo].message + "\n\n"
+            strResult += mActionR[resultNo].message + "\n\n"
+            strResult += "取得アイテム一覧" + "\n"
             
-            //取得アイテムを表示
-            lblResult.text! += "取得アイテム一覧" + "\n"
-            
-            //取得アイテム計算
-            var randDrop : Int32 = 0 //0〜100までのランダム数値
-            var dropPer : Int32 = 0 //補正込みのドロップ確率
-            //        var getItems : [Int] = []
-            var mItem : [M_Item]
-            var getItemFilter: NSPredicate
-            var tGetItem :[T_GetItem]
-            //ドロップアイテム数分ループ処理
-            for ( var j = 0; j < mDropItem.count-1; j++ ) {
-                //低確率のものから抽選する
-                randDrop = Int32(arc4random_uniform(UInt32(100)));
-                
-                dropPer = mDropItem[j].dropPer.intValue * Utility.getRankDrop(mActionR[0].rankKBN)
-                
-                //取得判定
-                if (0 <= randDrop && randDrop <= dropPer) {
-                    print("アイテムを獲得しました＝%@", mDropItem[j].dropItemID)
-                    //                //配列に格納する
-                    //                getItems.append(Int(mDropItem[j].dropItemID))
-                    
-                    //所持アイテムを加算
-                    getItemFilter = NSPredicate(format: "charaID = %@ and itemID = %@", charaData[0].charaID,mDropItem[j].dropItemID)
-                    tGetItem = T_GetItem.MR_findAllSortedBy("itemID", ascending: false, withPredicate: getItemFilter) as! [T_GetItem];
-                    
-                    if tGetItem.count == 0 {
-                        //INSERT
-                        let insertData = T_GetItem.MR_createEntity()! as T_GetItem
-                        insertData.charaID = Const.CHARACTER1_ID
-                        insertData.itemID = mDropItem[j].dropItemID
-                        insertData.itemCount = 1
-                        insertData.managedObjectContext!.MR_saveToPersistentStoreAndWait()
-                        
-                    } else {
-                        //UPDATE
-                        tGetItem[0].itemCount = Int(tGetItem[0].itemCount) + 1
-                        tGetItem[0].managedObjectContext!.MR_saveToPersistentStoreAndWait()
-                    }
-                    
-                    
-                    
-                    //取得アイテムをラベルへ設定
-                    mItem = Utility.getMItem(Int(mDropItem[j].dropItemID))
-                    lblResult.text! += mItem[0].itemName + "\n"
-                    
-                }
+            //ドロップアイテムを算出する.
+            let mDropItem = Utility.getDropItem(Int(tActionR[0].itemID),rankKbn: mActionR[0].rankKBN,loginUseFlg: false)
+
+            //件数確認
+            if (mDropItem.count == 0) {
+                strResult = "ドロップアイテムマスタが\n取得できませんでした。"
             }
+            
+            for dropItem in mDropItem {
+
+                //取得アイテムをラベルへ設定
+                let mItem = Utility.getMItem(Int(dropItem.dropItemID))
+                strResult += mItem[0].itemName + "\n"
+            }
+            
+            //完了フラグを”処理済”に更新する.
+            let updateActionR :T_ActionResult = tActionR[0]
+            updateActionR.finishFlg = 1
+            updateActionR.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+            
         } else {
             
             // マスタ不整合の場合
-            lblResult.text = "マスタが取得できませんでした。"
+            strResult = "行動結果マスタが\n取得できませんでした。"
         }
         
-        lblResult.numberOfLines = 0
-        self.view.addSubview(lblResult)
+        return strResult
     }
 
     //結果を画面に表示する
@@ -192,12 +133,12 @@ class ResultViewController: UIViewController {
         print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
     }
     
-    
     /** 全オブジェクトの制約設定 **/
     func objConstraints() {
         print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         
         imgResultView.translatesAutoresizingMaskIntoConstraints = false
+        lblResult.translatesAutoresizingMaskIntoConstraints = false
         
         // 壁紙の制約
         self.view.addConstraints([
@@ -246,6 +187,33 @@ class ResultViewController: UIViewController {
                 constant: 0
             )]
         )
+        
+        // 行動結果ラベルの制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.lblResult,
+                attribute:  NSLayoutAttribute.Left,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.Right,
+                multiplier: 1.0 / 9.0,
+                constant: 0
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.lblResult,
+                attribute: NSLayoutAttribute.Top,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: NSLayoutAttribute.Bottom,
+                multiplier: 1.0 / 6.0,
+                constant: 0
+            )]
+        )
+
     }
 }
 
