@@ -400,8 +400,8 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
             self.showPopoverView(self.manuBtn, identifier: "LoginBonusView")
             
             //ログイン年月日をセッションに格納
-            //ud.setInteger(year + Month + day, forKey: "LOGIN_LAST_DATE")
-            //ud.synchronize()
+            ud.setInteger(year + Month + day, forKey: "LOGIN_LAST_DATE")
+            ud.synchronize()
         }
     }
     

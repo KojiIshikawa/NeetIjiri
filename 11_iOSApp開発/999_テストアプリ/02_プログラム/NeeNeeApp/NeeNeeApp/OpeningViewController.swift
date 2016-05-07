@@ -555,7 +555,6 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
     func editGetItem() -> DarwinBoolean  {
         print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         
-        /**
         for (var i:Int = 1 ; i <= 51 ; i++) {
 
             // アイテム１を追加
@@ -565,7 +564,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
             initItem1.itemID = i
             initItem1.managedObjectContext!.MR_saveToPersistentStoreAndWait()
         }
-        **/
+
         /**
         // アイテム１を追加
         let initItem1 = T_GetItem.MR_createEntity()! as T_GetItem
