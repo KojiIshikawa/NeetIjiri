@@ -26,9 +26,12 @@ class Const {
     static let mySeStartPath = "se5"
     static let mySeYesPath = "se4"
     static let mySeNoPath = "se6"
+    static let mySeKakugenPath = "se11"
     static let mySeItemSetPath = "se1"
     static let mySeItemSetNGPath = "se12"
     static let mySeItemCancelNoPath = "se13"
+    static let mySeLoginPath = "me2"
+    static let mySeResultPath = "me1"
     static let ACTION_START_TIME_INTERVAL:Float = 60 * 3
     static let ACTION_END_TIME_INTERVAL:Float = 60 * 5
     static let CHARACTER_DEFAULT_FIRST_X = 5

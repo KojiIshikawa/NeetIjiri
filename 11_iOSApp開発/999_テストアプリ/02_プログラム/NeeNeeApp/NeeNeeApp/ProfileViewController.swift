@@ -50,6 +50,11 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         self.nameDataLabel = UILabel()
         self.nameDataLabel.textAlignment = .Left
         self.nameDataLabel.text = charaData[0].charaName
+        
+        //文字数が枠をはみ出す場合は文字を小さくする.
+        if self.nameDataLabel.text?.utf16.count > 7 {
+            self.nameDataLabel.font = UIFont(name: "HiraMinProN-W6", size: 8)
+        }
 
         // 生年月日
         let dateFormatter: NSDateFormatter = NSDateFormatter()
@@ -62,6 +67,11 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         self.positionDataLabel = UILabel()
         self.positionDataLabel.textAlignment = .Left
         self.positionDataLabel.text = getJobName()
+        
+        //文字数が枠をはみ出す場合は文字を小さくする.
+        if self.positionDataLabel.text?.utf16.count > 7 {
+            self.positionDataLabel.font = UIFont(name: "HiraMinProN-W6", size: 8)
+        }
 
         // 格言履歴（tableview）
         self.tableViewKakugenHistory = UITableView()
@@ -485,16 +495,31 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         switch tableView.tag {
             
         // 格言履歴
-        case 11: cell.textLabel?.text = listKakugen[indexPath.row]
+        case 11:
+            
+            cell.textLabel?.text = listKakugen[indexPath.row]
+        
+            //文字数が枠をはみ出す場合は文字を小さくする.
+            if cell.textLabel!.text!.utf16.count > 15 {
+                cell.textLabel!.font = UIFont(name: "HiraMinProN-W6", size: 8)
+            }
             
         // 行動履歴
-        case 12: cell.textLabel?.text = listAction[indexPath.row]
-                 cell.textLabel?.font = UIFont(name: "HiraKakuProN-W3", size: 7)
+        case 12:
+            cell.textLabel?.text = listAction[indexPath.row]
+            cell.textLabel?.font = UIFont(name: "HiraKakuProN-W3", size: 7)
             
         // 行った場所履歴
-        case 13: cell.textLabel?.text = listStage[indexPath.row]
+        case 13:
+            cell.textLabel?.text = listStage[indexPath.row]
             
-        default: break
+            //文字数が枠をはみ出す場合は文字を小さくする.
+            if cell.textLabel!.text!.utf16.count > 15 {
+                cell.textLabel!.font = UIFont(name: "HiraMinProN-W6", size: 8)
+            }
+            
+        default:
+            break
             
         }
         return cell

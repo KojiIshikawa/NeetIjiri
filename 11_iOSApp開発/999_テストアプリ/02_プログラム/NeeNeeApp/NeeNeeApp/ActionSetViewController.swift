@@ -47,9 +47,9 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         selItemLabel2.sizeToFit()
         selItemLabel3.sizeToFit()
 
-        selItemLabel1.numberOfLines = 2
-        selItemLabel2.numberOfLines = 2
-        selItemLabel3.numberOfLines = 2
+        selItemLabel1.numberOfLines = 0
+        selItemLabel2.numberOfLines = 0
+        selItemLabel3.numberOfLines = 0
         
         // セット済みアイテムの初期設定.
         setItemView = UIImageView()
@@ -393,9 +393,10 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! itemCell
+        cell._name.sizeToFit()
         
         // セルの情報を設定する.
-        cell._name.text = itemList[indexPath.row]["itemName"]! + " ×" + itemList[indexPath.row]["itemCountValue"]!
+        cell._name.text = itemList[indexPath.row]["itemName"]! + "\n×" + itemList[indexPath.row]["itemCountValue"]!
         cell._img.image = Utility.getUncachedImage( named: itemList[indexPath.row]["imageItem"]!)
         
         // セルを返却する.
@@ -537,6 +538,17 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
                 attribute:  NSLayoutAttribute.Top,
                 multiplier: 1.5 / 1.0,
                 constant: 0
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.selItemLabel3,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Width,
+                multiplier: 0.35 / 1.0,
+                constant: 0
             )]
         )
 
@@ -561,7 +573,18 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
                 relatedBy: .Equal,
                 toItem: self.setItemView,
                 attribute:  NSLayoutAttribute.Bottom,
-                multiplier: 1.0 / 1.05,
+                multiplier: 0.94 / 1.0,
+                constant: 0
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.selItemLabel2,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Width,
+                multiplier: 0.35 / 1.0,
                 constant: 0
             )]
         )
@@ -588,6 +611,17 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
                 toItem: self.setItemView,
                 attribute:  NSLayoutAttribute.Top,
                 multiplier: 1.5 / 1.0,
+                constant: 0
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.selItemLabel1,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Width,
+                multiplier: 0.35 / 1.0,
                 constant: 0
             )]
         )

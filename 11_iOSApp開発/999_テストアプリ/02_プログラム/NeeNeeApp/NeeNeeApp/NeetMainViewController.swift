@@ -211,6 +211,10 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
 
             //未完了の行動済行動履歴を取得し、存在する場合は結果画面を表示する.
             if (Utility.getFinishedTActionResult(Const.CHARACTER1_ID).count > 0) {
+                
+                // SEを再生する.
+                Utility.seSoundPlay(Const.mySeResultPath)
+                
                 self.showPopoverView(self.manuBtn, identifier: "ResultView")
             }
         }
@@ -329,6 +333,9 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         // 前回表示時と同じ年月日の場合
         if udDateKkgnLst == year + Month + day {
             
+            // SEを再生する.
+            Utility.seSoundPlay(Const.mySeKakugenPath)
+            
             // 保持済の格言を表示
             self.showPopoverView(self.manuBtn, identifier: "KakugenView")
             
@@ -339,13 +346,16 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
             let defaultActionYes = UIAlertAction(title: "表示する", style: .Default, handler:{
                 (action:UIAlertAction!) -> Void in
                 
+                // SEを再生する.
+                Utility.seSoundPlay(Const.mySeKakugenPath)
+                
                 // 格言表示
                 self.showPopoverView(self.manuBtn, identifier: "KakugenView")
                 
                 //NSUserDefaultに格言表示日付をセット
                 let ud = NSUserDefaults.standardUserDefaults()
                 
-                //年月日を取得し、センションに格納
+                //年月日を取得し、セッションに格納
                 ud.setInteger(year + Month + day, forKey: "KAKUGEN_LAST_DATE")
                 ud.synchronize()
                 
@@ -390,12 +400,19 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
             //行動結果PopOverを表示（表示すべきものがある場合のみ）
             //未完了の行動済行動履歴を取得し、存在する場合は結果画面を表示する.
             if (Utility.getFinishedTActionResult(Const.CHARACTER1_ID).count > 0) {
+                
+                // SEを再生する.
+                Utility.seSoundPlay(Const.mySeResultPath)
+                
                 self.showPopoverView(self.manuBtn, identifier: "ResultView")
             }
 
         } else {
 
             //前回のログイン時と日付が異なる場合
+            // SEを再生する.
+            Utility.seSoundPlay(Const.mySeLoginPath)
+            
             //ログインボーナスPopOverを表示
             self.showPopoverView(self.manuBtn, identifier: "LoginBonusView")
             

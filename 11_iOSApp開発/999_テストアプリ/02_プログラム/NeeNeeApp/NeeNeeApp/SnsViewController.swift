@@ -77,6 +77,9 @@ class SnsViewController: UIViewController {
     func tapFacebookBtn(sender: AnyObject) {
         print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         
+        // SEを再生する.
+        Utility.seSoundPlay(Const.mySeYesPath)
+        
         // Facebookの投稿ダイアログを作って
         let cv = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
         
@@ -90,6 +93,9 @@ class SnsViewController: UIViewController {
     //ラインボタン押下時の処理
     func tapLineBtn(sender: AnyObject) {
         print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        
+        // SEを再生する.
+        Utility.seSoundPlay(Const.mySeYesPath)
         
         //　共有する項目
         let shareImage = UIImage(named: "01_13_01.png")!
@@ -106,6 +112,9 @@ class SnsViewController: UIViewController {
     func tapTwitterBtn(sender: AnyObject) {
         print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         
+        // SEを再生する.
+        Utility.seSoundPlay(Const.mySeYesPath)
+        
         // 共有する項目
         // Twitterの投稿ダイアログを作って
         let cv = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
@@ -120,6 +129,9 @@ class SnsViewController: UIViewController {
     //？ボタン押下時の処理
     func tapQuestionBtn(sender: AnyObject) {
         print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        
+        // SEを再生する.
+        Utility.seSoundPlay(Const.mySeNoPath)
     }
     
     /** 全オブジェクトの制約設定 **/

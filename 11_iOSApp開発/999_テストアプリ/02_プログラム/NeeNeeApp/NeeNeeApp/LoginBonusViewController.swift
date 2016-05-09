@@ -167,22 +167,22 @@ class LoginBonusViewController: UIViewController {
             // x座標
             NSLayoutConstraint(
                 item: self.lblOkan,
-                attribute:  NSLayoutAttribute.Right,
+                attribute:  NSLayoutAttribute.Left,
                 relatedBy: .Equal,
                 toItem: self.view,
                 attribute:  NSLayoutAttribute.Right,
-                multiplier: 1.0 / 1.5,
+                multiplier: 0.1 / 1.0,
                 constant: 0
             ),
             
             // y座標
             NSLayoutConstraint(
                 item: self.lblOkan,
-                attribute: NSLayoutAttribute.Bottom,
+                attribute: NSLayoutAttribute.Top,
                 relatedBy: .Equal,
                 toItem: self.view,
                 attribute: NSLayoutAttribute.Bottom,
-                multiplier: 1.0 / 1.6,
+                multiplier: 0.2 / 1.0,
                 constant: 0
             )]
     )

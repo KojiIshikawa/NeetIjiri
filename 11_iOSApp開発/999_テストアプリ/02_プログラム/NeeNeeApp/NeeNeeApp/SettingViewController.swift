@@ -193,9 +193,9 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
                 attribute:  NSLayoutAttribute.Left,
                 relatedBy: .Equal,
                 toItem: self.view,
-                attribute:  NSLayoutAttribute.Left,
-                multiplier: 1.0,
-                constant: 20
+                attribute:  NSLayoutAttribute.Right,
+                multiplier: 0.1 / 1.0,
+                constant: 0
             ),
             
             // y座標
@@ -204,9 +204,9 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
                 attribute: NSLayoutAttribute.Top,
                 relatedBy: .Equal,
                 toItem: self.view,
-                attribute:  NSLayoutAttribute.Top,
-                multiplier: 1.0,
-                constant: 100
+                attribute:  NSLayoutAttribute.Bottom,
+                multiplier: 0.26 / 1.0,
+                constant: 0
             ),
             
             // 横幅
@@ -227,7 +227,7 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
                 relatedBy: .Equal,
                 toItem: self.view,
                 attribute: .Height,
-                multiplier: 1.0 / 24.0,
+                multiplier: 1.0 / 26.0,
                 constant: 0
             )]
         )
@@ -251,10 +251,10 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
                 item: self.bgmVolumeSBar,
                 attribute: NSLayoutAttribute.Top,
                 relatedBy: .Equal,
-                toItem: self.view,
+                toItem: self.bgmImage,
                 attribute:  NSLayoutAttribute.Top,
                 multiplier: 1.0,
-                constant: 100
+                constant: 0
             ),
             
             // 横幅
@@ -290,8 +290,8 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
                 relatedBy: .Equal,
                 toItem: self.bgmVolumeSBar,
                 attribute:  NSLayoutAttribute.Right,
-                multiplier: 1.0,
-                constant: 20
+                multiplier: 1.1 / 1.0,
+                constant: 0
             ),
             
             // y座標
@@ -299,10 +299,10 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
                 item: self.bgmMuteBtn,
                 attribute: NSLayoutAttribute.Top,
                 relatedBy: .Equal,
-                toItem: self.view,
+                toItem: self.bgmImage,
                 attribute:  NSLayoutAttribute.Top,
                 multiplier: 1.0,
-                constant: 100
+                constant: 0
             ),
             
             // 横幅
@@ -312,7 +312,7 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
                 relatedBy: .Equal,
                 toItem: self.view,
                 attribute: .Width,
-                multiplier: 1.0 / 4.0,
+                multiplier: 1.0 / 6.0,
                 constant: 0
             ),
             
@@ -333,13 +333,13 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
             
             // x座標
             NSLayoutConstraint(
-                item: self.seImage,
+                item: self.bgmImage,
                 attribute:  NSLayoutAttribute.Left,
                 relatedBy: .Equal,
-                toItem: self.view,
+                toItem: self.seImage,
                 attribute:  NSLayoutAttribute.Left,
                 multiplier: 1.0,
-                constant: 20
+                constant: 0
             ),
             
             // y座標
@@ -349,8 +349,8 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
                 relatedBy: .Equal,
                 toItem: self.bgmImage,
                 attribute:  NSLayoutAttribute.Bottom,
-                multiplier: 1.0,
-                constant: 20
+                multiplier: 1.2 / 1.0,
+                constant: 0
             ),
             
             // 横幅
@@ -358,9 +358,9 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
                 item: self.seImage,
                 attribute: .Width,
                 relatedBy: .Equal,
-                toItem: self.view,
+                toItem: self.bgmImage,
                 attribute: .Width,
-                multiplier: 1.0 / 6.0,
+                multiplier: 1.0,
                 constant: 0
             ),
             
@@ -369,9 +369,9 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
                 item: self.seImage,
                 attribute: .Height,
                 relatedBy: .Equal,
-                toItem: self.view,
+                toItem: self.bgmImage,
                 attribute: .Height,
-                multiplier: 1.0 / 24.0,
+                multiplier: 1.0,
                 constant: 0
             )]
         )
@@ -395,10 +395,10 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
                 item: self.seVolumeSBar,
                 attribute: NSLayoutAttribute.Top,
                 relatedBy: .Equal,
-                toItem: self.bgmVolumeSBar,
-                attribute:  NSLayoutAttribute.Bottom,
+                toItem: self.seImage,
+                attribute:  NSLayoutAttribute.Top,
                 multiplier: 1.0,
-                constant: 20
+                constant: 0
             ),
             
             // 横幅
@@ -406,9 +406,9 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
                 item: self.seVolumeSBar,
                 attribute: .Width,
                 relatedBy: .Equal,
-                toItem: self.view,
+                toItem: self.bgmVolumeSBar,
                 attribute: .Width,
-                multiplier: 1.0 / 3.0,
+                multiplier: 1.0,
                 constant: 0
             ),
             
@@ -417,9 +417,9 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
                 item: self.seVolumeSBar,
                 attribute: .Height,
                 relatedBy: .Equal,
-                toItem: self.view,
+                toItem: self.bgmVolumeSBar,
                 attribute: .Height,
-                multiplier: 1.0 / 24.0,
+                multiplier: 1.0,
                 constant: 0
             )]
         )
@@ -434,8 +434,8 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
                 relatedBy: .Equal,
                 toItem: self.seVolumeSBar,
                 attribute:  NSLayoutAttribute.Right,
-                multiplier: 1.0,
-                constant: 20
+                multiplier: 1.1 / 1.0,
+                constant: 0
             ),
             
             // y座標
@@ -443,10 +443,10 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
                 item: self.seMuteBtn,
                 attribute: NSLayoutAttribute.Top,
                 relatedBy: .Equal,
-                toItem: self.bgmMuteBtn,
-                attribute:  NSLayoutAttribute.Bottom,
+                toItem: self.seImage,
+                attribute:  NSLayoutAttribute.Top,
                 multiplier: 1.0,
-                constant: 20
+                constant: 0
             ),
             
             // 横幅
@@ -454,9 +454,9 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
                 item: self.seMuteBtn,
                 attribute: .Width,
                 relatedBy: .Equal,
-                toItem: self.view,
+                toItem: self.bgmMuteBtn,
                 attribute: .Width,
-                multiplier: 1.0 / 4.0,
+                multiplier: 1.0,
                 constant: 0
             ),
             
@@ -465,9 +465,9 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
                 item: self.seMuteBtn,
                 attribute: .Height,
                 relatedBy: .Equal,
-                toItem: self.view,
+                toItem: self.bgmMuteBtn,
                 attribute: .Height,
-                multiplier: 1.0 / 24.0,
+                multiplier: 1.0,
                 constant: 0
             )]
         )

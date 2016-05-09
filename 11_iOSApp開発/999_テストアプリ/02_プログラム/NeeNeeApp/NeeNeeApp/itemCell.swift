@@ -28,8 +28,9 @@ class itemCell: UICollectionViewCell {
         
         _name = UILabel()
         _name.sizeToFit()
+        _name.numberOfLines = 0
+        _name.textAlignment = NSTextAlignment.Center
         _name.font = UIFont(name: "HiraMinProN-W6", size: 8)
-        //_name.textColor = UIColor.redColor()
         
         self.addSubview(_img)
         self.addSubview(_name)
@@ -57,10 +58,9 @@ class itemCell: UICollectionViewCell {
                 relatedBy: .Equal,
                 toItem: self,
                 attribute:  NSLayoutAttribute.CenterY,
-                multiplier: 1.0,
-                constant: 20
+                multiplier: 1.4 / 1.0,
+                constant: 0
             )
-            
         ])
     }
 
