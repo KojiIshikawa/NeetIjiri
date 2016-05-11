@@ -2,8 +2,8 @@
 //  NeetMainViewController.swift
 //  NeeNeeApp
 //
-//  Created by 石川晃次 on 2015/12/27.
-//  Copyright © 2015年 KojiIshikawa. All rights reserved.
+//  Created by Boil Project on 2015/12/27.
+//  Copyright © 2015年 Boil Project. All rights reserved.
 //
 
 import UIKit
@@ -201,7 +201,6 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     }
     
     //popOver表示終了後のイベント
-    //TODO: 未通知の結果の件数分表示されるように処理を実装する必要あり
     func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
         print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         let identifier = popoverPresentationController.presentedViewController.title
@@ -275,42 +274,6 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         self.showPopoverView(sender, identifier: "SettingView")
         
     }
-    
-    
-//    // 画面にタッチで呼ばれる
-//    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-//        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
-//        
-//        // タッチイベントを取得
-//        let touchEvent = touches.first!
-//
-//        //print(touchEvent.view?.tag.description)
-//        
-//        // キャラクター画像がタップされた場合かつ、メニューが非表示の場合
-//        if touchEvent.view?.tag == 1
-//        {
-//            // ダイアログを表示
-//            let alertController = UIAlertController(title: "ニートの格言入手", message: "チラシを表示して、今日のニートの格言を取得しますか？", preferredStyle: .Alert)
-//            
-//            let defaultActionYes = UIAlertAction(title: "表示する", style: .Default, handler:{
-//                (action:UIAlertAction!) -> Void in
-//                
-//                // iAd(インタースティシャル)の表示
-//                self.requestInterstitialAdPresentation()
-//                
-//                // TODO:吹き出しの表示
-////                self.myFukidasiImageView.hidden = false
-////                self.fukidasiLabel.text = self.getMeigen()
-//                
-//            })
-//            
-//            let defaultActionNo = UIAlertAction(title: "表示しない", style: .Default, handler: nil)
-//            alertController.addAction(defaultActionYes)
-//            alertController.addAction(defaultActionNo)
-//            
-//            presentViewController(alertController, animated: true, completion: nil)
-//        }
-//    }
     
     // ジェスチャーイベント処理
     func tapChara(gestureRecognizer: UITapGestureRecognizer){

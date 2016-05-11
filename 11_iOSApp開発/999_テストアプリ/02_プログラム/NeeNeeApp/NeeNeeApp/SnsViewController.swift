@@ -2,8 +2,8 @@
 //  SNSViewController.swift
 //  NeeNeeApp
 //
-//  Created by v2_system on 2016/02/11.
-//  Copyright © 2016年 KojiIshikawa. All rights reserved.
+//  Created by Boil Project on 2016/02/11.
+//  Copyright © 2016年 Boil Project. All rights reserved.
 //
 
 import Foundation
@@ -86,6 +86,9 @@ class SnsViewController: UIViewController {
         // 画像を追加
         cv.addImage(UIImage(named: "01_13_01.png"))
         
+        // 文字を追加
+        cv.setInitialText("ニートいじりできみも自由になろう。")
+        
         // 投稿ダイアログを表示する
         self.presentViewController(cv, animated: true, completion: nil)
     }
@@ -105,6 +108,7 @@ class SnsViewController: UIViewController {
         let line = LINEActivity()
         let avc = UIActivityViewController(activityItems: shareItems, applicationActivities: [line])
         
+        // 投稿ダイアログを表示する
         presentViewController(avc, animated: true, completion: nil)
     }
     
@@ -120,7 +124,7 @@ class SnsViewController: UIViewController {
         let cv = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
         
         // 文字を追加
-        cv.setInitialText("メッセージを入力してください。")
+        cv.setInitialText("ニートいじりできみも自由になろう。")
         
         // 投稿ダイアログを表示する
         self.presentViewController(cv, animated: true, completion:nil )

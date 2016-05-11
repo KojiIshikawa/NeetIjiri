@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  NeeNeeApp
 //
-//  Created by 石川晃次 on 2015/12/27.
-//  Copyright © 2015年 KojiIshikawa. All rights reserved.
+//  Created by Boil Project on 2015/12/27.
+//  Copyright © 2015年 Boil Project. All rights reserved.
 //
 
 import UIKit

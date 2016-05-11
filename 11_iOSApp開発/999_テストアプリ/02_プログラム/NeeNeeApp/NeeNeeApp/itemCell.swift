@@ -2,8 +2,8 @@
 //  itemCell.swift
 //  NeeNeeApp
 //
-//  Created by 石川晃次 on 2016/01/26.
-//  Copyright © 2016年 KojiIshikawa. All rights reserved.
+//  Created by Boil Project on 2016/01/26.
+//  Copyright © 2016年 Boil Project. All rights reserved.
 //
 
 import Foundation

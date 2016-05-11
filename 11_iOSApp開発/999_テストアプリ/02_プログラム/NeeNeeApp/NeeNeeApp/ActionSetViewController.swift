@@ -2,8 +2,8 @@
 //  ActionSetViewController.swift
 //  NeeNeeApp
 //
-//  Created by v2_system on 2016/02/07.
-//  Copyright © 2016年 KojiIshikawa. All rights reserved.
+//  Created by Boil Project on 2016/02/07.
+//  Copyright © 2016年 Boil Project. All rights reserved.
 //
 
 import UIKit
