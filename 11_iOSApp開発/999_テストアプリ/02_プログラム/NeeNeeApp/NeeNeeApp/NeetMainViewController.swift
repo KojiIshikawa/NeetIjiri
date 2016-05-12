@@ -435,12 +435,19 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         //キャラクター設定
         // UIImageViewをViewに追加する.
         myCharImageView = UIImageView()
-        myCharImageView.frame.size = CGSizeMake(self.view.bounds.width / 2.6
-                                              , self.view.bounds.height / 3.0)
         
+        //キャラクターサイズの倍率を取得する.
+        let charaSizeRate : CGFloat = (activeItem.count >= 1 ? CGFloat(activeItem[0].useArea) : 10.0) / 10
+        
+        //キャラクターサイズ設定.
+        myCharImageView.frame.size = CGSizeMake(
+            (self.view.bounds.width  / 2.6) * charaSizeRate
+           ,(self.view.bounds.height / 3.0) * charaSizeRate)
+        
+        //キャラクター初期横位置設定.
         myCharImageView.frame.origin.x = CGFloat(Float(self.view.bounds.width)
                                  * (Float(activeItem.count >= 1 ? activeItem[0].firstX : Const.CHARACTER_DEFAULT_FIRST_X) / 10))
-
+        //キャラクター初期縦位置設定.
         myCharImageView.frame.origin.y = CGFloat(Float(self.view.bounds.height)
                                  * (Float(activeItem.count >= 1 ? activeItem[0].firstY : Const.CHARACTER_DEFAULT_FIRST_Y) / 10))
 

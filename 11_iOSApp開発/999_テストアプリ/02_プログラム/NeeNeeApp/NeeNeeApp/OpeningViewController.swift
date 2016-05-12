@@ -574,36 +574,6 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
         initItem1.itemID = 1
         initItem1.managedObjectContext!.MR_saveToPersistentStoreAndWait()
 
-        /**
-        // アイテム２を追加
-        let initItem2 = T_GetItem.MR_createEntity()! as T_GetItem
-        initItem2.charaID = Const.CHARACTER1_ID
-        initItem2.itemCount = 10
-        initItem2.itemID = 4
-        initItem2.managedObjectContext!.MR_saveToPersistentStoreAndWait()
-
-        // アイテム３を追加
-        let initItem3 = T_GetItem.MR_createEntity()! as T_GetItem
-        initItem3.charaID = Const.CHARACTER1_ID
-        initItem3.itemCount = 10
-        initItem3.itemID = 10
-        initItem3.managedObjectContext!.MR_saveToPersistentStoreAndWait()
-        
-        // アイテム４を追加
-        let initItem4 = T_GetItem.MR_createEntity()! as T_GetItem
-        initItem4.charaID = Const.CHARACTER1_ID
-        initItem4.itemCount = 10
-        initItem4.itemID = 11
-        initItem4.managedObjectContext!.MR_saveToPersistentStoreAndWait()
-        
-        // アイテム５を追加
-        let initItem5 = T_GetItem.MR_createEntity()! as T_GetItem
-        initItem5.charaID = Const.CHARACTER1_ID
-        initItem5.itemCount = 10
-        initItem5.itemID = 12
-        initItem5.managedObjectContext!.MR_saveToPersistentStoreAndWait()
-        **/
-
         return true
     }
 }
