@@ -46,7 +46,7 @@ class Utility {
                 myAudioPlayer.stop()
             }
             
-            myAudioPlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath:NSBundle.mainBundle().pathForResource(bgmPath == "" ? Const.DEFAULT_BGM_PATH : bgmPath, ofType:"mp3")!
+            myAudioPlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath:NSBundle.mainBundle().pathForResource(bgmPath == "" ? Const.BGM_DEFAULT_PATH : bgmPath, ofType:"mp3")!
 ))
             myAudioPlayer.volume = udBGM
             myAudioPlayer.numberOfLoops = -1
@@ -87,7 +87,7 @@ class Utility {
         
         // SEを再生する.
         do {
-            mySePlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath:NSBundle.mainBundle().pathForResource(sePath == "" ? Const.DEFAULT_SE_PATH : sePath, ofType:"mp3")!))
+            mySePlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath:NSBundle.mainBundle().pathForResource(sePath == "" ? Const.SE_DEFAULT_PATH : sePath, ofType:"mp3")!))
             mySePlayer.volume = udSE * 2
             mySePlayer.play()
             

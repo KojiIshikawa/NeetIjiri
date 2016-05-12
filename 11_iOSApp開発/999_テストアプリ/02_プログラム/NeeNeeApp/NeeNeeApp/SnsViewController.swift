@@ -78,7 +78,7 @@ class SnsViewController: UIViewController {
         print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         
         // SEを再生する.
-        Utility.seSoundPlay(Const.mySeYesPath)
+        Utility.seSoundPlay(Const.SE_YES_PATH)
         
         // Facebookの投稿ダイアログを作って
         let cv = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
@@ -87,7 +87,7 @@ class SnsViewController: UIViewController {
         cv.addImage(UIImage(named: "01_13_01.png"))
         
         // 文字を追加
-        cv.setInitialText("ニートいじりできみも自由になろう。")
+        cv.setInitialText(Const.SNS_MASSAGE)
         
         // 投稿ダイアログを表示する
         self.presentViewController(cv, animated: true, completion: nil)
@@ -98,7 +98,7 @@ class SnsViewController: UIViewController {
         print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         
         // SEを再生する.
-        Utility.seSoundPlay(Const.mySeYesPath)
+        Utility.seSoundPlay(Const.SE_YES_PATH)
         
         //　共有する項目
         let shareImage = UIImage(named: "01_13_01.png")!
@@ -117,14 +117,17 @@ class SnsViewController: UIViewController {
         print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         
         // SEを再生する.
-        Utility.seSoundPlay(Const.mySeYesPath)
+        Utility.seSoundPlay(Const.SE_YES_PATH)
         
         // 共有する項目
         // Twitterの投稿ダイアログを作って
         let cv = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
         
+        // 画像を追加
+        cv.addImage(UIImage(named: "01_13_01.png"))
+        
         // 文字を追加
-        cv.setInitialText("ニートいじりできみも自由になろう。")
+        cv.setInitialText(Const.SNS_MASSAGE)
         
         // 投稿ダイアログを表示する
         self.presentViewController(cv, animated: true, completion:nil )
@@ -135,7 +138,7 @@ class SnsViewController: UIViewController {
         print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         
         // SEを再生する.
-        Utility.seSoundPlay(Const.mySeNoPath)
+        Utility.seSoundPlay(Const.SE_NO_PATH)
     }
     
     /** 全オブジェクトの制約設定 **/

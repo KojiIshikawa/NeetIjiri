@@ -151,7 +151,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
             configBtn.hidden = false
 
             // SEを再生する.
-            Utility.seSoundPlay(Const.mySeYesPath)
+            Utility.seSoundPlay(Const.SE_YES_PATH)
             
         } else {
             
@@ -166,7 +166,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
             configBtn.hidden = true
             
             // SEを再生する.
-            Utility.seSoundPlay(Const.mySeNoPath)
+            Utility.seSoundPlay(Const.SE_NO_PATH)
         
         }
     }
@@ -212,7 +212,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
             if (Utility.getFinishedTActionResult(Const.CHARACTER1_ID).count > 0) {
                 
                 // SEを再生する.
-                Utility.seSoundPlay(Const.mySeResultPath)
+                Utility.seSoundPlay(Const.SE_RESULT_PATH)
                 
                 self.showPopoverView(self.manuBtn, identifier: "ResultView")
             }
@@ -232,7 +232,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         
         // SEを再生する.
-        Utility.seSoundPlay(Const.mySeYesPath)
+        Utility.seSoundPlay(Const.SE_YES_PATH)
         
         //PopOverを表示
         self.showPopoverView(sender, identifier: "ActionSetView")
@@ -244,7 +244,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
 
         // SEを再生する.
-        Utility.seSoundPlay(Const.mySeYesPath)
+        Utility.seSoundPlay(Const.SE_YES_PATH)
         
         //PopOverを表示
         self.showPopoverView(sender, identifier: "ProfileView")
@@ -256,7 +256,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         
         // SEを再生する.
-        Utility.seSoundPlay(Const.mySeYesPath)
+        Utility.seSoundPlay(Const.SE_YES_PATH)
         
         //PopOverを表示
         self.showPopoverView(sender, identifier: "SnsView")
@@ -268,7 +268,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         
         // SEを再生する.
-        Utility.seSoundPlay(Const.mySeYesPath)
+        Utility.seSoundPlay(Const.SE_YES_PATH)
         
         //PopOverを表示
         self.showPopoverView(sender, identifier: "SettingView")
@@ -297,7 +297,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         if udDateKkgnLst == year + Month + day {
             
             // SEを再生する.
-            Utility.seSoundPlay(Const.mySeKakugenPath)
+            Utility.seSoundPlay(Const.SE_KAKUGEN_PATH)
             
             // 保持済の格言を表示
             self.showPopoverView(self.manuBtn, identifier: "KakugenView")
@@ -310,7 +310,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
                 (action:UIAlertAction!) -> Void in
                 
                 // SEを再生する.
-                Utility.seSoundPlay(Const.mySeKakugenPath)
+                Utility.seSoundPlay(Const.SE_KAKUGEN_PATH)
                 
                 // 格言表示
                 self.showPopoverView(self.manuBtn, identifier: "KakugenView")
@@ -365,7 +365,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
             if (Utility.getFinishedTActionResult(Const.CHARACTER1_ID).count > 0) {
                 
                 // SEを再生する.
-                Utility.seSoundPlay(Const.mySeResultPath)
+                Utility.seSoundPlay(Const.SE_RESULT_PATH)
                 
                 self.showPopoverView(self.manuBtn, identifier: "ResultView")
             }
@@ -374,7 +374,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
 
             //前回のログイン時と日付が異なる場合
             // SEを再生する.
-            Utility.seSoundPlay(Const.mySeLoginPath)
+            Utility.seSoundPlay(Const.SE_LOGIN_PATH)
             
             //ログインボーナスPopOverを表示
             self.showPopoverView(self.manuBtn, identifier: "LoginBonusView")
@@ -437,7 +437,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         myCharImageView = UIImageView()
         
         //キャラクターサイズの倍率を取得する.
-        let charaSizeRate : CGFloat = (activeItem.count >= 1 ? CGFloat(activeItem[0].useArea) : 10.0) / 10
+        let charaSizeRate : CGFloat = (activeItem.count >= 1 ? CGFloat(activeItem[0].useArea) : CGFloat(Const.CHARACTER_DEFAULT_SIZE_RATE)) / 10
         
         //キャラクターサイズ設定.
         myCharImageView.frame.size = CGSizeMake(

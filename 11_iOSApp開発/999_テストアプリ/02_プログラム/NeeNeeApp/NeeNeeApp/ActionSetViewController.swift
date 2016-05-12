@@ -215,12 +215,12 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
                             deleteT_ActionResultWithActive(listActiveAction[0])
                             
                             // SEを再生する.
-                            Utility.seSoundPlay(Const.mySeItemCancelNoPath)
+                            Utility.seSoundPlay(Const.SE_ITEMCANCEL_PATH)
                             
                         } else {
 
                             // SEを再生する.
-                            Utility.seSoundPlay(Const.mySeItemSetNGPath)
+                            Utility.seSoundPlay(Const.SE_ITEMSET_NG_PATH)
 
                         }
                         
@@ -231,7 +231,7 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
                         deleteT_ActionResultWithActive(listActiveAction[1])
 
                         // SEを再生する.
-                        Utility.seSoundPlay(Const.mySeItemCancelNoPath)
+                        Utility.seSoundPlay(Const.SE_ITEMCANCEL_PATH)
                         
                     default:
                         
@@ -240,7 +240,7 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
                         deleteT_ActionResultWithActive(listActiveAction[2])
                         
                         // SEを再生する.
-                        Utility.seSoundPlay(Const.mySeItemCancelNoPath)
+                        Utility.seSoundPlay(Const.SE_ITEMCANCEL_PATH)
                         break
                         
                     }
@@ -323,7 +323,7 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
                         if setItemOverChk() {
                             
                             // SEを再生する.
-                            Utility.seSoundPlay(Const.mySeItemSetPath)
+                            Utility.seSoundPlay(Const.SE_ITEMSET_PATH)
 
                             // セットアイテムをデータベースに書き込む.
                             insertT_ActionResultWithActive(Int(itemList[itemListIdxPath]["itemID"]!)!)
@@ -334,7 +334,7 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
                         } else {
                             
                             // SEを再生する.
-                            Utility.seSoundPlay(Const.mySeItemSetNGPath)
+                            Utility.seSoundPlay(Const.SE_ITEMSET_NG_PATH)
                         }
                         
                     }

@@ -84,7 +84,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
             ud.synchronize()
             
             // BGMを再生する.
-            Utility.bgmSoundPlay(Const.myOpeningPath)
+            Utility.bgmSoundPlay(Const.BGM_OPENING_PATH)
         }
     }
         
@@ -99,7 +99,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
         print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         
         // SEを再生する.
-        Utility.seSoundPlay(Const.mySeStartPath)
+        Utility.seSoundPlay(Const.SE_START_PATH)
         
         // BGMを止める
         Utility.bgmStop()
