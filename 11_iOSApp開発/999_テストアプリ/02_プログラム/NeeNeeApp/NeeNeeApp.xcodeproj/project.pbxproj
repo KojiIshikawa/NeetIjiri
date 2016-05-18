@@ -209,6 +209,7 @@
 		F4F135431C68E32900130069 /* 02_05_03.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F1353F1C68E32900130069 /* 02_05_03.png */; };
 		F4F135441C68E32900130069 /* 02_05_04.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F135401C68E32900130069 /* 02_05_04.png */; };
 		F4F135481C68E39E00130069 /* 02_05_01.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F135471C68E39E00130069 /* 02_05_01.png */; };
+		F4F5B2361CECB0B900C9E588 /* 外を歩こうver2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F4F5B2351CECB0B900C9E588 /* 外を歩こうver2.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -441,6 +442,7 @@
 		F4F1353F1C68E32900130069 /* 02_05_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 02_05_03.png; sourceTree = "<group>"; };
 		F4F135401C68E32900130069 /* 02_05_04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 02_05_04.png; sourceTree = "<group>"; };
 		F4F135471C68E39E00130069 /* 02_05_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 02_05_01.png; sourceTree = "<group>"; };
+		F4F5B2351CECB0B900C9E588 /* 外を歩こうver2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "外を歩こうver2.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -603,6 +605,7 @@
 		AEFCBC481C68DC97000F5751 /* Sound */ = {
 			isa = PBXGroup;
 			children = (
+				F4F5B2351CECB0B900C9E588 /* 外を歩こうver2.mp3 */,
 				F444CC611CDF7F0D0030FECF /* town ピコピコ3.mp3 */,
 				F444CC621CDF7F0D0030FECF /* 暇で忙しい　キラキラver.mp3 */,
 				F444CC631CDF7F0D0030FECF /* 湯船のアヒルちゃん.mp3 */,
@@ -1031,6 +1034,7 @@
 				F4EE57481C6A28C40021E876 /* se7.mp3 in Resources */,
 				AEDE9AED1C66433700841902 /* 03_27_01.png in Resources */,
 				AEDE9ADE1C66433700841902 /* 02_03_01.png in Resources */,
+				F4F5B2361CECB0B900C9E588 /* 外を歩こうver2.mp3 in Resources */,
 				AEDE9AE71C66433700841902 /* 03_06_01.png in Resources */,
 				F4EE57431C6A28C40021E876 /* se2.mp3 in Resources */,
 				F4EE57561C6A28C40021E876 /* 暇で忙しい.mp3 in Resources */,
