@@ -133,6 +133,7 @@ class KakugenViewController: UIViewController {
         print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         
         imgViewKakugen.translatesAutoresizingMaskIntoConstraints = false
+        lblKakugen.translatesAutoresizingMaskIntoConstraints = false
         
         // 壁紙の制約
         self.view.addConstraints([
@@ -178,6 +179,32 @@ class KakugenViewController: UIViewController {
                 toItem: self.view,
                 attribute: .Height,
                 multiplier: 1.0,
+                constant: 0
+            )]
+        )
+        
+        // 格言ラベルの制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.lblKakugen,
+                attribute:  NSLayoutAttribute.Left,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.Right,
+                multiplier: 1.0 / 20.0,
+                constant: 0
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.lblKakugen,
+                attribute: NSLayoutAttribute.Top,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: NSLayoutAttribute.Bottom,
+                multiplier: 1.0 / 6.0,
                 constant: 0
             )]
         )

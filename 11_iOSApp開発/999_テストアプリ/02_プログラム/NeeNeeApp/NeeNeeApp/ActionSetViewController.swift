@@ -188,10 +188,14 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
                 // 選択中表示用アイテムが未作成なら作成する.
                 if selItemView == nil {
                     
+                    // セッションからアクションセット画面のサイズを取得
+                    let ud1 = NSUserDefaults.standardUserDefaults()
+                    let udActionSize : CGFloat! = CGFloat(ud1.floatForKey("ACTIONSET_SIZE"))
+                    
                     selItemView = UIImageView()
                     selItemView.image = myImage
                     selItemView.alpha = 0.8
-                    selItemView.frame.size = CGSizeMake(100,100)
+                    selItemView.frame.size = CGSizeMake(udActionSize,udActionSize)
                     self.view.addSubview(selItemView)
                 }
             }
@@ -298,10 +302,14 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
                 // 選択中表示用アイテムが未作成なら作成する.
                 if selItemView == nil {
                 
+                    // セッションからアクションセット画面のサイズを取得
+                    let ud1 = NSUserDefaults.standardUserDefaults()
+                    let udActionSize : CGFloat! = CGFloat(ud1.floatForKey("ACTIONSET_SIZE"))
+                    
                     selItemView = UIImageView()
                     selItemView.image = myImage
                     selItemView.alpha = 0.8
-                    selItemView.frame.size = CGSizeMake(100,100)
+                    selItemView.frame.size = CGSizeMake(udActionSize,udActionSize)
                     self.view.addSubview(selItemView)
                 }
                 

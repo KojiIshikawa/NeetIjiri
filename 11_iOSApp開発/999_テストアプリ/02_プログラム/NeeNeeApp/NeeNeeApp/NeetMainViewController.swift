@@ -422,8 +422,9 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         } else {
             
             // ない場合は先頭のデータを取得する.
+            activeItem = Utility.getMItem(0)
+            actionImages = Utility.getMActionImage(0)
             activeStage = Utility.getMStage(1)
-            actionImages = Utility.getMActionImage(1)
         }
         
         // 背景設定
@@ -446,10 +447,10 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         
         //キャラクター初期横位置設定.
         myCharImageView.frame.origin.x = CGFloat(Float(self.view.bounds.width)
-                                 * (Float(activeItem.count >= 1 ? activeItem[0].firstX : Const.CHARACTER_DEFAULT_FIRST_X) / 10))
+                                 * (Float(activeItem.count >= 1 ? activeItem[0].firstX : Const.CHARACTER_DEFAULT_FIRST_X) / 100))
         //キャラクター初期縦位置設定.
         myCharImageView.frame.origin.y = CGFloat(Float(self.view.bounds.height)
-                                 * (Float(activeItem.count >= 1 ? activeItem[0].firstY : Const.CHARACTER_DEFAULT_FIRST_Y) / 10))
+                                 * (Float(activeItem.count >= 1 ? activeItem[0].firstY : Const.CHARACTER_DEFAULT_FIRST_Y) / 100))
 
         myCharImageView.tag = 1
         myCharImageView.userInteractionEnabled = true
@@ -684,10 +685,10 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         var wkY: CGFloat
         let curX = self.myCharImageView.frame.origin.x
         let curY = self.myCharImageView.frame.origin.y
-        var minX:CGFloat = CGFloat((Float(3)  / 10.0) * Float(self.view.bounds.width))
-        var maxX:CGFloat = CGFloat((Float(8)  / 10.0) * Float(self.view.bounds.width))
-        var minY:CGFloat = CGFloat((Float(6)  / 10.0) * Float(self.view.bounds.height))
-        var maxY:CGFloat = CGFloat((Float(8)  / 10.0) * Float(self.view.bounds.height))
+        var minX:CGFloat = CGFloat(0.3 * Float(self.view.bounds.width))
+        var maxX:CGFloat = CGFloat(0.8 * Float(self.view.bounds.width))
+        var minY:CGFloat = CGFloat(0.6 * Float(self.view.bounds.height))
+        var maxY:CGFloat = CGFloat(0.8 * Float(self.view.bounds.height))
 
         //動く方向を決める(8方向)
         repeat {
@@ -718,10 +719,10 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
             if activeItem.count > 0 {
 
                 // 設定された可動範囲内のみでの動きとする.
-                minX = CGFloat((Float(activeItem[0].minX) / 10.0) * Float(self.view.bounds.width))
-                maxX = CGFloat((Float(activeItem[0].maxX) / 10.0) * Float(self.view.bounds.width))
-                minY = CGFloat((Float(activeItem[0].minY) / 10.0) * Float(self.view.bounds.height))
-                maxY = CGFloat((Float(activeItem[0].maxY) / 10.0) * Float(self.view.bounds.height))
+                minX = CGFloat((Float(activeItem[0].minX) / 100.0) * Float(self.view.bounds.width))
+                maxX = CGFloat((Float(activeItem[0].maxX) / 100.0) * Float(self.view.bounds.width))
+                minY = CGFloat((Float(activeItem[0].minY) / 100.0) * Float(self.view.bounds.height))
+                maxY = CGFloat((Float(activeItem[0].maxY) / 100.0) * Float(self.view.bounds.height))
             }
         
             //可動域の設定

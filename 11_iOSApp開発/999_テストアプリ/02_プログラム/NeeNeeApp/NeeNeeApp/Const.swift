@@ -31,10 +31,11 @@ class Const {
     static let SE_ITEMCANCEL_PATH = "se13"
     static let SE_RESULT_PATH = "me1"
     static let SE_LOGIN_PATH = "me2"
-    static let ACTION_START_TIME_INTERVAL:Float = 60 * 3
-    static let CHARACTER_DEFAULT_FIRST_X = 5
-    static let CHARACTER_DEFAULT_FIRST_Y = 6
-    static let CHARACTER_DEFAULT_SIZE_RATE = 10.0
+//    static let ACTION_START_TIME_INTERVAL:Float = 60 * 3
+    static let ACTION_START_TIME_INTERVAL:Float = 3
+    static let CHARACTER_DEFAULT_FIRST_X = 50
+    static let CHARACTER_DEFAULT_FIRST_Y = 50
+    static let CHARACTER_DEFAULT_SIZE_RATE = 10
     static let ANIME_KBN_RANDOM = 1
     static let ANIME_KBN_TEITEN = 2
     static let SNS_MASSAGE = "ニートいじりできみも中の世界に飛び出そう！"
