@@ -125,7 +125,7 @@ class KakugenViewController: UIViewController {
         ud.synchronize()
 
         // 格言の返却
-        return kakugenList[Int(randInt)].kakugenText
+        return Utility.insertReturn(kakugenList[Int(randInt)].kakugenText,interval: 16)
     }
     
     /** 全オブジェクトの制約設定 **/

@@ -95,7 +95,7 @@ class ResultViewController: UIViewController {
             //ラベルへの文言設定
             let usedItem = Utility.getMItem(Int(mActionR[0].itemID == nil ? 1 : mActionR[0].itemID))
             strResult = usedItem[0].itemName + " " + Utility.getRankName(mActionR[resultNo].rankKBN) + "\n\n"
-            strResult += mActionR[resultNo].message + "\n\n"
+            strResult += Utility.insertReturn(mActionR[resultNo].message,interval: 16) + "\n\n"
             strResult += "【取得アイテム一覧】" + "\n"
             
             //ドロップアイテムを算出する.

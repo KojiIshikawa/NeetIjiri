@@ -359,6 +359,26 @@ class Utility {
         //ドロップアイテムを返却する
         return retDropItem
     }
+    
+    //データ管理文字列表示用に指定した文字で改行コードを入れて返却する.
+    class func insertReturn(str :String, interval:Int)  -> String {
+        print(NSDate().description, __FUNCTION__, __LINE__)
+        
+        //返却する文字列を宣言
+        var retStr = ""
+        var i = 0
+        
+        for char in str.characters {
+            retStr += (i >= (interval - 1) && i % (interval - 1) == 0) ? String(char) + "\n" : String(char)
+            i++
+        }
+        //文字列を返却
+        return retStr
+        
+        
+    }
+    
+    
 }
 
 
