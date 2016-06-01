@@ -79,14 +79,14 @@ class ResultViewController: UIViewController {
         //行動結果のパターン分ループ処理
         for ( var i = 0; i < mActionR.count-1 ; i += 1 ) {
             
-            maxPer = minPer + mActionR[0].resPer.intValue
+            maxPer = minPer + mActionR[i].resPer.intValue
             
             if minPer <= randInt && randInt <= maxPer {
                 resultNo = i
                 break
             }
             
-            minPer = minPer + mActionR[0].resPer.intValue
+            minPer = minPer + mActionR[i].resPer.intValue
         }
 
         //使用したアイテムを取得

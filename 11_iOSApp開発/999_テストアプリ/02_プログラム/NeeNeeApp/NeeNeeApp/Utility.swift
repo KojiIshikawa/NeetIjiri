@@ -236,32 +236,32 @@ class Utility {
     }
     
     
-    class func getRankDrop(rankKBN: String) -> Int32  {
+    class func getRankDrop(rankKBN: String) -> Float  {
         print(NSDate().description, __FUNCTION__, __LINE__)
         
-        var ret :Int32 = 1
+        var ret :Float = 1.0
         
         switch rankKBN {
         case "S":
-            ret = 3
+            ret = 3.0
             
         case "A":
-            ret = 2
+            ret = 2.0
             
         case "B":
-            ret = 1
+            ret = 1.0
             
         case "C":
-            ret = 1
+            ret = 0.8
             
         case "D":
-            ret = 1
+            ret = 0.6
             
         case "E":
-            ret = 1
+            ret = 0.5
             
         default:
-            ret = 1
+            ret = 1.0
         }
         
         return ret
@@ -326,7 +326,7 @@ class Utility {
             //低確率のものから抽選する
             randDrop = Int32(arc4random_uniform(UInt32(100)));
             
-            dropPer = mDropItem[j].dropPer.intValue * Utility.getRankDrop(rankKbn)
+            dropPer = Int32(mDropItem[j].dropPer.floatValue * Utility.getRankDrop(rankKbn))
             
             //取得判定
             if (0 <= randDrop && randDrop <= dropPer) {
