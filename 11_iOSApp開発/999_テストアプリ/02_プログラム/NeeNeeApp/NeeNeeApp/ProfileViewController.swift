@@ -52,7 +52,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         self.nameDataLabel.text = charaData[0].charaName
         
         //文字数が枠をはみ出す場合は文字を小さくする.
-        if self.nameDataLabel.text?.utf16.count > 7 {
+        if self.nameDataLabel.text?.utf16.count > 8 {
             self.nameDataLabel.font = UIFont(name: "HiraMinProN-W6", size: 8)
         }
 
@@ -77,7 +77,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         self.tableViewKakugenHistory = UITableView()
         self.tableViewKakugenHistory.delegate = self
         self.tableViewKakugenHistory.dataSource = self
-        self.tableViewKakugenHistory.allowsSelection = false
+        //self.tableViewKakugenHistory.allowsSelection = false
         self.tableViewKakugenHistory.tag = 11
 
         // 行動履歴（tableview）

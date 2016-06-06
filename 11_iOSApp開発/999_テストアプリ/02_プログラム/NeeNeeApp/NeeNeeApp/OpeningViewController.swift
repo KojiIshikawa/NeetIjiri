@@ -98,6 +98,25 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
     func tapStartBtn(sender: AnyObject) {
         print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         
+        // なまえの文字列長エラー
+        if nameText.text?.characters.count < 1 || nameText.text?.characters.count > 8 {
+
+            // SEを再生する.
+            Utility.seSoundPlay(Const.SE_NO_PATH)
+            
+            let alertController = UIAlertController(title: "なまえが不正", message: "「なまえ」は1文字以上8文字以内にしてちょうだいね〜", preferredStyle: .Alert)
+            
+            let defaultActionYes = UIAlertAction(title: "はい", style: .Default, handler:{
+                (action:UIAlertAction!) -> Void in
+
+            })
+            
+            alertController.addAction(defaultActionYes)
+            presentViewController(alertController, animated: true, completion: nil)
+
+            return;
+        }
+
         // SEを再生する.
         Utility.seSoundPlay(Const.SE_START_PATH)
         
@@ -136,7 +155,8 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
         self.view.addSubview(nameLabel)
         
         birthLabel = UILabel()
-        birthLabel.text = "たんじょうび"
+        birthLabel.numberOfLines = 0
+        birthLabel.text = "　　　たんじ\n　　　ょうび"
         birthLabel.textColor = UIColor.whiteColor()
         birthLabel.font = UIFont(name: "HiraKakuProN-W3", size: 12)
         self.view.addSubview(birthLabel)
@@ -159,7 +179,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
         nameText = UITextField()
         nameText.delegate = self
         nameText.borderStyle = UITextBorderStyle.Bezel
-        nameText.placeholder = "ニートの名前"
+        nameText.placeholder = "8文字以内"
         self.view.addSubview(nameText)
         
         // 生年月日の設定.
@@ -337,7 +357,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
                 item: self.birthLabel,
                 attribute:  NSLayoutAttribute.Left,
                 relatedBy: .Equal,
-                toItem: self.view,
+                toItem: self.nameLabel,
                 attribute:  NSLayoutAttribute.Left,
                 multiplier: 1.0,
                 constant: 0
@@ -360,7 +380,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
                 relatedBy: .Equal,
                 toItem: self.view,
                 attribute: .Width,
-                multiplier: 1.0 / 4.4,
+                multiplier: 1.0 / 4.0,
                 constant: 0
             ),
             
@@ -371,7 +391,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
                 relatedBy: .Equal,
                 toItem: self.view,
                 attribute: .Height,
-                multiplier: 1.0 / 10.0,
+                multiplier: 1.0 / 8.0,
                 constant: 0
             )]
         )
@@ -555,6 +575,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
     func editGetItem() -> DarwinBoolean  {
         print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         
+        /**
         for (var i:Int = 1 ; i <= 51 ; i++) {
 
             // アイテム１を追加
@@ -564,15 +585,14 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
             initItem1.itemID = i
             initItem1.managedObjectContext!.MR_saveToPersistentStoreAndWait()
         }
+        **/
 
-        /**
         // アイテム１を追加
         let initItem1 = T_GetItem.MR_createEntity()! as T_GetItem
         initItem1.charaID = Const.CHARACTER1_ID
         initItem1.itemCount = 3
         initItem1.itemID = 1
         initItem1.managedObjectContext!.MR_saveToPersistentStoreAndWait()
-        **/
         
         return true
     }

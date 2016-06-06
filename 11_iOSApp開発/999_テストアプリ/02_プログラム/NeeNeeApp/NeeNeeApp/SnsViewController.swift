@@ -21,12 +21,34 @@ class SnsViewController: UIViewController {
     private var lineBtn: UIButton!
     private var twitterBtn: UIButton!
     private var questionBtn: UIButton!
+    private var kakugen = ""
     
     // view ロード完了時
     override func viewDidLoad() {
         print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         super.viewDidLoad()
 
+        //セッション情報.
+        let ud = NSUserDefaults.standardUserDefaults()
+        let udDateKkgnLst: Int! = ud.integerForKey("KAKUGEN_LAST_DATE")
+        let udKakugenId: Int! = ud.integerForKey("KAKUGEN_ID")
+        
+        //NSCalendarインスタンス
+        let cal = NSCalendar(identifier: NSCalendarIdentifierGregorian)!
+        let now = NSDate()
+        let year = cal.component(NSCalendarUnit.Year , fromDate: now) * 10000
+        let Month = cal.component(NSCalendarUnit.Month , fromDate: now) * 100
+        let day = cal.component(NSCalendarUnit.Day , fromDate: now)
+        var kakugenList :[M_Kakugen]
+        
+        //前回表示時と同じ年月日の場合
+        if udDateKkgnLst == year + Month + day {
+            
+            //格言をセッションから取得
+            kakugenList = M_Kakugen.MR_findByAttribute("kakugenID", withValue:udKakugenId , andOrderBy: "kakugenID", ascending: true) as! [M_Kakugen];
+            kakugen = kakugenList[0].kakugenText
+        }
+        
         //背景生成
         shareImgView = UIImageView(frame: self.view.frame)
         shareImgView.image = Utility.getUncachedImage(named: "02_02_01.png")
@@ -87,7 +109,7 @@ class SnsViewController: UIViewController {
         cv.addImage(UIImage(named: "01_13_01.png"))
         
         // 文字を追加
-        cv.setInitialText(Const.SNS_MASSAGE)
+        cv.setInitialText(Const.SNS_MASSAGE + kakugen)
         
         // 投稿ダイアログを表示する
         self.presentViewController(cv, animated: true, completion: nil)
@@ -127,7 +149,7 @@ class SnsViewController: UIViewController {
         cv.addImage(UIImage(named: "01_13_01.png"))
         
         // 文字を追加
-        cv.setInitialText(Const.SNS_MASSAGE)
+        cv.setInitialText(Const.SNS_MASSAGE + kakugen)
         
         // 投稿ダイアログを表示する
         self.presentViewController(cv, animated: true, completion:nil )

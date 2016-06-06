@@ -287,11 +287,9 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         let year = cal.component(NSCalendarUnit.Year , fromDate: now) * 10000
         let Month = cal.component(NSCalendarUnit.Month , fromDate: now) * 100
         let day = cal.component(NSCalendarUnit.Day , fromDate: now)
-        
-        
         let ud = NSUserDefaults.standardUserDefaults()
         let udDateKkgnLst: Int! = ud.integerForKey("KAKUGEN_LAST_DATE")
-        
+        var yesNo = false
         
         // 前回表示時と同じ年月日の場合
         if udDateKkgnLst == year + Month + day {
@@ -299,8 +297,8 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
             // SEを再生する.
             Utility.seSoundPlay(Const.SE_KAKUGEN_PATH)
             
-            // 保持済の格言を表示
-            self.showPopoverView(self.manuBtn, identifier: "KakugenView")
+            // 画面を表示をオン
+            yesNo = true
             
         } else {
             
@@ -308,6 +306,9 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
             
             let defaultActionYes = UIAlertAction(title: "表示する", style: .Default, handler:{
                 (action:UIAlertAction!) -> Void in
+                
+                // 画面表示フラグをオン
+                yesNo = true
                 
                 // SEを再生する.
                 Utility.seSoundPlay(Const.SE_KAKUGEN_PATH)
@@ -324,16 +325,23 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
                 
                 // iAd(インタースティシャル)の表示
                 self.requestInterstitialAdPresentation()
+
             })
+            alertController.addAction(defaultActionYes)
             
             let defaultActionNo = UIAlertAction(title: "表示しない", style: .Default, handler: nil)
-            alertController.addAction(defaultActionYes)
             alertController.addAction(defaultActionNo)
+
+            // アラート表示
             presentViewController(alertController, animated: true, completion: nil)
             
-            self.showPopoverView(self.manuBtn, identifier: "KakugenView")
-            
         }
+
+        // 画面を表示
+        if yesNo {
+            self.showPopoverView(self.manuBtn, identifier: "KakugenView")
+        }
+
     }
     
     //****************************************
@@ -683,13 +691,14 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         var y: CGFloat = 0.0
         var wkX: CGFloat
         var wkY: CGFloat
-        let curX = self.myCharImageView.frame.origin.x
-        let curY = self.myCharImageView.frame.origin.y
         var minX:CGFloat = CGFloat(0.3 * Float(self.view.bounds.width))
         var maxX:CGFloat = CGFloat(0.8 * Float(self.view.bounds.width))
         var minY:CGFloat = CGFloat(0.6 * Float(self.view.bounds.height))
         var maxY:CGFloat = CGFloat(0.8 * Float(self.view.bounds.height))
-
+        let curX = self.myCharImageView.frame.origin.x
+        let curY = self.myCharImageView.frame.origin.y
+        let moveSize:CGFloat = CGFloat(0.14 * Float(self.view.bounds.width))
+        
         //動く方向を決める(8方向)
         repeat {
             wkX = 0.0
@@ -698,9 +707,9 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
             let indexX = Int(arc4random_uniform(3))
             switch indexX {
             case 0:
-                wkX = -20.0
+                wkX = -1 * moveSize
             case 1:
-                wkX = 20.0
+                wkX = moveSize
             default:
                 wkX = 0.0
             }
@@ -708,9 +717,9 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
             let indexY = Int(arc4random_uniform(3))
             switch indexY {
             case 0:
-                wkY = -20.0
+                wkY = -1 * moveSize
             case 1:
-                wkY = 20.0
+                wkY = moveSize
             default:
                 wkY = 0.0
             }
