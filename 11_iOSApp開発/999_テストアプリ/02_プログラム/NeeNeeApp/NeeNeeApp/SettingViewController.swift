@@ -21,8 +21,14 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
     private var seMuteBtn: UIButton!
     private var seVolumeSBar: UISlider!
     private var seImage: UIImageView!
-    
     private var tumbViewImageView: UIImageView!
+    
+    // view アンロード開始時
+    override func viewWillDisappear(animated: Bool) {
+        
+        // SEを再生する.
+        Utility.seSoundPlay(Const.SE_NO_PATH)
+    }
     
     // view ロード完了時
     override func viewDidLoad() {

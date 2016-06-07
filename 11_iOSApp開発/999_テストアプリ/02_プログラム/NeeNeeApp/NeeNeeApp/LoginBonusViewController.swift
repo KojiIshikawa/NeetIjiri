@@ -12,13 +12,19 @@ import Foundation
 
 class LoginBonusViewController: UIViewController {
     
-    
     // 背景
     private var imgViewLogin: UIImageView!
 
     //画面オブジェクト
     private var lblOkan: UILabel! //オカンラベル
     private var btnOK: UIButton! //OKボタン
+    
+    // view アンロード開始時
+    override func viewWillDisappear(animated: Bool) {
+        
+        // SEを再生する.
+        Utility.seSoundPlay(Const.SE_NO_PATH)
+    }
     
     // view ロード完了時
     override func viewDidLoad() {

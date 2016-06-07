@@ -16,7 +16,13 @@ class KakugenViewController: UIViewController {
     //画面オブジェクト
     private var lblKakugen: UILabel! //格言ラベル
     private var btnOK: UIButton! //OKボタン
-
+    
+    // view アンロード開始時
+    override func viewWillDisappear(animated: Bool) {
+        
+        // SEを再生する.
+        Utility.seSoundPlay(Const.SE_NO_PATH)
+    }
     
     // view ロード完了時
     override func viewDidLoad() {
@@ -63,6 +69,7 @@ class KakugenViewController: UIViewController {
         let ud = NSUserDefaults.standardUserDefaults()
         let udDateKkgnLst: Int! = ud.integerForKey("KAKUGEN_LAST_DATE")
         let udKakugenId: Int! = ud.integerForKey("KAKUGEN_ID")
+        let udKakugenLogString: String! = ud.stringForKey("KAKUGEN_LOG_STRING")
         
         //NSCalendarインスタンス
         let cal = NSCalendar(identifier: NSCalendarIdentifierGregorian)!
@@ -74,6 +81,20 @@ class KakugenViewController: UIViewController {
         var randInt: UInt32 = 0
         var updFlg = false
         
+        // 格言履歴表示の場合
+        if (udKakugenLogString > "") {
+            
+            //NSUserDefaultに格言表示日付をセット
+            let ud = NSUserDefaults.standardUserDefaults()
+            
+            //セッションをクリア
+            ud.setValue("", forKey: "KAKUGEN_LOG_STRING")
+            ud.synchronize()
+            
+            // セッションの格言履歴を返却して終了
+            return Utility.insertReturn(udKakugenLogString,interval: 16)
+        }
+            
         //前回表示時と同じ年月日の場合
         if udDateKkgnLst == year + Month + day {
             

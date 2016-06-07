@@ -23,6 +23,13 @@ class SnsViewController: UIViewController {
     private var questionBtn: UIButton!
     private var kakugen = ""
     
+    // view アンロード開始時
+    override func viewWillDisappear(animated: Bool) {
+        
+        // SEを再生する.
+        Utility.seSoundPlay(Const.SE_NO_PATH)
+    }
+    
     // view ロード完了時
     override func viewDidLoad() {
         print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)

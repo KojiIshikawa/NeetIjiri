@@ -204,7 +204,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
         print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         let identifier = popoverPresentationController.presentedViewController.title
-
+        
         //ログイン画面または結果表示画面からの戻りの場合
         if (identifier == "LoginBonusView" || identifier == "ResultView") {
 

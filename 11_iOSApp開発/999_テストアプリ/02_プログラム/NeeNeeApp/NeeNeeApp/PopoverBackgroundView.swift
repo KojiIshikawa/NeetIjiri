@@ -7,8 +7,6 @@
 //
 
 import Foundation
-
-
 import UIKit
 
 // inherits:
@@ -28,8 +26,6 @@ class PopoverBackgroundView : UIPopoverBackgroundView {
     override class func wantsDefaultContentAppearance() -> Bool {
         return true // try false to see if you can find a difference...
     }
-    
-    
     
     override init(frame:CGRect) {
         self.arrOff = 0

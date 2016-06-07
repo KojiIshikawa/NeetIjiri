@@ -31,6 +31,13 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
     //取得済みセットアクションリスト
     private var listActiveAction:[T_ActionResult] = []
     
+    // view アンロード開始時
+    override func viewWillDisappear(animated: Bool) {
+        
+        // SEを再生する.
+        Utility.seSoundPlay(Const.SE_NO_PATH)
+    }
+    
     override func viewDidLoad() {
         
         // ポップの背景を設定する.

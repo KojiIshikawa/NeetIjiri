@@ -9,7 +9,7 @@
 import Foundation
 
 // 履歴書画面です。
-class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate  {
+class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,UIPopoverPresentationControllerDelegate  {
 
     // 履歴書メニューのオブジェクト
     private var detailImgView: UIImageView!
@@ -26,7 +26,13 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     private var listStage: [String] = []
     private var listAction: [String] = []
     private var listKakugen: [String] = []
-
+    
+    // view アンロード開始時
+    override func viewWillDisappear(animated: Bool) {
+        
+        // SEを再生する.
+        Utility.seSoundPlay(Const.SE_NO_PATH)
+    }
     
     // view ロード完了時
     override func viewDidLoad() {
@@ -436,7 +442,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 relatedBy: .Equal,
                 toItem: self.tableViewActionHistory,
                 attribute:  .Bottom,
-                multiplier: 1.06 / 1.0,
+                multiplier: 1.04 / 1.0,
                 constant: 0
             ),
             
@@ -458,7 +464,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 relatedBy: .Equal,
                 toItem: self.view,
                 attribute: .Height,
-                multiplier: 1.0 / 7.0,
+                multiplier: 1.0 / 6.9,
                 constant: 0
             )]
         )
@@ -486,6 +492,67 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             
         }
     }
+    
+    /** テーブル行選択時の処理 **/
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        switch tableView.tag {
+            
+            //格言履歴の場合
+            case 11:
+
+                //SEを再生する.
+                Utility.seSoundPlay(Const.SE_YES_PATH)
+
+                //NSUserDefaultに格言表示日付をセットする.
+                let ud = NSUserDefaults.standardUserDefaults()
+                
+                //セッションに選択行の格言を書き込み.
+                ud.setValue(listKakugen[indexPath.row], forKey: "KAKUGEN_LOG_STRING")
+                ud.synchronize()
+                
+                //ポップアップを表示する.
+                self.showPopoverView(self.tableViewKakugenHistory, identifier: "KakugenView")
+            return
+            
+        default: return
+            
+        }
+    }
+    
+    //Popover表示
+    func showPopoverView(sender: AnyObject, identifier:String) {
+        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        let popoverView = self.storyboard!.instantiateViewControllerWithIdentifier(identifier) as UIViewController
+        popoverView.modalPresentationStyle = .Popover
+        popoverView.preferredContentSize = CGSize(width: self.view.bounds.width / 1.1, height: self.view.bounds.height / 1.0)
+        popoverView.view.backgroundColor = UIColor.clearColor()
+        if let presentationController = popoverView.popoverPresentationController {
+            presentationController.permittedArrowDirections = .Down
+            presentationController.sourceView = sender as! UITableView
+            presentationController.sourceRect = sender.bounds
+            presentationController.delegate = self
+            presentationController.popoverBackgroundViewClass = PopoverBackgroundView.classForCoder()
+        }
+        popoverView.title = identifier
+        self.presentViewController(popoverView, animated: true, completion:nil)
+        
+    }
+    
+    //Popover実装時に必要になるイベント　おまじない
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController)
+        -> UIModalPresentationStyle {
+            return .None
+    }
+    
+    //popOver表示終了後のイベント
+    func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
+        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        
+        //SEを再生する.
+        //Utility.seSoundPlay(Const.SE_NO_PATH)
+    }
+
     
     // セルの内容を変更
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
