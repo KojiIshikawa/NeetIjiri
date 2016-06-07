@@ -77,36 +77,36 @@ class ResultViewController: UIViewController {
         let resFilter: NSPredicate = NSPredicate(format: "itemID = %@", tActionR[0].itemID)
         let mActionR :[M_ActionResult] = M_ActionResult.MR_findAllSortedBy("resultID", ascending: true, withPredicate: resFilter) as! [M_ActionResult];
         
-        //0~100の値をランダムで取得
-        let randInt = Int32(arc4random_uniform(UInt32(100)));
-        var minPer : Int32 = 0
+        //1~100の値をランダムで取得
+        let randInt = Int32(arc4random_uniform(UInt32(100))) + 1;
+        var minPer : Int32 = 1
         var maxPer : Int32 = 0
         var resultNo = 0
         
         //行動結果のパターン分ループ処理
         for ( var i = 0; i < mActionR.count-1 ; i += 1 ) {
             
-            maxPer = minPer + mActionR[0].resPer.intValue
+            maxPer = minPer + mActionR[i].resPer.intValue - 1
             
             if minPer <= randInt && randInt <= maxPer {
                 resultNo = i
                 break
             }
             
-            minPer = minPer + mActionR[0].resPer.intValue
+            minPer = minPer + mActionR[i].resPer.intValue
         }
 
         //使用したアイテムを取得
         if mActionR.count > 0 {
             
             //ラベルへの文言設定
-            let usedItem = Utility.getMItem(Int(mActionR[0].itemID == nil ? 1 : mActionR[0].itemID))
+            let usedItem = Utility.getMItem(Int(mActionR[resultNo].itemID == nil ? 1 : mActionR[resultNo].itemID))
             strResult = usedItem[0].itemName + " " + Utility.getRankName(mActionR[resultNo].rankKBN) + "\n\n"
             strResult += Utility.insertReturn(mActionR[resultNo].message,interval: 16) + "\n\n"
             strResult += "【取得アイテム一覧】" + "\n"
             
             //ドロップアイテムを算出する.
-            let mDropItem = Utility.getDropItem(Int(tActionR[0].itemID),rankKbn: mActionR[0].rankKBN,loginUseFlg: false)
+            let mDropItem = Utility.getDropItem(Int(tActionR[0].itemID),rankKbn: mActionR[resultNo].rankKBN,loginUseFlg: false)
 
             //件数確認
             if (mDropItem.count == 0) {

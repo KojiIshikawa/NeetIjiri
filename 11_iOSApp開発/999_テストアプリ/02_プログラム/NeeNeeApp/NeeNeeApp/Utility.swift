@@ -154,7 +154,7 @@ class Utility {
         print(NSDate().description, __FUNCTION__, __LINE__)
         
         let profileFilter: NSPredicate = NSPredicate(format: "charaID = %@ AND actEndDate <> nil AND finishFlg = '0'", String(charaId))
-        return  T_ActionResult.MR_findAllSortedBy("actSetDate", ascending: false, withPredicate: profileFilter) as! [T_ActionResult];
+        return  T_ActionResult.MR_findAllSortedBy("actSetDate", ascending: true, withPredicate: profileFilter) as! [T_ActionResult];
     }
     
     /** 所持ステージの書き込み **/

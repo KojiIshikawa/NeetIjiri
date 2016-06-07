@@ -567,9 +567,11 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             cell.textLabel?.text = listKakugen[indexPath.row]
         
             //文字数が枠をはみ出す場合は文字を小さくする.
+            /**
             if cell.textLabel!.text!.utf16.count > 15 {
                 cell.textLabel!.font = UIFont(name: "HiraMinProN-W6", size: 8)
             }
+            **/
             
         // 行動履歴
         case 12:
