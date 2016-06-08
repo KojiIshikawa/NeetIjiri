@@ -211,57 +211,51 @@ class Utility {
         
         switch rankKBN {
         case "S":
-            ret = "大成功！\nひまゲット率３倍！"
+            ret = "大成功！ひまゲット率２倍！"
             
         case "A":
-            ret = "大成功！\nひまゲット率２倍！"
-            
-        case "B":
             ret = "成功"
             
-        case "C":
+        case "B":
             ret = "普通"
             
-        case "D":
+        case "C":
             ret = "失敗"
             
-        case "E":
+        case "D":
             ret = "大失敗"
             
         default:
-            ret = "失敗"
+            ret = "普通"
         }
         
         return ret
     }
     
     
-    class func getRankDrop(rankKBN: String) -> Int32  {
+    class func getRankDrop(rankKBN: String) -> Float32  {
         print(NSDate().description, __FUNCTION__, __LINE__)
         
-        var ret :Int32 = 1
+        var ret :Float32 = 1.0
         
         switch rankKBN {
         case "S":
-            ret = 3
+            ret = 2.0
             
         case "A":
-            ret = 2
+            ret = 1.5
             
         case "B":
-            ret = 1
+            ret = 1.0
             
         case "C":
-            ret = 1
+            ret = 0.8
             
         case "D":
-            ret = 1
-            
-        case "E":
-            ret = 1
+            ret = 0.5
             
         default:
-            ret = 1
+            ret = 1.0
         }
         
         return ret
@@ -323,13 +317,14 @@ class Utility {
                 return retDropItem
             }
             
-            //低確率のものから抽選する
-            randDrop = Int32(arc4random_uniform(UInt32(100)));
+            //低確率のものから抽選する.(1~100を乱数取得し、取得確率内であれば取得する)
+            randDrop = Int32(arc4random_uniform(UInt32(100))) + 1;
             
-            dropPer = mDropItem[j].dropPer.intValue * Utility.getRankDrop(rankKbn)
+            //行動結果のランクを加味する.
+            dropPer = Int32(Float32(mDropItem[j].dropPer.intValue) * Utility.getRankDrop(rankKbn))
             
             //取得判定
-            if (0 <= randDrop && randDrop <= dropPer) {
+            if (1 <= randDrop && randDrop <= dropPer) {
                 
                 print("アイテムを獲得しました＝%@", mDropItem[j].dropItemID)
                 retDropItem.append(mDropItem[j])

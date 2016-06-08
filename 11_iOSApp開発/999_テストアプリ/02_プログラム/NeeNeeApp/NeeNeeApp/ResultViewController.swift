@@ -84,7 +84,7 @@ class ResultViewController: UIViewController {
         var resultNo = 0
         
         //行動結果のパターン分ループ処理
-        for ( var i = 0; i < mActionR.count-1 ; i += 1 ) {
+        for ( var i = 0; i < mActionR.count ; i++ ) {
             
             maxPer = minPer + mActionR[i].resPer.intValue - 1
             
