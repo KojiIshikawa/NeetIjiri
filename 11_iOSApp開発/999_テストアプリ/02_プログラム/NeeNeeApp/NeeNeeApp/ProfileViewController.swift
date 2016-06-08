@@ -511,6 +511,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 ud.setValue(listKakugen[indexPath.row], forKey: "KAKUGEN_LOG_STRING")
                 ud.synchronize()
                 
+                //行選択を解除する.
+                tableViewKakugenHistory.deselectRowAtIndexPath(indexPath, animated: true)
+                
                 //ポップアップを表示する.
                 self.showPopoverView(self.tableViewKakugenHistory, identifier: "KakugenView")
             return
