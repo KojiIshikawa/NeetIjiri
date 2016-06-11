@@ -291,7 +291,7 @@ class Utility {
                 
         //ドロップアイテムの判定
         let dropFilter: NSPredicate = NSPredicate(format: "itemID = %@", String(itemID))
-        let mDropItem :[M_DropItem] = M_DropItem.MR_findAllSortedBy("dropPer", ascending: true, withPredicate: dropFilter) as! [M_DropItem];
+        let mDropItem :[M_DropItem] = M_DropItem.MR_findAllSortedBy("dropItemID", ascending: true, withPredicate: dropFilter) as! [M_DropItem];
         
         //返却アイテム
         var retDropItem :[M_DropItem] = []

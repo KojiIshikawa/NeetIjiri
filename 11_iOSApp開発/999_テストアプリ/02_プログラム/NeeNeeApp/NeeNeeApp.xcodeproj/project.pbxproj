@@ -25,7 +25,6 @@
 		AE0D3F6A1C6CDA700015F479 /* KakugenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D3F691C6CDA700015F479 /* KakugenViewController.swift */; };
 		AE0D3F6C1C6CDAB30015F479 /* LoginBonusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D3F6B1C6CDAB30015F479 /* LoginBonusViewController.swift */; };
 		AE8E93961C5DE80D0031BF79 /* NeetMaster.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = AE8E93931C5DE80D0031BF79 /* NeetMaster.sqlite */; };
-		AEBB3CEE1CA7A86A00872A6F /* 共有メモ.txt in Resources */ = {isa = PBXBuildFile; fileRef = AEBB3CED1CA7A86A00872A6F /* 共有メモ.txt */; };
 		AEBFB8951C71F2DA006B3AEC /* Master.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = AEBFB8941C71F2DA006B3AEC /* Master.sqlite */; };
 		AEDE9ACD1C66433700841902 /* 01_01_01.png in Resources */ = {isa = PBXBuildFile; fileRef = AEDE9A7B1C66433700841902 /* 01_01_01.png */; };
 		AEDE9ACE1C66433700841902 /* 01_02_01.png in Resources */ = {isa = PBXBuildFile; fileRef = AEDE9A7C1C66433700841902 /* 01_02_01.png */; };
@@ -254,7 +253,6 @@
 		AE0D3F691C6CDA700015F479 /* KakugenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KakugenViewController.swift; sourceTree = "<group>"; };
 		AE0D3F6B1C6CDAB30015F479 /* LoginBonusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginBonusViewController.swift; sourceTree = "<group>"; };
 		AE8E93931C5DE80D0031BF79 /* NeetMaster.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = NeetMaster.sqlite; sourceTree = "<group>"; };
-		AEBB3CED1CA7A86A00872A6F /* 共有メモ.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "共有メモ.txt"; sourceTree = "<group>"; };
 		AEBFB8941C71F2DA006B3AEC /* Master.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Master.sqlite; sourceTree = "<group>"; };
 		AEDE9A7B1C66433700841902 /* 01_01_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 01_01_01.png; sourceTree = "<group>"; };
 		AEDE9A7C1C66433700841902 /* 01_02_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 01_02_01.png; sourceTree = "<group>"; };
@@ -502,7 +500,6 @@
 				AE0D3F631C6CB8EB0015F479 /* ResultViewController.swift */,
 				AE0D3F6B1C6CDAB30015F479 /* LoginBonusViewController.swift */,
 				AE0D3F691C6CDA700015F479 /* KakugenViewController.swift */,
-				AEBB3CED1CA7A86A00872A6F /* 共有メモ.txt */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -978,7 +975,6 @@
 				F45FEFD71CBFB42400BA1712 /* 03_30_02.png in Resources */,
 				AEDE9AD11C66433700841902 /* 01_03_02.png in Resources */,
 				AEDE9AF91C66433700841902 /* 04_01_01_01_12.PNG in Resources */,
-				AEBB3CEE1CA7A86A00872A6F /* 共有メモ.txt in Resources */,
 				F4EE574E1C6A28C40021E876 /* se13.mp3 in Resources */,
 				AEDE9AEE1C66433700841902 /* 04_01_01_01_01.PNG in Resources */,
 				F4F1F6FD1D0BAA61001F18AA /* 04_01_01_02_03.png in Resources */,

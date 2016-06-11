@@ -50,6 +50,10 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     //初回表示判定フラグ
     private var isFirstLoad: Bool! = false
     
+    //広告表示フラグ
+    private var dispIAd: Bool! = false
+
+    
     required init(coder aDecoder: NSCoder){
         super.init(coder: aDecoder)!
     }
@@ -217,6 +221,16 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
                 self.showPopoverView(self.manuBtn, identifier: "ResultView")
             }
         }
+        
+        //格言画面からの戻りの場合
+        if identifier == "KakugenView" {
+            
+            //iAd(インタースティシャル)の表示
+            if (dispIAd == true) {
+                self.requestInterstitialAdPresentation()
+                dispIAd = false
+            }
+        }
     }
     
     //Popover実装時に必要になるイベント　おまじない
@@ -289,31 +303,36 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         let day = cal.component(NSCalendarUnit.Day , fromDate: now)
         let ud = NSUserDefaults.standardUserDefaults()
         let udDateKkgnLst: Int! = ud.integerForKey("KAKUGEN_LAST_DATE")
-        var yesNo = false
+        var dispKakugen = false
         
-        // 前回表示時と同じ年月日の場合
+        //前回表示時と同じ年月日の場合
         if udDateKkgnLst == year + Month + day {
             
-            // SEを再生する.
+            //SEを再生する.
             Utility.seSoundPlay(Const.SE_KAKUGEN_PATH)
             
-            // 画面を表示をオン
-            yesNo = true
+            self.showPopoverView(self.manuBtn, identifier: "KakugenView")
+            
+            //格言表示フラグをオン
+            dispKakugen = true
             
         } else {
             
-            let alertController = UIAlertController(title: "ニートの格言入手", message: "チラシを表示して、今日のニートの格言を取得しますか？", preferredStyle: .Alert)
+            let alertController = UIAlertController(title: "きょうの格言", message: "ニートはきょうの格言をつぶやくかわりにネット広告をみるわるいクセがあります。とはいえ、きょうの格言をみますか？", preferredStyle: .Alert)
             
-            let defaultActionYes = UIAlertAction(title: "表示する", style: .Default, handler:{
+            let defaultActionYes = UIAlertAction(title: "みる", style: .Default, handler:{
                 (action:UIAlertAction!) -> Void in
                 
-                // 画面表示フラグをオン
-                yesNo = true
+                //格言表示フラグをオン
+                dispKakugen = true
                 
-                // SEを再生する.
+                //広告表示フラグをオン
+                self.dispIAd = true
+                
+                //SEを再生する.
                 Utility.seSoundPlay(Const.SE_KAKUGEN_PATH)
                 
-                // 格言表示
+                //格言表示
                 self.showPopoverView(self.manuBtn, identifier: "KakugenView")
                 
                 //NSUserDefaultに格言表示日付をセット
@@ -322,23 +341,20 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
                 //年月日を取得し、セッションに格納
                 ud.setInteger(year + Month + day, forKey: "KAKUGEN_LAST_DATE")
                 ud.synchronize()
-                
-                // iAd(インタースティシャル)の表示
-                self.requestInterstitialAdPresentation()
 
             })
             alertController.addAction(defaultActionYes)
             
-            let defaultActionNo = UIAlertAction(title: "表示しない", style: .Default, handler: nil)
+            let defaultActionNo = UIAlertAction(title: "みない", style: .Default, handler: nil)
             alertController.addAction(defaultActionNo)
 
             // アラート表示
-            presentViewController(alertController, animated: true, completion: nil)
+            presentViewController(alertController, animated: true, completion:nil)
             
         }
 
         // 画面を表示
-        if yesNo {
+        if dispKakugen {
             self.showPopoverView(self.manuBtn, identifier: "KakugenView")
         }
 

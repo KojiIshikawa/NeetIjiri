@@ -27,6 +27,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
     private var titleImageView: UIImageView!
 
     // ラベルオブジェクト
+    private var projectLabel: UILabel!
     private var nameLabel: UILabel!
     private var birthLabel: UILabel!
     
@@ -104,7 +105,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
             // SEを再生する.
             Utility.seSoundPlay(Const.SE_NO_PATH)
             
-            let alertController = UIAlertController(title: "なまえが不正", message: "「なまえ」は1文字以上8文字以内にしてちょうだいね〜", preferredStyle: .Alert)
+            let alertController = UIAlertController(title: "なまえが不正", message: "「なまえ」は1文字以上8文字以内にしてね", preferredStyle: .Alert)
             
             let defaultActionYes = UIAlertAction(title: "はい", style: .Default, handler:{
                 (action:UIAlertAction!) -> Void in
@@ -148,6 +149,11 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
         self.view.addSubview(myImageView)
 
         // ラベル設定
+        projectLabel = UILabel()
+        projectLabel.text = "2016 Boil Project."
+        projectLabel.textColor = UIColor.whiteColor()
+        self.view.addSubview(projectLabel)
+        
         nameLabel = UILabel()
         nameLabel.text = "　　　なまえ"
         nameLabel.textColor = UIColor.whiteColor()
@@ -180,6 +186,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
         nameText.delegate = self
         nameText.borderStyle = UITextBorderStyle.Bezel
         nameText.placeholder = "8文字以内"
+        nameText.textColor = UIColor.whiteColor()
         self.view.addSubview(nameText)
         
         // 生年月日の設定.
@@ -200,6 +207,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
         print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
         
         titleImageView.translatesAutoresizingMaskIntoConstraints = false
+        projectLabel.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         nameText.translatesAutoresizingMaskIntoConstraints = false
         birthLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -227,7 +235,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
                 relatedBy: .Equal,
                 toItem: self.view,
                 attribute:  NSLayoutAttribute.CenterY,
-                multiplier: 1.0 / 1.2,
+                multiplier: 1.0 / 1.4,
                 constant: 0
             ),
             
@@ -254,6 +262,54 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
             )]
         )
         
+        // プロジェクトラベルの制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.projectLabel,
+                attribute:  NSLayoutAttribute.CenterX,
+                relatedBy: .Equal,
+                toItem: self.titleImageView,
+                attribute:  NSLayoutAttribute.CenterX,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.projectLabel,
+                attribute: NSLayoutAttribute.Top,
+                relatedBy: .Equal,
+                toItem: self.titleImageView,
+                attribute:  NSLayoutAttribute.Bottom,
+                multiplier: 0.9 / 1.0,
+                constant: 0
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.projectLabel,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Width,
+                multiplier: 1.8 / 4.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.projectLabel,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Height,
+                multiplier: 1.0 / 10.0,
+                constant: 0
+            )]
+        )
+        
         // 名前ラベルの制約
         self.view.addConstraints([
             
@@ -275,7 +331,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
                 relatedBy: .Equal,
                 toItem: self.titleImageView,
                 attribute:  NSLayoutAttribute.Bottom,
-                multiplier: 1.04 / 1.0,
+                multiplier: 1.2 / 1.0,
                 constant: 0
             ),
             // 横幅
