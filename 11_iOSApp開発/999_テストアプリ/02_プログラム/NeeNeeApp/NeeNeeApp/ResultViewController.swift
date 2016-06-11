@@ -103,14 +103,14 @@ class ResultViewController: UIViewController {
             let usedItem = Utility.getMItem(Int(mActionR[resultNo].itemID == nil ? 1 : mActionR[resultNo].itemID))
             strResult = usedItem[0].itemName + " " + Utility.getRankName(mActionR[resultNo].rankKBN) + "\n\n"
             strResult += Utility.insertReturn(mActionR[resultNo].message,interval: 16) + "\n\n"
-            strResult += "【取得アイテム一覧】" + "\n"
+            strResult += "【取得ひま一覧】" + "\n"
             
             //ドロップアイテムを算出する.
             let mDropItem = Utility.getDropItem(Int(tActionR[0].itemID),rankKbn: mActionR[resultNo].rankKBN,loginUseFlg: false)
 
             //件数確認
             if (mDropItem.count == 0) {
-                strResult = "ドロップアイテムマスタが\n取得できませんでした。"
+                strResult += "ひまを取得できなかった・・・"
             }
             
             for dropItem in mDropItem {

@@ -209,6 +209,11 @@
 		F4F135431C68E32900130069 /* 02_05_03.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F1353F1C68E32900130069 /* 02_05_03.png */; };
 		F4F135441C68E32900130069 /* 02_05_04.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F135401C68E32900130069 /* 02_05_04.png */; };
 		F4F135481C68E39E00130069 /* 02_05_01.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F135471C68E39E00130069 /* 02_05_01.png */; };
+		F4F1F6FB1D0BAA61001F18AA /* 04_01_01_02_01.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F1F6F61D0BAA61001F18AA /* 04_01_01_02_01.png */; };
+		F4F1F6FC1D0BAA61001F18AA /* 04_01_01_02_02.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F1F6F71D0BAA61001F18AA /* 04_01_01_02_02.png */; };
+		F4F1F6FD1D0BAA61001F18AA /* 04_01_01_02_03.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F1F6F81D0BAA61001F18AA /* 04_01_01_02_03.png */; };
+		F4F1F6FE1D0BAA61001F18AA /* 04_01_01_03_01.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F1F6F91D0BAA61001F18AA /* 04_01_01_03_01.png */; };
+		F4F1F6FF1D0BAA61001F18AA /* 04_01_01_03_02.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F1F6FA1D0BAA61001F18AA /* 04_01_01_03_02.png */; };
 		F4F5B2361CECB0B900C9E588 /* 外を歩こうver2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F4F5B2351CECB0B900C9E588 /* 外を歩こうver2.mp3 */; };
 /* End PBXBuildFile section */
 
@@ -442,6 +447,11 @@
 		F4F1353F1C68E32900130069 /* 02_05_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 02_05_03.png; sourceTree = "<group>"; };
 		F4F135401C68E32900130069 /* 02_05_04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 02_05_04.png; sourceTree = "<group>"; };
 		F4F135471C68E39E00130069 /* 02_05_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 02_05_01.png; sourceTree = "<group>"; };
+		F4F1F6F61D0BAA61001F18AA /* 04_01_01_02_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 04_01_01_02_01.png; sourceTree = "<group>"; };
+		F4F1F6F71D0BAA61001F18AA /* 04_01_01_02_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 04_01_01_02_02.png; sourceTree = "<group>"; };
+		F4F1F6F81D0BAA61001F18AA /* 04_01_01_02_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 04_01_01_02_03.png; sourceTree = "<group>"; };
+		F4F1F6F91D0BAA61001F18AA /* 04_01_01_03_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 04_01_01_03_01.png; sourceTree = "<group>"; };
+		F4F1F6FA1D0BAA61001F18AA /* 04_01_01_03_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 04_01_01_03_02.png; sourceTree = "<group>"; };
 		F4F5B2351CECB0B900C9E588 /* 外を歩こうver2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "外を歩こうver2.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -520,6 +530,11 @@
 		AEDE9A7A1C66433700841902 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				F4F1F6F61D0BAA61001F18AA /* 04_01_01_02_01.png */,
+				F4F1F6F71D0BAA61001F18AA /* 04_01_01_02_02.png */,
+				F4F1F6F81D0BAA61001F18AA /* 04_01_01_02_03.png */,
+				F4F1F6F91D0BAA61001F18AA /* 04_01_01_03_01.png */,
+				F4F1F6FA1D0BAA61001F18AA /* 04_01_01_03_02.png */,
 				F4EFE5951CC386B0001040DF /* 01_13_01.png */,
 				F45FEFD11CBFB42400BA1712 /* 03_30_02.png */,
 				F45FEFD21CBFB42400BA1712 /* 03_31_02.png */,
@@ -966,6 +981,7 @@
 				AEBB3CEE1CA7A86A00872A6F /* 共有メモ.txt in Resources */,
 				F4EE574E1C6A28C40021E876 /* se13.mp3 in Resources */,
 				AEDE9AEE1C66433700841902 /* 04_01_01_01_01.PNG in Resources */,
+				F4F1F6FD1D0BAA61001F18AA /* 04_01_01_02_03.png in Resources */,
 				F44176D41CA197DA00042C24 /* 02_08_01.png in Resources */,
 				F4F135421C68E32900130069 /* 02_05_02.png in Resources */,
 				F44176D71CA197DA00042C24 /* 03_28_01.png in Resources */,
@@ -976,6 +992,7 @@
 				F4EE57521C6A28C40021E876 /* ついてる日.mp3 in Resources */,
 				F44176D21CA197DA00042C24 /* 01_12_01.png in Resources */,
 				F45FEFE31CBFB43500BA1712 /* 暇で忙しい2nd.mp3 in Resources */,
+				F4F1F6FC1D0BAA61001F18AA /* 04_01_01_02_02.png in Resources */,
 				AEDE9B161C66433700841902 /* 06_06_01.png in Resources */,
 				AEDE9AF41C66433700841902 /* 04_01_01_01_07.PNG in Resources */,
 				F4EE57441C6A28C40021E876 /* se3.mp3 in Resources */,
@@ -1040,6 +1057,7 @@
 				F4EE57561C6A28C40021E876 /* 暇で忙しい.mp3 in Resources */,
 				F4F135441C68E32900130069 /* 02_05_04.png in Resources */,
 				F44176DA1CA197DA00042C24 /* 03_31_01.png in Resources */,
+				F4F1F6FB1D0BAA61001F18AA /* 04_01_01_02_01.png in Resources */,
 				AE8E93961C5DE80D0031BF79 /* NeetMaster.sqlite in Resources */,
 				AEDE9B121C66433700841902 /* 06_02_01.png in Resources */,
 				F45FEFD91CBFB42400BA1712 /* 06_11_01.png in Resources */,
@@ -1050,6 +1068,8 @@
 				AEBFB8951C71F2DA006B3AEC /* Master.sqlite in Resources */,
 				AEDE9B141C66433700841902 /* 06_04_01.png in Resources */,
 				AEDE9AD51C66433700841902 /* 01_05_02.png in Resources */,
+				F4F1F6FE1D0BAA61001F18AA /* 04_01_01_03_01.png in Resources */,
+				F4F1F6FF1D0BAA61001F18AA /* 04_01_01_03_02.png in Resources */,
 				F44176D81CA197DA00042C24 /* 03_29_01.png in Resources */,
 				AEDE9B1A1C66433700841902 /* 07_01_01.png in Resources */,
 				AEDE9B131C66433700841902 /* 06_03_01.png in Resources */,
