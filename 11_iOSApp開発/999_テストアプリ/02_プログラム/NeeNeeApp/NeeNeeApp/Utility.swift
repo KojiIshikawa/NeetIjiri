@@ -211,7 +211,7 @@ class Utility {
         
         switch rankKBN {
         case "S":
-            ret = "大成功！ひまゲット率２倍！"
+            ret = "大成功！"
             
         case "A":
             ret = "成功"
