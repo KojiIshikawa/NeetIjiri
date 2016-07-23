@@ -28,7 +28,7 @@ class LoginBonusViewController: UIViewController {
     
     // view ロード完了時
     override func viewDidLoad() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         super.viewDidLoad()
 
         //メッセージ
@@ -90,7 +90,7 @@ class LoginBonusViewController: UIViewController {
     
     //メモリ消費が多くなった時に動くイベント
     override func didReceiveMemoryWarning() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -102,7 +102,7 @@ class LoginBonusViewController: UIViewController {
     func getOkan() -> String {
         
         //ランダムで取得
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         let okanList :[M_Okan] = M_Okan.MR_findAll() as! [M_Okan];
         let randInt = arc4random_uniform(UInt32(okanList.count));
@@ -114,7 +114,7 @@ class LoginBonusViewController: UIViewController {
     
     /** 全オブジェクトの制約設定 **/
     func objConstraints() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         imgViewLogin.translatesAutoresizingMaskIntoConstraints = false
         lblOkan.translatesAutoresizingMaskIntoConstraints = false

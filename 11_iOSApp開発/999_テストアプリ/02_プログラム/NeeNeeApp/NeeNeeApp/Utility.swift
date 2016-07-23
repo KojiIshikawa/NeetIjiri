@@ -29,7 +29,7 @@ class Utility {
     
     class func bgmSoundPlay(bgmPath: String)
     {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, #function,#function,#line)
         
         //userDefaultからボリューム値を取得
         let ud = NSUserDefaults.standardUserDefaults()
@@ -60,13 +60,13 @@ class Utility {
     
     class func bgmVolumeChange(volume: Float)
     {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, #function,#line)
         myAudioPlayer.volume = volume
     }
 
     class func bgmStop()
     {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, #function,#line)
         myAudioPlayer.stop()
     }
     
@@ -74,7 +74,7 @@ class Utility {
     //ファイルのパス
     class func seSoundPlay(sePath: String)
     {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, #function,#line)
         
         //userDefaultからボリューム値を取得
         let ud = NSUserDefaults.standardUserDefaults()
@@ -98,13 +98,13 @@ class Utility {
     
     class func seVolumeChange(volume: Float)
     {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, #function,#line)
         mySePlayer.volume = volume * 2
     }
     
     class func seStop()
     {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, #function,#line)
         mySePlayer.stop()
     }
 
@@ -115,28 +115,28 @@ class Utility {
     
     /** 基本情報の取得 **/
     class func getCharaBase(charaId: Int) -> [T_CharaBase]  {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, #function,#line)
         
         return T_CharaBase.MR_findByAttribute("charaID", withValue: charaId) as! [T_CharaBase];
     }
     
     /** アイテム情報の取得 **/
     class func getMItem(itemId: Int) -> [M_Item]  {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, #function,#line)
         
         return M_Item.MR_findByAttribute("itemID", withValue: itemId) as! [M_Item];
     }
     
     /** ステージ情報の取得 **/
     class func getMStage(stageId: Int) -> [M_Stage]  {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, #function,#line)
         
         return M_Stage.MR_findByAttribute("stageID", withValue: stageId) as! [M_Stage];
     }
 
     /** アクションイメージ情報の取得 **/
     class func getMActionImage(itemId: Int) -> [M_ActionImage] {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, #function,#line)
         
         return M_ActionImage.MR_findByAttribute("itemID", withValue: itemId, andOrderBy: "way,serialNo", ascending: true) as! [M_ActionImage];
     }
@@ -144,14 +144,14 @@ class Utility {
 
     /** 取得済アイテム情報の取得 **/
     class func getTGetItem(charaId: Int) -> [T_GetItem] {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, #function,#line)
         
         return T_GetItem.MR_findByAttribute("charaID", withValue: String(charaId), andOrderBy: "itemID", ascending: true) as! [T_GetItem];
     }
     
     /** 行動済かつ、未完了な行動結果履歴の取得 **/
     class func getFinishedTActionResult(charaId: Int) -> [T_ActionResult] {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, #function,#line)
         
         let profileFilter: NSPredicate = NSPredicate(format: "charaID = %@ AND actEndDate <> nil AND finishFlg = '0'", String(charaId))
         return  T_ActionResult.MR_findAllSortedBy("actSetDate", ascending: true, withPredicate: profileFilter) as! [T_ActionResult];
@@ -159,7 +159,7 @@ class Utility {
     
     /** 所持ステージの書き込み **/
      class func editT_RefStage(stageId:Int) {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, #function,#line)
 
         let filter: NSPredicate =
             NSPredicate(format: "charaID = " + String(Const.CHARACTER1_ID) + " and stageID = " + String(stageId))
@@ -180,7 +180,7 @@ class Utility {
     
     /** 所持ステージの書き込み **/
     class func editT_RefJob(stageId:Int) {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, #function,#line)
 
         // 該当ステージに一致するジョブを取得する.
         let filter1: NSPredicate = NSPredicate(format: "maxStageID = " + String(stageId))
@@ -205,7 +205,7 @@ class Utility {
     }
     
     class func getRankName(rankKBN: String) -> String  {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, #function,#line)
 
         var ret = ""
         
@@ -234,7 +234,7 @@ class Utility {
     
     
     class func getRankDrop(rankKBN: String) -> Float32  {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, #function,#line)
         
         var ret :Float32 = 1.0
         
@@ -287,7 +287,7 @@ class Utility {
     //行動結果を計算し、ドロップアイテムを返却する.
     //また、結果をテーブルへ反映する
     class func getDropItem(itemID :Int,rankKbn :String,loginUseFlg :Bool)  -> [M_DropItem] {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, #function,#line)
                 
         //ドロップアイテムの判定
         let dropFilter: NSPredicate = NSPredicate(format: "itemID = %@", String(itemID))
@@ -308,7 +308,7 @@ class Utility {
         var tGetItem :[T_GetItem]
         
         //ドロップアイテム数分ループ処理
-        for ( var j = 0; j < mDropItem.count; j++ ) {
+        for j in 0 ..< mDropItem.count  {
             
             //ログイン時に使用の場合は強制的に１件のみドロップとする.
             if (loginUseFlg && retDropItem.count > 0) {
@@ -357,7 +357,7 @@ class Utility {
     
     //データ管理文字列表示用に指定した文字で改行コードを入れて返却する.
     class func insertReturn(str :String, interval:Int)  -> String {
-        print(NSDate().description, __FUNCTION__, __LINE__)
+        print(NSDate().description, #function,#line)
         
         //返却する文字列を宣言
         var retStr = ""
@@ -365,7 +365,7 @@ class Utility {
         
         for char in str.characters {
             retStr += (i >= (interval - 1) && i % (interval - 1) == 0) ? String(char) + "\n" : String(char)
-            i++
+            i += 1
         }
         //文字列を返却
         return retStr

@@ -29,7 +29,7 @@ class ResultViewController: UIViewController {
     
     // view ロード完了時
     override func viewDidLoad() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function,#line)
         
         super.viewDidLoad()
         
@@ -51,7 +51,7 @@ class ResultViewController: UIViewController {
     
     //メモリ消費が多くなった時に動くイベント
     override func didReceiveMemoryWarning() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function,#line)
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -60,7 +60,7 @@ class ResultViewController: UIViewController {
     //行動結果を計算する
     //結果をテーブルへ反映する
     func getActionResult() -> String {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function,#line)
         
         //返却データ
         var strResult = ""
@@ -84,7 +84,7 @@ class ResultViewController: UIViewController {
         var resultNo = 0
         
         //行動結果のパターン分ループ処理
-        for ( var i = 0; i < mActionR.count ; i++ ) {
+        for i in 0 ..< mActionR.count {
             
             maxPer = minPer + mActionR[i].resPer.intValue - 1
             
@@ -136,12 +136,12 @@ class ResultViewController: UIViewController {
 
     //結果を画面に表示する
     func showResult() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function,#line)
     }
     
     /** 全オブジェクトの制約設定 **/
     func objConstraints() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function,#line)
         
         imgResultView.translatesAutoresizingMaskIntoConstraints = false
         lblResult.translatesAutoresizingMaskIntoConstraints = false

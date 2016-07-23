@@ -32,7 +32,7 @@ class SnsViewController: UIViewController {
     
     // view ロード完了時
     override func viewDidLoad() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function,#line)
         super.viewDidLoad()
 
         //セッション情報.
@@ -64,25 +64,25 @@ class SnsViewController: UIViewController {
         facebookBtn = UIButton()
         let facebookImage = Utility.getUncachedImage( named: "01_07_01.png")! as UIImage
         facebookBtn.setImage(facebookImage, forState: .Normal)
-        facebookBtn.addTarget(self, action: "tapFacebookBtn:", forControlEvents: .TouchUpInside)
+        facebookBtn.addTarget(self, action: #selector(SnsViewController.tapFacebookBtn(_:)), forControlEvents: .TouchUpInside)
         
         // Twitterボタンを生成
         twitterBtn = UIButton()
         let twitterImage = Utility.getUncachedImage( named: "01_08_01.png")! as UIImage
         twitterBtn.setImage(twitterImage, forState: .Normal)
-        twitterBtn.addTarget(self, action: "tapTwitterBtn:", forControlEvents: .TouchUpInside)
+        twitterBtn.addTarget(self, action: #selector(SnsViewController.tapTwitterBtn(_:)), forControlEvents: .TouchUpInside)
         
         // LINEボタンを生成
         lineBtn = UIButton()
         let lineImage = Utility.getUncachedImage( named: "01_09_01.png")! as UIImage
         lineBtn.setImage(lineImage, forState: .Normal)
-        lineBtn.addTarget(self, action: "tapLineBtn:", forControlEvents: .TouchUpInside)
+        lineBtn.addTarget(self, action: #selector(SnsViewController.tapLineBtn(_:)), forControlEvents: .TouchUpInside)
 
         // ？ボタンを生成
         questionBtn = UIButton()
         let questionImage = Utility.getUncachedImage( named: "01_12_01.png")! as UIImage
         questionBtn.setImage(questionImage, forState: .Normal)
-        questionBtn.addTarget(self, action: "tapQuestionBtn:", forControlEvents: .TouchUpInside)
+        questionBtn.addTarget(self, action: #selector(SnsViewController.tapQuestionBtn(_:)), forControlEvents: .TouchUpInside)
         
         // ポップ上に表示するオブジェクトをViewに追加する.
         self.view.addSubview(shareImgView)
@@ -97,14 +97,14 @@ class SnsViewController: UIViewController {
     
     //メモリ消費が多くなった時に動くイベント
     override func didReceiveMemoryWarning() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function,#line)
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
     //facebookボタン押下時の処理
     func tapFacebookBtn(sender: AnyObject) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function,#line)
         
         // SEを再生する.
         Utility.seSoundPlay(Const.SE_YES_PATH)
@@ -124,7 +124,7 @@ class SnsViewController: UIViewController {
     
     //ラインボタン押下時の処理
     func tapLineBtn(sender: AnyObject) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function,#line)
         
         // SEを再生する.
         Utility.seSoundPlay(Const.SE_YES_PATH)
@@ -143,7 +143,7 @@ class SnsViewController: UIViewController {
     
     //Twitterボタン押下時の処理
     func tapTwitterBtn(sender: AnyObject) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function,#line)
         
         // SEを再生する.
         Utility.seSoundPlay(Const.SE_YES_PATH)
@@ -164,7 +164,7 @@ class SnsViewController: UIViewController {
 
     //？ボタン押下時の処理
     func tapQuestionBtn(sender: AnyObject) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function,#line)
         
         // SEを再生する.
         Utility.seSoundPlay(Const.SE_NO_PATH)
@@ -172,7 +172,7 @@ class SnsViewController: UIViewController {
     
     /** 全オブジェクトの制約設定 **/
     func objConstraints() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function,#line)
         
         shareImgView.translatesAutoresizingMaskIntoConstraints = false
         facebookBtn.translatesAutoresizingMaskIntoConstraints = false

@@ -64,14 +64,14 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     
     // view 初回ロード時
     override func viewDidLoad() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         super.viewDidLoad()
 
         //アクティブ時のイベントを受け取る.
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "enterForeground:", name:"applicationWillEnterForeground", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(NeetMainViewController.enterForeground(_:)), name:"applicationWillEnterForeground", object: nil)
 
         //非アクティブ時のイベントを受け取る.
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "enterBackground:", name:"applicationDidEnterBackground", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(NeetMainViewController.enterBackground(_:)), name:"applicationDidEnterBackground", object: nil)
         
         //オブジェクトの配置
         self.createObjInit()
@@ -86,7 +86,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
 
     //view 表示完了後 毎回呼ばれる
     override func viewDidAppear(animated: Bool) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
 
         super.viewDidAppear(false)
 
@@ -99,14 +99,14 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     
     //メモリ消費が多くなった時に動くイベント
     override func didReceiveMemoryWarning() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
     //アクティブ時に動くイベント
     func enterForeground(notification: NSNotification){
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         // アクション進捗の最新化＆再描画する.
         self.manuBtnFlg = true
@@ -118,12 +118,12 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         self.objConstraints()
         
         //ログインボーナス画面の表示
-        NSTimer.scheduledTimerWithTimeInterval(0.8, target: self, selector: "showLoginBonus", userInfo: nil, repeats: false)
+        NSTimer.scheduledTimerWithTimeInterval(0.8, target: self, selector: #selector(NeetMainViewController.showLoginBonus), userInfo: nil, repeats: false)
     }
 
     //非アクティブ時に動くイベント
     func enterBackground(notification: NSNotification){
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         // オブジェクト変数を初期化する.
         self.activeItem.removeAll()
@@ -140,7 +140,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     
     /** メニューボタン押下時の処理 **/
     func tapManuBtn(sender: AnyObject) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         if  manuBtnFlg {
             
@@ -178,7 +178,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
 
     //Popover表示
     func showPopoverView(sender: AnyObject, identifier:String) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         let popoverView = self.storyboard!.instantiateViewControllerWithIdentifier(identifier) as UIViewController
         popoverView.modalPresentationStyle = .Popover
         popoverView.preferredContentSize = self.view.bounds.size
@@ -196,17 +196,17 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     }
     
     func prepareForPopoverPresentation(popoverPresentationController: UIPopoverPresentationController) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
     }
     
     func popoverPresentationControllerShouldDismissPopover(popoverPresentationController: UIPopoverPresentationController) -> Bool {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         return true
     }
     
     //popOver表示終了後のイベント
     func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         let identifier = popoverPresentationController.presentedViewController.title
         
         //ログイン画面または結果表示画面からの戻りの場合
@@ -243,7 +243,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     
     /** ひまつぶしボタン押下時の処理 **/
     func tapMainBtn(sender: AnyObject) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         // SEを再生する.
         Utility.seSoundPlay(Const.SE_YES_PATH)
@@ -255,7 +255,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
 
     //詳細ボタン押下時
     func tapDetailBtn(sender: AnyObject) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
 
         // SEを再生する.
         Utility.seSoundPlay(Const.SE_YES_PATH)
@@ -267,7 +267,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     
     /** シェアボタン押下時の処理 **/
     func tapShareBtn(sender: AnyObject) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         // SEを再生する.
         Utility.seSoundPlay(Const.SE_YES_PATH)
@@ -279,7 +279,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
 
     /** 設定ボタン押下時の処理 **/
     func tapConfigBtn(sender: AnyObject) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         // SEを再生する.
         Utility.seSoundPlay(Const.SE_YES_PATH)
@@ -292,7 +292,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     // ジェスチャーイベント処理
     func tapChara(gestureRecognizer: UITapGestureRecognizer){
         
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         //年月日を取得する.
         //NSCalendarインスタンス
@@ -366,7 +366,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
 
     //ログインボーナス
     func showLoginBonus() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         //セッション情報.
         let ud = NSUserDefaults.standardUserDefaults()
@@ -411,7 +411,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     
     //背景を取得
     func getBackGroundImage(_strImageFileName:String) ->UIImage {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         var imageBack = ""
         
         //現在行動中であれば、そのステージの背景を設定
@@ -433,7 +433,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     
     //初期表示時のオブジェクトを作成し設置する
     func createObjInit() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
 
         let activeItemId = self.updateSetAction()
         activeItem = Utility.getMItem(activeItemId)
@@ -478,7 +478,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
 
         myCharImageView.tag = 1
         myCharImageView.userInteractionEnabled = true
-        let singleTap = UITapGestureRecognizer(target: self, action:"tapChara:")
+        let singleTap = UITapGestureRecognizer(target: self, action:#selector(NeetMainViewController.tapChara(_:)))
         myCharImageView.addGestureRecognizer(singleTap)
         self.view.addSubview(myCharImageView)
         
@@ -514,35 +514,35 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         manuBtn = UIButton()
         manuBtn.setTitle("MENU",  forState: .Normal)
         manuBtn.setImage(Utility.getUncachedImage(named: "01_01_01.png"), forState: .Normal)
-        manuBtn.addTarget(self, action: "tapManuBtn:", forControlEvents: .TouchUpInside)
+        manuBtn.addTarget(self, action: #selector(NeetMainViewController.tapManuBtn(_:)), forControlEvents: .TouchUpInside)
         manuBtn.sizeToFit()
         self.view.addSubview(manuBtn)
         
         //暇つぶしボタン
         mainBtn = UIButton()
         mainBtn.setImage(Utility.getUncachedImage(named: "01_03_01.png"), forState: .Normal)
-        mainBtn.addTarget(self, action: "tapMainBtn:", forControlEvents: .TouchUpInside)
+        mainBtn.addTarget(self, action: #selector(NeetMainViewController.tapMainBtn(_:)), forControlEvents: .TouchUpInside)
         manuBtn.sizeToFit()
         self.view.addSubview(mainBtn)
         
         //履歴書ボタン
         detailBtn = UIButton()
         detailBtn.setImage(Utility.getUncachedImage(named: "01_04_01.png"), forState: .Normal)
-        detailBtn.addTarget(self, action: "tapDetailBtn:", forControlEvents: .TouchUpInside)
+        detailBtn.addTarget(self, action: #selector(NeetMainViewController.tapDetailBtn(_:)), forControlEvents: .TouchUpInside)
         detailBtn.sizeToFit()
         self.view.addSubview(detailBtn)
         
         //共有ボタン
         shareBtn = UIButton()
         shareBtn.setImage(Utility.getUncachedImage(named: "01_05_01.png"), forState: .Normal)
-        shareBtn.addTarget(self, action: "tapShareBtn:", forControlEvents: .TouchUpInside)
+        shareBtn.addTarget(self, action: #selector(NeetMainViewController.tapShareBtn(_:)), forControlEvents: .TouchUpInside)
         shareBtn.sizeToFit()
         self.view.addSubview(shareBtn)
         
         //設定ボタン
         configBtn = UIButton()
         configBtn.setImage(Utility.getUncachedImage(named: "01_06_01.png"), forState: .Normal)
-        configBtn.addTarget(self, action: "tapConfigBtn:", forControlEvents: .TouchUpInside)
+        configBtn.addTarget(self, action: #selector(NeetMainViewController.tapConfigBtn(_:)), forControlEvents: .TouchUpInside)
         configBtn.sizeToFit()
         self.view.addSubview(configBtn)
         
@@ -560,7 +560,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
 
     /** バナーが読みこまれた時に呼ばれる **/
     func bannerViewDidLoadAd(banner: ADBannerView!) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         self.footerBaner?.hidden = false
         print("bannerViewDidLoadAd")
@@ -569,13 +569,13 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     
     //ニートを動かすアニメーション
     func animationStart() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
-        animeTimer = NSTimer.scheduledTimerWithTimeInterval(0.0, target: self, selector: "randomWalk", userInfo: nil, repeats: true)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
+        animeTimer = NSTimer.scheduledTimerWithTimeInterval(0.0, target: self, selector: #selector(NeetMainViewController.randomWalk), userInfo: nil, repeats: true)
     }
     
     /** セットアクション情報の更新 **/
     func updateSetAction() -> Int {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
  
         // 更新対象のアクション（最大３件）を取得する.
         let actionFilter: NSPredicate =
@@ -831,7 +831,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
 
         //タイマー再設定
         animeTimer.invalidate()
-        animeTimer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: "randomWalk", userInfo: nil, repeats: true)
+        animeTimer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(NeetMainViewController.randomWalk), userInfo: nil, repeats: true)
     }
 
     //定点キョロキョロ
@@ -851,7 +851,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
 
     /** 全オブジェクトの制約設定 **/
     func objConstraints() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
    
         manuBtn.translatesAutoresizingMaskIntoConstraints = false
         mainBtn.translatesAutoresizingMaskIntoConstraints = false

@@ -70,17 +70,17 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         selItemLabel2.userInteractionEnabled = true
         selItemLabel3.userInteractionEnabled = true
         
-        let setItem1LongTouchRecognizer = UILongPressGestureRecognizer(target: self, action: "setItemLongTouch:")
+        let setItem1LongTouchRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(ActionSetViewController.setItemLongTouch(_:)))
         setItem1LongTouchRecognizer.minimumPressDuration = 0.2
         setItem1LongTouchRecognizer.delegate = self
         selItemLabel1.addGestureRecognizer(setItem1LongTouchRecognizer)
         
-        let setItem2LongTouchRecognizer = UILongPressGestureRecognizer(target: self, action: "setItemLongTouch:")
+        let setItem2LongTouchRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(ActionSetViewController.setItemLongTouch(_:)))
         setItem2LongTouchRecognizer.minimumPressDuration = 0.2
         setItem2LongTouchRecognizer.delegate = self
         selItemLabel2.addGestureRecognizer(setItem2LongTouchRecognizer)
         
-        let setItem3LongTouchRecognizer = UILongPressGestureRecognizer(target: self, action: "setItemLongTouch:")
+        let setItem3LongTouchRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(ActionSetViewController.setItemLongTouch(_:)))
         setItem3LongTouchRecognizer.minimumPressDuration = 0.2
         setItem3LongTouchRecognizer.delegate = self
         selItemLabel3.addGestureRecognizer(setItem3LongTouchRecognizer)
@@ -110,7 +110,7 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         
         // セル長押しイベント登録
         // 長押し用レコグナイザー
-        let cellitemCellLongTouchRecognizer = UILongPressGestureRecognizer(target: self, action: "itemCellLongTouch:")
+        let cellitemCellLongTouchRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(ActionSetViewController.itemCellLongTouch(_:)))
         cellitemCellLongTouchRecognizer.minimumPressDuration = 0.2
         cellitemCellLongTouchRecognizer.delegate = self
         itemCollectionView.addGestureRecognizer(cellitemCellLongTouchRecognizer)
@@ -137,7 +137,7 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
     // 画面ドラッグで呼ばれる
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
 
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
     }
     
@@ -145,13 +145,13 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
     // 画面ドラッグで呼ばれる
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
     }
 
     /** 暇つぶしアイテム長押し時の処理 **/
     func setItemLongTouch(recognizer: UILongPressGestureRecognizer) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
 
         switch recognizer.state {
             
@@ -285,7 +285,7 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
     
     /** 暇つぶしアイテム長押し時の処理 **/
     func itemCellLongTouch(recognizer: UILongPressGestureRecognizer) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         switch recognizer.state {
             
@@ -387,25 +387,25 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
     
     // Cellが選択された際に呼び出される
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
     }
     
     /** セクションの数 **/
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         return 1
     }
     
     /** 表示するセルの数 **/
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         return itemList.count
     }
     
     /** セルが表示されるときに呼ばれる処理（1個のセルを描画する毎に呼び出されます） **/
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! itemCell
         cell._name.sizeToFit()
@@ -424,7 +424,7 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
     
     /** 全オブジェクトの制約設定 **/
     func objConstraints() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function,#line)
    
         mainImgView.translatesAutoresizingMaskIntoConstraints = false
         selItemLabel1.translatesAutoresizingMaskIntoConstraints = false
@@ -815,7 +815,7 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
     
     /** 未実行・実行中のアクティブなアイテムの取得 **/
     func getT_ActionResultWithActive() -> [T_ActionResult]  {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function,#line)
         
         // 返却するアイテム
         var actionList :[T_ActionResult] = []
@@ -841,7 +841,7 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
 
     /** 未実行・実行中のアクティブなアイテムの追加 **/
     func insertT_ActionResultWithActive(itemId: Int) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function,#line)
         
         // 指定されたアイテムをテーブルに行動実績テーブルに追加.
         let insertData = T_ActionResult.MR_createEntity()! as T_ActionResult
@@ -877,7 +877,7 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
     
     /** 未実行・実行中のアクティブなアイテムの削除 **/
     func deleteT_ActionResultWithActive(deleteData: T_ActionResult) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function,#line)
         
         // 削除対象のアイテム情報を取得しておく.
         let itemID: Int = Int(deleteData.itemID)
@@ -908,7 +908,7 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
     
     /** T_GetItemからアイテムIDにひもづく取得済アイテム１件の取得 **/
     func getT_GetItemForKey(itemId: Int) -> T_GetItem  {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function,#line)
 
         // 取得済アイテムテーブルを取得.
         let itemTList :[T_GetItem] = T_GetItem.MR_findByAttribute("charaID", withValue: Const.CHARACTER1_ID, andOrderBy: "itemID", ascending: true) as! [T_GetItem];
@@ -935,7 +935,7 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
     
     /** M_ItemからアイテムIDにひもづく取得済アイテム１件の取得 **/
     func getM_ItemForKey(itemId: Int) -> M_Item  {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function,#line)
         
         // アイテムマスタを取得.
         let itemMList :[M_Item] = M_Item.MR_findByAttribute("itemID", withValue: itemId) as! [M_Item];
@@ -947,7 +947,7 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
     
     /** T_GetItemから取得済アイテムの取得 **/
     func getT_GetItem() -> [Dictionary<String, String>]  {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function,#line)
         
         // 取得済アイテムテーブルを取得.
         let itemTList :[T_GetItem] = T_GetItem.MR_findByAttribute("charaID", withValue: Const.CHARACTER1_ID, andOrderBy: "itemID", ascending: true) as! [T_GetItem];

@@ -919,7 +919,7 @@
 				TargetAttributes = {
 					F48330091C2F040D00234B18 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 82Y66MPE59;
+						DevelopmentTeam = 7AM5G3XKB9;
 					};
 					F48330201C2F040D00234B18 = {
 						CreatedOnToolsVersion = 7.2;
@@ -1266,7 +1266,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1289,6 +1289,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DSQLITE_HAS_CODEC";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1312,7 +1313,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: koji ishikawa (7AM5G3XKB9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: koji ishikawa (7AM5G3XKB9)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1328,6 +1330,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_CFLAGS = "-DSQLITE_HAS_CODEC";
+				PROVISIONING_PROFILE = "107f2a6e-05a5-4352-aa0e-466e2829affd";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1344,9 +1347,9 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = NeeNeeApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.KojiIshikawa.NeeNeeApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.koujicorner.NeeNeeApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "107f2a6e-05a5-4352-aa0e-466e2829affd";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 				SWIFT_OBJC_BRIDGING_HEADER = "NeeNeeApp/NeeNeeApp-Bridging-Header.h";
 			};
@@ -1357,14 +1360,14 @@
 			baseConfigurationReference = 76D912C337F465574C4CC36B /* Pods-NeeNeeApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: koji ishikawa (7AM5G3XKB9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: koji ishikawa (7AM5G3XKB9)";
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = NeeNeeApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.KojiIshikawa.NeeNeeApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.koujicorner.NeeNeeApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "107f2a6e-05a5-4352-aa0e-466e2829affd";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 				SWIFT_OBJC_BRIDGING_HEADER = "NeeNeeApp/NeeNeeApp-Bridging-Header.h";
 			};

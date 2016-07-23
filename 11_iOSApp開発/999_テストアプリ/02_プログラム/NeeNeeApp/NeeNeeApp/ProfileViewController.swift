@@ -36,7 +36,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     // view ロード完了時
     override func viewDidLoad() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         super.viewDidLoad()
 
         //背景設定
@@ -116,14 +116,14 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     //メモリ消費が多くなった時に動くイベント
     override func didReceiveMemoryWarning() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     /** 全オブジェクトの制約設定 **/
     func objConstraints() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         detailImgView.translatesAutoresizingMaskIntoConstraints = false
         nameDataLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -475,7 +475,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     //****************************************    
     // セルの行数
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         switch tableView.tag {
             
@@ -525,7 +525,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     //Popover表示
     func showPopoverView(sender: AnyObject, identifier:String) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         let popoverView = self.storyboard!.instantiateViewControllerWithIdentifier(identifier) as UIViewController
         popoverView.modalPresentationStyle = .Popover
         popoverView.preferredContentSize = CGSize(width: self.view.bounds.width / 1.1, height: self.view.bounds.height / 1.0)
@@ -550,7 +550,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     //popOver表示終了後のイベント
     func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         //SEを再生する.
         //Utility.seSoundPlay(Const.SE_NO_PATH)
@@ -559,7 +559,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     // セルの内容を変更
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "Cell")
         
         switch tableView.tag {
@@ -603,7 +603,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     //役職名の取得
     func getJobName() -> String  {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         // キャラクターIDが一致する最大のジョブIDを取得する.
         let tRefJob:[T_RefJob] = T_RefJob.MR_findByAttribute("charaID", withValue: Const.CHARACTER1_ID, andOrderBy: "jobID", ascending: false) as! [T_RefJob];
@@ -630,7 +630,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
 
     //格言履歴の取得
     func getKakugenHistory() -> [String]  {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         // キャラクターが保有する格言IDを取得する.（格言IDの昇順）
         let listTRefKakugen:[T_RefKakugen] = T_RefKakugen.MR_findByAttribute("charaID", withValue: Const.CHARACTER1_ID, andOrderBy: "kakugenID", ascending: true) as! [T_RefKakugen];
@@ -680,7 +680,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
  
     //行った場所の履歴の取得
     func getStageHistory() -> [String]  {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         // キャラクターが保有するステージIDを取得する.（ステージIDの昇順）
         let listTRefStage:[T_RefStage] = T_RefStage.MR_findByAttribute("charaID", withValue: Const.CHARACTER1_ID, andOrderBy: "stageID", ascending: true) as! [T_RefStage];
@@ -730,7 +730,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
 
     //行動履歴の取得
     func getActionHistory() -> [String]  {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         // 返却するアイテム
         var listResult :[String] = []

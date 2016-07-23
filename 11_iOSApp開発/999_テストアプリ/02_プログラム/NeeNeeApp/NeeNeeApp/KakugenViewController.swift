@@ -26,7 +26,7 @@ class KakugenViewController: UIViewController {
     
     // view ロード完了時
     override func viewDidLoad() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         super.viewDidLoad()
 
         //背景設定
@@ -52,7 +52,7 @@ class KakugenViewController: UIViewController {
     
     //メモリ消費が多くなった時に動くイベント
     override func didReceiveMemoryWarning() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -63,7 +63,7 @@ class KakugenViewController: UIViewController {
     
     //格言の取得
     func getKakugen() -> String {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         //セッション情報.
         let ud = NSUserDefaults.standardUserDefaults()
@@ -151,7 +151,7 @@ class KakugenViewController: UIViewController {
     
     /** 全オブジェクトの制約設定 **/
     func objConstraints() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), __FUNCTION__, __LINE__)
+        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         imgViewKakugen.translatesAutoresizingMaskIntoConstraints = false
         lblKakugen.translatesAutoresizingMaskIntoConstraints = false
