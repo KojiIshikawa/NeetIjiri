@@ -58,16 +58,15 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         self.nameDataLabel.text = charaData[0].charaName
         
         //文字数が枠をはみ出す場合は文字を小さくする.
-        if self.nameDataLabel.text?.utf16.count > 8 {
-            self.nameDataLabel.font = UIFont(name: "HiraMinProN-W6", size: 8)
-        }
-
+        self.nameDataLabel.font = UIFont.systemFontOfSize(Utility.getMojiSize(Const.SIZEKBN_MIDDLE))
+        
         // 生年月日
         let dateFormatter: NSDateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy年MM月dd日"
         self.birthDataLabel = UILabel()
         self.birthDataLabel.textAlignment = .Left
         self.birthDataLabel.text = dateFormatter.stringFromDate(charaData[0].charaBirth)
+        self.birthDataLabel.font = UIFont.systemFontOfSize(Utility.getMojiSize(Const.SIZEKBN_MIDDLE))
 
         // 役職
         self.positionDataLabel = UILabel()
@@ -75,15 +74,16 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         self.positionDataLabel.text = getJobName()
         
         //文字数が枠をはみ出す場合は文字を小さくする.
-        if self.positionDataLabel.text?.utf16.count > 7 {
-            self.positionDataLabel.font = UIFont(name: "HiraMinProN-W6", size: 8)
+        if self.positionDataLabel.text?.utf16.count > 8 {
+            self.positionDataLabel.font = UIFont.systemFontOfSize(Utility.getMojiSize(Const.SIZEKBN_SMALL))
+        } else {
+            self.positionDataLabel.font = UIFont.systemFontOfSize(Utility.getMojiSize(Const.SIZEKBN_MIDDLE))
         }
 
         // 格言履歴（tableview）
         self.tableViewKakugenHistory = UITableView()
         self.tableViewKakugenHistory.delegate = self
         self.tableViewKakugenHistory.dataSource = self
-        //self.tableViewKakugenHistory.allowsSelection = false
         self.tableViewKakugenHistory.tag = 11
 
         // 行動履歴（tableview）
@@ -528,7 +528,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         let popoverView = self.storyboard!.instantiateViewControllerWithIdentifier(identifier) as UIViewController
         popoverView.modalPresentationStyle = .Popover
-        popoverView.preferredContentSize = CGSize(width: self.view.bounds.width / 1.1, height: self.view.bounds.height / 1.0)
+        popoverView.preferredContentSize = CGSize(width: self.view.bounds.width / 1.0, height: self.view.bounds.height / 1.0)
         popoverView.view.backgroundColor = UIColor.clearColor()
         if let presentationController = popoverView.popoverPresentationController {
             presentationController.permittedArrowDirections = .Down
@@ -551,9 +551,6 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     //popOver表示終了後のイベント
     func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
         print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
-        
-        //SEを再生する.
-        //Utility.seSoundPlay(Const.SE_NO_PATH)
     }
 
     
@@ -566,30 +563,16 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             
         // 格言履歴
         case 11:
-            
             cell.textLabel?.text = listKakugen[indexPath.row]
-        
-            //文字数が枠をはみ出す場合は文字を小さくする.
-            /**
-            if cell.textLabel!.text!.utf16.count > 15 {
-                cell.textLabel!.font = UIFont(name: "HiraMinProN-W6", size: 8)
-            }
-            **/
-            
+            cell.textLabel!.font = UIFont.systemFontOfSize(Utility.getMojiSize(Const.SIZEKBN_MIDDLE))
         // 行動履歴
         case 12:
             cell.textLabel?.text = listAction[indexPath.row]
-            cell.textLabel?.font = UIFont(name: "HiraKakuProN-W3", size: 7)
-            
+            cell.textLabel!.font = UIFont.systemFontOfSize(Utility.getMojiSize(Const.SIZEKBN_SMALL))
         // 行った場所履歴
         case 13:
             cell.textLabel?.text = listStage[indexPath.row]
-            
-            //文字数が枠をはみ出す場合は文字を小さくする.
-            if cell.textLabel!.text!.utf16.count > 15 {
-                cell.textLabel!.font = UIFont(name: "HiraMinProN-W6", size: 8)
-            }
-            
+            cell.textLabel!.font = UIFont.systemFontOfSize(Utility.getMojiSize(Const.SIZEKBN_MIDDLE))
         default:
             break
             
@@ -745,9 +728,27 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             let actEndDate: String
               = action.actEndDate == nil ? "-": Utility.jpDate(action.actEndDate);
             
-               listResult.append(
-                  String(Utility.getMItem(Int(action.itemID))[0].itemName) +  " " + actStartDate +  " 〜 " + actEndDate
-               )
+            if actStartDate == "-" && actEndDate == "-" {
+
+                //準備中の場合
+                listResult.append(
+                    String(Utility.getMItem(Int(action.itemID))[0].itemName) +  " " + "（じゅんびちゅう...）"
+                )
+            } else if actEndDate == "-" {
+
+                //実行中の場合
+                listResult.append(
+                    String(Utility.getMItem(Int(action.itemID))[0].itemName) +  " " + actStartDate +  " 〜 " + "（つぶしちゅう...）"
+                )
+            } else {
+
+                //完了済みの場合
+                listResult.append(
+                    String(Utility.getMItem(Int(action.itemID))[0].itemName) +  " " + actStartDate +  " 〜 " + actEndDate
+                )
+                
+            }
+            
         }
         
         return  listResult

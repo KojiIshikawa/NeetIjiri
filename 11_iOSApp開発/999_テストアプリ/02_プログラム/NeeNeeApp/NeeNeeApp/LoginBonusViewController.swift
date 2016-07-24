@@ -43,6 +43,7 @@ class LoginBonusViewController: UIViewController {
         //メッセージラベル
         lblOkan = UILabel()
         lblOkan.numberOfLines = 0
+        self.lblOkan.font = UIFont.systemFontOfSize(Utility.getMojiSize(Const.SIZEKBN_LARGE))
         
         //キャラクター基本情報マスタを取得する.
         let charaData : [T_CharaBase] = Utility.getCharaBase(Const.CHARACTER1_ID)

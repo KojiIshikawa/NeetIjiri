@@ -266,7 +266,7 @@ class Utility {
         
         let dateFormatter1 = NSDateFormatter()
         dateFormatter1.locale = NSLocale(localeIdentifier: "ja_JP") // 日本時間
-        dateFormatter1.dateFormat = "yyyy/MM/dd HH:mm:ss"
+        dateFormatter1.dateFormat = "YYYY年MM月dd日 HH時mm分"
         
         return dateFormatter1.stringFromDate(date)
     }
@@ -369,9 +369,75 @@ class Utility {
         }
         //文字列を返却
         return retStr
-        
-        
     }
+    
+    //実行端末とサイズ区分から適切な文字サイズを返却する.
+    class func getMojiSize(sizeKbn : Int) -> CGFloat {
+        let screenSize = UIScreen.mainScreen().bounds
+        let width = Int(screenSize.width)
+        //let height = Int(screenSize.height)
+
+        switch sizeKbn {
+            
+        case Const.SIZEKBN_SMALL:
+        
+            switch width {
+                
+            case 320:
+                
+                //iPhone4,5
+                return 5
+
+            case 375:
+                //iPhone6
+                return 6
+
+            default:
+                //iPhone6 Plus及びその他
+                return 7
+            }
+            
+        case Const.SIZEKBN_LARGE:
+            
+            switch width {
+                
+            case 320:
+                
+                //iPhone4,5
+                return 17
+                
+            case 375:
+                //iPhone6
+                return 18
+                
+            default:
+                //iPhone6 Plus及びその他
+                return 19
+            }
+            
+        default:
+            
+            //中サイズ
+            switch width {
+                
+            case 320:
+                
+                //iPhone4,5
+                return 12
+                
+            case 375:
+                //iPhone6
+                return 13
+                
+            default:
+                //iPhone6 Plus及びその他
+                return 14
+            }
+
+            
+        }
+    }
+
     
     
 }

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import iAd
 import AVFoundation
 
 class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDelegate,
@@ -48,10 +47,6 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     
     //初回表示判定フラグ
     private var isFirstLoad: Bool! = false
-    
-    //広告表示フラグ
-    private var dispIAd: Bool! = false
-
     
     required init(coder aDecoder: NSCoder){
         super.init(coder: aDecoder)!
@@ -107,6 +102,17 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     func enterForeground(notification: NSNotification){
         print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
+        // オブジェクト変数を初期化する.
+        self.activeItem.removeAll()
+        self.actionImages.removeAll()
+        self.myCharImageView.removeFromSuperview()
+        self.manuBtn.removeFromSuperview()
+        self.mainBtn.removeFromSuperview()
+        self.shareBtn.removeFromSuperview()
+        self.detailBtn.removeFromSuperview()
+        self.configBtn.removeFromSuperview()
+        self.myImageView.removeFromSuperview()
+        
         // アクション進捗の最新化＆再描画する.
         self.manuBtnFlg = true
         
@@ -124,16 +130,6 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     func enterBackground(notification: NSNotification){
         print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
         
-        // オブジェクト変数を初期化する.
-        self.activeItem.removeAll()
-        self.actionImages.removeAll()
-        self.myCharImageView.removeFromSuperview()
-        self.manuBtn.removeFromSuperview()
-        self.mainBtn.removeFromSuperview()
-        self.shareBtn.removeFromSuperview()
-        self.detailBtn.removeFromSuperview()
-        self.configBtn.removeFromSuperview()
-        self.myImageView.removeFromSuperview()
     }
     
     /** メニューボタン押下時の処理 **/
@@ -502,7 +498,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         
         // NADViewクラスを生成
         nadView = NADView(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
-        nadView.frame.origin.x = (self.view.bounds.width - nadView.frame.width) * 0.7
+        nadView.frame.origin.x = (self.view.bounds.width - nadView.frame.width) * 0.5
         nadView.frame.origin.y = self.view.bounds.height - nadView.frame.height
         
         // 広告枠のapikey/spotidを設定(必須)
@@ -517,9 +513,6 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         
         // 読み込み開始(必須)
         nadView.load()
-        
-        // iAd(インタースティシャル)のマニュアル表示設定
-        self.interstitialPresentationPolicy = ADInterstitialPresentationPolicy.Manual
         
         // メニューボタン及びサブメニューボタンの設定.
         manuBtn = UIButton()
@@ -880,7 +873,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
                 relatedBy: .Equal,
                 toItem: self.view,
                 attribute:  NSLayoutAttribute.Bottom,
-                multiplier: 1.0 / 1.096,
+                multiplier: 1.0 / getMenuBtnY(),
                 constant: 0
             ),
             
@@ -1106,5 +1099,35 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         // ロードが完了してから NADView を表示する
         self.view.addSubview(nadView)
     }
+    
+    /** メニューボタンの相対的なY位置を端末によって分ける **/
+    func getMenuBtnY() -> CGFloat {
+        
+        let screenSize = UIScreen.mainScreen().bounds
+        let width = Int(screenSize.width)
+        let height = Int(screenSize.height)
+        
+        switch width {
+                
+            case 320:
+                
+                if height == 480 {
+                    //iPhone4
+                    return 1.116
+                } else {
+                    //iPhone5
+                    return 1.095
+                }
+
+            case 375:
+                //iPhone6
+                return 1.080
+                
+            default:
+                //iPhone6 Plus及びその他
+                return 1.072
+        }
+    }
+    
 }
 

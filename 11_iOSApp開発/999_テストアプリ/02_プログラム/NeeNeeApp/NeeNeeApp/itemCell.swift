@@ -30,7 +30,7 @@ class itemCell: UICollectionViewCell {
         _name.sizeToFit()
         _name.numberOfLines = 0
         _name.textAlignment = NSTextAlignment.Center
-        _name.font = UIFont(name: "HiraMinProN-W6", size: 8)
+        _name.font = UIFont.systemFontOfSize(Utility.getMojiSize(Const.SIZEKBN_SMALL))
         
         self.addSubview(_img)
         self.addSubview(_name)

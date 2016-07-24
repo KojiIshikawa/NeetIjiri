@@ -42,6 +42,8 @@ class ResultViewController: UIViewController {
         lblResult = UILabel()
         lblResult.numberOfLines = 0
         lblResult.text = self.getActionResult()
+        self.lblResult.font = UIFont.systemFontOfSize(Utility.getMojiSize(Const.SIZEKBN_LARGE))
+        
         self.view.addSubview(lblResult)
         
         //全オブジェクトの制約設定.

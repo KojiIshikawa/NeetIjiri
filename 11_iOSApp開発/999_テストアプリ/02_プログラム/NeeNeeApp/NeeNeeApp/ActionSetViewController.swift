@@ -48,12 +48,9 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         selItemLabel1 = UILabel()
         selItemLabel2 = UILabel()
         selItemLabel3 = UILabel()
-        
-        // 仮で設定
         selItemLabel1.sizeToFit()
         selItemLabel2.sizeToFit()
         selItemLabel3.sizeToFit()
-
         selItemLabel1.numberOfLines = 0
         selItemLabel2.numberOfLines = 0
         selItemLabel3.numberOfLines = 0
@@ -65,6 +62,11 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         selItemLabel1.tag = 11
         selItemLabel2.tag = 12
         selItemLabel3.tag = 13
+        
+        // 文字サイズ指定.
+        selItemLabel1.font = UIFont.systemFontOfSize(Utility.getMojiSize(Const.SIZEKBN_LARGE))
+        selItemLabel2.font = UIFont.systemFontOfSize(Utility.getMojiSize(Const.SIZEKBN_LARGE))
+        selItemLabel3.font = UIFont.systemFontOfSize(Utility.getMojiSize(Const.SIZEKBN_LARGE))
         
         selItemLabel1.userInteractionEnabled = true
         selItemLabel2.userInteractionEnabled = true
@@ -158,6 +160,12 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
             //長押し-タッチ時の処理
         case UIGestureRecognizerState.Began:
             
+            //バイブを鳴らす
+            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+            
+            // SEを再生する.
+            Utility.seSoundPlay(Const.SE_ITEMSEL_PATH)
+            
             // 画像に使用するアイテムID
             var picItemID:Int = 0
             
@@ -197,12 +205,14 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
                     
                     // セッションからアクションセット画面のサイズを取得
                     let ud1 = NSUserDefaults.standardUserDefaults()
-                    let udActionSize : CGFloat! = CGFloat(ud1.floatForKey("ACTIONSET_SIZE"))
+                    let udActionSize : CGFloat! = CGFloat(ud1.floatForKey("ACTIONSET_SIZE")) * 1.5
                     
                     selItemView = UIImageView()
                     selItemView.image = myImage
                     selItemView.alpha = 0.8
                     selItemView.frame.size = CGSizeMake(udActionSize,udActionSize)
+                    selItemView.frame.origin.x = (recognizer.view?.frame.origin.x)! + (selItemView.frame.size.width / 2)
+                    selItemView.frame.origin.y = (recognizer.view?.frame.origin.y)! + (selItemView.frame.size.height / 2)
                     self.view.addSubview(selItemView)
                 }
             }
@@ -273,11 +283,8 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         if selItemView != nil {
             
             // 選択したアイテムの画像位置をタップ中の位置に常に合わせる.
-            selItemView.frame.origin.x = recognizer.locationInView(self.view).x
-            selItemView.frame.origin.y = recognizer.locationInView(self.view).y
-            selItemView.frame.origin.x -= 40.0
-            selItemView.frame.origin.y -= 40.0
-            
+            selItemView.frame.origin.x = recognizer.locationInView(self.view).x - (selItemView.frame.size.width / 2)
+            selItemView.frame.origin.y = recognizer.locationInView(self.view).y - (selItemView.frame.size.height / 2)
         }
 
         
@@ -291,7 +298,13 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
             
           //長押し-タッチ時の処理
           case UIGestureRecognizerState.Began:
+            
+            //バイブを鳴らす
+            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
         
+            // SEを再生する.
+            Utility.seSoundPlay(Const.SE_ITEMSEL_PATH)
+            
             // 押された位置でcellのPathを取得する.
             let point = recognizer.locationInView(itemCollectionView)
             
@@ -311,7 +324,7 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
                 
                     // セッションからアクションセット画面のサイズを取得
                     let ud1 = NSUserDefaults.standardUserDefaults()
-                    let udActionSize : CGFloat! = CGFloat(ud1.floatForKey("ACTIONSET_SIZE"))
+                    let udActionSize : CGFloat! = CGFloat(ud1.floatForKey("ACTIONSET_SIZE")) * 1.5
                     
                     selItemView = UIImageView()
                     selItemView.image = myImage
@@ -373,10 +386,8 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         if selItemView != nil {
             
             // 選択したアイテムの画像位置をタップ中の位置に常に合わせる.
-            selItemView.frame.origin.x = recognizer.locationInView(self.view).x
-            selItemView.frame.origin.y = recognizer.locationInView(self.view).y
-            selItemView.frame.origin.x -= 40.0
-            selItemView.frame.origin.y -= 40.0
+            selItemView.frame.origin.x = recognizer.locationInView(self.view).x - (selItemView.frame.size.width / 2)
+            selItemView.frame.origin.y = recognizer.locationInView(self.view).y - (selItemView.frame.size.height / 2)
             
         }
     }

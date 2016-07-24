@@ -8,7 +8,6 @@
 
 import UIKit
 import Social
-import iAd
 import AVFoundation
 
 
@@ -18,9 +17,6 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
     //****************************************
     // MARK: - メンバ変数
     //****************************************
-
-    // バナー
-    private var footerBaner: ADBannerView!
     
     // 壁紙オブジェクト
     private var myImageView: UIImageView!
@@ -152,34 +148,26 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
         projectLabel = UILabel()
         projectLabel.text = "2016 Boil Project."
         projectLabel.textColor = UIColor.whiteColor()
+        projectLabel.font = UIFont.systemFontOfSize(Utility.getMojiSize(Const.SIZEKBN_LARGE))
         self.view.addSubview(projectLabel)
         
         nameLabel = UILabel()
         nameLabel.text = "　　　なまえ"
         nameLabel.textColor = UIColor.whiteColor()
-        nameLabel.font = UIFont(name: "HiraKakuProN-W3", size: 12)
+        nameLabel.font = UIFont.systemFontOfSize(Utility.getMojiSize(Const.SIZEKBN_MIDDLE))
         self.view.addSubview(nameLabel)
         
         birthLabel = UILabel()
         birthLabel.numberOfLines = 0
         birthLabel.text = "　　　たんじ\n　　　ょうび"
         birthLabel.textColor = UIColor.whiteColor()
-        birthLabel.font = UIFont(name: "HiraKakuProN-W3", size: 12)
+        birthLabel.font = UIFont.systemFontOfSize(Utility.getMojiSize(Const.SIZEKBN_MIDDLE))
         self.view.addSubview(birthLabel)
         
         // タイトル設定
         titleImageView = UIImageView(frame: CGRectMake(0,0,self.view.bounds.width,self.view.bounds.height))
         titleImageView.image = Utility.getUncachedImage(named:"08_03_01.png")
         self.view.addSubview(titleImageView)
-        
-        // フッタのバナーを生成する.
-        self.footerBaner = ADBannerView()
-        self.footerBaner.frame.offsetInPlace(dx: 0, dy: self.view.bounds.height-footerBaner.frame.height)
-        self.footerBaner?.hidden = false
-        self.view.addSubview(footerBaner)
-        
-        // iAd(インタースティシャル)のマニュアル表示設定
-        self.interstitialPresentationPolicy = ADInterstitialPresentationPolicy.Manual
 
         // 名前入力テキストボックスの設定.
         nameText = UITextField()
@@ -519,8 +507,8 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
                 item: self.startBtn,
                 attribute: NSLayoutAttribute.Bottom,
                 relatedBy: .Equal,
-                toItem: self.footerBaner,
-                attribute:  NSLayoutAttribute.Top,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.Bottom,
                 multiplier: 1.0 / 1.02,
                 constant: 0
             ),

@@ -15,7 +15,6 @@ class KakugenViewController: UIViewController {
 
     //画面オブジェクト
     private var lblKakugen: UILabel! //格言ラベル
-    private var btnOK: UIButton! //OKボタン
     
     // view アンロード開始時
     override func viewWillDisappear(animated: Bool) {
@@ -35,15 +34,11 @@ class KakugenViewController: UIViewController {
         self.view.addSubview(imgViewKakugen)
         
         // 格言を表示
-        lblKakugen = UILabel(frame: CGRectMake(22,60,self.view.bounds.width-50,120))
+        lblKakugen = UILabel()
         lblKakugen.text = getKakugen()
         lblKakugen.numberOfLines = 0
+        self.lblKakugen.font = UIFont.systemFontOfSize(Utility.getMojiSize(Const.SIZEKBN_LARGE))
         self.view.addSubview(lblKakugen)
-        
-        //OKボタン
-        btnOK = UIButton(frame: CGRectMake(20,60,self.view.bounds.width-30,120))
-        btnOK.titleLabel!.text = "OK"
-        self.view.addSubview(btnOK)
         
         // 制約を設定する.
         objConstraints()
