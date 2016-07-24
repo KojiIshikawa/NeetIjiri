@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
 
-        print(NSDate().description, #function, __LINE__)
+        print(NSDate().description, #function, #line)
         
         //coredataでやりとりするsqliteを設定
         MagicalRecord.setupCoreDataStackWithAutoMigratingSqliteStoreNamed("NeetMaster.sqlite")
@@ -113,7 +113,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             newRecord.maxX = NSNumber(int: res_Item.intForColumn("maxX"))
             newRecord.minY = NSNumber(int: res_Item.intForColumn("minY"))
             newRecord.maxY = NSNumber(int: res_Item.intForColumn("maxY"))
-            
             newRecord.managedObjectContext!.MR_saveToPersistentStoreAndWait()
             i += 1
         }
@@ -141,8 +140,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         while res_ActionImage.next() {
             let newRecord: M_ActionImage = M_ActionImage.MR_createEntity()! as M_ActionImage
             newRecord.itemID = NSNumber(int: res_ActionImage.intForColumn("itemID"))
-//            newRecord.stageID = NSNumber(int: res_ActionImage.intForColumn("stageID"))
-//            newRecord.actID = NSNumber(int: res_ActionImage.intForColumn("actID"))
             newRecord.imageAct = res_ActionImage.stringForColumn("imageAct")
             newRecord.way = NSNumber(int: res_ActionImage.intForColumn("way"))
             newRecord.managedObjectContext!.MR_saveToPersistentStoreAndWait()
@@ -160,9 +157,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             newRecord.message = res_ActionResult.stringForColumn("message")
             newRecord.resPer = NSNumber(int: res_ActionResult.intForColumn("resPer"))
             newRecord.rankKBN = res_ActionResult.stringForColumn("rankKBN")
-//            newRecord.itemCount = NSNumber(int: res_ActionResult.intForColumn("itemCount"))
-            
-            
             newRecord.managedObjectContext!.MR_saveToPersistentStoreAndWait()
             i += 1
         }
@@ -182,60 +176,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("件数\(i)")
         i = 0
 
-        
-
         db.close()
 
-
-        
-        
-//        let fileManager = NSFileManager.defaultManager()
-//        print(NSPersistentStore.MR_urlForStoreName("NeetMaster.sqlite"))
-// Override point for customization after application launch.
-        
-//        do {
-//            //端末内にSQLiteファイルが存在するか確認
-//            let storeSQLiteURL = NSPersistentStore.MR_urlForStoreName("NeetMaster.sqlite")
-////            let storeSQLshmURL = NSURL(fileURLWithPath: storeSQLiteURL!.URLByDeletingLastPathComponent!.path! + "/NeetMaster.sqlite-shm")
-////            let storeSQLwalURL = NSURL(fileURLWithPath: storeSQLiteURL!.URLByDeletingLastPathComponent!.path! + "/NeetMaster.sqlite-wal")
-//            //let pathToStore = storeSQLiteURL?.URLByDeletingLastPathComponent
-//            
-//            
-//            if fileManager.fileExistsAtPath(storeSQLiteURL!.path!) {
-//                
-//                //端末内の自動生成ファイルを削除する
-//                try fileManager.removeItemAtURL(storeSQLiteURL!)
-////                try fileManager.removeItemAtURL(storeSQLshmURL)
-////                try fileManager.removeItemAtURL(storeSQLwalURL)
-//                
-//            } else {
-//                print("storeSQLiteFile not exist")
-//            }
-//            
-//            
-//            
-//            // file URL to preload
-//            let preloadSQLiteURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("NeetMaster", ofType: "sqlite")!)
-////            let preloadSQLshmURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("NeetMaster", ofType: "sqlite-shm")!)
-////            let preloadSQLwalURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("NeetMaster", ofType: "sqlite-wal")!)
-//            
-//            
-//            print("storeSQLiteURL:  \(storeSQLiteURL)")
-////            print("storeSQLshmURL:  \(storeSQLshmURL)")
-////            print("storeSQLwalURL:  \(storeSQLwalURL)")
-//            print("sql:  \(preloadSQLiteURL)")
-////            print("shm:  \(preloadSQLshmURL)")
-////            print("wal:  \(preloadSQLwalURL)")
-//            
-//            //コピーする
-//            try fileManager.copyItemAtURL(preloadSQLiteURL, toURL: storeSQLiteURL!)
-////            try fileManager.copyItemAtURL(preloadSQLshmURL, toURL: storeSQLshmURL)
-////            try fileManager.copyItemAtURL(preloadSQLwalURL, toURL: storeSQLwalURL)
-//            
-//            
-//        } catch let error {
-//            print("Error...\(error)")
-//        }
+        //インターステイシャル広告の読み込み
+        NADInterstitial.sharedInstance().loadAdWithApiKey("44f368525bf701c52095f5ea3801bdb9c31cf0c0", spotId: "631009")
         return true
     }
 

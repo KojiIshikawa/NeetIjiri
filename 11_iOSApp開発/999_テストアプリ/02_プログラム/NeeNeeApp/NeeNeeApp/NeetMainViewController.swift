@@ -10,9 +10,8 @@ import UIKit
 import iAd
 import AVFoundation
 
-
 class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollectionViewDelegate,
-                                UIGestureRecognizerDelegate,UIPopoverPresentationControllerDelegate {
+                                UIGestureRecognizerDelegate,UIPopoverPresentationControllerDelegate, NADViewDelegate {
 
     
     //****************************************
@@ -20,7 +19,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
     //****************************************
     
     // バナー
-    private var footerBaner: ADBannerView!
+    private var nadView: NADView!
     
     // メニューボタン制御用
     private var manuBtnFlg = true
@@ -128,7 +127,6 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         // オブジェクト変数を初期化する.
         self.activeItem.removeAll()
         self.actionImages.removeAll()
-        self.footerBaner.removeFromSuperview()
         self.myCharImageView.removeFromSuperview()
         self.manuBtn.removeFromSuperview()
         self.mainBtn.removeFromSuperview()
@@ -219,17 +217,19 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
                 Utility.seSoundPlay(Const.SE_RESULT_PATH)
                 
                 self.showPopoverView(self.manuBtn, identifier: "ResultView")
+                
+            } else {
+                
+                // インターステイシャル広告を表示する.
+                NADInterstitial.sharedInstance().showAd()
             }
         }
         
         //格言画面からの戻りの場合
         if identifier == "KakugenView" {
             
-            //iAd(インタースティシャル)の表示
-            if (dispIAd == true) {
-                self.requestInterstitialAdPresentation()
-                dispIAd = false
-            }
+            // インターステイシャル広告を表示する.
+            NADInterstitial.sharedInstance().showAd()
         }
     }
     
@@ -318,16 +318,13 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
             
         } else {
             
-            let alertController = UIAlertController(title: "きょうの格言", message: "ニートはきょうの格言をつぶやくかわりにネット広告をみるわるいクセがあります。とはいえ、きょうの格言をみますか？", preferredStyle: .Alert)
+            let alertController = UIAlertController(title: "きょうの格言", message: "きょうの格言をみますか？", preferredStyle: .Alert)
             
             let defaultActionYes = UIAlertAction(title: "みる", style: .Default, handler:{
                 (action:UIAlertAction!) -> Void in
                 
                 //格言表示フラグをオン
                 dispKakugen = true
-                
-                //広告表示フラグをオン
-                self.dispIAd = true
                 
                 //SEを再生する.
                 Utility.seSoundPlay(Const.SE_KAKUGEN_PATH)
@@ -502,10 +499,24 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         }
 
         // フッタのバナーを生成する.
-        self.footerBaner = ADBannerView()
-        self.footerBaner.frame.offsetInPlace(dx: 0, dy: self.view.bounds.height-footerBaner.frame.height)
-        self.footerBaner?.hidden = false
-        self.view.addSubview(footerBaner)
+        
+        // NADViewクラスを生成
+        nadView = NADView(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
+        nadView.frame.origin.x = (self.view.bounds.width - nadView.frame.width) * 0.7
+        nadView.frame.origin.y = self.view.bounds.height - nadView.frame.height
+        
+        // 広告枠のapikey/spotidを設定(必須)
+        nadView.setNendID("ccdc50cb50ce600fb0597b861ac01069ebdfaea3",
+                          spotID: "631007")
+        
+        // nendSDKログ出力の設定(任意)
+        nadView.isOutputLog = false
+        
+        // delegateを受けるオブジェクトを指定(必須)
+        nadView.delegate = self
+        
+        // 読み込み開始(必須)
+        nadView.load()
         
         // iAd(インタースティシャル)のマニュアル表示設定
         self.interstitialPresentationPolicy = ADInterstitialPresentationPolicy.Manual
@@ -554,18 +565,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         
         // テーマソングを再生する.
         Utility.bgmSoundPlay(activeStage.count >= 1 ? activeStage[0].bgm : "")
-        
-        
     }
-
-    /** バナーが読みこまれた時に呼ばれる **/
-    func bannerViewDidLoadAd(banner: ADBannerView!) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
-        
-        self.footerBaner?.hidden = false
-        print("bannerViewDidLoadAd")
-    }
-
     
     //ニートを動かすアニメーション
     func animationStart() {
@@ -854,10 +854,10 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
    
         manuBtn.translatesAutoresizingMaskIntoConstraints = false
-        mainBtn.translatesAutoresizingMaskIntoConstraints = false
-        detailBtn.translatesAutoresizingMaskIntoConstraints = false
-        shareBtn.translatesAutoresizingMaskIntoConstraints = false
         configBtn.translatesAutoresizingMaskIntoConstraints = false
+        shareBtn.translatesAutoresizingMaskIntoConstraints = false
+        detailBtn.translatesAutoresizingMaskIntoConstraints = false
+        mainBtn.translatesAutoresizingMaskIntoConstraints = false
         
         // メニューボタンの制約
         self.view.addConstraints([
@@ -878,9 +878,9 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
                 item: self.manuBtn,
                 attribute: NSLayoutAttribute.Bottom,
                 relatedBy: .Equal,
-                toItem: self.footerBaner,
-                attribute:  NSLayoutAttribute.Top,
-                multiplier: 1.0 / 1.02,
+                toItem: self.view,
+                attribute:  NSLayoutAttribute.Bottom,
+                multiplier: 1.0 / 1.096,
                 constant: 0
             ),
             
@@ -907,150 +907,6 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
             )]
         )
         
-        // メインボタンの制約
-        self.view.addConstraints([
-            
-            // x座標
-            NSLayoutConstraint(
-                item: self.mainBtn,
-                attribute:  NSLayoutAttribute.Right,
-                relatedBy: .Equal,
-                toItem: self.manuBtn,
-                attribute:  NSLayoutAttribute.Left,
-                multiplier: 1.0 / 1.04,
-                constant: 0
-            ),
-            
-            // y座標
-            NSLayoutConstraint(
-                item: self.mainBtn,
-                attribute: NSLayoutAttribute.Top,
-                relatedBy: .Equal,
-                toItem: self.manuBtn,
-                attribute:  NSLayoutAttribute.Top,
-                multiplier: 1.0,
-                constant: 0
-            ),
-            
-            // 横幅
-            NSLayoutConstraint(
-                item: self.mainBtn,
-                attribute: .Width,
-                relatedBy: .Equal,
-                toItem: self.manuBtn,
-                attribute: .Width,
-                multiplier: 1.0,
-                constant: 0
-            ),
-            
-            // 縦幅
-            NSLayoutConstraint(
-                item: self.mainBtn,
-                attribute: .Height,
-                relatedBy: .Equal,
-                toItem: self.manuBtn,
-                attribute: .Height,
-                multiplier: 1.0,
-                constant: 0
-            )]
-        )
-
-        // 履歴書ボタンの制約
-        self.view.addConstraints([
-            
-            // x座標
-            NSLayoutConstraint(
-                item: self.detailBtn,
-                attribute:  NSLayoutAttribute.Right,
-                relatedBy: .Equal,
-                toItem: self.mainBtn,
-                attribute:  NSLayoutAttribute.Left,
-                multiplier: 1.0 / 1.04,
-                constant: 0
-            ),
-            
-            // y座標
-            NSLayoutConstraint(
-                item: self.detailBtn,
-                attribute: NSLayoutAttribute.Top,
-                relatedBy: .Equal,
-                toItem: self.manuBtn,
-                attribute:  NSLayoutAttribute.Top,
-                multiplier: 1.0,
-                constant: 0
-            ),
-            
-            // 横幅
-            NSLayoutConstraint(
-                item: self.detailBtn,
-                attribute: .Width,
-                relatedBy: .Equal,
-                toItem: self.manuBtn,
-                attribute: .Width,
-                multiplier: 1.0,
-                constant: 0
-            ),
-            
-            // 縦幅
-            NSLayoutConstraint(
-                item: self.detailBtn,
-                attribute: .Height,
-                relatedBy: .Equal,
-                toItem: self.manuBtn,
-                attribute: .Height,
-                multiplier: 1.0,
-                constant: 0
-            )]
-        )
-
-        // シェアボタンの制約
-        self.view.addConstraints([
-            
-            // x座標
-            NSLayoutConstraint(
-                item: self.shareBtn,
-                attribute:  NSLayoutAttribute.Right,
-                relatedBy: .Equal,
-                toItem: self.detailBtn,
-                attribute:  NSLayoutAttribute.Left,
-                multiplier: 1.0 / 1.04,
-                constant: 0
-            ),
-            
-            // y座標
-            NSLayoutConstraint(
-                item: self.shareBtn,
-                attribute: NSLayoutAttribute.Top,
-                relatedBy: .Equal,
-                toItem: self.manuBtn,
-                attribute:  NSLayoutAttribute.Top,
-                multiplier: 1.0,
-                constant: 0
-            ),
-            
-            // 横幅
-            NSLayoutConstraint(
-                item: self.shareBtn,
-                attribute: .Width,
-                relatedBy: .Equal,
-                toItem: self.manuBtn,
-                attribute: .Width,
-                multiplier: 1.0,
-                constant: 0
-            ),
-            
-            // 縦幅
-            NSLayoutConstraint(
-                item: self.shareBtn,
-                attribute: .Height,
-                relatedBy: .Equal,
-                toItem: self.manuBtn,
-                attribute: .Height,
-                multiplier: 1.0,
-                constant: 0
-            )]
-        )
-
         // 設定ボタンの制約
         self.view.addConstraints([
             
@@ -1059,9 +915,9 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
                 item: self.configBtn,
                 attribute:  NSLayoutAttribute.Right,
                 relatedBy: .Equal,
-                toItem: self.shareBtn,
+                toItem: self.manuBtn,
                 attribute:  NSLayoutAttribute.Left,
-                multiplier: 1.0 / 1.1,
+                multiplier: 1.0 / 1.04,
                 constant: 0
             ),
             
@@ -1098,6 +954,157 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
                 constant: 0
             )]
         )
+        
+        // 履歴書ボタンの制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.detailBtn,
+                attribute:  NSLayoutAttribute.Right,
+                relatedBy: .Equal,
+                toItem: self.shareBtn,
+                attribute:  NSLayoutAttribute.Left,
+                multiplier: 1.0 / 1.04,
+                constant: 0
+            ),
+            
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.detailBtn,
+                attribute: NSLayoutAttribute.Top,
+                relatedBy: .Equal,
+                toItem: self.manuBtn,
+                attribute:  NSLayoutAttribute.Top,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.detailBtn,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.manuBtn,
+                attribute: .Width,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.detailBtn,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.manuBtn,
+                attribute: .Height,
+                multiplier: 1.0,
+                constant: 0
+            )]
+        )
+        
+        // メインボタンの制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.mainBtn,
+                attribute:  NSLayoutAttribute.Right,
+                relatedBy: .Equal,
+                toItem: self.detailBtn,
+                attribute:  NSLayoutAttribute.Left,
+                multiplier: 1.0 / 1.1,
+                constant: 0
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.mainBtn,
+                attribute: NSLayoutAttribute.Top,
+                relatedBy: .Equal,
+                toItem: self.manuBtn,
+                attribute:  NSLayoutAttribute.Top,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.mainBtn,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.manuBtn,
+                attribute: .Width,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.mainBtn,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.manuBtn,
+                attribute: .Height,
+                multiplier: 1.0,
+                constant: 0
+            )]
+        )
+        // シェアボタンの制約
+        self.view.addConstraints([
+            
+            // x座標
+            NSLayoutConstraint(
+                item: self.shareBtn,
+                attribute:  NSLayoutAttribute.Right,
+                relatedBy: .Equal,
+                toItem: self.configBtn,
+                attribute:  NSLayoutAttribute.Left,
+                multiplier: 1.0 / 1.04,
+                constant: 0
+            ),
+            
+            // y座標
+            NSLayoutConstraint(
+                item: self.shareBtn,
+                attribute: NSLayoutAttribute.Top,
+                relatedBy: .Equal,
+                toItem: self.manuBtn,
+                attribute:  NSLayoutAttribute.Top,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // 横幅
+            NSLayoutConstraint(
+                item: self.shareBtn,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: self.manuBtn,
+                attribute: .Width,
+                multiplier: 1.0,
+                constant: 0
+            ),
+            
+            // 縦幅
+            NSLayoutConstraint(
+                item: self.shareBtn,
+                attribute: .Height,
+                relatedBy: .Equal,
+                toItem: self.manuBtn,
+                attribute: .Height,
+                multiplier: 1.0,
+                constant: 0
+            )]
+        )
+    }
+    
+    func nadViewDidFinishLoad(adView: NADView!) {
+        print("delegate nadViewDidFinishLoad:")
+        
+        // ロードが完了してから NADView を表示する
+        self.view.addSubview(nadView)
     }
 }
 

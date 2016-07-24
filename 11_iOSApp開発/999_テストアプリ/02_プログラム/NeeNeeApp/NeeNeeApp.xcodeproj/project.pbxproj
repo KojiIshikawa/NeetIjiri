@@ -139,6 +139,22 @@
 		F41FD6371C4D3B640086A607 /* LINEActivityIcon@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F41FD6301C4D3B640086A607 /* LINEActivityIcon@2x~ipad.png */; };
 		F41FD6381C4D3B640086A607 /* LINEActivityIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F41FD6311C4D3B640086A607 /* LINEActivityIcon@3x.png */; };
 		F41FD6391C4D3B640086A607 /* LINEActivityIcon~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F41FD6321C4D3B640086A607 /* LINEActivityIcon~ipad.png */; };
+		F42F72AE1D433EA300E6625A /* libNendAd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F42F72A11D433EA300E6625A /* libNendAd.a */; };
+		F42F72AF1D433EA300E6625A /* NADInterstitial.h in Headers */ = {isa = PBXBuildFile; fileRef = F42F72A21D433EA300E6625A /* NADInterstitial.h */; };
+		F42F72B01D433EA300E6625A /* NADNative.h in Headers */ = {isa = PBXBuildFile; fileRef = F42F72A31D433EA300E6625A /* NADNative.h */; };
+		F42F72B11D433EA300E6625A /* NADNativeClient.h in Headers */ = {isa = PBXBuildFile; fileRef = F42F72A41D433EA300E6625A /* NADNativeClient.h */; };
+		F42F72B21D433EA300E6625A /* NADNativeError.h in Headers */ = {isa = PBXBuildFile; fileRef = F42F72A51D433EA300E6625A /* NADNativeError.h */; };
+		F42F72B31D433EA300E6625A /* NADNativeImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = F42F72A61D433EA300E6625A /* NADNativeImageView.h */; };
+		F42F72B41D433EA300E6625A /* NADNativeLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = F42F72A71D433EA300E6625A /* NADNativeLabel.h */; };
+		F42F72B51D433EA300E6625A /* NADNativeLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = F42F72A81D433EA300E6625A /* NADNativeLogger.h */; };
+		F42F72B61D433EA300E6625A /* NADNativeTableViewHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = F42F72A91D433EA300E6625A /* NADNativeTableViewHelper.h */; };
+		F42F72B71D433EA300E6625A /* NADNativeTableViewPlacement.h in Headers */ = {isa = PBXBuildFile; fileRef = F42F72AA1D433EA300E6625A /* NADNativeTableViewPlacement.h */; };
+		F42F72B81D433EA300E6625A /* NADNativeViewRendering.h in Headers */ = {isa = PBXBuildFile; fileRef = F42F72AB1D433EA300E6625A /* NADNativeViewRendering.h */; };
+		F42F72B91D433EA400E6625A /* NADView.h in Headers */ = {isa = PBXBuildFile; fileRef = F42F72AC1D433EA300E6625A /* NADView.h */; };
+		F42F72BA1D433EA400E6625A /* NADView_readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = F42F72AD1D433EA300E6625A /* NADView_readme.txt */; };
+		F42F72BC1D43415B00E6625A /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F42F72BB1D43415B00E6625A /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		F42F72BE1D43416E00E6625A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F42F72BD1D43416E00E6625A /* Security.framework */; };
+		F42F72C01D43418500E6625A /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F42F72BF1D43418500E6625A /* ImageIO.framework */; };
 		F43D9B641C5D24240080F75D /* itemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D9B631C5D24240080F75D /* itemCell.swift */; };
 		F44176D11CA197DA00042C24 /* 01_10_01.png in Resources */ = {isa = PBXBuildFile; fileRef = F44176C61CA197DA00042C24 /* 01_10_01.png */; };
 		F44176D21CA197DA00042C24 /* 01_12_01.png in Resources */ = {isa = PBXBuildFile; fileRef = F44176C71CA197DA00042C24 /* 01_12_01.png */; };
@@ -369,6 +385,22 @@
 		F41FD6301C4D3B640086A607 /* LINEActivityIcon@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LINEActivityIcon@2x~ipad.png"; sourceTree = "<group>"; };
 		F41FD6311C4D3B640086A607 /* LINEActivityIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LINEActivityIcon@3x.png"; sourceTree = "<group>"; };
 		F41FD6321C4D3B640086A607 /* LINEActivityIcon~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LINEActivityIcon~ipad.png"; sourceTree = "<group>"; };
+		F42F72A11D433EA300E6625A /* libNendAd.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libNendAd.a; sourceTree = "<group>"; };
+		F42F72A21D433EA300E6625A /* NADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADInterstitial.h; sourceTree = "<group>"; };
+		F42F72A31D433EA300E6625A /* NADNative.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADNative.h; sourceTree = "<group>"; };
+		F42F72A41D433EA300E6625A /* NADNativeClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADNativeClient.h; sourceTree = "<group>"; };
+		F42F72A51D433EA300E6625A /* NADNativeError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADNativeError.h; sourceTree = "<group>"; };
+		F42F72A61D433EA300E6625A /* NADNativeImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADNativeImageView.h; sourceTree = "<group>"; };
+		F42F72A71D433EA300E6625A /* NADNativeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADNativeLabel.h; sourceTree = "<group>"; };
+		F42F72A81D433EA300E6625A /* NADNativeLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADNativeLogger.h; sourceTree = "<group>"; };
+		F42F72A91D433EA300E6625A /* NADNativeTableViewHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADNativeTableViewHelper.h; sourceTree = "<group>"; };
+		F42F72AA1D433EA300E6625A /* NADNativeTableViewPlacement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADNativeTableViewPlacement.h; sourceTree = "<group>"; };
+		F42F72AB1D433EA300E6625A /* NADNativeViewRendering.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADNativeViewRendering.h; sourceTree = "<group>"; };
+		F42F72AC1D433EA300E6625A /* NADView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NADView.h; sourceTree = "<group>"; };
+		F42F72AD1D433EA300E6625A /* NADView_readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NADView_readme.txt; sourceTree = "<group>"; };
+		F42F72BB1D43415B00E6625A /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		F42F72BD1D43416E00E6625A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		F42F72BF1D43418500E6625A /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		F43D9B631C5D24240080F75D /* itemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = itemCell.swift; sourceTree = "<group>"; };
 		F44176C61CA197DA00042C24 /* 01_10_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 01_10_01.png; sourceTree = "<group>"; };
 		F44176C71CA197DA00042C24 /* 01_12_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 01_12_01.png; sourceTree = "<group>"; };
@@ -458,7 +490,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F42F72C01D43418500E6625A /* ImageIO.framework in Frameworks */,
+				F42F72BE1D43416E00E6625A /* Security.framework in Frameworks */,
+				F42F72BC1D43415B00E6625A /* AdSupport.framework in Frameworks */,
 				564CDF907C4EC18FA819679E /* libPods-NeeNeeApp.a in Frameworks */,
+				F42F72AE1D433EA300E6625A /* libNendAd.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -726,6 +762,9 @@
 		E0948DE9BFEBC44A9DFED657 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F42F72BF1D43418500E6625A /* ImageIO.framework */,
+				F42F72BD1D43416E00E6625A /* Security.framework */,
+				F42F72BB1D43415B00E6625A /* AdSupport.framework */,
 				F4EB1D06214EC164462ADCDD /* libPods-NeeNeeApp.a */,
 			);
 			name = Frameworks;
@@ -745,9 +784,30 @@
 			path = LINEActivity;
 			sourceTree = "<group>";
 		};
+		F42F72A01D433EA300E6625A /* NendAd */ = {
+			isa = PBXGroup;
+			children = (
+				F42F72A11D433EA300E6625A /* libNendAd.a */,
+				F42F72A21D433EA300E6625A /* NADInterstitial.h */,
+				F42F72A31D433EA300E6625A /* NADNative.h */,
+				F42F72A41D433EA300E6625A /* NADNativeClient.h */,
+				F42F72A51D433EA300E6625A /* NADNativeError.h */,
+				F42F72A61D433EA300E6625A /* NADNativeImageView.h */,
+				F42F72A71D433EA300E6625A /* NADNativeLabel.h */,
+				F42F72A81D433EA300E6625A /* NADNativeLogger.h */,
+				F42F72A91D433EA300E6625A /* NADNativeTableViewHelper.h */,
+				F42F72AA1D433EA300E6625A /* NADNativeTableViewPlacement.h */,
+				F42F72AB1D433EA300E6625A /* NADNativeViewRendering.h */,
+				F42F72AC1D433EA300E6625A /* NADView.h */,
+				F42F72AD1D433EA300E6625A /* NADView_readme.txt */,
+			);
+			path = NendAd;
+			sourceTree = "<group>";
+		};
 		F48330011C2F040D00234B18 = {
 			isa = PBXGroup;
 			children = (
+				F42F72A01D433EA300E6625A /* NendAd */,
 				F483300C1C2F040D00234B18 /* NeeNeeApp */,
 				F48330241C2F040D00234B18 /* NeeNeeAppTests */,
 				F483302F1C2F040D00234B18 /* NeeNeeAppUITests */,
@@ -813,6 +873,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F42F72B01D433EA300E6625A /* NADNative.h in Headers */,
+				F42F72B71D433EA300E6625A /* NADNativeTableViewPlacement.h in Headers */,
 				AEFCBCBE1C68DD4B000F5751 /* T_CharaBase.h in Headers */,
 				AEFCBCA61C68DD4B000F5751 /* _T_RefItem.h in Headers */,
 				AEFCBC961C68DD4B000F5751 /* _M_Job.h in Headers */,
@@ -820,6 +882,7 @@
 				AEFCBCBA1C68DD4B000F5751 /* M_Stage.h in Headers */,
 				AE029E611C78546E00BDD370 /* M_ActionResult.h in Headers */,
 				AEFCBCB61C68DD4B000F5751 /* M_Okan.h in Headers */,
+				F42F72B91D433EA400E6625A /* NADView.h in Headers */,
 				AEFCBCC61C68DD4B000F5751 /* T_RefKakugen.h in Headers */,
 				AEFCBCAE1C68DD4B000F5751 /* M_DropItem.h in Headers */,
 				AEFCBCC41C68DD4B000F5751 /* T_RefJob.h in Headers */,
@@ -830,14 +893,22 @@
 				AEFCBCB41C68DD4B000F5751 /* M_Kakugen.h in Headers */,
 				AEFCBCC81C68DD4B000F5751 /* T_RefStage.h in Headers */,
 				AEFCBC9A1C68DD4B000F5751 /* _M_Okan.h in Headers */,
+				F42F72B81D433EA300E6625A /* NADNativeViewRendering.h in Headers */,
 				AEFCBCBC1C68DD4B000F5751 /* T_ActionResult.h in Headers */,
 				AEFCBC981C68DD4B000F5751 /* _M_Kakugen.h in Headers */,
+				F42F72B61D433EA300E6625A /* NADNativeTableViewHelper.h in Headers */,
+				F42F72B11D433EA300E6625A /* NADNativeClient.h in Headers */,
 				AE029E551C78522600BDD370 /* _M_ActionImage.h in Headers */,
 				AEFCBC921C68DD4B000F5751 /* _M_DropItem.h in Headers */,
 				AEFCBC941C68DD4B000F5751 /* _M_Item.h in Headers */,
+				F42F72AF1D433EA300E6625A /* NADInterstitial.h in Headers */,
+				F42F72B51D433EA300E6625A /* NADNativeLogger.h in Headers */,
 				AEFCBCA81C68DD4B000F5751 /* _T_RefJob.h in Headers */,
+				F42F72B31D433EA300E6625A /* NADNativeImageView.h in Headers */,
 				F41FD6331C4D3B640086A607 /* LINEActivity.h in Headers */,
 				AEFCBCC01C68DD4B000F5751 /* T_GetItem.h in Headers */,
+				F42F72B21D433EA300E6625A /* NADNativeError.h in Headers */,
+				F42F72B41D433EA300E6625A /* NADNativeLabel.h in Headers */,
 				AEFCBCAA1C68DD4B000F5751 /* _T_RefKakugen.h in Headers */,
 				AEFCBCAC1C68DD4B000F5751 /* _T_RefStage.h in Headers */,
 				AEFCBCA41C68DD4B000F5751 /* _T_GetItem.h in Headers */,
@@ -1049,6 +1120,7 @@
 				AEDE9ADE1C66433700841902 /* 02_03_01.png in Resources */,
 				F4F5B2361CECB0B900C9E588 /* 外を歩こうver2.mp3 in Resources */,
 				AEDE9AE71C66433700841902 /* 03_06_01.png in Resources */,
+				F42F72BA1D433EA400E6625A /* NADView_readme.txt in Resources */,
 				F4EE57431C6A28C40021E876 /* se2.mp3 in Resources */,
 				F4EE57561C6A28C40021E876 /* 暇で忙しい.mp3 in Resources */,
 				F4F135441C68E32900130069 /* 02_05_04.png in Resources */,
@@ -1347,6 +1419,10 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = NeeNeeApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/NendAd",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.koujicorner.NeeNeeApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "107f2a6e-05a5-4352-aa0e-466e2829affd";
@@ -1365,6 +1441,10 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = NeeNeeApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/NendAd",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.koujicorner.NeeNeeApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "107f2a6e-05a5-4352-aa0e-466e2829affd";
