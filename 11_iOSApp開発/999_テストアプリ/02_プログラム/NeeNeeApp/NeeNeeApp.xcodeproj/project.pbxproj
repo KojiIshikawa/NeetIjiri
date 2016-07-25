@@ -1438,7 +1438,7 @@
 			baseConfigurationReference = 76D912C337F465574C4CC36B /* Pods-NeeNeeApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Koji Ishikawa (3FJ984UZ3P)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: koji ishikawa (7AM5G3XKB9)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = NeeNeeApp/Info.plist;
@@ -1450,7 +1450,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.koujicorner.NeeNeeApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "972f1bb7-25ac-441b-be98-cdf5168fa796";
+				PROVISIONING_PROFILE = "107f2a6e-05a5-4352-aa0e-466e2829affd";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 				SWIFT_OBJC_BRIDGING_HEADER = "NeeNeeApp/NeeNeeApp-Bridging-Header.h";
 				VALIDATE_PRODUCT = YES;
