@@ -335,7 +335,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 relatedBy: .Equal,
                 toItem: self.nameDataLabel,
                 attribute:  .Left,
-                multiplier: 1.0 / 1.4,
+                multiplier: 0.69 / 1.0,
                 constant: 0
             ),
             
@@ -357,7 +357,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 relatedBy: .Equal,
                 toItem: self.view,
                 attribute: .Width,
-                multiplier: 1.0 / 1.3,
+                multiplier: 0.78 / 1.0,
                 constant: 0
             ),
             
@@ -394,7 +394,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 relatedBy: .Equal,
                 toItem: self.tableViewKakugenHistory,
                 attribute:  .Bottom,
-                multiplier: 1.06 / 1.0,
+                multiplier: 1.064 / 1.0,
                 constant: 0
             ),
             
@@ -403,9 +403,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 item: self.tableViewActionHistory,
                 attribute: .Width,
                 relatedBy: .Equal,
-                toItem: self.view,
+                toItem: self.tableViewKakugenHistory,
                 attribute: .Width,
-                multiplier: 1.0 / 1.3,
+                multiplier: 1.0,
                 constant: 0
             ),
             
@@ -416,7 +416,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 relatedBy: .Equal,
                 toItem: self.view,
                 attribute: .Height,
-                multiplier: 1.0 / 6.0,
+                multiplier: 1.0 / 6.1,
                 constant: 0
             )]
         )
@@ -442,7 +442,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 relatedBy: .Equal,
                 toItem: self.tableViewActionHistory,
                 attribute:  .Bottom,
-                multiplier: 1.04 / 1.0,
+                multiplier: 1.03 / 1.0,
                 constant: 0
             ),
             
@@ -451,9 +451,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 item: self.tableViewCompHistory,
                 attribute: .Width,
                 relatedBy: .Equal,
-                toItem: self.view,
+                toItem: self.tableViewKakugenHistory,
                 attribute: .Width,
-                multiplier: 1.0 / 1.3,
+                multiplier: 1.0,
                 constant: 0
             ),
             
@@ -464,7 +464,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 relatedBy: .Equal,
                 toItem: self.view,
                 attribute: .Height,
-                multiplier: 1.0 / 6.9,
+                multiplier: 1.0 / 5.45,
                 constant: 0
             )]
         )

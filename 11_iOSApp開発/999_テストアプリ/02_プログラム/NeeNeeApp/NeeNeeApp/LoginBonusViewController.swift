@@ -66,13 +66,13 @@ class LoginBonusViewController: UIViewController {
             let mDropItem:[M_DropItem] = Utility.getDropItem(tempItemId,rankKbn: "B",loginUseFlg: true)
 
             //エラーがなければログインメッセージを表示
-            mes1 = "〇〇くんへ\n\nかあさん腕をふるって\n〇〇くんの大好きな\n\(getOkan())を\n作りました。"
+            mes1 = "〇〇くんへ\n\nかあさんうでをふるって\n〇〇くんのだいすきな\n\(getOkan())\nを、つくりました。"
             mes1 = mes1.stringByReplacingOccurrencesOfString("〇〇",withString: charaData[0].charaName)
-            mes3 = "\n\n無理しないで頑張ってね！"
+            mes3 = "\n\nむりしないでがんばってね！"
             
             //ドロップアイテムが取得できた場合は文言を追加する.
             if (mDropItem.count > 0) {
-                mes2 = "\nそれと、「" + Utility.getMItem(Int(mDropItem[0].dropItemID))[0].itemName + "」を\nおいておくので\n足しにしてください。"
+                mes2 = "\nそれと、「" + Utility.getMItem(Int(mDropItem[0].dropItemID))[0].itemName + "」\nを、おいておくので\nたしにしてください。"
             }
         }
         

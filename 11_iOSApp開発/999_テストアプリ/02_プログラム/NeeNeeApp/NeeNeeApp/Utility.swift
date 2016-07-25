@@ -404,7 +404,7 @@ class Utility {
             case 320:
                 
                 //iPhone4,5
-                return 17
+                return 16
                 
             case 375:
                 //iPhone6

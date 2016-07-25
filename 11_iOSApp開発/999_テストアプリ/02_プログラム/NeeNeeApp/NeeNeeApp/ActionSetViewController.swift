@@ -299,12 +299,6 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
           //長押し-タッチ時の処理
           case UIGestureRecognizerState.Began:
             
-            //バイブを鳴らす
-            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-        
-            // SEを再生する.
-            Utility.seSoundPlay(Const.SE_ITEMSEL_PATH)
-            
             // 押された位置でcellのPathを取得する.
             let point = recognizer.locationInView(itemCollectionView)
             
@@ -315,6 +309,12 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
             // 長押しされた場合の処理
             // アイテムが選択されている場合のみ処理する.
             if itemListIdxPath > -1 {
+                
+                //バイブを鳴らす
+                AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+                
+                // SEを再生する.
+                Utility.seSoundPlay(Const.SE_ITEMSEL_PATH)
             
                 // タップされたアイテムの画像を半透明で表示する
                 let myImage = Utility.getUncachedImage( named: String(UTF8String: itemList[itemListIdxPath]["imageItem"]!)!)
