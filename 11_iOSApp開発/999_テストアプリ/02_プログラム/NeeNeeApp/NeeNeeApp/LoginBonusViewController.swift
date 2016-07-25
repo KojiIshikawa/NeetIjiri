@@ -72,7 +72,7 @@ class LoginBonusViewController: UIViewController {
             
             //ドロップアイテムが取得できた場合は文言を追加する.
             if (mDropItem.count > 0) {
-                mes2 = "\nそれと、「" + Utility.getMItem(Int(mDropItem[0].dropItemID))[0].itemName + "」\nを、おいておくので\nたしにしてください。"
+                mes2 = "\n\nそれと、「" + Utility.getMItem(Int(mDropItem[0].dropItemID))[0].itemName + "」\nを、おいておくので\nたしにしてください。"
             }
         }
         
