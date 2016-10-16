@@ -12,14 +12,14 @@ import AVFoundation
 class Utility {
     
     // BGM・SEの再生用オブジェクト
-    static private var myAudioPlayer: AVAudioPlayer!
-    static private var mySePlayer: AVAudioPlayer!
+    static fileprivate var myAudioPlayer: AVAudioPlayer!
+    static fileprivate var mySePlayer: AVAudioPlayer!
     
     //画像をキャッシュせず読み込むメソッド
     class func getUncachedImage (named name : String) -> UIImage?
     {
         print(name)
-        if let imgPath = NSBundle.mainBundle().pathForResource(name, ofType: nil)
+        if let imgPath = Bundle.main.path(forResource: name, ofType: nil)
         {
             return UIImage(contentsOfFile: imgPath)
         }
@@ -27,13 +27,13 @@ class Utility {
     }
     
     
-    class func bgmSoundPlay(bgmPath: String)
+    class func bgmSoundPlay(_ bgmPath: String)
     {
-        print(NSDate().description, #function,#function,#line)
+        print(Date().description, #function,#function,#line)
         
         //userDefaultからボリューム値を取得
-        let ud = NSUserDefaults.standardUserDefaults()
-        var udBGM : Float! = ud.floatForKey("VOL_BGM")
+        let ud = UserDefaults.standard
+        var udBGM : Float! = ud.float(forKey: "VOL_BGM")
         
         if udBGM < 0.0 {
             udBGM = 0.5
@@ -46,7 +46,7 @@ class Utility {
                 myAudioPlayer.stop()
             }
             
-            myAudioPlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath:NSBundle.mainBundle().pathForResource(bgmPath == "" ? Const.BGM_DEFAULT_PATH : bgmPath, ofType:"mp3")!
+            myAudioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath:Bundle.main.path(forResource: bgmPath == "" ? Const.BGM_DEFAULT_PATH : bgmPath, ofType:"caf")!
 ))
             myAudioPlayer.volume = udBGM
             myAudioPlayer.numberOfLoops = -1
@@ -58,27 +58,27 @@ class Utility {
    }
    
     
-    class func bgmVolumeChange(volume: Float)
+    class func bgmVolumeChange(_ volume: Float)
     {
-        print(NSDate().description, #function,#line)
+        print(Date().description, #function,#line)
         myAudioPlayer.volume = volume
     }
 
     class func bgmStop()
     {
-        print(NSDate().description, #function,#line)
+        print(Date().description, #function,#line)
         myAudioPlayer.stop()
     }
     
     /** SE再生 **/
     //ファイルのパス
-    class func seSoundPlay(sePath: String)
+    class func seSoundPlay(_ sePath: String)
     {
-        print(NSDate().description, #function,#line)
+        print(Date().description, #function,#line)
         
         //userDefaultからボリューム値を取得
-        let ud = NSUserDefaults.standardUserDefaults()
-        var udSE : Float! = ud.floatForKey("VOL_SE")
+        let ud = UserDefaults.standard
+        var udSE : Float! = ud.float(forKey: "VOL_SE")
         
         if udSE < 0.0 {
             udSE = 0.5
@@ -87,7 +87,7 @@ class Utility {
         
         // SEを再生する.
         do {
-            mySePlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath:NSBundle.mainBundle().pathForResource(sePath == "" ? Const.SE_DEFAULT_PATH : sePath, ofType:"mp3")!))
+            mySePlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath:Bundle.main.path(forResource: sePath == "" ? Const.SE_DEFAULT_PATH : sePath, ofType:"caf")!))
             mySePlayer.volume = udSE * 2
             mySePlayer.play()
             
@@ -96,15 +96,15 @@ class Utility {
         }
     }
     
-    class func seVolumeChange(volume: Float)
+    class func seVolumeChange(_ volume: Float)
     {
-        print(NSDate().description, #function,#line)
+        print(Date().description, #function,#line)
         mySePlayer.volume = volume * 2
     }
     
     class func seStop()
     {
-        print(NSDate().description, #function,#line)
+        print(Date().description, #function,#line)
         mySePlayer.stop()
     }
 
@@ -114,98 +114,98 @@ class Utility {
     //****************************************
     
     /** 基本情報の取得 **/
-    class func getCharaBase(charaId: Int) -> [T_CharaBase]  {
-        print(NSDate().description, #function,#line)
+    class func getCharaBase(_ charaId: Int) -> [T_CharaBase]  {
+        print(Date().description, #function,#line)
         
-        return T_CharaBase.MR_findByAttribute("charaID", withValue: charaId) as! [T_CharaBase];
+        return T_CharaBase.mr_find(byAttribute: "charaID", withValue: charaId) as! [T_CharaBase];
     }
     
     /** アイテム情報の取得 **/
-    class func getMItem(itemId: Int) -> [M_Item]  {
-        print(NSDate().description, #function,#line)
+    class func getMItem(_ itemId: Int) -> [M_Item]  {
+        print(Date().description, #function,#line)
         
-        return M_Item.MR_findByAttribute("itemID", withValue: itemId) as! [M_Item];
+        return M_Item.mr_find(byAttribute: "itemID", withValue: itemId) as! [M_Item];
     }
     
     /** ステージ情報の取得 **/
-    class func getMStage(stageId: Int) -> [M_Stage]  {
-        print(NSDate().description, #function,#line)
+    class func getMStage(_ stageId: Int) -> [M_Stage]  {
+        print(Date().description, #function,#line)
         
-        return M_Stage.MR_findByAttribute("stageID", withValue: stageId) as! [M_Stage];
+        return M_Stage.mr_find(byAttribute: "stageID", withValue: stageId) as! [M_Stage];
     }
 
     /** アクションイメージ情報の取得 **/
-    class func getMActionImage(itemId: Int) -> [M_ActionImage] {
-        print(NSDate().description, #function,#line)
+    class func getMActionImage(_ itemId: Int) -> [M_ActionImage] {
+        print(Date().description, #function,#line)
         
-        return M_ActionImage.MR_findByAttribute("itemID", withValue: itemId, andOrderBy: "way,serialNo", ascending: true) as! [M_ActionImage];
+        return M_ActionImage.mr_find(byAttribute: "itemID", withValue: itemId, andOrderBy: "way,serialNo", ascending: true) as! [M_ActionImage];
     }
     
 
     /** 取得済アイテム情報の取得 **/
-    class func getTGetItem(charaId: Int) -> [T_GetItem] {
-        print(NSDate().description, #function,#line)
+    class func getTGetItem(_ charaId: Int) -> [T_GetItem] {
+        print(Date().description, #function,#line)
         
-        return T_GetItem.MR_findByAttribute("charaID", withValue: String(charaId), andOrderBy: "itemID", ascending: true) as! [T_GetItem];
+        return T_GetItem.mr_find(byAttribute: "charaID", withValue: String(charaId), andOrderBy: "itemID", ascending: true) as! [T_GetItem];
     }
     
     /** 行動済かつ、未完了な行動結果履歴の取得 **/
-    class func getFinishedTActionResult(charaId: Int) -> [T_ActionResult] {
-        print(NSDate().description, #function,#line)
+    class func getFinishedTActionResult(_ charaId: Int) -> [T_ActionResult] {
+        print(Date().description, #function,#line)
         
         let profileFilter: NSPredicate = NSPredicate(format: "charaID = %@ AND actEndDate <> nil AND finishFlg = '0'", String(charaId))
-        return  T_ActionResult.MR_findAllSortedBy("actSetDate", ascending: true, withPredicate: profileFilter) as! [T_ActionResult];
+        return  T_ActionResult.mr_findAllSorted(by: "actSetDate", ascending: true, with: profileFilter) as! [T_ActionResult];
     }
     
     /** 所持ステージの書き込み **/
-     class func editT_RefStage(stageId:Int) {
-        print(NSDate().description, #function,#line)
+     class func editT_RefStage(_ stageId:Int) {
+        print(Date().description, #function,#line)
 
         let filter: NSPredicate =
             NSPredicate(format: "charaID = " + String(Const.CHARACTER1_ID) + " and stageID = " + String(stageId))
     
-        let refStage :[T_RefStage] = T_RefStage.MR_findAllSortedBy("charaID,stageID", ascending: true, withPredicate: filter) as! [T_RefStage];
+        let refStage :[T_RefStage] = T_RefStage.mr_findAllSorted(by: "charaID,stageID", ascending: true, with: filter) as! [T_RefStage];
         
         // ステージを所持していない場合
         if (refStage.count == 0) {
 
             // 所持ステージを追加する.
-            let initItem = T_RefStage.MR_createEntity()! as T_RefStage
-            initItem.charaID = Const.CHARACTER1_ID
-            initItem.stageID = stageId
-            initItem.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+            let initItem = T_RefStage.mr_createEntity()! as T_RefStage
+            initItem.charaID = Const.CHARACTER1_ID as NSNumber!
+            initItem.stageID = stageId as NSNumber!
+            initItem.managedObjectContext!.mr_saveToPersistentStoreAndWait()
         }
     }
     
     
     /** 所持ステージの書き込み **/
-    class func editT_RefJob(stageId:Int) {
-        print(NSDate().description, #function,#line)
+    class func editT_RefJob(_ stageId:Int) {
+        print(Date().description, #function,#line)
 
         // 該当ステージに一致するジョブを取得する.
         let filter1: NSPredicate = NSPredicate(format: "maxStageID = " + String(stageId))
         
-        let mJob :[M_Job] = M_Job.MR_findAllSortedBy("maxStageID", ascending: true, withPredicate: filter1) as! [M_Job];
+        let mJob :[M_Job] = M_Job.mr_findAllSorted(by: "maxStageID", ascending: true, with: filter1) as! [M_Job];
 
         // 所持済のジョブの存在チェックをする.
         let filter2: NSPredicate =
-        NSPredicate(format: "charaID = " + String(Const.CHARACTER1_ID) + " and jobID = " + String(mJob[0].jobID))
+        NSPredicate(format: "charaID = " + String(Const.CHARACTER1_ID) + " and jobID = " + String(describing: mJob[0].jobID))
         
-        let refJob :[T_RefJob] = T_RefJob.MR_findAllSortedBy("charaID,jobID", ascending: true, withPredicate: filter2) as! [T_RefJob];
+        let refJob :[T_RefJob] = T_RefJob.mr_findAllSorted(by: "charaID,jobID", ascending: true, with: filter2) as! [T_RefJob];
         
         // ステージに該当するジョブを所持していない場合
         if (refJob.count == 0) {
             
             // 所持ステージを追加する.
-            let addJob = T_RefJob.MR_createEntity()! as T_RefJob
-            addJob.charaID = Const.CHARACTER1_ID
+            let addJob = T_RefJob.mr_createEntity()! as T_RefJob
+            addJob.charaID = Const.CHARACTER1_ID as NSNumber!
             addJob.jobID = mJob[0].jobID
-            addJob.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+            addJob.managedObjectContext!.mr_saveToPersistentStoreAndWait()
         }
     }
     
-    class func getRankName(rankKBN: String) -> String  {
-        print(NSDate().description, #function,#line)
+    class func getRankName(_ rankKBN: String) -> String  {
+        print(Date().description, #function,#line)
 
         var ret = ""
         
@@ -233,8 +233,8 @@ class Utility {
     }
     
     
-    class func getRankDrop(rankKBN: String) -> Float32  {
-        print(NSDate().description, #function,#line)
+    class func getRankDrop(_ rankKBN: String) -> Float32  {
+        print(Date().description, #function,#line)
         
         var ret :Float32 = 1.0
         
@@ -262,36 +262,36 @@ class Utility {
     }
     
     /** 渡された日付を日本時間に変換して返却する. **/
-    class func jpDate (date: NSDate) -> String {
+    class func jpDate (_ date: Date) -> String {
         
-        let dateFormatter1 = NSDateFormatter()
-        dateFormatter1.locale = NSLocale(localeIdentifier: "ja_JP") // 日本時間
+        let dateFormatter1 = DateFormatter()
+        dateFormatter1.locale = Locale(identifier: "ja_JP") // 日本時間
         dateFormatter1.dateFormat = "YYYY年MM月dd日 HH時mm分"
         
-        return dateFormatter1.stringFromDate(date)
+        return dateFormatter1.string(from: date)
     }
     
     // 比率だけ指定する場合
-    class func resizeImage(imageFile: String,resizewWidth: CGFloat,resizeHeight: CGFloat) -> UIImage {
+    class func resizeImage(_ imageFile: String,resizewWidth: CGFloat,resizeHeight: CGFloat) -> UIImage {
         
         let imageWk: UIImage = Utility.getUncachedImage(named: imageFile)!
         
         let resizedSize = CGSize(width: Int(resizewWidth), height: Int(resizeHeight))
         UIGraphicsBeginImageContext(resizedSize)
-        imageWk.drawInRect(CGRect(x: 0, y: 0, width: resizedSize.width, height: resizedSize.height))
+        imageWk.draw(in: CGRect(x: 0, y: 0, width: resizedSize.width, height: resizedSize.height))
         let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return resizedImage
+        return resizedImage!
     }
     
     //行動結果を計算し、ドロップアイテムを返却する.
     //また、結果をテーブルへ反映する
-    class func getDropItem(itemID :Int,rankKbn :String,loginUseFlg :Bool)  -> [M_DropItem] {
-        print(NSDate().description, #function,#line)
+    class func getDropItem(_ itemID :Int,rankKbn :String,loginUseFlg :Bool)  -> [M_DropItem] {
+        print(Date().description, #function,#line)
                 
         //ドロップアイテムの判定
         let dropFilter: NSPredicate = NSPredicate(format: "itemID = %@", String(itemID))
-        let mDropItem :[M_DropItem] = M_DropItem.MR_findAllSortedBy("dropItemID", ascending: true, withPredicate: dropFilter) as! [M_DropItem];
+        let mDropItem :[M_DropItem] = M_DropItem.mr_findAllSorted(by: "dropItemID", ascending: true, with: dropFilter) as! [M_DropItem];
         
         //返却アイテム
         var retDropItem :[M_DropItem] = []
@@ -321,7 +321,7 @@ class Utility {
             randDrop = Int32(arc4random_uniform(UInt32(100))) + 1;
             
             //行動結果のランクを加味する.
-            dropPer = Int32(Float32(mDropItem[j].dropPer.intValue) * Utility.getRankDrop(rankKbn))
+            dropPer = Int32(Float32(mDropItem[j].dropPer.int32Value) * Utility.getRankDrop(rankKbn))
             
             //取得判定
             if (1 <= randDrop && randDrop <= dropPer) {
@@ -331,22 +331,22 @@ class Utility {
                 
                 //所持アイテムを加算
                 getItemFilter = NSPredicate(format: "charaID = %@ and itemID = %@", String(Const.CHARACTER1_ID),mDropItem[j].dropItemID)
-                tGetItem = T_GetItem.MR_findAllSortedBy("itemID", ascending: false, withPredicate: getItemFilter) as! [T_GetItem];
+                tGetItem = T_GetItem.mr_findAllSorted(by: "itemID", ascending: false, with: getItemFilter) as! [T_GetItem];
                 
                 if tGetItem.count == 0 {
                     
                     //INSERT
-                    let insertData = T_GetItem.MR_createEntity()! as T_GetItem
-                    insertData.charaID = Const.CHARACTER1_ID
+                    let insertData = T_GetItem.mr_createEntity()! as T_GetItem
+                    insertData.charaID = Const.CHARACTER1_ID as NSNumber!
                     insertData.itemID = mDropItem[j].dropItemID
                     insertData.itemCount = 1
-                    insertData.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+                    insertData.managedObjectContext!.mr_saveToPersistentStoreAndWait()
                     
                 } else {
                     
                     //UPDATE
-                    tGetItem[0].itemCount = Int(tGetItem[0].itemCount) + 1
-                    tGetItem[0].managedObjectContext!.MR_saveToPersistentStoreAndWait()
+                    tGetItem[0].itemCount = NSNumber(Int32(tGetItem[0].itemCount)! + 1)
+                    tGetItem[0].managedObjectContext!.mr_saveToPersistentStoreAndWait()
                 }
             }
         }
@@ -356,8 +356,8 @@ class Utility {
     }
     
     //データ管理文字列表示用に指定した文字で改行コードを入れて返却する.
-    class func insertReturn(str :String, interval:Int)  -> String {
-        print(NSDate().description, #function,#line)
+    class func insertReturn(_ str :String, interval:Int)  -> String {
+        print(Date().description, #function,#line)
         
         //返却する文字列を宣言
         var retStr = ""
@@ -372,8 +372,8 @@ class Utility {
     }
     
     //実行端末とサイズ区分から適切な文字サイズを返却する.
-    class func getMojiSize(sizeKbn : Int) -> CGFloat {
-        let screenSize = UIScreen.mainScreen().bounds
+    class func getMojiSize(_ sizeKbn : Int) -> CGFloat {
+        let screenSize = UIScreen.main.bounds
         let width = Int(screenSize.width)
         //let height = Int(screenSize.height)
 

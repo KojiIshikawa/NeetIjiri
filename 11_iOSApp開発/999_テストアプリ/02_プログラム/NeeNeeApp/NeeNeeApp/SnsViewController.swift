@@ -14,17 +14,17 @@ class SnsViewController: UIViewController {
 
     
     // シェアメニューのオブジェクト
-    private var shareImgView: UIImageView!
+    fileprivate var shareImgView: UIImageView!
 
     // オブジェクト
-    private var facebookBtn: UIButton!
-    private var lineBtn: UIButton!
-    private var twitterBtn: UIButton!
-    private var questionBtn: UIButton!
-    private var kakugen = ""
+    fileprivate var facebookBtn: UIButton!
+    fileprivate var lineBtn: UIButton!
+    fileprivate var twitterBtn: UIButton!
+    fileprivate var questionBtn: UIButton!
+    fileprivate var kakugen = ""
     
     // view アンロード開始時
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         
         // SEを再生する.
         Utility.seSoundPlay(Const.SE_NO_PATH)
@@ -32,27 +32,27 @@ class SnsViewController: UIViewController {
     
     // view ロード完了時
     override func viewDidLoad() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function,#line)
+        print(Date().description, NSStringFromClass(self.classForCoder), #function,#line)
         super.viewDidLoad()
 
         //セッション情報.
-        let ud = NSUserDefaults.standardUserDefaults()
-        let udDateKkgnLst: Int! = ud.integerForKey("KAKUGEN_LAST_DATE")
-        let udKakugenId: Int! = ud.integerForKey("KAKUGEN_ID")
+        let ud = UserDefaults.standard
+        let udDateKkgnLst: Int! = ud.integer(forKey: "KAKUGEN_LAST_DATE")
+        let udKakugenId: Int! = ud.integer(forKey: "KAKUGEN_ID")
         
         //NSCalendarインスタンス
-        let cal = NSCalendar(identifier: NSCalendarIdentifierGregorian)!
-        let now = NSDate()
-        let year = cal.component(NSCalendarUnit.Year , fromDate: now) * 10000
-        let Month = cal.component(NSCalendarUnit.Month , fromDate: now) * 100
-        let day = cal.component(NSCalendarUnit.Day , fromDate: now)
+        let cal = Calendar(identifier: Calendar.Identifier.gregorian)
+        let now = Date()
+        let year = (cal as NSCalendar).component(NSCalendar.Unit.year , from: now) * 10000
+        let Month = (cal as NSCalendar).component(NSCalendar.Unit.month , from: now) * 100
+        let day = (cal as NSCalendar).component(NSCalendar.Unit.day , from: now)
         var kakugenList :[M_Kakugen]
         
         //前回表示時と同じ年月日の場合
         if udDateKkgnLst == year + Month + day {
             
             //格言をセッションから取得
-            kakugenList = M_Kakugen.MR_findByAttribute("kakugenID", withValue:udKakugenId , andOrderBy: "kakugenID", ascending: true) as! [M_Kakugen];
+            kakugenList = M_Kakugen.mr_find(byAttribute: "kakugenID", withValue:udKakugenId , andOrderBy: "kakugenID", ascending: true) as! [M_Kakugen];
             kakugen = kakugenList[0].kakugenText
         }
         
@@ -63,26 +63,26 @@ class SnsViewController: UIViewController {
         // FaceBookボタンを生成
         facebookBtn = UIButton()
         let facebookImage = Utility.getUncachedImage( named: "01_07_01.png")! as UIImage
-        facebookBtn.setImage(facebookImage, forState: .Normal)
-        facebookBtn.addTarget(self, action: #selector(SnsViewController.tapFacebookBtn(_:)), forControlEvents: .TouchUpInside)
+        facebookBtn.setImage(facebookImage, for: UIControlState())
+        facebookBtn.addTarget(self, action: #selector(SnsViewController.tapFacebookBtn(_:)), for: .touchUpInside)
         
         // Twitterボタンを生成
         twitterBtn = UIButton()
         let twitterImage = Utility.getUncachedImage( named: "01_08_01.png")! as UIImage
-        twitterBtn.setImage(twitterImage, forState: .Normal)
-        twitterBtn.addTarget(self, action: #selector(SnsViewController.tapTwitterBtn(_:)), forControlEvents: .TouchUpInside)
+        twitterBtn.setImage(twitterImage, for: UIControlState())
+        twitterBtn.addTarget(self, action: #selector(SnsViewController.tapTwitterBtn(_:)), for: .touchUpInside)
         
         // LINEボタンを生成
         lineBtn = UIButton()
         let lineImage = Utility.getUncachedImage( named: "01_09_01.png")! as UIImage
-        lineBtn.setImage(lineImage, forState: .Normal)
-        lineBtn.addTarget(self, action: #selector(SnsViewController.tapLineBtn(_:)), forControlEvents: .TouchUpInside)
+        lineBtn.setImage(lineImage, for: UIControlState())
+        lineBtn.addTarget(self, action: #selector(SnsViewController.tapLineBtn(_:)), for: .touchUpInside)
 
         // ？ボタンを生成
         questionBtn = UIButton()
         let questionImage = Utility.getUncachedImage( named: "01_12_01.png")! as UIImage
-        questionBtn.setImage(questionImage, forState: .Normal)
-        questionBtn.addTarget(self, action: #selector(SnsViewController.tapQuestionBtn(_:)), forControlEvents: .TouchUpInside)
+        questionBtn.setImage(questionImage, for: UIControlState())
+        questionBtn.addTarget(self, action: #selector(SnsViewController.tapQuestionBtn(_:)), for: .touchUpInside)
         
         // ポップ上に表示するオブジェクトをViewに追加する.
         self.view.addSubview(shareImgView)
@@ -97,14 +97,14 @@ class SnsViewController: UIViewController {
     
     //メモリ消費が多くなった時に動くイベント
     override func didReceiveMemoryWarning() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function,#line)
+        print(Date().description, NSStringFromClass(self.classForCoder), #function,#line)
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
     //facebookボタン押下時の処理
-    func tapFacebookBtn(sender: AnyObject) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function,#line)
+    func tapFacebookBtn(_ sender: AnyObject) {
+        print(Date().description, NSStringFromClass(self.classForCoder), #function,#line)
         
         // SEを再生する.
         Utility.seSoundPlay(Const.SE_YES_PATH)
@@ -113,18 +113,18 @@ class SnsViewController: UIViewController {
         let cv = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
         
         // 画像を追加
-        cv.addImage(UIImage(named: "01_13_01.png"))
+        cv?.add(UIImage(named: "01_13_01.png"))
         
         // 文字を追加
-        cv.setInitialText(Const.SNS_MASSAGE + kakugen)
+        cv?.setInitialText(Const.SNS_MASSAGE + kakugen)
         
         // 投稿ダイアログを表示する
-        self.presentViewController(cv, animated: true, completion: nil)
+        self.present(cv!, animated: true, completion: nil)
     }
     
     //ラインボタン押下時の処理
-    func tapLineBtn(sender: AnyObject) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function,#line)
+    func tapLineBtn(_ sender: AnyObject) {
+        print(Date().description, NSStringFromClass(self.classForCoder), #function,#line)
         
         // SEを再生する.
         Utility.seSoundPlay(Const.SE_YES_PATH)
@@ -135,15 +135,15 @@ class SnsViewController: UIViewController {
         
         // LINEで送るボタンを追加
         let line = LINEActivity()
-        let avc = UIActivityViewController(activityItems: shareItems, applicationActivities: [line])
+        let avc = UIActivityViewController(activityItems: shareItems, applicationActivities: [line!])
         
         // 投稿ダイアログを表示する
-        presentViewController(avc, animated: true, completion: nil)
+        present(avc, animated: true, completion: nil)
     }
     
     //Twitterボタン押下時の処理
-    func tapTwitterBtn(sender: AnyObject) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function,#line)
+    func tapTwitterBtn(_ sender: AnyObject) {
+        print(Date().description, NSStringFromClass(self.classForCoder), #function,#line)
         
         // SEを再生する.
         Utility.seSoundPlay(Const.SE_YES_PATH)
@@ -153,18 +153,18 @@ class SnsViewController: UIViewController {
         let cv = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
         
         // 画像を追加
-        cv.addImage(UIImage(named: "01_13_01.png"))
+        cv?.add(UIImage(named: "01_13_01.png"))
         
         // 文字を追加
-        cv.setInitialText(Const.SNS_MASSAGE + kakugen)
+        cv?.setInitialText(Const.SNS_MASSAGE + kakugen)
         
         // 投稿ダイアログを表示する
-        self.presentViewController(cv, animated: true, completion:nil )
+        self.present(cv!, animated: true, completion:nil )
     }
 
     //？ボタン押下時の処理
-    func tapQuestionBtn(sender: AnyObject) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function,#line)
+    func tapQuestionBtn(_ sender: AnyObject) {
+        print(Date().description, NSStringFromClass(self.classForCoder), #function,#line)
         
         // SEを再生する.
         Utility.seSoundPlay(Const.SE_NO_PATH)
@@ -172,7 +172,7 @@ class SnsViewController: UIViewController {
     
     /** 全オブジェクトの制約設定 **/
     func objConstraints() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function,#line)
+        print(Date().description, NSStringFromClass(self.classForCoder), #function,#line)
         
         shareImgView.translatesAutoresizingMaskIntoConstraints = false
         facebookBtn.translatesAutoresizingMaskIntoConstraints = false
@@ -186,10 +186,10 @@ class SnsViewController: UIViewController {
             // x座標
             NSLayoutConstraint(
                 item: self.shareImgView,
-                attribute:  NSLayoutAttribute.Right,
-                relatedBy: .Equal,
+                attribute:  NSLayoutAttribute.right,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute:  NSLayoutAttribute.Right,
+                attribute:  NSLayoutAttribute.right,
                 multiplier: 1.0,
                 constant: 0
             ),
@@ -197,10 +197,10 @@ class SnsViewController: UIViewController {
             // y座標
             NSLayoutConstraint(
                 item: self.shareImgView,
-                attribute: NSLayoutAttribute.Bottom,
-                relatedBy: .Equal,
+                attribute: NSLayoutAttribute.bottom,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute:  NSLayoutAttribute.Bottom,
+                attribute:  NSLayoutAttribute.bottom,
                 multiplier: 1.0,
                 constant: 0
             ),
@@ -208,10 +208,10 @@ class SnsViewController: UIViewController {
             // 横幅
             NSLayoutConstraint(
                 item: self.shareImgView,
-                attribute: .Width,
-                relatedBy: .Equal,
+                attribute: .width,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute: .Width,
+                attribute: .width,
                 multiplier: 1.0,
                 constant: 0
             ),
@@ -219,10 +219,10 @@ class SnsViewController: UIViewController {
             // 縦幅
             NSLayoutConstraint(
                 item: self.shareImgView,
-                attribute: .Height,
-                relatedBy: .Equal,
+                attribute: .height,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute: .Height,
+                attribute: .height,
                 multiplier: 1.0,
                 constant: 0
             )]
@@ -234,10 +234,10 @@ class SnsViewController: UIViewController {
             // x座標
             NSLayoutConstraint(
                 item: self.facebookBtn,
-                attribute:  NSLayoutAttribute.Left,
-                relatedBy: .Equal,
+                attribute:  NSLayoutAttribute.left,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute:  NSLayoutAttribute.Right,
+                attribute:  NSLayoutAttribute.right,
                 multiplier: 1.0 / 8.0,
                 constant: 0
             ),
@@ -245,10 +245,10 @@ class SnsViewController: UIViewController {
             // y座標
             NSLayoutConstraint(
                 item: self.facebookBtn,
-                attribute: NSLayoutAttribute.Top,
-                relatedBy: .Equal,
+                attribute: NSLayoutAttribute.top,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute:  NSLayoutAttribute.Top,
+                attribute:  NSLayoutAttribute.top,
                 multiplier: 1.0,
                 constant: 100
             ),
@@ -256,10 +256,10 @@ class SnsViewController: UIViewController {
             // 横幅
             NSLayoutConstraint(
                 item: self.facebookBtn,
-                attribute: .Width,
-                relatedBy: .Equal,
+                attribute: .width,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute: .Width,
+                attribute: .width,
                 multiplier: 1.0 / 3.0,
                 constant: 0
             ),
@@ -267,10 +267,10 @@ class SnsViewController: UIViewController {
             // 縦幅
             NSLayoutConstraint(
                 item: self.facebookBtn,
-                attribute: .Height,
-                relatedBy: .Equal,
+                attribute: .height,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute: .Height,
+                attribute: .height,
                 multiplier: 1.0 / 4.0,
                 constant: 0
             )]
@@ -282,10 +282,10 @@ class SnsViewController: UIViewController {
             // x座標
             NSLayoutConstraint(
                 item: self.twitterBtn,
-                attribute:  NSLayoutAttribute.Left,
-                relatedBy: .Equal,
+                attribute:  NSLayoutAttribute.left,
+                relatedBy: .equal,
                 toItem: self.facebookBtn,
-                attribute:  NSLayoutAttribute.Right,
+                attribute:  NSLayoutAttribute.right,
                 multiplier: 1.2 / 1.0,
                 constant: 0
             ),
@@ -293,10 +293,10 @@ class SnsViewController: UIViewController {
             // y座標
             NSLayoutConstraint(
                 item: self.twitterBtn,
-                attribute: NSLayoutAttribute.Top,
-                relatedBy: .Equal,
+                attribute: NSLayoutAttribute.top,
+                relatedBy: .equal,
                 toItem: self.facebookBtn,
-                attribute:  NSLayoutAttribute.Top,
+                attribute:  NSLayoutAttribute.top,
                 multiplier: 1.0,
                 constant: 0
             ),
@@ -304,10 +304,10 @@ class SnsViewController: UIViewController {
             // 横幅
             NSLayoutConstraint(
                 item: self.twitterBtn,
-                attribute: .Width,
-                relatedBy: .Equal,
+                attribute: .width,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute: .Width,
+                attribute: .width,
                 multiplier: 1.0 / 3.0,
                 constant: 0
             ),
@@ -315,10 +315,10 @@ class SnsViewController: UIViewController {
             // 縦幅
             NSLayoutConstraint(
                 item: self.twitterBtn,
-                attribute: .Height,
-                relatedBy: .Equal,
+                attribute: .height,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute: .Height,
+                attribute: .height,
                 multiplier: 1.0 / 4.0,
                 constant: 0
             )]
@@ -330,10 +330,10 @@ class SnsViewController: UIViewController {
             // x座標
             NSLayoutConstraint(
                 item: self.lineBtn,
-                attribute:  NSLayoutAttribute.Left,
-                relatedBy: .Equal,
+                attribute:  NSLayoutAttribute.left,
+                relatedBy: .equal,
                 toItem: self.facebookBtn,
-                attribute:  NSLayoutAttribute.Left,
+                attribute:  NSLayoutAttribute.left,
                 multiplier: 1.0,
                 constant: 0
             ),
@@ -341,10 +341,10 @@ class SnsViewController: UIViewController {
             // y座標
             NSLayoutConstraint(
                 item: self.lineBtn,
-                attribute: NSLayoutAttribute.Top,
-                relatedBy: .Equal,
+                attribute: NSLayoutAttribute.top,
+                relatedBy: .equal,
                 toItem: self.facebookBtn,
-                attribute:  NSLayoutAttribute.Bottom,
+                attribute:  NSLayoutAttribute.bottom,
                 multiplier: 1.2 / 1.0,
                 constant: 0
             ),
@@ -352,10 +352,10 @@ class SnsViewController: UIViewController {
             // 横幅
             NSLayoutConstraint(
                 item: self.lineBtn,
-                attribute: .Width,
-                relatedBy: .Equal,
+                attribute: .width,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute: .Width,
+                attribute: .width,
                 multiplier: 1.0 / 3.0,
                 constant: 0
             ),
@@ -363,10 +363,10 @@ class SnsViewController: UIViewController {
             // 縦幅
             NSLayoutConstraint(
                 item: self.lineBtn,
-                attribute: .Height,
-                relatedBy: .Equal,
+                attribute: .height,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute: .Height,
+                attribute: .height,
                 multiplier: 1.0 / 4.0,
                 constant: 0
             )]
@@ -378,10 +378,10 @@ class SnsViewController: UIViewController {
             // x座標
             NSLayoutConstraint(
                 item: self.questionBtn,
-                attribute:  NSLayoutAttribute.Left,
-                relatedBy: .Equal,
+                attribute:  NSLayoutAttribute.left,
+                relatedBy: .equal,
                 toItem: self.twitterBtn,
-                attribute:  NSLayoutAttribute.Left,
+                attribute:  NSLayoutAttribute.left,
                 multiplier: 1.0,
                 constant: 0
             ),
@@ -389,10 +389,10 @@ class SnsViewController: UIViewController {
             // y座標
             NSLayoutConstraint(
                 item: self.questionBtn,
-                attribute: NSLayoutAttribute.Top,
-                relatedBy: .Equal,
+                attribute: NSLayoutAttribute.top,
+                relatedBy: .equal,
                 toItem: self.lineBtn,
-                attribute:  NSLayoutAttribute.Top,
+                attribute:  NSLayoutAttribute.top,
                 multiplier: 1.0,
                 constant: 0
             ),
@@ -400,10 +400,10 @@ class SnsViewController: UIViewController {
             // 横幅
             NSLayoutConstraint(
                 item: self.questionBtn,
-                attribute: .Width,
-                relatedBy: .Equal,
+                attribute: .width,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute: .Width,
+                attribute: .width,
                 multiplier: 1.0 / 3.0,
                 constant: 0
             ),
@@ -411,10 +411,10 @@ class SnsViewController: UIViewController {
             // 縦幅
             NSLayoutConstraint(
                 item: self.questionBtn,
-                attribute: .Height,
-                relatedBy: .Equal,
+                attribute: .height,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute: .Height,
+                attribute: .height,
                 multiplier: 1.0 / 4.0,
                 constant: 0
             )]

@@ -14,17 +14,17 @@ import UIKit
 class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
 
     // 設定メニューのオブジェクト
-    private var settingImgView: UIImageView!
-    private var bgmMuteBtn: UIButton!
-    private var bgmVolumeSBar: UISlider!
-    private var bgmImage: UIImageView!
-    private var seMuteBtn: UIButton!
-    private var seVolumeSBar: UISlider!
-    private var seImage: UIImageView!
-    private var tumbViewImageView: UIImageView!
+    fileprivate var settingImgView: UIImageView!
+    fileprivate var bgmMuteBtn: UIButton!
+    fileprivate var bgmVolumeSBar: UISlider!
+    fileprivate var bgmImage: UIImageView!
+    fileprivate var seMuteBtn: UIButton!
+    fileprivate var seVolumeSBar: UISlider!
+    fileprivate var seImage: UIImageView!
+    fileprivate var tumbViewImageView: UIImageView!
     
     // view アンロード開始時
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         
         // SEを再生する.
         Utility.seSoundPlay(Const.SE_NO_PATH)
@@ -32,7 +32,7 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
     
     // view ロード完了時
     override func viewDidLoad() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
+        print(Date().description, NSStringFromClass(self.classForCoder), #function, #line)
         super.viewDidLoad()
         
         // ラベル等の画像
@@ -69,15 +69,15 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
         
         // BGMのスライドバーを生成
         bgmVolumeSBar = UISlider()
-        bgmVolumeSBar.setThumbImage(tumbViewImage, forState: .Normal)
-        bgmVolumeSBar.setMinimumTrackImage(minBarViewImage, forState: .Normal)
-        bgmVolumeSBar.setMaximumTrackImage(maxBarViewImage, forState: .Normal)
-        bgmVolumeSBar.addTarget(self, action: #selector(SettingViewController.slideBgmVolume(_:)), forControlEvents: .TouchUpInside)
+        bgmVolumeSBar.setThumbImage(tumbViewImage, for: UIControlState())
+        bgmVolumeSBar.setMinimumTrackImage(minBarViewImage, for: UIControlState())
+        bgmVolumeSBar.setMaximumTrackImage(maxBarViewImage, for: UIControlState())
+        bgmVolumeSBar.addTarget(self, action: #selector(SettingViewController.slideBgmVolume(_:)), for: .touchUpInside)
         
         // BGMのミュートボタンを生成
         bgmMuteBtn = UIButton()
-        bgmMuteBtn.setImage(muteViewImage, forState: .Normal)
-        bgmMuteBtn.addTarget(self, action: #selector(SettingViewController.tapBgmMuteBtn(_:)), forControlEvents: .TouchUpInside)
+        bgmMuteBtn.setImage(muteViewImage, for: UIControlState())
+        bgmMuteBtn.addTarget(self, action: #selector(SettingViewController.tapBgmMuteBtn(_:)), for: .touchUpInside)
         
         // SEのラベルを生成
         seImage = UIImageView()
@@ -85,15 +85,15 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
         
         // SEのスライドバーを生成
         seVolumeSBar = UISlider()
-        seVolumeSBar.setThumbImage(tumbViewImage, forState: .Normal)
-        seVolumeSBar.setMinimumTrackImage(minBarViewImage, forState: .Normal)
-        seVolumeSBar.setMaximumTrackImage(maxBarViewImage, forState: .Normal)
-        seVolumeSBar.addTarget(self, action: #selector(SettingViewController.slideSeVolume(_:)), forControlEvents: .TouchUpInside)
+        seVolumeSBar.setThumbImage(tumbViewImage, for: UIControlState())
+        seVolumeSBar.setMinimumTrackImage(minBarViewImage, for: UIControlState())
+        seVolumeSBar.setMaximumTrackImage(maxBarViewImage, for: UIControlState())
+        seVolumeSBar.addTarget(self, action: #selector(SettingViewController.slideSeVolume(_:)), for: .touchUpInside)
         
         // SEのミュートボタンを生成
         seMuteBtn = UIButton()
-        seMuteBtn.setImage(muteViewImage, forState: .Normal)
-        seMuteBtn.addTarget(self, action: #selector(SettingViewController.tapSeMuteBtn(_:)), forControlEvents: .TouchUpInside)
+        seMuteBtn.setImage(muteViewImage, for: UIControlState())
+        seMuteBtn.addTarget(self, action: #selector(SettingViewController.tapSeMuteBtn(_:)), for: .touchUpInside)
         
         // Viewに追加する.
         self.view.addSubview(bgmImage)
@@ -107,15 +107,15 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
         self.objConstraints()
         
         //UserDefaultから値を取得
-        let ud = NSUserDefaults.standardUserDefaults()
-        let udBGM : Float! = ud.floatForKey("VOL_BGM")
+        let ud = UserDefaults.standard
+        let udBGM : Float! = ud.float(forKey: "VOL_BGM")
         if udBGM != nil {
             bgmVolumeSBar.value = udBGM
         } else {
             bgmVolumeSBar.value = 0.5 //音量　初期値
         }
 
-        let udSE : Float! = ud.floatForKey("VOL_SE")
+        let udSE : Float! = ud.float(forKey: "VOL_SE")
         if udSE != nil {
             seVolumeSBar.value = udSE
         } else {
@@ -125,14 +125,14 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
     
     //メモリ消費が多くなった時に動くイベント
     override func didReceiveMemoryWarning() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
+        print(Date().description, NSStringFromClass(self.classForCoder), #function, #line)
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     /** 全オブジェクトの制約設定 **/
     func objConstraints() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
+        print(Date().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         settingImgView.translatesAutoresizingMaskIntoConstraints = false
         bgmImage.translatesAutoresizingMaskIntoConstraints = false
@@ -148,10 +148,10 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
             // x座標
             NSLayoutConstraint(
                 item: self.settingImgView,
-                attribute:  NSLayoutAttribute.Right,
-                relatedBy: .Equal,
+                attribute:  NSLayoutAttribute.right,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute:  NSLayoutAttribute.Right,
+                attribute:  NSLayoutAttribute.right,
                 multiplier: 1.0,
                 constant: 0
             ),
@@ -159,10 +159,10 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
             // y座標
             NSLayoutConstraint(
                 item: self.settingImgView,
-                attribute: NSLayoutAttribute.Bottom,
-                relatedBy: .Equal,
+                attribute: NSLayoutAttribute.bottom,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute:  NSLayoutAttribute.Bottom,
+                attribute:  NSLayoutAttribute.bottom,
                 multiplier: 1.0,
                 constant: 0
             ),
@@ -170,10 +170,10 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
             // 横幅
             NSLayoutConstraint(
                 item: self.settingImgView,
-                attribute: .Width,
-                relatedBy: .Equal,
+                attribute: .width,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute: .Width,
+                attribute: .width,
                 multiplier: 1.0,
                 constant: 0
             ),
@@ -181,10 +181,10 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
             // 縦幅
             NSLayoutConstraint(
                 item: self.settingImgView,
-                attribute: .Height,
-                relatedBy: .Equal,
+                attribute: .height,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute: .Height,
+                attribute: .height,
                 multiplier: 1.0,
                 constant: 0
             )]
@@ -196,10 +196,10 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
             // x座標
             NSLayoutConstraint(
                 item: self.bgmImage,
-                attribute:  NSLayoutAttribute.Left,
-                relatedBy: .Equal,
+                attribute:  NSLayoutAttribute.left,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute:  NSLayoutAttribute.Right,
+                attribute:  NSLayoutAttribute.right,
                 multiplier: 0.1 / 1.0,
                 constant: 0
             ),
@@ -207,10 +207,10 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
             // y座標
             NSLayoutConstraint(
                 item: self.bgmImage,
-                attribute: NSLayoutAttribute.Top,
-                relatedBy: .Equal,
+                attribute: NSLayoutAttribute.top,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute:  NSLayoutAttribute.Bottom,
+                attribute:  NSLayoutAttribute.bottom,
                 multiplier: 0.26 / 1.0,
                 constant: 0
             ),
@@ -218,10 +218,10 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
             // 横幅
             NSLayoutConstraint(
                 item: self.bgmImage,
-                attribute: .Width,
-                relatedBy: .Equal,
+                attribute: .width,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute: .Width,
+                attribute: .width,
                 multiplier: 1.0 / 6.0,
                 constant: 0
             ),
@@ -229,10 +229,10 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
             // 縦幅
             NSLayoutConstraint(
                 item: self.bgmImage,
-                attribute: .Height,
-                relatedBy: .Equal,
+                attribute: .height,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute: .Height,
+                attribute: .height,
                 multiplier: 1.0 / 26.0,
                 constant: 0
             )]
@@ -244,10 +244,10 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
             // x座標
             NSLayoutConstraint(
                 item: self.bgmVolumeSBar,
-                attribute:  NSLayoutAttribute.Left,
-                relatedBy: .Equal,
+                attribute:  NSLayoutAttribute.left,
+                relatedBy: .equal,
                 toItem: self.bgmImage,
-                attribute:  NSLayoutAttribute.Right,
+                attribute:  NSLayoutAttribute.right,
                 multiplier: 1.0,
                 constant: 20
             ),
@@ -255,10 +255,10 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
             // y座標
             NSLayoutConstraint(
                 item: self.bgmVolumeSBar,
-                attribute: NSLayoutAttribute.Top,
-                relatedBy: .Equal,
+                attribute: NSLayoutAttribute.top,
+                relatedBy: .equal,
                 toItem: self.bgmImage,
-                attribute:  NSLayoutAttribute.Top,
+                attribute:  NSLayoutAttribute.top,
                 multiplier: 1.0,
                 constant: 0
             ),
@@ -266,10 +266,10 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
             // 横幅
             NSLayoutConstraint(
                 item: self.bgmVolumeSBar,
-                attribute: .Width,
-                relatedBy: .Equal,
+                attribute: .width,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute: .Width,
+                attribute: .width,
                 multiplier: 1.0 / 3.0,
                 constant: 0
             ),
@@ -277,10 +277,10 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
             // 縦幅
             NSLayoutConstraint(
                 item: self.bgmVolumeSBar,
-                attribute: .Height,
-                relatedBy: .Equal,
+                attribute: .height,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute: .Height,
+                attribute: .height,
                 multiplier: 1.0 / 24.0,
                 constant: 0
             )]
@@ -292,10 +292,10 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
             // x座標
             NSLayoutConstraint(
                 item: self.bgmMuteBtn,
-                attribute:  NSLayoutAttribute.Left,
-                relatedBy: .Equal,
+                attribute:  NSLayoutAttribute.left,
+                relatedBy: .equal,
                 toItem: self.bgmVolumeSBar,
-                attribute:  NSLayoutAttribute.Right,
+                attribute:  NSLayoutAttribute.right,
                 multiplier: 1.1 / 1.0,
                 constant: 0
             ),
@@ -303,10 +303,10 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
             // y座標
             NSLayoutConstraint(
                 item: self.bgmMuteBtn,
-                attribute: NSLayoutAttribute.Top,
-                relatedBy: .Equal,
+                attribute: NSLayoutAttribute.top,
+                relatedBy: .equal,
                 toItem: self.bgmImage,
-                attribute:  NSLayoutAttribute.Top,
+                attribute:  NSLayoutAttribute.top,
                 multiplier: 1.0,
                 constant: 0
             ),
@@ -314,10 +314,10 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
             // 横幅
             NSLayoutConstraint(
                 item: self.bgmMuteBtn,
-                attribute: .Width,
-                relatedBy: .Equal,
+                attribute: .width,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute: .Width,
+                attribute: .width,
                 multiplier: 1.0 / 6.0,
                 constant: 0
             ),
@@ -325,10 +325,10 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
             // 縦幅
             NSLayoutConstraint(
                 item: self.bgmMuteBtn,
-                attribute: .Height,
-                relatedBy: .Equal,
+                attribute: .height,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute: .Height,
+                attribute: .height,
                 multiplier: 1.0 / 24.0,
                 constant: 0
             )]
@@ -340,10 +340,10 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
             // x座標
             NSLayoutConstraint(
                 item: self.bgmImage,
-                attribute:  NSLayoutAttribute.Left,
-                relatedBy: .Equal,
+                attribute:  NSLayoutAttribute.left,
+                relatedBy: .equal,
                 toItem: self.seImage,
-                attribute:  NSLayoutAttribute.Left,
+                attribute:  NSLayoutAttribute.left,
                 multiplier: 1.0,
                 constant: 0
             ),
@@ -351,10 +351,10 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
             // y座標
             NSLayoutConstraint(
                 item: self.seImage,
-                attribute: NSLayoutAttribute.Top,
-                relatedBy: .Equal,
+                attribute: NSLayoutAttribute.top,
+                relatedBy: .equal,
                 toItem: self.bgmImage,
-                attribute:  NSLayoutAttribute.Bottom,
+                attribute:  NSLayoutAttribute.bottom,
                 multiplier: 1.2 / 1.0,
                 constant: 0
             ),
@@ -362,10 +362,10 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
             // 横幅
             NSLayoutConstraint(
                 item: self.seImage,
-                attribute: .Width,
-                relatedBy: .Equal,
+                attribute: .width,
+                relatedBy: .equal,
                 toItem: self.bgmImage,
-                attribute: .Width,
+                attribute: .width,
                 multiplier: 1.0,
                 constant: 0
             ),
@@ -373,10 +373,10 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
             // 縦幅
             NSLayoutConstraint(
                 item: self.seImage,
-                attribute: .Height,
-                relatedBy: .Equal,
+                attribute: .height,
+                relatedBy: .equal,
                 toItem: self.bgmImage,
-                attribute: .Height,
+                attribute: .height,
                 multiplier: 1.0,
                 constant: 0
             )]
@@ -388,10 +388,10 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
             // x座標
             NSLayoutConstraint(
                 item: self.seVolumeSBar,
-                attribute:  NSLayoutAttribute.Left,
-                relatedBy: .Equal,
+                attribute:  NSLayoutAttribute.left,
+                relatedBy: .equal,
                 toItem: self.seImage,
-                attribute:  NSLayoutAttribute.Right,
+                attribute:  NSLayoutAttribute.right,
                 multiplier: 1.0,
                 constant: 20
             ),
@@ -399,10 +399,10 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
             // y座標
             NSLayoutConstraint(
                 item: self.seVolumeSBar,
-                attribute: NSLayoutAttribute.Top,
-                relatedBy: .Equal,
+                attribute: NSLayoutAttribute.top,
+                relatedBy: .equal,
                 toItem: self.seImage,
-                attribute:  NSLayoutAttribute.Top,
+                attribute:  NSLayoutAttribute.top,
                 multiplier: 1.0,
                 constant: 0
             ),
@@ -410,10 +410,10 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
             // 横幅
             NSLayoutConstraint(
                 item: self.seVolumeSBar,
-                attribute: .Width,
-                relatedBy: .Equal,
+                attribute: .width,
+                relatedBy: .equal,
                 toItem: self.bgmVolumeSBar,
-                attribute: .Width,
+                attribute: .width,
                 multiplier: 1.0,
                 constant: 0
             ),
@@ -421,10 +421,10 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
             // 縦幅
             NSLayoutConstraint(
                 item: self.seVolumeSBar,
-                attribute: .Height,
-                relatedBy: .Equal,
+                attribute: .height,
+                relatedBy: .equal,
                 toItem: self.bgmVolumeSBar,
-                attribute: .Height,
+                attribute: .height,
                 multiplier: 1.0,
                 constant: 0
             )]
@@ -436,10 +436,10 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
             // x座標
             NSLayoutConstraint(
                 item: self.seMuteBtn,
-                attribute:  NSLayoutAttribute.Left,
-                relatedBy: .Equal,
+                attribute:  NSLayoutAttribute.left,
+                relatedBy: .equal,
                 toItem: self.seVolumeSBar,
-                attribute:  NSLayoutAttribute.Right,
+                attribute:  NSLayoutAttribute.right,
                 multiplier: 1.1 / 1.0,
                 constant: 0
             ),
@@ -447,10 +447,10 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
             // y座標
             NSLayoutConstraint(
                 item: self.seMuteBtn,
-                attribute: NSLayoutAttribute.Top,
-                relatedBy: .Equal,
+                attribute: NSLayoutAttribute.top,
+                relatedBy: .equal,
                 toItem: self.seImage,
-                attribute:  NSLayoutAttribute.Top,
+                attribute:  NSLayoutAttribute.top,
                 multiplier: 1.0,
                 constant: 0
             ),
@@ -458,10 +458,10 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
             // 横幅
             NSLayoutConstraint(
                 item: self.seMuteBtn,
-                attribute: .Width,
-                relatedBy: .Equal,
+                attribute: .width,
+                relatedBy: .equal,
                 toItem: self.bgmMuteBtn,
-                attribute: .Width,
+                attribute: .width,
                 multiplier: 1.0,
                 constant: 0
             ),
@@ -469,10 +469,10 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
             // 縦幅
             NSLayoutConstraint(
                 item: self.seMuteBtn,
-                attribute: .Height,
-                relatedBy: .Equal,
+                attribute: .height,
+                relatedBy: .equal,
                 toItem: self.bgmMuteBtn,
-                attribute: .Height,
+                attribute: .height,
                 multiplier: 1.0,
                 constant: 0
             )]
@@ -482,14 +482,14 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
     
     
     /** BGMボリューム変更時の処理 **/
-    func slideBgmVolume(sender: AnyObject) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
+    func slideBgmVolume(_ sender: AnyObject) {
+        print(Date().description, NSStringFromClass(self.classForCoder), #function, #line)
         // スライド値をBGM音量にセットする
 //        myAudioPlayer.volume = bgmVolumeSBar.value
         
         //NSUserDefaultに値を保存
-        let ud = NSUserDefaults.standardUserDefaults()
-        ud.setFloat(bgmVolumeSBar.value, forKey: "VOL_BGM")
+        let ud = UserDefaults.standard
+        ud.set(bgmVolumeSBar.value, forKey: "VOL_BGM")
         ud.synchronize()
         
         Utility.bgmVolumeChange(bgmVolumeSBar.value)
@@ -497,8 +497,8 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
     }
 
     /** BGMミュートボタン押下時の処理 **/
-    func tapBgmMuteBtn(sender: AnyObject) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
+    func tapBgmMuteBtn(_ sender: AnyObject) {
+        print(Date().description, NSStringFromClass(self.classForCoder), #function, #line)
 
         // SEを再生する.
         Utility.seSoundPlay(Const.SE_YES_PATH)
@@ -511,8 +511,8 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
         }
 
         //NSUserDefaultに値を保存
-        let ud = NSUserDefaults.standardUserDefaults()
-        ud.setFloat(bgmVolumeSBar.value, forKey: "VOL_BGM")
+        let ud = UserDefaults.standard
+        ud.set(bgmVolumeSBar.value, forKey: "VOL_BGM")
         ud.synchronize()
         
         Utility.bgmVolumeChange(bgmVolumeSBar.value)
@@ -521,12 +521,12 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
     
     
     /** SEボリューム変更時の処理 **/
-    func slideSeVolume(sender: AnyObject) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
+    func slideSeVolume(_ sender: AnyObject) {
+        print(Date().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         //NSUserDefaultに値を保存
-        let ud = NSUserDefaults.standardUserDefaults()
-        ud.setFloat(seVolumeSBar.value, forKey: "VOL_SE")
+        let ud = UserDefaults.standard
+        ud.set(seVolumeSBar.value, forKey: "VOL_SE")
         ud.synchronize()
 
         Utility.seVolumeChange(seVolumeSBar.value)
@@ -534,8 +534,8 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
     }
 
     /** SEミュートボタン押下時の処理 **/
-    func tapSeMuteBtn(sender: AnyObject) {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
+    func tapSeMuteBtn(_ sender: AnyObject) {
+        print(Date().description, NSStringFromClass(self.classForCoder), #function, #line)
         Utility.seSoundPlay(Const.SE_YES_PATH)
         
         if seVolumeSBar.value == 0.0 {
@@ -546,8 +546,8 @@ class SettingViewController: UIViewController ,AVAudioPlayerDelegate{
         }
     
         //NSUserDefaultに値を保存
-        let ud = NSUserDefaults.standardUserDefaults()
-        ud.setFloat(seVolumeSBar.value, forKey: "VOL_SE")
+        let ud = UserDefaults.standard
+        ud.set(seVolumeSBar.value, forKey: "VOL_SE")
         ud.synchronize()
         
         // SEを再生する.

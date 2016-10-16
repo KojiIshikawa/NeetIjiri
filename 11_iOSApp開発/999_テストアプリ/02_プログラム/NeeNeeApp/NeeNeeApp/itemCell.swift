@@ -18,19 +18,19 @@ class itemCell: UICollectionViewCell {
         super.init(frame: frame)
         
         // セッションからアクションセット画面のサイズを取得
-        let ud1 = NSUserDefaults.standardUserDefaults()
-        let udActionSize : CGFloat! = CGFloat(ud1.floatForKey("ACTIONSET_SIZE"))
+        let ud1 = UserDefaults.standard
+        let udActionSize : CGFloat! = CGFloat(ud1.float(forKey: "ACTIONSET_SIZE"))
 
-        _img = UIImageView(frame: CGRectMake(
-            0,0
-           ,udActionSize
-           ,udActionSize))
+        _img = UIImageView(frame: CGRect(
+            x: 0,y: 0
+           ,width: udActionSize
+           ,height: udActionSize))
         
         _name = UILabel()
         _name.sizeToFit()
         _name.numberOfLines = 0
-        _name.textAlignment = NSTextAlignment.Center
-        _name.font = UIFont.systemFontOfSize(Utility.getMojiSize(Const.SIZEKBN_SMALL))
+        _name.textAlignment = NSTextAlignment.center
+        _name.font = UIFont.systemFont(ofSize: Utility.getMojiSize(Const.SIZEKBN_SMALL))
         
         self.addSubview(_img)
         self.addSubview(_name)
@@ -43,10 +43,10 @@ class itemCell: UICollectionViewCell {
             // x座標
             NSLayoutConstraint(
                 item: self._name,
-                attribute:  NSLayoutAttribute.CenterX,
-                relatedBy: .Equal,
+                attribute:  NSLayoutAttribute.centerX,
+                relatedBy: .equal,
                 toItem: self,
-                attribute:  NSLayoutAttribute.CenterX,
+                attribute:  NSLayoutAttribute.centerX,
                 multiplier: 1.0,
                 constant: 0
             ),
@@ -54,10 +54,10 @@ class itemCell: UICollectionViewCell {
             // y座標
             NSLayoutConstraint(
                 item: self._name,
-                attribute: NSLayoutAttribute.CenterY,
-                relatedBy: .Equal,
+                attribute: NSLayoutAttribute.centerY,
+                relatedBy: .equal,
                 toItem: self,
-                attribute:  NSLayoutAttribute.CenterY,
+                attribute:  NSLayoutAttribute.centerY,
                 multiplier: 1.4 / 1.0,
                 constant: 0
             )

@@ -29,11 +29,11 @@ class Const {
     static let SE_RESULT_PATH = "me1"
     static let SE_LOGIN_PATH = "me2"
     static let ACTION_START_TIME_INTERVAL:Float = 60 * 3
-    static let CHARACTER_DEFAULT_FIRST_X = 50
-    static let CHARACTER_DEFAULT_FIRST_Y = 50
+    static let CHARACTER_DEFAULT_FIRST_X:NSNumber = 50
+    static let CHARACTER_DEFAULT_FIRST_Y:NSNumber = 50
     static let CHARACTER_DEFAULT_SIZE_RATE = 10
-    static let ANIME_KBN_RANDOM = 1
-    static let ANIME_KBN_TEITEN = 2
+    static let ANIME_KBN_RANDOM:NSNumber = 1
+    static let ANIME_KBN_TEITEN:NSNumber = 2
     static let SNS_MASSAGE = "「ニートいじり」できみも中の世界に飛び出そう！\n"
     static let SIZEKBN_SMALL  = 1
     static let SIZEKBN_MIDDLE = 2

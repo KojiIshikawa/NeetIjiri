@@ -13,14 +13,14 @@ import Foundation
 class LoginBonusViewController: UIViewController {
     
     // 背景
-    private var imgViewLogin: UIImageView!
+    fileprivate var imgViewLogin: UIImageView!
 
     //画面オブジェクト
-    private var lblOkan: UILabel! //オカンラベル
-    private var btnOK: UIButton! //OKボタン
+    fileprivate var lblOkan: UILabel! //オカンラベル
+    fileprivate var btnOK: UIButton! //OKボタン
     
     // view アンロード開始時
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         
         // SEを再生する.
         Utility.seSoundPlay(Const.SE_NO_PATH)
@@ -28,7 +28,7 @@ class LoginBonusViewController: UIViewController {
     
     // view ロード完了時
     override func viewDidLoad() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
+        print(Date().description, NSStringFromClass(self.classForCoder), #function, #line)
         super.viewDidLoad()
 
         //メッセージ
@@ -43,7 +43,7 @@ class LoginBonusViewController: UIViewController {
         //メッセージラベル
         lblOkan = UILabel()
         lblOkan.numberOfLines = 0
-        self.lblOkan.font = UIFont.systemFontOfSize(Utility.getMojiSize(Const.SIZEKBN_LARGE))
+        self.lblOkan.font = UIFont.systemFont(ofSize: Utility.getMojiSize(Const.SIZEKBN_LARGE))
         
         //キャラクター基本情報マスタを取得する.
         let charaData : [T_CharaBase] = Utility.getCharaBase(Const.CHARACTER1_ID)
@@ -67,7 +67,7 @@ class LoginBonusViewController: UIViewController {
 
             //エラーがなければログインメッセージを表示
             mes1 = "〇〇くんへ\n\nかあさんうでをふるって\n〇〇くんのだいすきな\n\(getOkan())\nを、つくりました。"
-            mes1 = mes1.stringByReplacingOccurrencesOfString("〇〇",withString: charaData[0].charaName)
+            mes1 = mes1.replacingOccurrences(of: "〇〇",with: charaData[0].charaName)
             mes3 = "\n\nむりしないでがんばってね！"
             
             //ドロップアイテムが取得できた場合は文言を追加する.
@@ -91,7 +91,7 @@ class LoginBonusViewController: UIViewController {
     
     //メモリ消費が多くなった時に動くイベント
     override func didReceiveMemoryWarning() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
+        print(Date().description, NSStringFromClass(self.classForCoder), #function, #line)
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -103,9 +103,9 @@ class LoginBonusViewController: UIViewController {
     func getOkan() -> String {
         
         //ランダムで取得
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
+        print(Date().description, NSStringFromClass(self.classForCoder), #function, #line)
         
-        let okanList :[M_Okan] = M_Okan.MR_findAll() as! [M_Okan];
+        let okanList :[M_Okan] = M_Okan.mr_findAll() as! [M_Okan];
         let randInt = arc4random_uniform(UInt32(okanList.count));
         print(okanList.count)
         
@@ -115,7 +115,7 @@ class LoginBonusViewController: UIViewController {
     
     /** 全オブジェクトの制約設定 **/
     func objConstraints() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
+        print(Date().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         imgViewLogin.translatesAutoresizingMaskIntoConstraints = false
         lblOkan.translatesAutoresizingMaskIntoConstraints = false
@@ -126,10 +126,10 @@ class LoginBonusViewController: UIViewController {
             // x座標
             NSLayoutConstraint(
                 item: self.imgViewLogin,
-                attribute:  NSLayoutAttribute.Right,
-                relatedBy: .Equal,
+                attribute:  NSLayoutAttribute.right,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute:  NSLayoutAttribute.Right,
+                attribute:  NSLayoutAttribute.right,
                 multiplier: 1.0,
                 constant: 0
             ),
@@ -137,10 +137,10 @@ class LoginBonusViewController: UIViewController {
             // y座標
             NSLayoutConstraint(
                 item: self.imgViewLogin,
-                attribute: NSLayoutAttribute.Bottom,
-                relatedBy: .Equal,
+                attribute: NSLayoutAttribute.bottom,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute:  NSLayoutAttribute.Bottom,
+                attribute:  NSLayoutAttribute.bottom,
                 multiplier: 1.0,
                 constant: 0
             ),
@@ -148,10 +148,10 @@ class LoginBonusViewController: UIViewController {
             // 横幅
             NSLayoutConstraint(
                 item: self.imgViewLogin,
-                attribute: NSLayoutAttribute.Width,
-                relatedBy: .Equal,
+                attribute: NSLayoutAttribute.width,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute: NSLayoutAttribute.Width,
+                attribute: NSLayoutAttribute.width,
                 multiplier: 1.0,
                 constant: 0
             ),
@@ -159,10 +159,10 @@ class LoginBonusViewController: UIViewController {
             // 縦幅
             NSLayoutConstraint(
                 item: self.imgViewLogin,
-                attribute: NSLayoutAttribute.Height,
-                relatedBy: .Equal,
+                attribute: NSLayoutAttribute.height,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute: NSLayoutAttribute.Height,
+                attribute: NSLayoutAttribute.height,
                 multiplier: 1.0,
                 constant: 0
             )]
@@ -174,10 +174,10 @@ class LoginBonusViewController: UIViewController {
             // x座標
             NSLayoutConstraint(
                 item: self.lblOkan,
-                attribute:  NSLayoutAttribute.Left,
-                relatedBy: .Equal,
+                attribute:  NSLayoutAttribute.left,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute:  NSLayoutAttribute.Right,
+                attribute:  NSLayoutAttribute.right,
                 multiplier: 0.1 / 1.0,
                 constant: 0
             ),
@@ -185,10 +185,10 @@ class LoginBonusViewController: UIViewController {
             // y座標
             NSLayoutConstraint(
                 item: self.lblOkan,
-                attribute: NSLayoutAttribute.Top,
-                relatedBy: .Equal,
+                attribute: NSLayoutAttribute.top,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute: NSLayoutAttribute.Bottom,
+                attribute: NSLayoutAttribute.bottom,
                 multiplier: 0.2 / 1.0,
                 constant: 0
             )]

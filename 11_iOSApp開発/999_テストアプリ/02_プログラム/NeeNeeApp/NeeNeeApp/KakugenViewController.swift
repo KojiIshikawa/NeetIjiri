@@ -7,17 +7,37 @@
 //
 
 import Foundation
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class KakugenViewController: UIViewController {
     
     //背景
-    private var imgViewKakugen: UIImageView!
+    fileprivate var imgViewKakugen: UIImageView!
 
     //画面オブジェクト
-    private var lblKakugen: UILabel! //格言ラベル
+    fileprivate var lblKakugen: UILabel! //格言ラベル
     
     // view アンロード開始時
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         
         // SEを再生する.
         Utility.seSoundPlay(Const.SE_NO_PATH)
@@ -25,7 +45,7 @@ class KakugenViewController: UIViewController {
     
     // view ロード完了時
     override func viewDidLoad() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
+        print(Date().description, NSStringFromClass(self.classForCoder), #function, #line)
         super.viewDidLoad()
 
         //背景設定
@@ -37,7 +57,7 @@ class KakugenViewController: UIViewController {
         lblKakugen = UILabel()
         lblKakugen.text = getKakugen()
         lblKakugen.numberOfLines = 0
-        self.lblKakugen.font = UIFont.systemFontOfSize(Utility.getMojiSize(Const.SIZEKBN_LARGE))
+        self.lblKakugen.font = UIFont.systemFont(ofSize: Utility.getMojiSize(Const.SIZEKBN_LARGE))
         self.view.addSubview(lblKakugen)
         
         // 制約を設定する.
@@ -47,7 +67,7 @@ class KakugenViewController: UIViewController {
     
     //メモリ消費が多くなった時に動くイベント
     override func didReceiveMemoryWarning() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
+        print(Date().description, NSStringFromClass(self.classForCoder), #function, #line)
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -58,20 +78,20 @@ class KakugenViewController: UIViewController {
     
     //格言の取得
     func getKakugen() -> String {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
+        print(Date().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         //セッション情報.
-        let ud = NSUserDefaults.standardUserDefaults()
-        let udDateKkgnLst: Int! = ud.integerForKey("KAKUGEN_LAST_DATE")
-        let udKakugenId: Int! = ud.integerForKey("KAKUGEN_ID")
-        let udKakugenLogString: String! = ud.stringForKey("KAKUGEN_LOG_STRING")
+        let ud = UserDefaults.standard
+        let udDateKkgnLst: Int! = ud.integer(forKey: "KAKUGEN_LAST_DATE")
+        let udKakugenId: Int! = ud.integer(forKey: "KAKUGEN_ID")
+        let udKakugenLogString: String! = ud.string(forKey: "KAKUGEN_LOG_STRING")
         
         //NSCalendarインスタンス
-        let cal = NSCalendar(identifier: NSCalendarIdentifierGregorian)!
-        let now = NSDate()
-        let year = cal.component(NSCalendarUnit.Year , fromDate: now) * 10000
-        let Month = cal.component(NSCalendarUnit.Month , fromDate: now) * 100
-        let day = cal.component(NSCalendarUnit.Day , fromDate: now)
+        let cal = Calendar(identifier: Calendar.Identifier.gregorian)
+        let now = Date()
+        let year = (cal as NSCalendar).component(NSCalendar.Unit.year , from: now) * 10000
+        let Month = (cal as NSCalendar).component(NSCalendar.Unit.month , from: now) * 100
+        let day = (cal as NSCalendar).component(NSCalendar.Unit.day , from: now)
         var kakugenList :[M_Kakugen]
         var randInt: UInt32 = 0
         var updFlg = false
@@ -80,7 +100,7 @@ class KakugenViewController: UIViewController {
         if (udKakugenLogString > "") {
             
             //NSUserDefaultに格言表示日付をセット
-            let ud = NSUserDefaults.standardUserDefaults()
+            let ud = UserDefaults.standard
             
             //セッションをクリア
             ud.setValue("", forKey: "KAKUGEN_LOG_STRING")
@@ -94,21 +114,21 @@ class KakugenViewController: UIViewController {
         if udDateKkgnLst == year + Month + day {
             
             //格言をセッションから取得
-            kakugenList = M_Kakugen.MR_findByAttribute("kakugenID", withValue:udKakugenId , andOrderBy: "kakugenID", ascending: true) as! [M_Kakugen];
+            kakugenList = M_Kakugen.mr_find(byAttribute: "kakugenID", withValue:udKakugenId , andOrderBy: "kakugenID", ascending: true) as! [M_Kakugen];
             updFlg = false
             
             
         } else {
 
             //格言をランダムで取得
-            kakugenList = M_Kakugen.MR_findAll() as! [M_Kakugen];
+            kakugenList = M_Kakugen.mr_findAll() as! [M_Kakugen];
             randInt = arc4random_uniform(UInt32(kakugenList.count));
             updFlg = true
             
         }
         
         // 取得済格言テーブルで存在チェックを行い、存在しない場合のみセットする.
-        let listT_RefKakugen :[T_RefKakugen] = T_RefKakugen.MR_findByAttribute("charaID", withValue: Const.CHARACTER1_ID, andOrderBy: "kakugenID", ascending: true) as! [T_RefKakugen];
+        let listT_RefKakugen :[T_RefKakugen] = T_RefKakugen.mr_find(byAttribute: "charaID", withValue: Const.CHARACTER1_ID, andOrderBy: "kakugenID", ascending: true) as! [T_RefKakugen];
         
         // 件数分繰り返す
         for refKakugen in listT_RefKakugen {
@@ -129,15 +149,15 @@ class KakugenViewController: UIViewController {
         if updFlg {
 
             //取得済み格言の更新
-            let insertItem = T_RefKakugen.MR_createEntity()! as T_RefKakugen
-            insertItem.charaID = Const.CHARACTER1_ID
+            let insertItem = T_RefKakugen.mr_createEntity()! as T_RefKakugen
+            insertItem.charaID = Const.CHARACTER1_ID as NSNumber!
             insertItem.kakugenID = kakugenList[Int(randInt)].kakugenID
-            insertItem.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+            insertItem.managedObjectContext!.mr_saveToPersistentStoreAndWait()
             
         }
         
         //取得した格言コードをセッションに格納
-        ud.setInteger(Int(kakugenList[Int(randInt)].kakugenID), forKey: "KAKUGEN_ID")
+        ud.set(Int(kakugenList[Int(randInt)].kakugenID), forKey: "KAKUGEN_ID")
         ud.synchronize()
 
         // 格言の返却
@@ -146,7 +166,7 @@ class KakugenViewController: UIViewController {
     
     /** 全オブジェクトの制約設定 **/
     func objConstraints() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function, #line)
+        print(Date().description, NSStringFromClass(self.classForCoder), #function, #line)
         
         imgViewKakugen.translatesAutoresizingMaskIntoConstraints = false
         lblKakugen.translatesAutoresizingMaskIntoConstraints = false
@@ -157,10 +177,10 @@ class KakugenViewController: UIViewController {
             // x座標
             NSLayoutConstraint(
                 item: self.imgViewKakugen,
-                attribute:  NSLayoutAttribute.Right,
-                relatedBy: .Equal,
+                attribute:  NSLayoutAttribute.right,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute:  NSLayoutAttribute.Right,
+                attribute:  NSLayoutAttribute.right,
                 multiplier: 1.0,
                 constant: 0
             ),
@@ -168,10 +188,10 @@ class KakugenViewController: UIViewController {
             // y座標
             NSLayoutConstraint(
                 item: self.imgViewKakugen,
-                attribute: NSLayoutAttribute.Bottom,
-                relatedBy: .Equal,
+                attribute: NSLayoutAttribute.bottom,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute:  NSLayoutAttribute.Bottom,
+                attribute:  NSLayoutAttribute.bottom,
                 multiplier: 1.0,
                 constant: 0
             ),
@@ -179,10 +199,10 @@ class KakugenViewController: UIViewController {
             // 横幅
             NSLayoutConstraint(
                 item: self.imgViewKakugen,
-                attribute: .Width,
-                relatedBy: .Equal,
+                attribute: .width,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute: .Width,
+                attribute: .width,
                 multiplier: 1.0,
                 constant: 0
             ),
@@ -190,10 +210,10 @@ class KakugenViewController: UIViewController {
             // 縦幅
             NSLayoutConstraint(
                 item: self.imgViewKakugen,
-                attribute: .Height,
-                relatedBy: .Equal,
+                attribute: .height,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute: .Height,
+                attribute: .height,
                 multiplier: 1.0,
                 constant: 0
             )]
@@ -205,10 +225,10 @@ class KakugenViewController: UIViewController {
             // x座標
             NSLayoutConstraint(
                 item: self.lblKakugen,
-                attribute:  NSLayoutAttribute.Left,
-                relatedBy: .Equal,
+                attribute:  NSLayoutAttribute.left,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute:  NSLayoutAttribute.Right,
+                attribute:  NSLayoutAttribute.right,
                 multiplier: 1.0 / 20.0,
                 constant: 0
             ),
@@ -216,10 +236,10 @@ class KakugenViewController: UIViewController {
             // y座標
             NSLayoutConstraint(
                 item: self.lblKakugen,
-                attribute: NSLayoutAttribute.Top,
-                relatedBy: .Equal,
+                attribute: NSLayoutAttribute.top,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute: NSLayoutAttribute.Bottom,
+                attribute: NSLayoutAttribute.bottom,
                 multiplier: 1.0 / 6.0,
                 constant: 0
             )]

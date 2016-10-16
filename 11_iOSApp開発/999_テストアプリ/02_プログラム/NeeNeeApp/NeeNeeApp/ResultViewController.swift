@@ -14,14 +14,14 @@ import Foundation
 class ResultViewController: UIViewController {
     
     // 背景
-    private var imgResultView: UIImageView!
+    fileprivate var imgResultView: UIImageView!
 
     //画面オブジェクト
-    private var lblResult: UILabel! //ラベル
-    private var btnOK: UIButton! //OKボタン
+    fileprivate var lblResult: UILabel! //ラベル
+    fileprivate var btnOK: UIButton! //OKボタン
     
     // view アンロード開始時
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         
         // SEを再生する.
         Utility.seSoundPlay(Const.SE_NO_PATH)
@@ -29,7 +29,7 @@ class ResultViewController: UIViewController {
     
     // view ロード完了時
     override func viewDidLoad() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function,#line)
+        print(Date().description, NSStringFromClass(self.classForCoder), #function,#line)
         
         super.viewDidLoad()
         
@@ -42,7 +42,7 @@ class ResultViewController: UIViewController {
         lblResult = UILabel()
         lblResult.numberOfLines = 0
         lblResult.text = self.getActionResult()
-        self.lblResult.font = UIFont.systemFontOfSize(Utility.getMojiSize(Const.SIZEKBN_LARGE))
+        self.lblResult.font = UIFont.systemFont(ofSize: Utility.getMojiSize(Const.SIZEKBN_LARGE))
         
         self.view.addSubview(lblResult)
         
@@ -53,7 +53,7 @@ class ResultViewController: UIViewController {
     
     //メモリ消費が多くなった時に動くイベント
     override func didReceiveMemoryWarning() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function,#line)
+        print(Date().description, NSStringFromClass(self.classForCoder), #function,#line)
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -62,7 +62,7 @@ class ResultViewController: UIViewController {
     //行動結果を計算する
     //結果をテーブルへ反映する
     func getActionResult() -> String {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function,#line)
+        print(Date().description, NSStringFromClass(self.classForCoder), #function,#line)
         
         //返却データ
         var strResult = ""
@@ -77,7 +77,7 @@ class ResultViewController: UIViewController {
         
         //行動結果マスタ取得
         let resFilter: NSPredicate = NSPredicate(format: "itemID = %@", tActionR[0].itemID)
-        let mActionR :[M_ActionResult] = M_ActionResult.MR_findAllSortedBy("resultID", ascending: true, withPredicate: resFilter) as! [M_ActionResult];
+        let mActionR :[M_ActionResult] = M_ActionResult.mr_findAllSorted(by: "resultID", ascending: true, with: resFilter) as! [M_ActionResult];
         
         //1~100の値をランダムで取得
         let randInt = Int32(arc4random_uniform(UInt32(100))) + 1;
@@ -88,14 +88,14 @@ class ResultViewController: UIViewController {
         //行動結果のパターン分ループ処理
         for i in 0 ..< mActionR.count {
             
-            maxPer = minPer + mActionR[i].resPer.intValue - 1
+            maxPer = minPer + mActionR[i].resPer.int32Value - 1
             
             if minPer <= randInt && randInt <= maxPer {
                 resultNo = i
                 break
             }
             
-            minPer = minPer + mActionR[i].resPer.intValue
+            minPer = minPer + mActionR[i].resPer.int32Value
         }
 
         //使用したアイテムを取得
@@ -125,7 +125,7 @@ class ResultViewController: UIViewController {
             //完了フラグを”処理済”に更新する.
             let updateActionR :T_ActionResult = tActionR[0]
             updateActionR.finishFlg = 1
-            updateActionR.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+            updateActionR.managedObjectContext!.mr_saveToPersistentStoreAndWait()
             
         } else {
             
@@ -138,12 +138,12 @@ class ResultViewController: UIViewController {
 
     //結果を画面に表示する
     func showResult() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function,#line)
+        print(Date().description, NSStringFromClass(self.classForCoder), #function,#line)
     }
     
     /** 全オブジェクトの制約設定 **/
     func objConstraints() {
-        print(NSDate().description, NSStringFromClass(self.classForCoder), #function,#line)
+        print(Date().description, NSStringFromClass(self.classForCoder), #function,#line)
         
         imgResultView.translatesAutoresizingMaskIntoConstraints = false
         lblResult.translatesAutoresizingMaskIntoConstraints = false
@@ -154,10 +154,10 @@ class ResultViewController: UIViewController {
             // x座標
             NSLayoutConstraint(
                 item: self.imgResultView,
-                attribute:  NSLayoutAttribute.Right,
-                relatedBy: .Equal,
+                attribute:  NSLayoutAttribute.right,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute:  NSLayoutAttribute.Right,
+                attribute:  NSLayoutAttribute.right,
                 multiplier: 1.0,
                 constant: 0
             ),
@@ -165,10 +165,10 @@ class ResultViewController: UIViewController {
             // y座標
             NSLayoutConstraint(
                 item: self.imgResultView,
-                attribute: NSLayoutAttribute.Bottom,
-                relatedBy: .Equal,
+                attribute: NSLayoutAttribute.bottom,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute:  NSLayoutAttribute.Bottom,
+                attribute:  NSLayoutAttribute.bottom,
                 multiplier: 1.0,
                 constant: 0
             ),
@@ -176,10 +176,10 @@ class ResultViewController: UIViewController {
             // 横幅
             NSLayoutConstraint(
                 item: self.imgResultView,
-                attribute: .Width,
-                relatedBy: .Equal,
+                attribute: .width,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute: .Width,
+                attribute: .width,
                 multiplier: 1.0,
                 constant: 0
             ),
@@ -187,10 +187,10 @@ class ResultViewController: UIViewController {
             // 縦幅
             NSLayoutConstraint(
                 item: self.imgResultView,
-                attribute: .Height,
-                relatedBy: .Equal,
+                attribute: .height,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute: .Height,
+                attribute: .height,
                 multiplier: 1.0,
                 constant: 0
             )]
@@ -202,10 +202,10 @@ class ResultViewController: UIViewController {
             // x座標
             NSLayoutConstraint(
                 item: self.lblResult,
-                attribute:  NSLayoutAttribute.Left,
-                relatedBy: .Equal,
+                attribute:  NSLayoutAttribute.left,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute:  NSLayoutAttribute.Right,
+                attribute:  NSLayoutAttribute.right,
                 multiplier: 1.0 / 9.0,
                 constant: 0
             ),
@@ -213,10 +213,10 @@ class ResultViewController: UIViewController {
             // y座標
             NSLayoutConstraint(
                 item: self.lblResult,
-                attribute: NSLayoutAttribute.Top,
-                relatedBy: .Equal,
+                attribute: NSLayoutAttribute.top,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute: NSLayoutAttribute.Bottom,
+                attribute: NSLayoutAttribute.bottom,
                 multiplier: 1.0 / 6.0,
                 constant: 0
             )]

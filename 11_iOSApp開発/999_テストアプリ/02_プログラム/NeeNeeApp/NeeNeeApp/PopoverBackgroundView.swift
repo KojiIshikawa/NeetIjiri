@@ -23,15 +23,15 @@ class PopoverBackgroundView : UIPopoverBackgroundView {
     static let ARBASE : CGFloat = 20
     static let ARHEIGHT : CGFloat = 20
     
-    override class func wantsDefaultContentAppearance() -> Bool {
+    override class var wantsDefaultContentAppearance : Bool {
         return true // try false to see if you can find a difference...
     }
     
     override init(frame:CGRect) {
         self.arrOff = 0
-        self.arrDir = .Any
+        self.arrDir = .any
         super.init(frame:frame)
-        self.opaque = false
+        self.isOpaque = false
     }
     
     
@@ -41,7 +41,7 @@ class PopoverBackgroundView : UIPopoverBackgroundView {
     
     
     
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         // WARNING: this code is sort of a cheat:
         // I should be checking self.arrowDirection and changing what I do depending on that...
         // but instead I am just *assuming* that the arrowDirection is UIPopoverArrowDirectionUp
