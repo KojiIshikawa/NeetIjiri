@@ -182,7 +182,7 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
             presentationController.sourceView = sender as! UIButton
             presentationController.sourceRect = sender.bounds
             presentationController.delegate = self
-            presentationController.popoverBackgroundViewClass = PopoverBackgroundView.classForCoder()!
+            //presentationController.popoverBackgroundViewClass = PopoverBackgroundView.classForCoder()
         }
         popoverView.title = identifier
         self.present(popoverView, animated: true, completion: nil)

@@ -555,7 +555,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             presentationController.sourceView = sender as! UITableView
             presentationController.sourceRect = sender.bounds
             presentationController.delegate = self
-            presentationController.popoverBackgroundViewClass = PopoverBackgroundView.classForCoder()
+            //presentationController.popoverBackgroundViewClass = PopoverBackgroundView.classForCoder()
         }
         popoverView.title = identifier
         self.present(popoverView, animated: true, completion:nil)

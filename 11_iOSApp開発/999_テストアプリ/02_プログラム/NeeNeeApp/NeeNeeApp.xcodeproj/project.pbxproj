@@ -205,9 +205,6 @@
 		F44176DD1CA19AF400042C24 /* 02_02_01.png in Resources */ = {isa = PBXBuildFile; fileRef = F44176DC1CA19AF400042C24 /* 02_02_01.png */; };
 		F442D34B1CA2C36F0071F50A /* 03_03_02.png in Resources */ = {isa = PBXBuildFile; fileRef = F442D3491CA2C36F0071F50A /* 03_03_02.png */; };
 		F442D34C1CA2C36F0071F50A /* 03_04_02.png in Resources */ = {isa = PBXBuildFile; fileRef = F442D34A1CA2C36F0071F50A /* 03_04_02.png */; };
-		F444CC641CDF7F0D0030FECF /* town ピコピコ3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F444CC611CDF7F0D0030FECF /* town ピコピコ3.mp3 */; };
-		F444CC651CDF7F0D0030FECF /* 暇で忙しい　キラキラver.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F444CC621CDF7F0D0030FECF /* 暇で忙しい　キラキラver.mp3 */; };
-		F444CC661CDF7F0D0030FECF /* 湯船のアヒルちゃん.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F444CC631CDF7F0D0030FECF /* 湯船のアヒルちゃん.mp3 */; };
 		F44C0DE91C43EFF400B0CB27 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F44C0DE81C43EFF400B0CB27 /* Main.storyboard */; };
 		F45FEFD71CBFB42400BA1712 /* 03_30_02.png in Resources */ = {isa = PBXBuildFile; fileRef = F45FEFD11CBFB42400BA1712 /* 03_30_02.png */; };
 		F45FEFD81CBFB42400BA1712 /* 03_31_02.png in Resources */ = {isa = PBXBuildFile; fileRef = F45FEFD21CBFB42400BA1712 /* 03_31_02.png */; };
@@ -215,10 +212,6 @@
 		F45FEFDA1CBFB42400BA1712 /* 06_12_01.png in Resources */ = {isa = PBXBuildFile; fileRef = F45FEFD41CBFB42400BA1712 /* 06_12_01.png */; };
 		F45FEFDB1CBFB42400BA1712 /* 06_13_01.png in Resources */ = {isa = PBXBuildFile; fileRef = F45FEFD51CBFB42400BA1712 /* 06_13_01.png */; };
 		F45FEFDC1CBFB42400BA1712 /* 06_14_01.png in Resources */ = {isa = PBXBuildFile; fileRef = F45FEFD61CBFB42400BA1712 /* 06_14_01.png */; };
-		F45FEFE21CBFB43500BA1712 /* disco1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F45FEFDD1CBFB43500BA1712 /* disco1.mp3 */; };
-		F45FEFE31CBFB43500BA1712 /* 暇で忙しい2nd.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F45FEFDE1CBFB43500BA1712 /* 暇で忙しい2nd.mp3 */; };
-		F45FEFE41CBFB43500BA1712 /* 小さな幸せ　ピコピコ版.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F45FEFDF1CBFB43500BA1712 /* 小さな幸せ　ピコピコ版.mp3 */; };
-		F45FEFE51CBFB43500BA1712 /* 小さな幸せ.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F45FEFE01CBFB43500BA1712 /* 小さな幸せ.mp3 */; };
 		F483300E1C2F040D00234B18 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F483300D1C2F040D00234B18 /* AppDelegate.swift */; };
 		F48330101C2F040D00234B18 /* NeetMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F483300F1C2F040D00234B18 /* NeetMainViewController.swift */; };
 		F48330161C2F040D00234B18 /* NeeNeeApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F48330141C2F040D00234B18 /* NeeNeeApp.xcdatamodeld */; };
@@ -227,33 +220,6 @@
 		F48330261C2F040D00234B18 /* NeeNeeAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48330251C2F040D00234B18 /* NeeNeeAppTests.swift */; };
 		F48330311C2F040D00234B18 /* NeeNeeAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48330301C2F040D00234B18 /* NeeNeeAppUITests.swift */; };
 		F4EE57261C6A249A0021E876 /* OpeningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EE57251C6A249A0021E876 /* OpeningViewController.swift */; };
-		F4EE57401C6A28C40021E876 /* me1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F4EE57271C6A28C40021E876 /* me1.mp3 */; };
-		F4EE57411C6A28C40021E876 /* me2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F4EE57281C6A28C40021E876 /* me2.mp3 */; };
-		F4EE57421C6A28C40021E876 /* se1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F4EE57291C6A28C40021E876 /* se1.mp3 */; };
-		F4EE57431C6A28C40021E876 /* se2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F4EE572A1C6A28C40021E876 /* se2.mp3 */; };
-		F4EE57441C6A28C40021E876 /* se3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F4EE572B1C6A28C40021E876 /* se3.mp3 */; };
-		F4EE57451C6A28C40021E876 /* se4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F4EE572C1C6A28C40021E876 /* se4.mp3 */; };
-		F4EE57461C6A28C40021E876 /* se5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F4EE572D1C6A28C40021E876 /* se5.mp3 */; };
-		F4EE57471C6A28C40021E876 /* se6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F4EE572E1C6A28C40021E876 /* se6.mp3 */; };
-		F4EE57481C6A28C40021E876 /* se7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F4EE572F1C6A28C40021E876 /* se7.mp3 */; };
-		F4EE57491C6A28C40021E876 /* se8.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F4EE57301C6A28C40021E876 /* se8.mp3 */; };
-		F4EE574A1C6A28C40021E876 /* se9.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F4EE57311C6A28C40021E876 /* se9.mp3 */; };
-		F4EE574B1C6A28C40021E876 /* se10.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F4EE57321C6A28C40021E876 /* se10.mp3 */; };
-		F4EE574C1C6A28C40021E876 /* se11.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F4EE57331C6A28C40021E876 /* se11.mp3 */; };
-		F4EE574D1C6A28C40021E876 /* se12.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F4EE57341C6A28C40021E876 /* se12.mp3 */; };
-		F4EE574E1C6A28C40021E876 /* se13.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F4EE57351C6A28C40021E876 /* se13.mp3 */; };
-		F4EE574F1C6A28C40021E876 /* start data config.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F4EE57361C6A28C40021E876 /* start data config.mp3 */; };
-		F4EE57501C6A28C40021E876 /* さあゴロゴロしよう.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F4EE57371C6A28C40021E876 /* さあゴロゴロしよう.mp3 */; };
-		F4EE57511C6A28C40021E876 /* さすがっす先輩.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F4EE57381C6A28C40021E876 /* さすがっす先輩.mp3 */; };
-		F4EE57521C6A28C40021E876 /* ついてる日.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F4EE57391C6A28C40021E876 /* ついてる日.mp3 */; };
-		F4EE57531C6A28C40021E876 /* トランス状態.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F4EE573A1C6A28C40021E876 /* トランス状態.mp3 */; };
-		F4EE57541C6A28C40021E876 /* 暇で忙しい_PianoVer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F4EE573B1C6A28C40021E876 /* 暇で忙しい_PianoVer.mp3 */; };
-		F4EE57551C6A28C40021E876 /* 暇で忙しい_少し遅めVer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F4EE573C1C6A28C40021E876 /* 暇で忙しい_少し遅めVer.mp3 */; };
-		F4EE57561C6A28C40021E876 /* 暇で忙しい.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F4EE573D1C6A28C40021E876 /* 暇で忙しい.mp3 */; };
-		F4EE57571C6A28C40021E876 /* 外を歩こう.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F4EE573E1C6A28C40021E876 /* 外を歩こう.mp3 */; };
-		F4EE57581C6A28C40021E876 /* 落ち着くところ.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F4EE573F1C6A28C40021E876 /* 落ち着くところ.mp3 */; };
-		F4EFE5931CC38698001040DF /* ピコピコの世界.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F4EFE5911CC38698001040DF /* ピコピコの世界.mp3 */; };
-		F4EFE5941CC38698001040DF /* 未知の場所.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F4EFE5921CC38698001040DF /* 未知の場所.mp3 */; };
 		F4EFE5961CC386B0001040DF /* 01_13_01.png in Resources */ = {isa = PBXBuildFile; fileRef = F4EFE5951CC386B0001040DF /* 01_13_01.png */; };
 		F4F135421C68E32900130069 /* 02_05_02.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F1353E1C68E32900130069 /* 02_05_02.png */; };
 		F4F135431C68E32900130069 /* 02_05_03.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F1353F1C68E32900130069 /* 02_05_03.png */; };
@@ -264,7 +230,6 @@
 		F4F1F6FD1D0BAA61001F18AA /* 04_01_01_02_03.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F1F6F81D0BAA61001F18AA /* 04_01_01_02_03.png */; };
 		F4F1F6FE1D0BAA61001F18AA /* 04_01_01_03_01.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F1F6F91D0BAA61001F18AA /* 04_01_01_03_01.png */; };
 		F4F1F6FF1D0BAA61001F18AA /* 04_01_01_03_02.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F1F6FA1D0BAA61001F18AA /* 04_01_01_03_02.png */; };
-		F4F5B2361CECB0B900C9E588 /* 外を歩こうver2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F4F5B2351CECB0B900C9E588 /* 外を歩こうver2.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -486,9 +451,6 @@
 		F44176DC1CA19AF400042C24 /* 02_02_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 02_02_01.png; sourceTree = "<group>"; };
 		F442D3491CA2C36F0071F50A /* 03_03_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 03_03_02.png; sourceTree = "<group>"; };
 		F442D34A1CA2C36F0071F50A /* 03_04_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 03_04_02.png; sourceTree = "<group>"; };
-		F444CC611CDF7F0D0030FECF /* town ピコピコ3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "town ピコピコ3.mp3"; sourceTree = "<group>"; };
-		F444CC621CDF7F0D0030FECF /* 暇で忙しい　キラキラver.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "暇で忙しい　キラキラver.mp3"; sourceTree = "<group>"; };
-		F444CC631CDF7F0D0030FECF /* 湯船のアヒルちゃん.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "湯船のアヒルちゃん.mp3"; sourceTree = "<group>"; };
 		F44C0DE81C43EFF400B0CB27 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F45FEFD11CBFB42400BA1712 /* 03_30_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 03_30_02.png; sourceTree = "<group>"; };
 		F45FEFD21CBFB42400BA1712 /* 03_31_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 03_31_02.png; sourceTree = "<group>"; };
@@ -496,10 +458,6 @@
 		F45FEFD41CBFB42400BA1712 /* 06_12_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 06_12_01.png; sourceTree = "<group>"; };
 		F45FEFD51CBFB42400BA1712 /* 06_13_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 06_13_01.png; sourceTree = "<group>"; };
 		F45FEFD61CBFB42400BA1712 /* 06_14_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 06_14_01.png; sourceTree = "<group>"; };
-		F45FEFDD1CBFB43500BA1712 /* disco1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = disco1.mp3; sourceTree = "<group>"; };
-		F45FEFDE1CBFB43500BA1712 /* 暇で忙しい2nd.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "暇で忙しい2nd.mp3"; sourceTree = "<group>"; };
-		F45FEFDF1CBFB43500BA1712 /* 小さな幸せ　ピコピコ版.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "小さな幸せ　ピコピコ版.mp3"; sourceTree = "<group>"; };
-		F45FEFE01CBFB43500BA1712 /* 小さな幸せ.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "小さな幸せ.mp3"; sourceTree = "<group>"; };
 		F483300A1C2F040D00234B18 /* NeeNeeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NeeNeeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F483300D1C2F040D00234B18 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F483300F1C2F040D00234B18 /* NeetMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeetMainViewController.swift; sourceTree = "<group>"; };
@@ -513,35 +471,9 @@
 		F483302C1C2F040D00234B18 /* NeeNeeAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NeeNeeAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F48330301C2F040D00234B18 /* NeeNeeAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeeNeeAppUITests.swift; sourceTree = "<group>"; };
 		F48330321C2F040D00234B18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F4A5A0571DB3793600938360 /* NeeNeeApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NeeNeeApp.entitlements; sourceTree = "<group>"; };
 		F4EB1D06214EC164462ADCDD /* libPods-NeeNeeApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NeeNeeApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4EE57251C6A249A0021E876 /* OpeningViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpeningViewController.swift; sourceTree = "<group>"; };
-		F4EE57271C6A28C40021E876 /* me1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = me1.mp3; sourceTree = "<group>"; };
-		F4EE57281C6A28C40021E876 /* me2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = me2.mp3; sourceTree = "<group>"; };
-		F4EE57291C6A28C40021E876 /* se1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = se1.mp3; sourceTree = "<group>"; };
-		F4EE572A1C6A28C40021E876 /* se2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = se2.mp3; sourceTree = "<group>"; };
-		F4EE572B1C6A28C40021E876 /* se3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = se3.mp3; sourceTree = "<group>"; };
-		F4EE572C1C6A28C40021E876 /* se4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = se4.mp3; sourceTree = "<group>"; };
-		F4EE572D1C6A28C40021E876 /* se5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = se5.mp3; sourceTree = "<group>"; };
-		F4EE572E1C6A28C40021E876 /* se6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = se6.mp3; sourceTree = "<group>"; };
-		F4EE572F1C6A28C40021E876 /* se7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = se7.mp3; sourceTree = "<group>"; };
-		F4EE57301C6A28C40021E876 /* se8.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = se8.mp3; sourceTree = "<group>"; };
-		F4EE57311C6A28C40021E876 /* se9.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = se9.mp3; sourceTree = "<group>"; };
-		F4EE57321C6A28C40021E876 /* se10.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = se10.mp3; sourceTree = "<group>"; };
-		F4EE57331C6A28C40021E876 /* se11.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = se11.mp3; sourceTree = "<group>"; };
-		F4EE57341C6A28C40021E876 /* se12.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = se12.mp3; sourceTree = "<group>"; };
-		F4EE57351C6A28C40021E876 /* se13.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = se13.mp3; sourceTree = "<group>"; };
-		F4EE57361C6A28C40021E876 /* start data config.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "start data config.mp3"; sourceTree = "<group>"; };
-		F4EE57371C6A28C40021E876 /* さあゴロゴロしよう.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "さあゴロゴロしよう.mp3"; sourceTree = "<group>"; };
-		F4EE57381C6A28C40021E876 /* さすがっす先輩.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "さすがっす先輩.mp3"; sourceTree = "<group>"; };
-		F4EE57391C6A28C40021E876 /* ついてる日.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "ついてる日.mp3"; sourceTree = "<group>"; };
-		F4EE573A1C6A28C40021E876 /* トランス状態.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "トランス状態.mp3"; sourceTree = "<group>"; };
-		F4EE573B1C6A28C40021E876 /* 暇で忙しい_PianoVer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "暇で忙しい_PianoVer.mp3"; sourceTree = "<group>"; };
-		F4EE573C1C6A28C40021E876 /* 暇で忙しい_少し遅めVer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "暇で忙しい_少し遅めVer.mp3"; sourceTree = "<group>"; };
-		F4EE573D1C6A28C40021E876 /* 暇で忙しい.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "暇で忙しい.mp3"; sourceTree = "<group>"; };
-		F4EE573E1C6A28C40021E876 /* 外を歩こう.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "外を歩こう.mp3"; sourceTree = "<group>"; };
-		F4EE573F1C6A28C40021E876 /* 落ち着くところ.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "落ち着くところ.mp3"; sourceTree = "<group>"; };
-		F4EFE5911CC38698001040DF /* ピコピコの世界.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "ピコピコの世界.mp3"; sourceTree = "<group>"; };
-		F4EFE5921CC38698001040DF /* 未知の場所.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "未知の場所.mp3"; sourceTree = "<group>"; };
 		F4EFE5951CC386B0001040DF /* 01_13_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 01_13_01.png; sourceTree = "<group>"; };
 		F4F1353E1C68E32900130069 /* 02_05_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 02_05_02.png; sourceTree = "<group>"; };
 		F4F1353F1C68E32900130069 /* 02_05_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 02_05_03.png; sourceTree = "<group>"; };
@@ -552,7 +484,6 @@
 		F4F1F6F81D0BAA61001F18AA /* 04_01_01_02_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 04_01_01_02_03.png; sourceTree = "<group>"; };
 		F4F1F6F91D0BAA61001F18AA /* 04_01_01_03_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 04_01_01_03_01.png; sourceTree = "<group>"; };
 		F4F1F6FA1D0BAA61001F18AA /* 04_01_01_03_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 04_01_01_03_02.png; sourceTree = "<group>"; };
-		F4F5B2351CECB0B900C9E588 /* 外を歩こうver2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "外を歩こうver2.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -758,41 +689,6 @@
 				F408D9461DB281C600C6C9ED /* 湯船のアヒルちゃん.caf */,
 				F408D9471DB281C600C6C9ED /* 未知の場所.caf */,
 				F408D9481DB281C600C6C9ED /* 落ち着くところ.caf */,
-				F4F5B2351CECB0B900C9E588 /* 外を歩こうver2.mp3 */,
-				F444CC611CDF7F0D0030FECF /* town ピコピコ3.mp3 */,
-				F444CC621CDF7F0D0030FECF /* 暇で忙しい　キラキラver.mp3 */,
-				F444CC631CDF7F0D0030FECF /* 湯船のアヒルちゃん.mp3 */,
-				F4EFE5911CC38698001040DF /* ピコピコの世界.mp3 */,
-				F4EFE5921CC38698001040DF /* 未知の場所.mp3 */,
-				F45FEFDD1CBFB43500BA1712 /* disco1.mp3 */,
-				F45FEFDE1CBFB43500BA1712 /* 暇で忙しい2nd.mp3 */,
-				F45FEFDF1CBFB43500BA1712 /* 小さな幸せ　ピコピコ版.mp3 */,
-				F45FEFE01CBFB43500BA1712 /* 小さな幸せ.mp3 */,
-				F4EE57271C6A28C40021E876 /* me1.mp3 */,
-				F4EE57281C6A28C40021E876 /* me2.mp3 */,
-				F4EE57291C6A28C40021E876 /* se1.mp3 */,
-				F4EE572A1C6A28C40021E876 /* se2.mp3 */,
-				F4EE572B1C6A28C40021E876 /* se3.mp3 */,
-				F4EE572C1C6A28C40021E876 /* se4.mp3 */,
-				F4EE572D1C6A28C40021E876 /* se5.mp3 */,
-				F4EE572E1C6A28C40021E876 /* se6.mp3 */,
-				F4EE572F1C6A28C40021E876 /* se7.mp3 */,
-				F4EE57301C6A28C40021E876 /* se8.mp3 */,
-				F4EE57311C6A28C40021E876 /* se9.mp3 */,
-				F4EE57321C6A28C40021E876 /* se10.mp3 */,
-				F4EE57331C6A28C40021E876 /* se11.mp3 */,
-				F4EE57341C6A28C40021E876 /* se12.mp3 */,
-				F4EE57351C6A28C40021E876 /* se13.mp3 */,
-				F4EE57361C6A28C40021E876 /* start data config.mp3 */,
-				F4EE57371C6A28C40021E876 /* さあゴロゴロしよう.mp3 */,
-				F4EE57381C6A28C40021E876 /* さすがっす先輩.mp3 */,
-				F4EE57391C6A28C40021E876 /* ついてる日.mp3 */,
-				F4EE573A1C6A28C40021E876 /* トランス状態.mp3 */,
-				F4EE573B1C6A28C40021E876 /* 暇で忙しい_PianoVer.mp3 */,
-				F4EE573C1C6A28C40021E876 /* 暇で忙しい_少し遅めVer.mp3 */,
-				F4EE573D1C6A28C40021E876 /* 暇で忙しい.mp3 */,
-				F4EE573E1C6A28C40021E876 /* 外を歩こう.mp3 */,
-				F4EE573F1C6A28C40021E876 /* 落ち着くところ.mp3 */,
 			);
 			path = Sound;
 			sourceTree = "<group>";
@@ -935,6 +831,7 @@
 		F483300C1C2F040D00234B18 /* NeeNeeApp */ = {
 			isa = PBXGroup;
 			children = (
+				F4A5A0571DB3793600938360 /* NeeNeeApp.entitlements */,
 				AEFCBC591C68DD4B000F5751 /* Model */,
 				AEFCBC481C68DC97000F5751 /* Sound */,
 				AEDE9A7A1C66433700841902 /* Image */,
@@ -1097,6 +994,11 @@
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = 7AM5G3XKB9;
 						LastSwiftMigration = 0800;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 0;
+							};
+						};
 					};
 					F48330201C2F040D00234B18 = {
 						CreatedOnToolsVersion = 7.2;
@@ -1145,20 +1047,17 @@
 				F45FEFDB1CBFB42400BA1712 /* 06_13_01.png in Resources */,
 				F408D96A1DB281C600C6C9ED /* 未知の場所.caf in Resources */,
 				F41FD6351C4D3B640086A607 /* LINEActivityIcon.png in Resources */,
-				F4EE57491C6A28C40021E876 /* se8.mp3 in Resources */,
 				AEDE9B1C1C66433700841902 /* 07_02_02.png in Resources */,
 				AEDE9AF01C66433700841902 /* 04_01_01_01_03.PNG in Resources */,
 				AEDE9AF81C66433700841902 /* 04_01_01_01_11.PNG in Resources */,
 				F44176D91CA197DA00042C24 /* 03_30_01.png in Resources */,
 				F44176D61CA197DA00042C24 /* 03_02_02.png in Resources */,
-				F4EE574D1C6A28C40021E876 /* se12.mp3 in Resources */,
 				AEDE9AF31C66433700841902 /* 04_01_01_01_06.PNG in Resources */,
 				F45FEFD71CBFB42400BA1712 /* 03_30_02.png in Resources */,
 				F408D95A1DB281C600C6C9ED /* town ピコピコ3.caf in Resources */,
 				AEDE9AD11C66433700841902 /* 01_03_02.png in Resources */,
 				F408D9531DB281C600C6C9ED /* se8.caf in Resources */,
 				AEDE9AF91C66433700841902 /* 04_01_01_01_12.PNG in Resources */,
-				F4EE574E1C6A28C40021E876 /* se13.mp3 in Resources */,
 				F408D94E1DB281C600C6C9ED /* se3.caf in Resources */,
 				AEDE9AEE1C66433700841902 /* 04_01_01_01_01.PNG in Resources */,
 				F4F1F6FD1D0BAA61001F18AA /* 04_01_01_02_03.png in Resources */,
@@ -1169,15 +1068,11 @@
 				AEDE9AD31C66433700841902 /* 01_04_02.png in Resources */,
 				AEDE9AD01C66433700841902 /* 01_03_01.png in Resources */,
 				AEDE9AE91C66433700841902 /* 03_08_01.png in Resources */,
-				F45FEFE21CBFB43500BA1712 /* disco1.mp3 in Resources */,
 				F408D95D1DB281C600C6C9ED /* ついてる日.caf in Resources */,
-				F4EE57521C6A28C40021E876 /* ついてる日.mp3 in Resources */,
 				F44176D21CA197DA00042C24 /* 01_12_01.png in Resources */,
-				F45FEFE31CBFB43500BA1712 /* 暇で忙しい2nd.mp3 in Resources */,
 				F4F1F6FC1D0BAA61001F18AA /* 04_01_01_02_02.png in Resources */,
 				AEDE9B161C66433700841902 /* 06_06_01.png in Resources */,
 				AEDE9AF41C66433700841902 /* 04_01_01_01_07.PNG in Resources */,
-				F4EE57441C6A28C40021E876 /* se3.mp3 in Resources */,
 				F408D9571DB281C600C6C9ED /* se12.caf in Resources */,
 				AEDE9B181C66433700841902 /* 06_08_01.png in Resources */,
 				AEDE9B111C66433700841902 /* 06_01_01.png in Resources */,
@@ -1187,48 +1082,34 @@
 				AEDE9AE51C66433700841902 /* 03_04_01.png in Resources */,
 				F442D34C1CA2C36F0071F50A /* 03_04_02.png in Resources */,
 				AEDE9AD91C66433700841902 /* 01_08_01.png in Resources */,
-				F4EFE5931CC38698001040DF /* ピコピコの世界.mp3 in Resources */,
-				F4EE57461C6A28C40021E876 /* se5.mp3 in Resources */,
 				F45FEFD81CBFB42400BA1712 /* 03_31_02.png in Resources */,
 				F44176DB1CA197DA00042C24 /* 08_03_01.png in Resources */,
 				AEDE9AE31C66433700841902 /* 03_02_01.png in Resources */,
 				F408D96B1DB281C600C6C9ED /* 落ち着くところ.caf in Resources */,
 				AEDE9AD21C66433700841902 /* 01_04_01.png in Resources */,
 				F41FD6371C4D3B640086A607 /* LINEActivityIcon@2x~ipad.png in Resources */,
-				F444CC641CDF7F0D0030FECF /* town ピコピコ3.mp3 in Resources */,
 				AEDE9AE21C66433700841902 /* 03_01_01.png in Resources */,
 				AEDE9AE41C66433700841902 /* 03_03_01.png in Resources */,
 				F408D9501DB281C600C6C9ED /* se5.caf in Resources */,
-				F4EE574F1C6A28C40021E876 /* start data config.mp3 in Resources */,
 				F408D9651DB281C600C6C9ED /* 外を歩こう.caf in Resources */,
 				F408D9521DB281C600C6C9ED /* se7.caf in Resources */,
-				F4EE57471C6A28C40021E876 /* se6.mp3 in Resources */,
 				F4F135431C68E32900130069 /* 02_05_03.png in Resources */,
 				AEDE9ADA1C66433700841902 /* 01_09_01.png in Resources */,
 				AEDE9AF71C66433700841902 /* 04_01_01_01_10.PNG in Resources */,
-				F4EE57401C6A28C40021E876 /* me1.mp3 in Resources */,
 				F408D9621DB281C600C6C9ED /* 暇で忙しい_少し遅めVer.caf in Resources */,
 				F408D9491DB281C600C6C9ED /* disco1.caf in Resources */,
-				F45FEFE41CBFB43500BA1712 /* 小さな幸せ　ピコピコ版.mp3 in Resources */,
-				F444CC651CDF7F0D0030FECF /* 暇で忙しい　キラキラver.mp3 in Resources */,
 				AEDE9AF11C66433700841902 /* 04_01_01_01_04.PNG in Resources */,
 				F4EFE5961CC386B0001040DF /* 01_13_01.png in Resources */,
 				F4F135481C68E39E00130069 /* 02_05_01.png in Resources */,
 				F45FEFDA1CBFB42400BA1712 /* 06_12_01.png in Resources */,
 				F483301B1C2F040D00234B18 /* LaunchScreen.storyboard in Resources */,
 				F408D9631DB281C600C6C9ED /* 暇で忙しい.caf in Resources */,
-				F4EE57421C6A28C40021E876 /* se1.mp3 in Resources */,
-				F45FEFE51CBFB43500BA1712 /* 小さな幸せ.mp3 in Resources */,
-				F4EE57541C6A28C40021E876 /* 暇で忙しい_PianoVer.mp3 in Resources */,
 				F408D95F1DB281C600C6C9ED /* ピコピコの世界.caf in Resources */,
 				F442D34B1CA2C36F0071F50A /* 03_03_02.png in Resources */,
-				F4EE57551C6A28C40021E876 /* 暇で忙しい_少し遅めVer.mp3 in Resources */,
-				F4EE574C1C6A28C40021E876 /* se11.mp3 in Resources */,
 				AEDE9AD41C66433700841902 /* 01_05_01.png in Resources */,
 				F408D94C1DB281C600C6C9ED /* se1.caf in Resources */,
 				AEDE9AF51C66433700841902 /* 04_01_01_01_08.PNG in Resources */,
 				F408D9551DB281C600C6C9ED /* se10.caf in Resources */,
-				F4EE57571C6A28C40021E876 /* 外を歩こう.mp3 in Resources */,
 				F408D9601DB281C600C6C9ED /* 暇で忙しい　キラキラver.caf in Resources */,
 				AEDE9AE11C66433700841902 /* 02_06_01.png in Resources */,
 				F41FD6361C4D3B640086A607 /* LINEActivityIcon@2x.png in Resources */,
@@ -1237,23 +1118,16 @@
 				F408D95B1DB281C600C6C9ED /* さあゴロゴロしよう.caf in Resources */,
 				AEDE9ACF1C66433700841902 /* 01_02_02.png in Resources */,
 				F408D9511DB281C600C6C9ED /* se6.caf in Resources */,
-				F4EFE5941CC38698001040DF /* 未知の場所.mp3 in Resources */,
 				AEDE9ADB1C66433700841902 /* 01_11_01.png in Resources */,
 				AEDE9AE61C66433700841902 /* 03_05_01.png in Resources */,
-				F4EE574B1C6A28C40021E876 /* se10.mp3 in Resources */,
 				F44C0DE91C43EFF400B0CB27 /* Main.storyboard in Resources */,
 				F45FEFDC1CBFB42400BA1712 /* 06_14_01.png in Resources */,
-				F4EE57581C6A28C40021E876 /* 落ち着くところ.mp3 in Resources */,
 				AEDE9AF61C66433700841902 /* 04_01_01_01_09.PNG in Resources */,
 				F408D94D1DB281C600C6C9ED /* se2.caf in Resources */,
-				F4EE57481C6A28C40021E876 /* se7.mp3 in Resources */,
 				AEDE9AED1C66433700841902 /* 03_27_01.png in Resources */,
 				AEDE9ADE1C66433700841902 /* 02_03_01.png in Resources */,
-				F4F5B2361CECB0B900C9E588 /* 外を歩こうver2.mp3 in Resources */,
 				AEDE9AE71C66433700841902 /* 03_06_01.png in Resources */,
 				F42F72BA1D433EA400E6625A /* NADView_readme.txt in Resources */,
-				F4EE57431C6A28C40021E876 /* se2.mp3 in Resources */,
-				F4EE57561C6A28C40021E876 /* 暇で忙しい.mp3 in Resources */,
 				F408D9671DB281C600C6C9ED /* 小さな幸せ　ピコピコ版.caf in Resources */,
 				F4F135441C68E32900130069 /* 02_05_04.png in Resources */,
 				F44176DA1CA197DA00042C24 /* 03_31_01.png in Resources */,
@@ -1266,7 +1140,6 @@
 				AEDE9B121C66433700841902 /* 06_02_01.png in Resources */,
 				F45FEFD91CBFB42400BA1712 /* 06_11_01.png in Resources */,
 				AEDE9B171C66433700841902 /* 06_07_01.png in Resources */,
-				F4EE57531C6A28C40021E876 /* トランス状態.mp3 in Resources */,
 				AEDE9AD71C66433700841902 /* 01_06_02.png in Resources */,
 				F408D94B1DB281C600C6C9ED /* me2.caf in Resources */,
 				AEDE9B151C66433700841902 /* 06_05_01.png in Resources */,
@@ -1282,21 +1155,15 @@
 				F44176D81CA197DA00042C24 /* 03_29_01.png in Resources */,
 				AEDE9B1A1C66433700841902 /* 07_01_01.png in Resources */,
 				AEDE9B131C66433700841902 /* 06_03_01.png in Resources */,
-				F4EE57451C6A28C40021E876 /* se4.mp3 in Resources */,
 				F408D9561DB281C600C6C9ED /* se11.caf in Resources */,
-				F4EE57411C6A28C40021E876 /* me2.mp3 in Resources */,
 				F44176D51CA197DA00042C24 /* 02_09_01.png in Resources */,
-				F444CC661CDF7F0D0030FECF /* 湯船のアヒルちゃん.mp3 in Resources */,
 				F44176D11CA197DA00042C24 /* 01_10_01.png in Resources */,
 				AEDE9B1B1C66433700841902 /* 07_02_01.png in Resources */,
 				F44176DD1CA19AF400042C24 /* 02_02_01.png in Resources */,
 				F41FD6391C4D3B640086A607 /* LINEActivityIcon~ipad.png in Resources */,
 				F408D95C1DB281C600C6C9ED /* さすがっす先輩.caf in Resources */,
 				F48330181C2F040D00234B18 /* Assets.xcassets in Resources */,
-				F4EE574A1C6A28C40021E876 /* se9.mp3 in Resources */,
-				F4EE57511C6A28C40021E876 /* さすがっす先輩.mp3 in Resources */,
 				AEDE9AD81C66433700841902 /* 01_07_01.png in Resources */,
-				F4EE57501C6A28C40021E876 /* さあゴロゴロしよう.mp3 in Resources */,
 				AEDE9B1E1C66433700841902 /* 08_02_01.png in Resources */,
 				F44176D31CA197DA00042C24 /* 02_07_01.png in Resources */,
 				AEDE9AE81C66433700841902 /* 03_07_01.png in Resources */,
@@ -1502,7 +1369,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DSQLITE_HAS_CODEC";
@@ -1546,7 +1413,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_CFLAGS = "-DSQLITE_HAS_CODEC";
 				PROVISIONING_PROFILE = "107f2a6e-05a5-4352-aa0e-466e2829affd";
@@ -1563,7 +1430,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Koji Ishikawa (3FJ984UZ3P)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Koji Ishikawa (3FJ984UZ3P)";
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = NeeNeeApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1576,6 +1443,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "972f1bb7-25ac-441b-be98-cdf5168fa796";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
+				SDKROOT = iphoneos10.0;
 				SWIFT_OBJC_BRIDGING_HEADER = "NeeNeeApp/NeeNeeApp-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				VALIDATE_PRODUCT = YES;
@@ -1588,7 +1456,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: koji ishikawa (7AM5G3XKB9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: koji ishikawa (7AM5G3XKB9)";
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = NeeNeeApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1601,6 +1469,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "107f2a6e-05a5-4352-aa0e-466e2829affd";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
+				SDKROOT = iphoneos10.0;
 				SWIFT_OBJC_BRIDGING_HEADER = "NeeNeeApp/NeeNeeApp-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				VALIDATE_PRODUCT = YES;

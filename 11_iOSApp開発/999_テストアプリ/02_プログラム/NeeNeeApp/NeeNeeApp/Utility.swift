@@ -39,6 +39,22 @@ class Utility {
             udBGM = 0.5
         }
         
+        // 他アプリで音楽再生時、再生したままプレイ可能とする.
+        let audioSession: AVAudioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(AVAudioSessionCategoryAmbient)
+        } catch  {
+            // 例外発生
+            print("例外発生",Date().description, #function, #line)
+        }
+
+        do {
+            try audioSession.setActive(true)
+        } catch  {
+            // 例外発生
+            print("例外発生",Date().description, #function, #line)
+        }
+
         //再生
         do {
             //再生中ならストップする.
@@ -46,14 +62,15 @@ class Utility {
                 myAudioPlayer.stop()
             }
             
-            myAudioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath:Bundle.main.path(forResource: bgmPath == "" ? Const.BGM_DEFAULT_PATH : bgmPath, ofType:"caf")!
-))
+            myAudioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath:Bundle.main.path(
+                forResource: bgmPath == "" ? Const.BGM_DEFAULT_PATH : bgmPath, ofType:"caf")!))
             myAudioPlayer.volume = udBGM
             myAudioPlayer.numberOfLoops = -1
             myAudioPlayer.play()
             
         }catch{
             // 例外発生
+            print("例外発生",Date().description, #function, #line)
         }
    }
    
@@ -85,6 +102,22 @@ class Utility {
         }
 
         
+        // 他アプリで音楽再生時、再生したままプレイ可能とする.
+        let audioSession: AVAudioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(AVAudioSessionCategoryAmbient)
+        } catch  {
+            // 例外発生
+            print("例外発生",Date().description, #function, #line)
+        }
+        
+        do {
+            try audioSession.setActive(true)
+        } catch  {
+            // 例外発生
+            print("例外発生",Date().description, #function, #line)
+        }
+        
         // SEを再生する.
         do {
             mySePlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath:Bundle.main.path(forResource: sePath == "" ? Const.SE_DEFAULT_PATH : sePath, ofType:"caf")!))
@@ -93,6 +126,7 @@ class Utility {
             
         }catch{
             // 例外発生
+            print("例外発生",Date().description, #function, #line)
         }
     }
     
@@ -345,7 +379,7 @@ class Utility {
                 } else {
                     
                     //UPDATE
-                    tGetItem[0].itemCount = NSNumber(Int32(tGetItem[0].itemCount)! + 1)
+                    tGetItem[0].itemCount = tGetItem[0].itemCount.intValue + 1 as! NSNumber
                     tGetItem[0].managedObjectContext!.mr_saveToPersistentStoreAndWait()
                 }
             }
