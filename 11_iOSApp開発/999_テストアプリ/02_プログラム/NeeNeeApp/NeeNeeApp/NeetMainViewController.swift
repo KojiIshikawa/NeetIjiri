@@ -586,6 +586,11 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
         
         for action in actionList {
             
+            // １件のみ処理するようにする
+            if !flgFirst {
+                continue;
+            }
+            
             // アクティブなアイテムが探知済の場合、それ以降のアイテムは処理しない.
             if activeItemId != -1 {
                 break;
@@ -622,11 +627,10 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
                 
             }
 
-            
             //スタート時間を、算出した時間で更新する.
             let updPredicate: NSPredicate = NSPredicate(
                 format: "charaID = %@ AND itemID = %@ AND actSetDate = %@"
-                , argumentArray:[action.charaID,String(describing: action.itemID), action.actSetDate]);
+                , argumentArray:[action.charaID,action.itemID, action.actSetDate]);
             
             let updateData = T_ActionResult.mr_findFirst(with: updPredicate)! as T_ActionResult
 
@@ -669,11 +673,11 @@ class NeetMainViewController: UIViewController, AVAudioPlayerDelegate,UICollecti
             updateData.managedObjectContext!.mr_saveToPersistentStoreAndWait()
             
             // アクションが実行中であった場合
-            if action.actStartDate != nil && action.actEndDate == nil{
+            //if action.actStartDate != nil && action.actEndDate == nil{
                 
-                // 実行中のアクションがあるということなので返却するアイテムIDをセットする.
+                // 返却するアイテムIDをセットする.
                 activeItemId = Int(action.itemID)
-            }
+            //}
             
             //１件目フラグをおろす.
             flgFirst = false

@@ -147,7 +147,7 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
         Utility.editT_RefStage(1)
         
         // 画面遷移する.
-        let NextViewController = self.storyboard!.instantiateViewController( withIdentifier: "NeetMain" )
+        let NextViewController = self.storyboard!.instantiateViewController( withIdentifier: "StoryView" )
         self.present( NextViewController, animated: true, completion: nil)
         
     }
@@ -639,24 +639,25 @@ class OpeningViewController: UIViewController, AVAudioPlayerDelegate,UITextField
     func editGetItem() -> DarwinBoolean  {
         print(Date().description, NSStringFromClass(self.classForCoder), #function,#line)
         
-        /**
-        for (var i:Int = 1 ; i <= 51 ; i++) {
+
+        for i in 1 ..< 51 {
 
             // アイテム１を追加
-            let initItem1 = T_GetItem.MR_createEntity()! as T_GetItem
-            initItem1.charaID = Const.CHARACTER1_ID
+            let initItem1 = T_GetItem.mr_createEntity()! as T_GetItem
+            initItem1.charaID = Const.CHARACTER1_ID as NSNumber!
             initItem1.itemCount = 10
-            initItem1.itemID = i
-            initItem1.managedObjectContext!.MR_saveToPersistentStoreAndWait()
+            initItem1.itemID = i as NSNumber!
+            initItem1.managedObjectContext!.mr_saveToPersistentStoreAndWait()
         }
-        **/
 
+        /**
         // アイテム１を追加
         let initItem1 = T_GetItem.mr_createEntity()! as T_GetItem
         initItem1.charaID = Const.CHARACTER1_ID as NSNumber!
         initItem1.itemCount = 3
         initItem1.itemID = 1
         initItem1.managedObjectContext!.mr_saveToPersistentStoreAndWait()
+        **/
         
         return true
     }

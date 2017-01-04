@@ -353,8 +353,10 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
                             // SEを再生する.
                             Utility.seSoundPlay(Const.SE_ITEMSET_PATH)
 
+                            print(Int(itemList[itemListIdxPath]["itemID"]!))
+                            
                             // セットアイテムをデータベースに書き込む.
-                            insertT_ActionResultWithActive(Int(itemList[itemListIdxPath]["itemID"]!)!)
+                            insertT_ActionResultWithActive(itemId: Int(itemList[itemListIdxPath]["itemID"]!)!)
                             
                             // 画面を再描画する.
                             _ = setItemImageReLoad()
@@ -851,7 +853,7 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
     }
 
     /** 未実行・実行中のアクティブなアイテムの追加 **/
-    func insertT_ActionResultWithActive(_ itemId: Int) {
+    func insertT_ActionResultWithActive(itemId: Int) {
         print(Date().description, NSStringFromClass(self.classForCoder), #function,#line)
         
         // 指定されたアイテムをテーブルに行動実績テーブルに追加.
@@ -909,7 +911,7 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
         } else {
             
             // 対象レコードのアイテム数を加算する.
-            let updPredicate: NSPredicate = NSPredicate(format: "charaID = %@ AND itemID = %@", argumentArray:[String(Const.CHARACTER1_ID),String(describing: insertData.itemID)]);
+            let updPredicate: NSPredicate = NSPredicate(format: "charaID = %@ AND itemID = %@", argumentArray:[String(Const.CHARACTER1_ID),String(describing: insertData.itemID!)]);
             let updateData = T_GetItem.mr_findFirst(with: updPredicate)! as T_GetItem
             updateData.itemCountValue += 1
             updateData.managedObjectContext!.mr_saveToPersistentStoreAndWait()
@@ -978,7 +980,7 @@ class ActionSetViewController: UIViewController, AVAudioPlayerDelegate,UICollect
 
                     // アイテムをセット
                     var itemDic : Dictionary<String, String> = Dictionary<String, String>()
-                    itemDic["itemID"] = String(describing: havingItem.itemID)
+                    itemDic["itemID"] = String(describing: havingItem.itemID!)
                     itemDic["itemCountValue"] = String(havingItem.itemCountValue)
                     itemDic["itemName"] = String(masterItem.itemName)
                     itemDic["itemText"] = String(masterItem.itemText)

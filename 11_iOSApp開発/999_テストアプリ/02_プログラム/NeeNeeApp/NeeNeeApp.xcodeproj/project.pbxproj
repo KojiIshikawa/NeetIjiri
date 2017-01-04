@@ -219,6 +219,7 @@
 		F483301B1C2F040D00234B18 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F48330191C2F040D00234B18 /* LaunchScreen.storyboard */; };
 		F48330261C2F040D00234B18 /* NeeNeeAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48330251C2F040D00234B18 /* NeeNeeAppTests.swift */; };
 		F48330311C2F040D00234B18 /* NeeNeeAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48330301C2F040D00234B18 /* NeeNeeAppUITests.swift */; };
+		F4AC0B241E1CD1BA0009C000 /* StoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AC0B231E1CD1BA0009C000 /* StoryViewController.swift */; };
 		F4EE57261C6A249A0021E876 /* OpeningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EE57251C6A249A0021E876 /* OpeningViewController.swift */; };
 		F4EFE5961CC386B0001040DF /* 01_13_01.png in Resources */ = {isa = PBXBuildFile; fileRef = F4EFE5951CC386B0001040DF /* 01_13_01.png */; };
 		F4F135421C68E32900130069 /* 02_05_02.png in Resources */ = {isa = PBXBuildFile; fileRef = F4F1353E1C68E32900130069 /* 02_05_02.png */; };
@@ -472,6 +473,7 @@
 		F48330301C2F040D00234B18 /* NeeNeeAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeeNeeAppUITests.swift; sourceTree = "<group>"; };
 		F48330321C2F040D00234B18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4A5A0571DB3793600938360 /* NeeNeeApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NeeNeeApp.entitlements; sourceTree = "<group>"; };
+		F4AC0B231E1CD1BA0009C000 /* StoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryViewController.swift; sourceTree = "<group>"; };
 		F4EB1D06214EC164462ADCDD /* libPods-NeeNeeApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NeeNeeApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4EE57251C6A249A0021E876 /* OpeningViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpeningViewController.swift; sourceTree = "<group>"; };
 		F4EFE5951CC386B0001040DF /* 01_13_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 01_13_01.png; sourceTree = "<group>"; };
@@ -537,6 +539,7 @@
 				AE0D3F631C6CB8EB0015F479 /* ResultViewController.swift */,
 				AE0D3F6B1C6CDAB30015F479 /* LoginBonusViewController.swift */,
 				AE0D3F691C6CDA700015F479 /* KakugenViewController.swift */,
+				F4AC0B231E1CD1BA0009C000 /* StoryViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -831,6 +834,7 @@
 		F483300C1C2F040D00234B18 /* NeeNeeApp */ = {
 			isa = PBXGroup;
 			children = (
+				F44C0DE81C43EFF400B0CB27 /* Main.storyboard */,
 				F4A5A0571DB3793600938360 /* NeeNeeApp.entitlements */,
 				AEFCBC591C68DD4B000F5751 /* Model */,
 				AEFCBC481C68DC97000F5751 /* Sound */,
@@ -842,7 +846,6 @@
 				F483300D1C2F040D00234B18 /* AppDelegate.swift */,
 				F41FD6021C4D29930086A607 /* NeeNeeApp-Bridging-Header.h */,
 				F48330171C2F040D00234B18 /* Assets.xcassets */,
-				F44C0DE81C43EFF400B0CB27 /* Main.storyboard */,
 				F48330191C2F040D00234B18 /* LaunchScreen.storyboard */,
 				F48330141C2F040D00234B18 /* NeeNeeApp.xcdatamodeld */,
 				F483301C1C2F040D00234B18 /* Info.plist */,
@@ -1239,6 +1242,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4AC0B241E1CD1BA0009C000 /* StoryViewController.swift in Sources */,
 				AEFCBCA91C68DD4B000F5751 /* _T_RefJob.m in Sources */,
 				AEFCBCAF1C68DD4B000F5751 /* M_DropItem.m in Sources */,
 				AEFCBCC51C68DD4B000F5751 /* T_RefJob.m in Sources */,
@@ -1443,7 +1447,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "972f1bb7-25ac-441b-be98-cdf5168fa796";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
-				SDKROOT = iphoneos10.0;
+				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "NeeNeeApp/NeeNeeApp-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				VALIDATE_PRODUCT = YES;
@@ -1469,7 +1473,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "107f2a6e-05a5-4352-aa0e-466e2829affd";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
-				SDKROOT = iphoneos10.0;
+				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "NeeNeeApp/NeeNeeApp-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				VALIDATE_PRODUCT = YES;

@@ -223,7 +223,7 @@ class Utility {
 
         // 所持済のジョブの存在チェックをする.
         let filter2: NSPredicate =
-        NSPredicate(format: "charaID = " + String(Const.CHARACTER1_ID) + " and jobID = " + String(describing: mJob[0].jobID))
+        NSPredicate(format: "charaID = " + String(Const.CHARACTER1_ID) + " and jobID = " + String(describing: mJob[0].jobID!))
         
         let refJob :[T_RefJob] = T_RefJob.mr_findAllSorted(by: "charaID,jobID", ascending: true, with: filter2) as! [T_RefJob];
         
@@ -379,7 +379,7 @@ class Utility {
                 } else {
                     
                     //UPDATE
-                    tGetItem[0].itemCount = tGetItem[0].itemCount.intValue + 1 as! NSNumber
+                    tGetItem[0].itemCount = tGetItem[0].itemCount.intValue + 1 as NSNumber
                     tGetItem[0].managedObjectContext!.mr_saveToPersistentStoreAndWait()
                 }
             }
